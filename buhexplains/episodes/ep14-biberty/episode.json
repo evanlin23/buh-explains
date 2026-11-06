@@ -539,17 +539,17 @@
      "enter": "whip"
     },
     {
-     "on": "Muppets",
+     "on": "Yes,",
      "sticker": "arrow",
      "target": "face",
      "from": -140,
-     "dur": 0.5
+     "dur": 0.4
     },
     {
-     "on": "guy.",
+     "on": "Muppets",
      "sticker": "ellipse",
      "target": "kermit",
-     "dur": 0.6
+     "dur": 0.4
     }
    ]
   },

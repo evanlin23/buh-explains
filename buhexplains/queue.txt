@@ -2,6 +2,7 @@
 # anything already in uploads.json. Deadlines first. Edit freely; add new episodes as they're made.
 ep06-gta-wait      # before 2026-11-19 (GTA 6 release)
 ep11-mbappe       # time-critical: the story is from late October
+ep14-biberty      # time-critical: Boston protest was Oct 25, still in KYM's Nov 6 roundup
 ep03-november      # before late November
 ep01-verity
 ep04-deceive       # while the Holmes doc is in theatres
