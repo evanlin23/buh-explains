@@ -1,0 +1,367 @@
+{
+ "slug": "ep10-randy",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "meme": "Know Your Meme, 'Randy Marsh vs. / What's Up Brah?': resurged Oct 2026 on TikTok/Instagram Reels (edits vs Minecraft Steve, Omni-Man, Absolute Bane); scene from 'Broadway Bro Down'. KYM weekly roundup (Oct 16, 2026).",
+  "episode": "Wikipedia, 'Broadway Bro Down': South Park season 15, episode 11, aired Oct 26, 2011 on Comedy Central; Randy has a bro-down with Stephen Sondheim.",
+  "sondheim": "Stephen Sondheim wrote the lyrics for West Side Story (1957) - Wikipedia, 'Stephen Sondheim' / 'West Side Story'."
+ },
+ "images": {
+  "omni": {
+   "url": "https://i.ytimg.com/vi/OdhjyxT95w8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=OdhjyxT95w8",
+   "points": {
+    "randy": [
+     0.8,
+     0.45,
+     0.15
+    ],
+    "omni": [
+     0.35,
+     0.25,
+     0.18
+    ]
+   }
+  },
+  "steve": {
+   "url": "https://i.ytimg.com/vi/A2IWzc6LRWg/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=A2IWzc6LRWg",
+   "points": {
+    "randy": [
+     0.62,
+     0.45,
+     0.08
+    ],
+    "steve": [
+     0.35,
+     0.35,
+     0.15
+    ]
+   }
+  },
+  "anime": {
+   "url": "https://i.ytimg.com/vi/xhir2hKVQf0/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=xhir2hKVQf0",
+   "points": {
+    "randy": [
+     0.52,
+     0.2,
+     0.1
+    ],
+    "villain": [
+     0.33,
+     0.2,
+     0.12
+    ]
+   }
+  },
+  "omni2": {
+   "url": "https://i.ytimg.com/vi/CzEEMTh4r88/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=CzEEMTh4r88",
+   "points": {
+    "omni": [
+     0.6,
+     0.5,
+     0.25
+    ]
+   }
+  },
+  "giant": {
+   "url": "https://i.ytimg.com/vi/AfTDa6wbce4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=AfTDa6wbce4",
+   "points": {
+    "randy": [
+     0.86,
+     0.62,
+     0.06
+    ],
+    "giant": [
+     0.4,
+     0.35,
+     0.12
+    ]
+   }
+  },
+  "scene": {
+   "url": "https://i.ytimg.com/vi/WoudYNeVn5E/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=WoudYNeVn5E",
+   "points": {
+    "sondheim": [
+     0.52,
+     0.48,
+     0.07
+    ],
+    "randy": [
+     0.46,
+     0.66,
+     0.07
+    ]
+   }
+  },
+  "sondheim": {
+   "url": "https://i.ytimg.com/vi/eoUArB9oOxw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=eoUArB9oOxw",
+   "points": {
+    "face": [
+     0.48,
+     0.38,
+     0.22
+    ]
+   }
+  },
+  "wss": {
+   "url": "https://i.ytimg.com/vi/7CfPT9N9ZM0/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=7CfPT9N9ZM0",
+   "points": {
+    "title": [
+     0.4,
+     0.5,
+     0.22
+    ]
+   }
+  },
+  "broadway": {
+   "url": "https://www.showbiz411.com/wp-content/uploads/2014/07/Broadway-street-sign-theater-district-NYC1.jpg",
+   "points": {
+    "sign": [
+     0.75,
+     0.33,
+     0.15
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "Who is {Randy} actually squaring up to?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "omni",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "randy",
+     "dur": 0.9
+    },
+    {
+     "on": "squaring",
+     "sticker": "arrow",
+     "target": "randy",
+     "from": -30,
+     "dur": 0.7
+    },
+    {
+     "on": "to?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {What's up brah} meme we all know and love has Randy circling everyone.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "giant",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "know",
+     "sticker": "heart",
+     "dur": 0.8
+    },
+    {
+     "on": "circling",
+     "img": "steve",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "everyone.",
+     "sticker": "ellipse",
+     "target": "randy",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Omni-Man. Minecraft Steve. Anime villains.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "omni2",
+     "fit": "blurfill",
+     "enter": "cut",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Minecraft",
+     "img": "steve",
+     "fit": "blurfill",
+     "enter": "cut",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Steve.",
+     "sticker": "arrow",
+     "target": "steve",
+     "from": 30,
+     "dur": 0.5
+    },
+    {
+     "on": "Anime",
+     "img": "anime",
+     "fit": "blurfill",
+     "enter": "cut",
+     "sfx": [
+      "impact"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But in the original episode from twenty eleven, he's squaring up to a real person.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "scene",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "glitch"
+     ]
+    },
+    {
+     "on": "twenty",
+     "label": "OCTOBER 2011",
+     "dur": 1.6
+    },
+    {
+     "on": "real",
+     "sticker": "ellipse",
+     "target": "sondheim",
+     "dur": 1.2
+    },
+    {
+     "on": "person.",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "That old man is Stephen Sondheim, the Broadway legend who wrote the lyrics to West Side Story.",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "Stephen",
+     "img": "sondheim",
+     "fit": "blurfill",
+     "enter": "spin",
+     "sfx": [
+      "mcboom"
+     ]
+    },
+    {
+     "on": "Stephen",
+     "label": "STEPHEN SONDHEIM",
+     "dur": 1.8
+    },
+    {
+     "on": "legend",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.8
+    },
+    {
+     "on": "lyrics",
+     "img": "wss",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "West",
+     "sticker": "arrow",
+     "target": "title",
+     "from": -150,
+     "dur": 0.8
+    }
+   ],
+   "pause_before": 0.2
+  },
+  {
+   "text": "So {Randy} was bro-ing down with a Broadway genius.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "scene",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "bro-ing",
+     "sticker": "ellipse",
+     "target": "sondheim",
+     "dur": 0.7
+    },
+    {
+     "on": "Broadway",
+     "img": "broadway",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "genius.",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
+    }
+   ]
+  }
+ ]
+}

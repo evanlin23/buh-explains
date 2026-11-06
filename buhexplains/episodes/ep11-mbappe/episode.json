@@ -1,0 +1,419 @@
+{
+ "slug": "ep11-mbappe",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "remark": "Al Jazeera, Oct 27, 2026, 'Kylian Mbappe apologises after dictator comment angers Chinese fans': on French talk show 'The Bridge' he said the funniest meme was his face altered onto 'some guy - I think he's a Chinese dictator'; jokes about Mao are a social taboo in China; cost him at least two sponsors in China.",
+  "sponsors": "Forbes, Oct 27, 2026, 'Kylian Mbapp\u00e9 Apologizes For Mao Zedong Comment After Losing Chinese Sponsors'.",
+  "club": "CBS Sports, 'Real Madrid striker Kylian Mbappe apologizes after Mao meme comments amid growing backlash in China'; La Liga issued an apology on behalf of the league and the club; Real Madrid apologized (Fox News/OutKick)."
+ },
+ "images": {
+  "mbappe": {
+   "url": "https://i.ytimg.com/vi/6JH9HyvJSpw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=6JH9HyvJSpw",
+   "points": {
+    "face": [
+     0.55,
+     0.4,
+     0.2
+    ]
+   }
+  },
+  "meme": {
+   "url": "https://i.ytimg.com/vi/rd5SdmuUl9w/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=rd5SdmuUl9w",
+   "crop": [
+    0.18,
+    0.02,
+    0.85,
+    0.78
+   ],
+   "points": {
+    "face": [
+     0.55,
+     0.45,
+     0.25
+    ]
+   }
+  },
+  "show": {
+   "url": "https://i.ytimg.com/vi/zd6O0p1YFOA/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=zd6O0p1YFOA",
+   "crop": [
+    0.5,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "points": {
+    "face": [
+     0.5,
+     0.45,
+     0.3
+    ]
+   }
+  },
+  "show2": {
+   "url": "https://i.ytimg.com/vi/OuTz0_Rx1q8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=OuTz0_Rx1q8",
+   "crop": [
+    0.0,
+    0.0,
+    0.5,
+    0.55
+   ],
+   "points": {
+    "face": [
+     0.45,
+     0.45,
+     0.3
+    ]
+   }
+  },
+  "flag": {
+   "url": "https://i.ytimg.com/vi/snJwmT1K7eU/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=snJwmT1K7eU",
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.62
+   ],
+   "points": {
+    "face": [
+     0.6,
+     0.45,
+     0.15
+    ]
+   }
+  },
+  "china": {
+   "url": "https://i.ytimg.com/vi/-EBTyqJa5p8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=-EBTyqJa5p8",
+   "points": {
+    "gate": [
+     0.5,
+     0.15,
+     0.3
+    ]
+   }
+  },
+  "rm": {
+   "url": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
+   "points": {
+    "crest": [
+     0.5,
+     0.5,
+     0.15
+    ]
+   }
+  },
+  "laliga": {
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/960px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "points": {
+    "logo": [
+     0.5,
+     0.4,
+     0.3
+    ]
+   }
+  },
+  "sponsors": {
+   "url": "https://i.ytimg.com/vi/aVIGICAIpY4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=aVIGICAIpY4",
+   "crop": [
+    0.5,
+    0.0,
+    1.0,
+    0.75
+   ],
+   "points": {
+    "bottles": [
+     0.5,
+     0.55,
+     0.35
+    ],
+    "face": [
+     0.3,
+     0.35,
+     0.15
+    ]
+   }
+  },
+  "dark": {
+   "url": "https://i.ytimg.com/vi/NGCzedAMzrc/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=NGCzedAMzrc",
+   "points": {
+    "face": [
+     0.5,
+     0.2,
+     0.15
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "How much did one meme just cost {Kylian Mbapp\u00e9}?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "mbappe",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "cost",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Mbapp\u00e9} meme we all know and love puts his face on a portrait of Mao.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "meme",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "face",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "Mao.",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "On a French talk show, he called it the funniest meme he'd ever seen.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "show",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "funniest",
+     "label": "\"THE FUNNIEST MEME\"",
+     "dur": 1.4
+    },
+    {
+     "on": "seen.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "Some guy, he said. I think he's a Chinese dictator.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "show2",
+     "fit": "blurfill",
+     "enter": "cut",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Chinese",
+     "label": "\"A CHINESE DICTATOR\"",
+     "dur": 1.4
+    },
+    {
+     "on": "dictator.",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "Harmless joke? Not in China, where mocking Mao is a serious taboo.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "flag",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Not",
+     "sticker": "x",
+     "target": "face",
+     "dur": 0.5
+    },
+    {
+     "on": "China,",
+     "img": "china",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "taboo.",
+     "sticker": "ellipse",
+     "target": "gate",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Real Madrid apologized. So did La Liga.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "rm",
+     "fit": "white",
+     "enter": "spin",
+     "sfx": [
+      "ding"
+     ]
+    },
+    {
+     "on": "So",
+     "img": "laliga",
+     "fit": "blurfill",
+     "enter": "whip",
+     "sfx": [
+      "ding"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But the real bill came from sponsors.",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "dark",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "sponsors.",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -140,
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "At least two Chinese brands dropped him.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "sponsors",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "two",
+     "label": "AT LEAST 2 SPONSORS GONE",
+     "dur": 1.8
+    },
+    {
+     "on": "dropped",
+     "sticker": "x",
+     "target": "bottles",
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "On October twenty seventh, {Mbapp\u00e9} said sorry too.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "mbappe",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "October",
+     "label": "OCT 27, 2026",
+     "dur": 1.4
+    },
+    {
+     "on": "sorry",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.7
+    }
+   ]
+  },
+  {
+   "text": "One meme, two sponsors gone.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "sponsors",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "sponsors",
+     "sticker": "x",
+     "target": "bottles",
+     "dur": 0.9
+    }
+   ]
+  }
+ ]
+}
