@@ -26,6 +26,26 @@ async function easeLook (yaw, pitch, ms) {
 // Timeline for the HUD overlay, in ms since the recording started.
 let t0 = null; const timeline = []
 const mark = (event, extra = {}) => { if (t0 !== null) timeline.push({ t: Date.now() - t0, event, slot: bot.quickBarSlot, health: bot.health, ...extra }) }
+// Tick-accurate recording for the offline renderer (preview/render.js): a chunk snapshot at the
+// start, then the POV pose on every physics tick and every block change, stamped in ticks.
+let rec = null, tick = 0
+function startRecording (cx, cz) {
+  const columns = []
+  for (const { chunkX, chunkZ, column: col } of bot.world.getColumns()) {
+    const x = Number(chunkX), z = Number(chunkZ)
+    if (Math.abs(x * 16 - cx) <= 96 && Math.abs(z * 16 - cz) <= 96) columns.push({ x: x * 16, z: z * 16, chunk: col.toJson() })
+  }
+  rec = { version: bot.version, columns, poses: [], blocks: [] }
+  tick = 0
+  const onTick = () => {
+    const e = bot.entity
+    rec.poses.push([tick++, +e.position.x.toFixed(4), +e.position.y.toFixed(4), +e.position.z.toFixed(4), +e.yaw.toFixed(5), +e.pitch.toFixed(5), bot.quickBarSlot])
+  }
+  const onBlock = (o, n) => { if (n) rec.blocks.push([tick, n.position.x, n.position.y, n.position.z, n.stateId]) }
+  bot.on('physicsTick', onTick); bot.on('blockUpdate', onBlock)
+  rec.stop = () => { bot.removeListener('physicsTick', onTick); bot.removeListener('blockUpdate', onBlock); delete rec.stop }
+}
+function stopRecording () { if (rec && rec.stop) rec.stop() }
 const cmd = async (c) => { bot.chat(c); await bot.waitForTicks(4) }
 
 bot.once('spawn', async () => {
@@ -77,6 +97,7 @@ bot.once('spawn', async () => {
       while (!fs.existsSync(process.env.GO_FILE || 'go')) await sleep(200)
     }
     t0 = Date.now(); mark('start')
+    if (process.env.RECORD) startRecording(x, z)
     await cmd(`/replay start players ${NAME}`)
     await bot.waitForTicks(30)                     // ~1.5 s of "standing on the pillar"
     await easeLook(0, -1.0, 600)                   // peek over the edge (mineflayer: negative pitch = down)
@@ -128,11 +149,13 @@ bot.once('spawn', async () => {
     await easeLook(Math.atan2(-dx, -dz), 1.0, 1200)
     await bot.waitForTicks(30)
     mark('end')
+    stopRecording()
     await cmd(`/replay stop players ${NAME}`)
     await bot.waitForTicks(40)
     const ok = !died && bot.health > 0 && placed
     log(ok ? 'CLUTCH OK' : 'CLUTCH FAILED', 'health', bot.health)
     require('fs').writeFileSync(process.env.TIMELINE || 'timeline.json', JSON.stringify({ ok, timeline }, null, 1))
+    if (rec) require('fs').writeFileSync(process.env.RECORD, JSON.stringify(rec))
     bot.quit(); await sleep(500); process.exit(ok ? 0 : 1)
   } catch (e) { log('script error', e); process.exit(3) }
 })

@@ -5,8 +5,8 @@
                   [--timeline timeline.json] [--audio game.wav] [--hud/--no-hud]
                   --out out.mp4
 
-Layout (measured from research/cover-frames.jpg): black band on top (~23% of the height) with a
-white bold centered caption; gameplay fills the rest, center-cropped. The HUD (hotbar, hearts,
+Layout (measured from a real HelloBuh Short): equal black bands top and bottom (~23.7% each), a
+white bold centered caption in the top band, gameplay 1080x1011 in the middle, center-cropped. The HUD (hotbar, hearts,
 food) is drawn from the client jar's own GUI sprites at GUI scale 3, because the renderers we
 use either don't draw it (prismarine-viewer) or we choose to keep it consistent. The slot
 highlight and the bucket item follow the bot's timeline. Audio is loudness-normalized to about
@@ -24,8 +24,11 @@ import zipfile
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = pathlib.Path(__file__).resolve().parent
-W, H, BAND = 1080, 1920, 440
-GAME_H = H - BAND
+# Measured on a real HelloBuh Short (afk firework save, 720x1280): black 0-303, game 303-977,
+# black 977-1280; caption centered at y~181, ~68% of the width. Scaled to 1080x1920:
+W, H, BAND = 1080, 1920, 455
+GAME_H = 1011                      # game area 1080x1011 between equal black bands
+CAPTION_Y = 271                    # vertical center of the caption line
 GUI = 3  # Minecraft GUI scale
 FONT = "/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf"
 TWEMOJI = "https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/72x72/{}.png"
@@ -57,17 +60,19 @@ def caption_png(text, red_word, path):
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rectangle((0, 0, W, BAND), fill=(0, 0, 0, 255))
+    d.rectangle((0, BAND + GAME_H, W, H), fill=(0, 0, 0, 255))
     tokens = text.split(" ")
     def is_emoji(tok):
         return any(ord(c) > 0x2500 for c in tok)
-    for size in range(96, 40, -2):  # largest size that fits in 90% of the width
+    for size in range(86, 40, -2):  # largest size that fits in 72% of the width
         font = ImageFont.truetype(FONT, size)
         widths = [(size + 6) if is_emoji(t) else d.textlength(t, font=font) for t in tokens]
         space = d.textlength(" ", font=font)
         total = sum(widths) + space * (len(tokens) - 1)
-        if total <= W * 0.9:
+        if total <= W * 0.72:
             break
-    x, y = (W - total) / 2, BAND - 175
+    asc, desc = font.getmetrics()
+    x, y = (W - total) / 2, CAPTION_Y - (asc + desc) / 2
     for tok, w in zip(tokens, widths):
         if is_emoji(tok):
             e = emoji_png(tok).resize((size, size), Image.LANCZOS)
@@ -83,7 +88,7 @@ def hud_png(jar, slot, items, health, path):
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     bar = big(sprite(jar, "gui/sprites/hud/hotbar"))
     sel = big(sprite(jar, "gui/sprites/hud/hotbar_selection"))
-    bx, by = (W - bar.width) // 2, H - bar.height - 8 * GUI
+    bx, by = (W - bar.width) // 2, BAND + GAME_H - bar.height - GUI   # hotbar sits at the bottom edge of the game
     img.alpha_composite(bar, (bx, by))
     for i, it in enumerate(items):
         if it:
@@ -93,7 +98,10 @@ def hud_png(jar, slot, items, health, path):
     heart_c, heart = big(sprite(jar, "gui/sprites/hud/heart/container")), big(sprite(jar, "gui/sprites/hud/heart/full"))
     half = big(sprite(jar, "gui/sprites/hud/heart/half"))
     food_e, food = big(sprite(jar, "gui/sprites/hud/food_empty")), big(sprite(jar, "gui/sprites/hud/food_full"))
-    hy = by - 10 * GUI
+    xp_bg, xp = big(sprite(jar, "gui/sprites/hud/experience_bar_background")), big(sprite(jar, "gui/sprites/hud/experience_bar_progress"))
+    img.alpha_composite(xp_bg, (bx + GUI, by - 7 * GUI))
+    img.alpha_composite(xp.crop((0, 0, int(xp.width * 0.35), xp.height)), (bx + GUI, by - 7 * GUI))
+    hy = by - 17 * GUI
     for i in range(10):
         hx = bx + 8 * GUI * i
         img.alpha_composite(heart_c, (hx, hy))
@@ -130,7 +138,7 @@ def probe_duration(args):
     if args.video:
         out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", args.video], capture_output=True, text=True).stdout
         return float(out)
-    n = len(list(pathlib.Path(args.frames).parent.glob("*.jpg")))
+    n = len(list(pathlib.Path(args.frames).parent.glob("*" + pathlib.Path(args.frames).suffix)))
     return n / args.fps
 
 
@@ -155,7 +163,7 @@ def main():
     inputs = (["-ss", str(args.start), "-i", args.video] if args.video else
               ["-framerate", str(args.fps), "-start_number", str(int(args.start * args.fps)), "-i", args.frames])
     inputs += ["-loop", "1", "-i", str(tmp / "caption.png")]
-    graph = [f"[0:v]scale={W}:{GAME_H}:force_original_aspect_ratio=increase,crop={W}:{GAME_H},"
+    graph = [f"[0:v]scale={W}:{GAME_H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{GAME_H},"
              f"pad={W}:{H}:0:{BAND}:black,fps={args.out_fps},format=rgba[g0]"]
     last = "g0"
     n_in = 2
