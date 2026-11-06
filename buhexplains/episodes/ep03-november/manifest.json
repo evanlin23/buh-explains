@@ -1,0 +1,101 @@
+{
+ "slug": "ep03-november",
+ "images": {
+  "hero": {
+   "used": "https://i.kym-cdn.com/entries/icons/facebook/000/046/624/_polarbear2026_.jpg",
+   "page": "https://i.kym-cdn.com/entries/icons/facebook/000/046/624/_polarbear2026_.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "original": {
+   "used": "https://i.kym-cdn.com/photos/images/newsfeed/002/666/497/f3f.jpg",
+   "page": "https://i.kym-cdn.com/photos/images/newsfeed/002/666/497/f3f.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "sing": {
+   "used": "https://i.ytimg.com/vi/W71dTvlW824/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=W71dTvlW824",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "apoc": {
+   "used": "https://wallpapercave.com/wp/wp9096456.jpg",
+   "page": "https://wallpapercave.com/wp/wp9096456.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "album": {
+   "used": "https://i2.wp.com/www.heritagechristiancollege.com/wp-content/uploads/2019/05/free-vinyl-record-template-of-vinyl-template-by-reza-chunwookiee-of-free-vinyl-record-template.jpg",
+   "page": "https://i2.wp.com/www.heritagechristiancollege.com/wp-content/uploads/2019/05/free-vinyl-record-template-of-vinyl-template-by-reza-chunwookiee-of-free-vinyl-record-template.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "calendar": {
+   "used": "https://mondaymandala.com/wp-content/uploads/November-2026-Calendar-Printable-Business-2-Landscape-v2.jpg",
+   "page": "https://mondaymandala.com/wp-content/uploads/November-2026-Calendar-Printable-Business-2-Landscape-v2.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "empty": {
+   "used": "https://wallpaperaccess.com/full/2726468.jpg",
+   "page": "https://wallpaperaccess.com/full/2726468.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  }
+ },
+ "stock": {
+  "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-720.mp4",
+  "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-720.mp4"
+ },
+ "sfx": [
+  "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",
+  "anime_whoosh https://www.myinstants.com/media/sounds/anime-ahh.mp3 0.862041",
+  "whoosh https://www.myinstants.com/media/sounds/whoosh-wind.mp3 0.679184",
+  "boing https://www.myinstants.com/media/sounds/cartoon-boing_7vRWDlc.mp3 1.619592",
+  "ding https://www.myinstants.com/media/sounds/ding-sound-effect_2.mp3 2.977959",
+  "bonk https://www.myinstants.com/media/sounds/bonk_7zPAD7C.mp3 0.470204",
+  "camera_flash https://www.myinstants.com/media/sounds/camera-flash-sound-effect.mp3 2.063673",
+  "error https://www.myinstants.com/media/sounds/error_CDOxCYm.mp3 1.018776",
+  "record_scratch https://www.myinstants.com/media/sounds/record-scratch-clean.mp3 0.679184",
+  "anime_wow https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3 4.205714",
+  "dun_dun_dun https://www.myinstants.com/media/sounds/dun-dun-dun-sound-effect-brass_8nFBccR.mp3 5.146122",
+  "pop https://www.myinstants.com/media/sounds/pop_7e9Is8L.mp3 0.312000",
+  "metal_pipe https://www.myinstants.com/media/sounds/metal-pipe-clang.mp3 2.821224",
+  "swoosh_transition https://www.myinstants.com/media/sounds/woosh-informativo.mp3 7.026938",
+  "riser https://www.myinstants.com/media/sounds/popular-riser-metallic-sound-effect.mp3 2.795102",
+  "taco_bell_bong https://www.myinstants.com/media/sounds/taco-bell-bong-sfx.mp3 1.959184",
+  "fart_reverb https://www.myinstants.com/media/sounds/fart-with-reverb.mp3 3.239184",
+  "heartbeat https://www.myinstants.com/media/sounds/heart-beat-speeds-up.mp3 31.764898",
+  "emotional_damage https://www.myinstants.com/media/sounds/emotional-damage-meme.mp3 3.369796",
+  "thunder_strike_1 https://www.myinstants.com/media/sounds/lightning-strike.mp3 13.035102",
+  "thunder_strike_2 https://www.myinstants.com/media/sounds/mix_12s-audio-joiner_kPvukUQ.mp3 12.492000",
+  "thunder_strike_3 https://www.myinstants.com/media/sounds/magic-thunder-strike.mp3 13.766531",
+  "lightning_1 https://www.myinstants.com/media/sounds/nuagghhhh-scream_H3TDo14.mp3 3.576000",
+  "lightning_2 https://www.myinstants.com/media/sounds/lightning-strike-cool.mp3 6.696000",
+  "lightning_3 https://www.myinstants.com/media/sounds/ambient-thunder.mp3 8.045714",
+  "bruh_sound_effect_1 https://www.myinstants.com/media/sounds/bruh-sound-effect_WstdzdM.mp3 0.864000",
+  "bruh_sound_effect_2 https://www.myinstants.com/media/sounds/oh-my-god-bruhh.mp3 6.696000",
+  "bruh_sound_effect_3 https://www.myinstants.com/media/sounds/vine-dramatic-surprise.mp3 1.828571",
+  "explosion_1 https://www.myinstants.com/media/sounds/capcut-explosion-sound.mp3 3.239184",
+  "explosion_2 https://www.myinstants.com/media/sounds/explosion-meme_dTCfAHs.mp3 1.560000",
+  "explosion_3 https://www.myinstants.com/media/sounds/minecraft-explosion-meme-sound-effect.mp3 2.560000",
+  "fast_whoosh_1 https://www.myinstants.com/media/sounds/fast-whoosh.mp3 1.201625",
+  "sparkle_1 https://www.myinstants.com/media/sounds/fairy-sparkle.mp3 1.541224",
+  "sparkle_2 https://www.myinstants.com/media/sounds/sparkle-ascending-fop-2026.mp3 3.456000",
+  "sparkle_3 https://www.myinstants.com/media/sounds/shiny-sparkles-drama.mp3 6.191020",
+  "glitch_1 https://www.myinstants.com/media/sounds/error-glitch.mp3 1.332245",
+  "glitch_2 https://www.myinstants.com/media/sounds/glitch-transition.mp3 3.056313",
+  "glitch_3 https://www.myinstants.com/media/sounds/vhs-startup-glitch-sound.mp3 4.656000",
+  "punch_1 https://www.myinstants.com/media/sounds/punch-gaming-sound-effect-hd_RzlG1GE.mp3 1.567347",
+  "punch_2 https://www.myinstants.com/media/sounds/punch_u4LmMsr.mp3 0.391837",
+  "punch_3 https://www.myinstants.com/media/sounds/bone-crack-meme.mp3 1.097143",
+  "typing_1 https://www.myinstants.com/media/sounds/keyboard-typing-sound-effect.mp3 10.083265",
+  "typing_2 https://www.myinstants.com/media/sounds/typing-noises.mp3 6.974694",
+  "typing_3 https://www.myinstants.com/media/sounds/rage2.mp3 7.758367",
+  "notification_1 https://www.myinstants.com/media/sounds/discord-notification.mp3 0.504000",
+  "notification_2 https://www.myinstants.com/media/sounds/notification_o14egLP.mp3 4.675918",
+  "notification_3 https://www.myinstants.com/media/sounds/snapchat-message.mp3 3.032000",
+  "huh_1 https://www.myinstants.com/media/sounds/huh_37bAoRo.mp3 0.672000",
+  "huh_2 https://www.myinstants.com/media/sounds/metal-gear-alert-sound-effect_XKoHReZ.mp3 1.985306",
+  "huh_3 https://www.myinstants.com/media/sounds/ceeday-huh-sound-effect.mp3 1.201633"
+ ],
+ "name_bites": {
+  "Polarbear": ".cache/bites/november_full.wav"
+ }
+}

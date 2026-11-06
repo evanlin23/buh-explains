@@ -37,7 +37,7 @@ jobs:
           key: tts-${{ hashFiles('buhexplains/episodes/**/episode.json', 'buhexplains/pipeline/voice.py') }}
           restore-keys: tts-
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
-      - run: pip install -q numpy soundfile librosa faster-whisper
+      - run: pip install -q numpy soundfile librosa faster-whisper yt-dlp
       - name: narrate
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

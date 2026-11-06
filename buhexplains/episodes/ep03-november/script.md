@@ -15,3 +15,5 @@
 | 6 | So in November... nothing happens. | KYM: nothing is specified; the countdown is the joke |
 
 Left out: GTA 6 (Nov 19, 2026). It's widely reported, but nothing found is newer than May 2026.
+
+- Years are written as spoken ("twenty twenty-six") because Gemini reads "2026" as "two thousand twenty six". On-screen labels keep the digits.

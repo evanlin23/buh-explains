@@ -1,0 +1,293 @@
+{
+ "slug": "ep02-last-dance",
+ "names": {
+  "Lastdancebite": {
+   "bite": ".cache/bites/lastdance_bite.wav",
+   "bite_full": ".cache/bites/lastdance_bite.wav",
+   "bite_src": "https://soundcloud.com/maretu/fpd-ff7-botsu-8",
+   "bite_file": "maretu_lastdance.mp3",
+   "bite_cut": [
+    52.78,
+    55.1
+   ],
+   "bite_full_src": "https://soundcloud.com/maretu/fpd-ff7-botsu-8",
+   "bite_full_cut": [
+    52.78,
+    55.1
+   ],
+   "note": "4 beats of MARETU's fpd ff7 botsu 8 (the Last Dance audio). Copyrighted song: a short bite, same accepted trade as the phonk."
+  }
+ },
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "images": {
+  "duo": {
+   "url": "https://i.ytimg.com/vi/huBN9Dxy-mI/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/huBN9Dxy-mI/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=huBN9Dxy-mI",
+   "points": {
+    "pair": [
+     0.47,
+     0.6,
+     0.18
+    ],
+    "hands": [
+     0.5,
+     0.56,
+     0.06
+    ]
+   }
+  },
+  "duo2": {
+   "url": "https://i.ytimg.com/vi/Hmn3Uc-hRKU/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/Hmn3Uc-hRKU/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=Hmn3Uc-hRKU",
+   "points": {
+    "pair": [
+     0.5,
+     0.55,
+     0.28
+    ]
+   }
+  },
+  "duo3": {
+   "url": "https://i.ytimg.com/vi/ldgHqcJxzbU/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/ldgHqcJxzbU/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=ldgHqcJxzbU",
+   "points": {
+    "faces": [
+     0.5,
+     0.38,
+     0.28
+    ]
+   }
+  },
+  "art": {
+   "url": "https://i1.sndcdn.com/avatars-000044597155-3j9k7z-t500x500.jpg",
+   "page": "https://soundcloud.com/maretu/fpd-ff7-botsu-8",
+   "points": {
+    "note": [
+     0.45,
+     0.5,
+     0.3
+    ]
+   }
+  },
+  "sc": {
+   "url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/08/gettyimages-1083228772.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+   "points": {
+    "icon": [
+     0.55,
+     0.45,
+     0.25
+    ]
+   }
+  }
+ },
+ "sources": {
+  "upload": "SoundCloud: uploader Maretu, 'fpd ff7 botsu 8', upload date 2014-09-19 (https://soundcloud.com/maretu/fpd-ff7-botsu-8, read via the public API).",
+  "trend": "KYM 'The Last Dance Trend': two characters in a synchronized dance; spread on TikTok from August 2026; fans nicknamed the audio 'The Last Dance'. https://knowyourmeme.com/memes/the-last-dance-trend",
+  "botsu_not_used": "No source found for the meaning of 'botsu' in the title, so the script doesn't explain it."
+ },
+ "lines": [
+  {
+   "text": "How old is the Last Dance song?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "duo",
+     "fit": "band",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "Last",
+     "sticker": "ellipse",
+     "target": "pair",
+     "dur": 0.9
+    },
+    {
+     "on": "song?",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Last Dance} trend we all know and love is two characters dancing hand in hand.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "duo2",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.9,
+     "sfx": [
+      "rizz"
+     ]
+    },
+    {
+     "on": "two",
+     "img": "duo",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "hand",
+     "sticker": "arrow",
+     "target": "hands",
+     "from": -20
+    }
+   ]
+  },
+  {
+   "text": "It took over TikTok this August.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "duo3",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "August.",
+     "label": "AUGUST 2026",
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "So it must be new, right? It isn't even called the Last Dance.",
+   "beats": [
+    {
+     "on": "new,",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      600
+     ]
+    },
+    {
+     "on": "isn't",
+     "img": "art",
+     "fit": "white",
+     "enter": "spin"
+    },
+    {
+     "on": "isn't",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    },
+    {
+     "on": "called",
+     "sticker": "ellipse",
+     "target": "note",
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "Its real name is F P D F F seven, botsu eight, by a Vocaloid producer called MARETU.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "art",
+     "fit": "white",
+     "enter": "cut"
+    },
+    {
+     "on": "name",
+     "label": "fpd ff7 botsu 8",
+     "dur": 2.4
+    },
+    {
+     "on": "MARETU.",
+     "label": "MARETU",
+     "sfx": [
+      "ding"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "And MARETU uploaded it to SoundCloud in September twenty fourteen.",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": "uploaded",
+     "img": "sc",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "SoundCloud",
+     "sticker": "ellipse",
+     "target": "icon",
+     "dur": 0.9
+    },
+    {
+     "on": "September",
+     "label": "SEPTEMBER 19, 2014"
+    }
+   ],
+   "pause_before": 0.25
+  },
+  {
+   "text": "This makes the {Last Dance} twelve years old.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "duo",
+     "fit": "band",
+     "enter": "cut"
+    },
+    {
+     "on": "twelve",
+     "label": "12 YEARS OLD",
+     "sfx": [
+      "bong"
+     ]
+    },
+    {
+     "on": "old.",
+     "sticker": "ellipse",
+     "target": "pair"
+    }
+   ]
+  }
+ ]
+}

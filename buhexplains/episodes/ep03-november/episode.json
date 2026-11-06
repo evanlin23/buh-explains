@@ -131,7 +131,7 @@
  },
  "lines": [
   {
-   "text": "What actually happens in November 2026?",
+   "text": "What actually happens in November twenty twenty-six?",
    "beats": [
     {
      "on": 0,
@@ -147,12 +147,12 @@
      "dur": 0.9
     },
     {
-     "on": "2026?",
+     "on": "twenty-six?",
      "sticker": "ellipse",
      "target": "bear"
     },
     {
-     "on": "2026?",
+     "on": "twenty-six?",
      "sticker": "interrobang",
      "at": [
       790,
@@ -162,7 +162,7 @@
    ]
   },
   {
-   "text": "You see, the {Remember November 2026 is coming} bear we all know and love has been warning us for months.",
+   "text": "You see, the {Remember November twenty twenty-six is coming} bear we all know and love has been warning us for months.",
    "beats": [
     {
      "on": 0,
@@ -305,7 +305,7 @@
    ]
   },
   {
-   "text": "It was posted in March 2023, captioned: a November meme from 2026 you won't understand yet.",
+   "text": "It was posted in March twenty twenty-three, captioned: a November meme from twenty twenty-six you won't understand yet.",
    "beats": [
     {
      "on": 0,
@@ -325,7 +325,7 @@
      "label": "MARCH 2023"
     },
     {
-     "on": "2023,",
+     "on": "twenty-three,",
      "sticker": "ellipse",
      "target": "bear",
      "dur": 0.9

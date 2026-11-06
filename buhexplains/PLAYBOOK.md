@@ -92,7 +92,7 @@ The hook wording varies too: "Do you know…", "X isn't…", "X is older than…
 - Direction: "a dead-serious lore documentary narrator who knows this is absurd; quick, confident, a real lift on the turn and the reveal".
 - One request per script, then split by Whisper word timings. Fail the build if any line's words aren't heard (Gemini sometimes skips lines) or if words are added. Trim the tail noise burst it sometimes adds.
 - Check meme names by ear (Verity, ThatMob, Skunx, botsu). Free tier: about 10 requests a day, so cache.
-- Don't fake "um"s; punctuation does the pacing. Write years as digits.
+- Don't fake "um"s; punctuation does the pacing. **Write years as they're said** ("twenty twenty-six"): Gemini reads "2026" as "two thousand twenty six". Labels keep the digits.
 
 ## 6. Picture and sound (the edit)
 **The visual identity is real pictures pulled from online, edited over the top** (owner, 2026-11-06). Seen in the old frames (`content/research_notes/buhexplains_frames/`):

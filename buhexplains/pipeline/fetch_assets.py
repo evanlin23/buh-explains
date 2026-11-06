@@ -19,6 +19,10 @@ def get(url, path):
     if os.path.exists(path) and os.path.getsize(path) > 0: return
     os.makedirs(os.path.dirname(path), exist_ok=True)
     print("  fetch", url)
+    if "soundcloud.com" in url:  # public SoundCloud stream, first 90 s only
+        base = os.path.splitext(path)[0]
+        subprocess.run(["yt-dlp", "-q", "-x", "--audio-format", "mp3", "--download-sections", "*0-90", "-o", base + ".%(ext)s", url], check=True)
+        return
     open(path, "wb").write(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120).read())
 
 
@@ -43,7 +47,7 @@ def main(slug):
         for key, url, cut in (("bite", cfg.get("bite_src"), cfg.get("bite_cut")),
                               ("bite_full", cfg.get("bite_full_src") or cfg.get("bite_src"), cfg.get("bite_full_cut"))):
             if not url: continue
-            src = os.path.join(C, "bites", os.path.basename(url)); get(url, src)
+            src = os.path.join(C, "bites", (cfg.get("bite_file") if "soundcloud.com" in url else None) or os.path.basename(url)); get(url, src)
             if cfg.get(key) and cut and not os.path.exists(os.path.join(REPO, cfg[key])):
                 a, b = cut
                 subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", str(a), "-to", str(b), "-i", src, "-ac", "1", "-ar", "48000",
