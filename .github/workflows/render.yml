@@ -28,15 +28,16 @@ jobs:
           key: whisper-base-en-v1
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
       - run: pip install -q numpy soundfile librosa faster-whisper yt-dlp pillow
-      - name: latest voice artifact
+      - name: raw takes from recent voice runs (any branch)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow voice.yml --branch "$GITHUB_REF_NAME" --status success --json databaseId --limit 1 -q '.[0].databaseId')
-          gh run download "$run" --repo "$GITHUB_REPOSITORY" -n voice -D _voice
           mkdir -p .cache/tts out
-          cp -r _voice/out/* out/ 2>/dev/null || true
-          cp _voice/.cache/tts/*.wav .cache/tts/ 2>/dev/null || true
+          for run in $(gh run list --repo "$GITHUB_REPOSITORY" --workflow voice.yml --status success --json databaseId --limit 15 -q '.[].databaseId'); do
+            rm -rf _voice && gh run download "$run" --repo "$GITHUB_REPOSITORY" -n voice -D _voice 2>/dev/null || continue
+            cp -n _voice/.cache/tts/*.wav .cache/tts/ 2>/dev/null || true
+          done
+          ls .cache/tts | wc -l
       - name: build
         env:
           SLUG: ${{ inputs.slug }}

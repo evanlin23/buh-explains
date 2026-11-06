@@ -1,6 +1,7 @@
 # Makes an episode's narration with Gemini TTS (voice Achird), using the repo secret GEMINI_API_KEY, which only
 # Actions can read. Output: artifact voice-<slug> with voice.wav, words.json, joins.json. The render reads them.
-# Runs when an episode script or the voice code changes on a branch, or by hand.
+# Runs when an episode script changes (only those episodes), or by hand (blank slug = every Gemini episode).
+# Raw takes from earlier runs on any branch are restored first, so an unchanged script never costs a request.
 name: voice
 on:
   push:
@@ -15,6 +16,7 @@ on:
         default: ""
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: voice-${{ github.ref }}
   cancel-in-progress: false
@@ -24,6 +26,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -36,6 +40,16 @@ jobs:
           path: .cache/tts
           key: tts-${{ hashFiles('buhexplains/episodes/**/episode.json', 'buhexplains/pipeline/voice.py') }}
           restore-keys: tts-
+      - name: raw takes from earlier runs (any branch), so unchanged scripts never cost a Gemini request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p .cache/tts
+          for run in $(gh run list --repo "$GITHUB_REPOSITORY" --workflow voice.yml --status success --json databaseId --limit 15 -q '.[].databaseId'); do
+            rm -rf _v && gh run download "$run" --repo "$GITHUB_REPOSITORY" -n voice -D _v 2>/dev/null || continue
+            cp -n _v/.cache/tts/*.wav .cache/tts/ 2>/dev/null || true
+          done
+          ls .cache/tts | wc -l
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
       - run: pip install -q numpy soundfile librosa faster-whisper yt-dlp
       - name: narrate
@@ -43,9 +57,17 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           VOICE_ONLY: "1"
           SLUG: ${{ inputs.slug }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
           slugs="$SLUG"
-          if [ -z "$slugs" ]; then
+          if [ -z "$slugs" ] && [ "$EVENT" = "push" ]; then
+            # only the episodes whose script changed in this push; a brand-new branch (BEFORE all zeros) voices nothing
+            if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+              slugs=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- 'buhexplains/episodes/*/episode.json' | cut -d/ -f3 | sort -u)
+            fi
+            [ -z "$slugs" ] && echo "no episode script changed in this push: nothing to voice"
+          elif [ -z "$slugs" ]; then
             slugs=$(for f in buhexplains/episodes/*/episode.json; do python -c "import json,sys;e=json.load(open('$f'));print(e['slug'] if e['voice'].get('engine')=='gemini' else '')"; done)
           fi
           for s in $slugs; do

@@ -31,4 +31,4 @@ buhexplains/make.sh <slug> --preview   # half-size render, no voicecheck
 git config user.name evanlin23
 git config user.email 113861384+evanlin23@users.noreply.github.com
 ```
-Work on a branch; no PR unless asked.
+**`main` is what runs** (owner, 2026-11-07: "just get everything to main"). The daily upload clock (cron-job.org → `upload.yml`, ref `main`) runs main's code, uploads main's `queue.txt`, and commits `uploads.json` there. Work on a branch, and once it's tested, merge it to `main` (fast-forward or merge commit). No PR unless asked.

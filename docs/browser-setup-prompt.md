@@ -28,7 +28,7 @@ Set up YouTube upload access and a daily upload schedule for my @BuhExplains cha
    - Schedule: every day at 7:07, time zone America/Chicago
    - Advanced → Request method: POST
    - Headers: Accept: application/vnd.github+json, Authorization: Bearer <the token>, X-GitHub-Api-Version: 2022-11-28
-   - Request body, exactly: {"ref":"claude/sleepy-ptolemy-8eyek4"}
+   - Request body, exactly: {"ref":"main"}
    - Make sure the job is enabled (clones start disabled).
    - Press "Test run" once. A good result is HTTP 204. Uploads are still off (no YT_ENABLED), so it only runs the workflow, which prints "uploads are off" and does nothing.
 
