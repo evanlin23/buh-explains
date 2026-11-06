@@ -1,5 +1,7 @@
 # @HelloBuh: automated Minecraft stunt Shorts
 
+> **Moved (2026-11-06):** HelloBuh now lives in its own repo, [`evanlin23/hello-buh`](https://github.com/evanlin23/hello-buh) (owner's call). That repo has the working pipeline, the trial report (`docs/trial.md`) and the format research. `hellobuh/trial/` here keeps the abandoned real-client/ReplayMod route for reference.
+
 ## The format (from the channel, 2026-11-06)
 - 72 Shorts, 553 subscribers. Most get 20–40K views; the best is "re:zero instant respawn" (`PdcbpRxYKlc`) at 191K.
 - First-person Minecraft **Java** survival footage, HUD visible (hotbar, hearts).
