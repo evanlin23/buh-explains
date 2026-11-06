@@ -11,6 +11,12 @@ Automation for **@BuhExplains**: 20–35 s meme-lore explainer Shorts (a TTS nar
 - `buhexplains/pipeline/`: `fetch_assets.py` (rebuild `.cache/` from logged URLs), `voice.py` (Gemini Achird or Kokoro; the narrator says the names, `voice.bites: false`), `render.py` (picture + sound + mix), `voicecheck.py` (clipped cuts + intelligibility in the final mix), `shake_measure.py`, `bite.py`, `upload.py`, `comment.py`, `audit.py` (virality QA on the finished file).
 - `buhexplains/assets/sfx/`: the owner's own sound kit (committed). `buhexplains/assets/sfx_sources.txt`: the myinstants kit's URLs.
 
+## Skills (`.claude/skills/`)
+- `/buh-episode`: make one episode end to end (the producer runs this twice a day).
+- `/buh-scout`: find live memes and write scored pitches.
+- `/buh-rerender`: push a pipeline fix to every not-yet-uploaded episode and refresh the `videos` branch.
+- `/buh-status`: are uploads, comments, production and the buffer healthy; what's going up today.
+
 ## Commands
 ```bash
 buhexplains/make.sh <slug>             # fetch_assets -> voice -> render -> voicecheck

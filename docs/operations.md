@@ -12,7 +12,7 @@ Set up 2026-11-06. Times are US Central (America/Chicago).
 | 8:41 PM | The producer makes another episode | Claude scheduled task **"BuhExplains: make a video (evening)"** (`trig_013Qt73kb2xaNSNXciSV1WcV`) |
 
 ## The pieces
-- **The producer** is a persistent Claude Code session, "BuhExplains daily producer" (`session_019n1tKEkGRKrN3GaLngZKVK`), created with this repo as its source. Its first message holds the "Daily run" steps. Each scheduled task wakes it with "Make today's BuhExplains video". A run:
+- **The producer** is a persistent Claude Code session, "BuhExplains daily producer" (`session_019n1tKEkGRKrN3GaLngZKVK`), created with this repo as its source. Each scheduled task wakes it with "Make today's BuhExplains video", and it follows `.claude/skills/buh-episode/SKILL.md` (its first message holds an older copy of the same steps; the skill wins). A run:
   1. Scouts and picks one meme.
   2. Makes `epNN-<slug>` with the full pipeline (one Gemini request).
   3. Runs `audit.py`.
