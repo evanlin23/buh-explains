@@ -1,0 +1,48 @@
+# Uploads one rendered episode to @BuhExplains as a PRIVATE video with a scheduled publish, then opens an issue.
+# OFF until the owner sets it up (docs/youtube-setup.md): it does nothing unless the YT_* secrets, the variable
+# YT_CHANNEL_ID and the variable YT_ENABLED=true all exist. Started by hand, or by cron-job.org (GitHub's own
+# schedule never fires for this owner).
+name: upload
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "episode slug to upload, e.g. ep01-verity"
+        required: true
+concurrency:
+  group: upload
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+  actions: read
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: off unless enabled
+        if: ${{ vars.YT_ENABLED != 'true' }}
+        run: echo "uploads are off (repo variable YT_ENABLED is not 'true'). Nothing done."
+      - uses: actions/checkout@v4
+        if: ${{ vars.YT_ENABLED == 'true' }}
+      - uses: actions/setup-python@v5
+        if: ${{ vars.YT_ENABLED == 'true' }}
+        with:
+          python-version: "3.12"
+      - if: ${{ vars.YT_ENABLED == 'true' }}
+        run: pip install -q google-api-python-client google-auth
+      - name: upload
+        if: ${{ vars.YT_ENABLED == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          YT_ENABLED: ${{ vars.YT_ENABLED }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          SLUG: ${{ inputs.slug }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898729+github-actions[bot]@users.noreply.github.com"
+          python buhexplains/pipeline/upload.py --slug "$SLUG"

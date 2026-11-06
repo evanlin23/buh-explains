@@ -1,0 +1,56 @@
+# Renders one episode's MP4 on Actions from the latest voice artifact (Gemini's cached raw take included, so no
+# new TTS request). Output: artifact film-<slug> (the MP4 and its manifest). Started by hand, or by cron-job.org.
+name: render
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "episode slug, e.g. ep01-verity"
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: render-${{ inputs.slug }}
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: .cache/models/whisper
+          key: whisper-base-en-v1
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+      - run: pip install -q numpy soundfile librosa faster-whisper yt-dlp pillow
+      - name: latest voice artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow voice.yml --branch "$GITHUB_REF_NAME" --status success --json databaseId --limit 1 -q '.[0].databaseId')
+          gh run download "$run" --repo "$GITHUB_REPOSITORY" -n voice -D _voice
+          mkdir -p .cache/tts out
+          cp -r _voice/out/* out/ 2>/dev/null || true
+          cp _voice/.cache/tts/*.wav .cache/tts/ 2>/dev/null || true
+      - name: build
+        env:
+          SLUG: ${{ inputs.slug }}
+        run: |
+          python buhexplains/pipeline/fetch_assets.py "$SLUG"
+          python buhexplains/pipeline/voice.py "$SLUG"
+          python buhexplains/pipeline/render.py "$SLUG"
+          python buhexplains/pipeline/voicecheck.py "$SLUG" | tee "out/$SLUG/voicecheck.txt"
+          cp "buhexplains/episodes/$SLUG/manifest.json" "out/$SLUG/"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: film-${{ inputs.slug }}
+          path: |
+            out/${{ inputs.slug }}/${{ inputs.slug }}.mp4
+            out/${{ inputs.slug }}/manifest.json
+            out/${{ inputs.slug }}/voicecheck.txt
+          retention-days: 90
