@@ -1,0 +1,293 @@
+{
+ "slug": "ep06-gta-wait",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "images": {
+  "waiting": {
+   "url": "https://www.ashleycourtcare.co.uk/wp-content/uploads/2018/10/Senior-and-Elderly-Care-Living-Options.jpg",
+   "points": {
+    "men": [
+     0.5,
+     0.35,
+     0.3
+    ]
+   }
+  },
+  "keyart": {
+   "url": "https://i.ytimg.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
+   "points": {
+    "logo": [
+     0.53,
+     0.16,
+     0.12
+    ],
+    "duo": [
+     0.5,
+     0.55,
+     0.15
+    ]
+   }
+  },
+  "launch": {
+   "url": "https://i.ytimg.com/vi/rz1B4B2yBZY/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+   "points": {
+    "date": [
+     0.78,
+     0.73,
+     0.12
+    ],
+    "logo": [
+     0.78,
+     0.32,
+     0.14
+    ]
+   }
+  },
+  "gta5": {
+   "url": "https://i.ytimg.com/vi/QkkoHAzjnUs/hq3.jpg",
+   "page": "https://www.youtube.com/watch?v=QkkoHAzjnUs",
+   "points": {
+    "logo": [
+     0.5,
+     0.55,
+     0.16
+    ]
+   }
+  },
+  "gta5city": {
+   "url": "https://i.ytimg.com/vi/QkkoHAzjnUs/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=QkkoHAzjnUs",
+   "points": {
+    "people": [
+     0.5,
+     0.45,
+     0.2
+    ]
+   }
+  },
+  "pope": {
+   "url": "https://cdn.britannica.com/02/272502-050-0B027EC4/robert-francis-prevost-leo-xiv-pope-conclave-2025.jpg",
+   "points": {
+    "pope": [
+     0.5,
+     0.38,
+     0.11
+    ]
+   }
+  },
+  "baby": {
+   "url": "https://www.evagudphotography.co.uk/wp-content/uploads/2020/04/IMG_7822-copy.png",
+   "points": {
+    "face": [
+     0.48,
+     0.35,
+     0.15
+    ]
+   }
+  },
+  "teens": {
+   "url": "https://static.vecteezy.com/system/resources/previews/034/341/409/non_2x/group-of-happy-teenagers-looking-at-camera-and-smiling-in-the-park-portrait-of-happy-young-students-ai-generated-free-photo.jpg",
+   "points": {
+    "faces": [
+     0.5,
+     0.42,
+     0.32
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "How long have we actually waited for {GTA six}?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "waiting",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "men",
+     "dur": 0.9
+    },
+    {
+     "on": "GTA",
+     "img": "keyart",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "six}?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {GTA six} we all know and love finally drops November nineteenth.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "keyart",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.8
+    },
+    {
+     "on": "finally",
+     "img": "launch",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "November",
+     "sticker": "ellipse",
+     "target": "date",
+     "dur": 1.0
+    },
+    {
+     "on": "nineteenth.",
+     "label": "NOV 19"
+    }
+   ]
+  },
+  {
+   "text": "But {GTA five} came out in September twenty thirteen.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "gta5",
+     "fit": "blurfill",
+     "enter": "whip",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "came",
+     "sticker": "arrow",
+     "target": "logo",
+     "from": -30,
+     "dur": 0.6
+    },
+    {
+     "on": "September",
+     "img": "gta5city",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "September",
+     "label": "SEPT 2013"
+    }
+   ]
+  },
+  {
+   "text": "Since then, we got a whole new pope.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "pope",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "whole",
+     "sticker": "arrow",
+     "target": "pope",
+     "from": -20,
+     "dur": 0.7
+    },
+    {
+     "on": "pope.",
+     "sfx": [
+      "heavenly"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "A baby born the day {GTA five} dropped",
+   "beats": [
+    {
+     "on": 0,
+     "img": "baby",
+     "fit": "blurfill",
+     "enter": "whip",
+     "sfx": [
+      "heartpop"
+     ]
+    },
+    {
+     "on": "born",
+     "sticker": "heart",
+     "dur": 0.7
+    }
+   ]
+  },
+  {
+   "text": "is a teenager now. Thirteen years.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "teens",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "teenager",
+     "sticker": "ellipse",
+     "target": "faces",
+     "dur": 0.9
+    },
+    {
+     "on": "Thirteen",
+     "label": "13 YEARS",
+     "sfx": [
+      "bong"
+     ]
+    },
+    {
+     "on": "Thirteen",
+     "punch": true
+    }
+   ]
+  }
+ ],
+ "sources": {
+  "gta6_date": "Rockstar announced Nov 6, 2025 that GTA VI moved to Nov 19, 2026 (Engadget, Bleacher Report); Take-Two reaffirmed it in 2026 (Northeast Times 2026-07-18).",
+  "gta5_date": "GTA V released Sept 17, 2013 (Rockstar).",
+  "pope": "Pope Leo XIV elected May 8, 2025.",
+  "thirteen": "Sept 17, 2013 to Nov 19, 2026 = 13 years 2 months."
+ }
+}

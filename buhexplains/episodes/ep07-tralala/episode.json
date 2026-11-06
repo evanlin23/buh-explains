@@ -1,0 +1,372 @@
+{
+ "slug": "ep07-tralala",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "images": {
+  "hero": {
+   "url": "https://i.ytimg.com/vi/ZfErIGWo9ME/maxresdefault.jpg",
+   "points": {
+    "face": [
+     0.48,
+     0.45,
+     0.18
+    ]
+   }
+  },
+  "melt": {
+   "url": "https://i.ytimg.com/vi/eM2fjF9Lf64/hq1.jpg",
+   "points": {
+    "mouth": [
+     0.45,
+     0.62,
+     0.12
+    ]
+   }
+  },
+  "banana": {
+   "url": "https://i.ytimg.com/vi/XMl6HnhFFIA/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=XMl6HnhFFIA",
+   "points": {
+    "cast": [
+     0.5,
+     0.45,
+     0.3
+    ]
+   }
+  },
+  "mickey": {
+   "url": "https://i.ytimg.com/vi/5GxuKac4VC8/hq1.jpg",
+   "points": {
+    "mickey": [
+     0.6,
+     0.55,
+     0.12
+    ]
+   }
+  },
+  "battle": {
+   "url": "https://i.ytimg.com/vi/LMI4GzwPu5s/hq3.jpg",
+   "page": "https://www.youtube.com/@CalobiProductions",
+   "points": {
+    "stage": [
+     0.55,
+     0.42,
+     0.24
+    ]
+   }
+  },
+  "pebbles_car": {
+   "url": "https://i.ytimg.com/vi/qJz18c6gw8c/hq3.jpg",
+   "page": "https://www.youtube.com/watch?v=qJz18c6gw8c",
+   "points": {
+    "car": [
+     0.5,
+     0.3,
+     0.15
+    ]
+   }
+  },
+  "pebbles_face": {
+   "url": "https://i.ytimg.com/vi/qJz18c6gw8c/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=qJz18c6gw8c",
+   "points": {
+    "face": [
+     0.52,
+     0.3,
+     0.18
+    ],
+    "mouth": [
+     0.52,
+     0.42,
+     0.1
+    ]
+   }
+  },
+  "uber": {
+   "url": "https://cdn.britannica.com/72/239572-050-F878B4FD/Uber-driver-holds-smartphone-in-car.jpg",
+   "points": {
+    "logo": [
+     0.72,
+     0.48,
+     0.12
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "Where did melting {SpongeBob} actually come from?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "actually",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Tra La La SpongeBob} we all know and love blew up on X on October second.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "melt",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "blew",
+     "sticker": "arrow",
+     "target": "mouth",
+     "from": -30,
+     "dur": 0.7
+    },
+    {
+     "on": "October",
+     "label": "OCT 2, 2026"
+    }
+   ]
+  },
+  {
+   "text": "The song is two kids' shows mashed together: Mickey Mouse Clubhouse and the Banana Splits, from nineteen sixty eight.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "melt",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "Mickey",
+     "img": "mickey",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Mickey",
+     "sticker": "arrow",
+     "target": "mickey",
+     "from": -30,
+     "dur": 0.9
+    },
+    {
+     "on": "Banana",
+     "img": "banana",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "Banana",
+     "sticker": "ellipse",
+     "target": "cast",
+     "dur": 1.0
+    },
+    {
+     "on": "nineteen",
+     "label": "1968"
+    }
+   ]
+  },
+  {
+   "text": "The SpongeBob was traced from a Cartoon Rap Battle from twenty nineteen.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "traced",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    },
+    {
+     "on": "Cartoon",
+     "img": "battle",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Battle",
+     "sticker": "ellipse",
+     "target": "stage",
+     "dur": 0.9
+    },
+    {
+     "on": "twenty",
+     "label": "2019"
+    }
+   ]
+  },
+  {
+   "text": "But some of the animation came from Get Out of My Car, a cartoon by PsychicPebbles.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "pebbles_car",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Get",
+     "sticker": "arrow",
+     "target": "car",
+     "from": -150,
+     "dur": 0.8
+    },
+    {
+     "on": "cartoon",
+     "img": "pebbles_face",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "PsychicPebbles.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.8
+    }
+   ]
+  },
+  {
+   "text": "And that cartoon was based on a real video from twenty sixteen.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "pebbles_face",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "real",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    },
+    {
+     "on": "real",
+     "punch": true
+    },
+    {
+     "on": "twenty",
+     "label": "JULY 2016",
+     "sfx": [
+      "riser"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "An Uber driver, yelling at his passenger to get out of his car.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "uber",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "Uber",
+     "sticker": "ellipse",
+     "target": "logo",
+     "dur": 0.9
+    },
+    {
+     "on": "yelling",
+     "img": "pebbles_face",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "yelling",
+     "sticker": "ellipse",
+     "target": "mouth",
+     "dur": 0.8
+    },
+    {
+     "on": "get",
+     "punch": true
+    }
+   ]
+  },
+  {
+   "text": "So {Tra La La SpongeBob} is partly an Uber ride.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "Uber",
+     "img": "uber",
+     "fit": "blurfill",
+     "enter": "spin"
+    },
+    {
+     "on": "ride.",
+     "sfx": [
+      "bong"
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": {
+  "kym": "Know Your Meme, 'Tra La La SpongeBob': @osmisanidiot posted the original on X, Oct 2, 2026; audio = @ethansclubhouse intro (TikTok, Sept 16, 2026), a Mickey Mouse Clubhouse x Banana Splits mashup; SpongeBob animation traced from Calobi Productions' Cartoon Rap Battle (Feb 23, 2019); additional animation traced from PsychicPebbles' 'Get Out of My Car' (Nov 25, 2017), inspired by a July 2016 viral Uber driver video.",
+  "primary": "PsychicPebbles 'GET OUT OF MY CAR' (YouTube qJz18c6gw8c, uploaded 2017-11-25). 'Hostile Uber driver refuses to take me to ER!' (YouTube Oih1Yf7l-c0, uploaded 2016-07-08). The Banana Splits Adventure Hour premiered 1968. Calobi's own 'Why Calobi Quit Making Cartoon Rap Battles - Tralala Spongebob' (2026-10-09)."
+ }
+}
