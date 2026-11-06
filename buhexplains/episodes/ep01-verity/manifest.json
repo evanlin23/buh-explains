@@ -140,6 +140,6 @@
   "huh_3 https://www.myinstants.com/media/sounds/ceeday-huh-sound-effect.mp3 1.201633"
  ],
  "name_bites": {
-  "Verity": "placeholder (synthetic)"
+  "Verity": ".cache/bites/verity_short.wav"
  }
 }

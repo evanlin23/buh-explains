@@ -498,18 +498,26 @@ def sfx(name, var=0):
     raise KeyError(name)
 
 
-KIT = {  # event -> myinstants files in .cache/sfx (sources in .cache/sfx/sources.txt, copied to the manifest)
-    "whoosh": ["fast_whoosh_1", "whoosh", "anime_whoosh"], "whip": ["fast_whoosh_1", "whoosh"], "spin": ["whoosh"],
-    "pop": ["pop"], "boom": ["explosion_2"], "impact": ["vine_boom"], "scribble": ["pop"], "whipstk": ["fast_whoosh_1"],
-    "heartpop": ["sparkle_1"], "alarm": ["huh_2"], "boing": ["huh_3", "huh_1"], "x": ["error", "bonk"], "ding": ["notification_1"],
-    "typing": ["notification_1"], "zap": ["lightning_2"], "riser": ["riser"], "glitch": ["glitch_1"], "wow": ["anime_wow"],
-    "mcboom": ["explosion_3"], "reveal": ["bruh_sound_effect_3"],
+KIT = {  # event -> files in buhexplains/assets/sfx (the owner's saved sounds) or .cache/sfx (myinstants, sources.txt)
+    "whoosh": ["woosh", "fast_whoosh_1"], "whip": ["woosh", "fast_whoosh_1"], "spin": ["whoosh"],
+    "pop": ["pop"], "boom": ["explosion_2"], "impact": ["vine-boom"], "scribble": ["pop"], "whipstk": ["fast_whoosh_1"],
+    "heartpop": ["fairy-dust-sound-effect"], "alarm": ["huh_2"], "boing": ["huh_3", "huh_1"], "x": ["metal-pipe-clang", "tuco-get-out"], "ding": ["ding-sound-effect_2"],
+    "typing": ["ding-sound-effect_2"], "zap": ["lightning_2"], "riser": ["riser"], "glitch": ["glitch_1"], "wow": ["anime_wow"],
+    "mcboom": ["explosion_3"], "reveal": ["among-us-role-reveal-sound"], "rizz": ["rizz-sound-effect"], "heavenly": ["heavenly"], "bong": ["taco-bell-bong-sfx"],
 }
 GAIN = {"boom": 0.45, "whoosh": 0.5, "whip": 0.5, "spin": 0.5, "pop": 0.6, "impact": 0.9, "zap": 0.6, "riser": 0.6, "wow": 0.7,
-        "alarm": 0.7, "x": 0.8, "heartpop": 0.5, "ding": 0.6, "typing": 0.5, "scribble": 0.4, "boing": 0.8, "mcboom": 0.8, "reveal": 0.9}
+        "alarm": 0.7, "x": 0.8, "heartpop": 0.5, "ding": 0.6, "typing": 0.5, "scribble": 0.4, "boing": 0.8, "mcboom": 0.8, "reveal": 0.9, "rizz": 0.8, "heavenly": 0.7, "bong": 0.9}
 ALIGN_PEAK = {"whoosh", "whip", "spin", "whipstk", "riser", "boom"}   # build-ups: their peak lands on the event
-MAXLEN = {"zap": 2.2, "wow": 3.0}                                      # only very long files get capped
+MAXLEN = {"zap": 2.2, "wow": 3.0, "x": 1.4, "reveal": 2.6, "heavenly": 1.6, "ding": 1.2, "typing": 1.0}                                      # only very long files get capped
 _KIT = {}
+
+
+def lufs(a):
+    """Integrated loudness (EBU R128) of a mono float array, via ffmpeg."""
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-", "-af", "ebur128",
+                        "-f", "null", "-"], input=np.asarray(a, np.float32).tobytes(), capture_output=True).stderr.decode()
+    m = re.findall(r"I:\s+(-?[\d.]+) LUFS", r)
+    return float(m[-1]) if m else -70.0
 
 
 def kit_sound(name, var):
@@ -519,7 +527,8 @@ def kit_sound(name, var):
     f = files[var % len(files)]
     key = (f, name)
     if key not in _KIT:
-        p = os.path.join(CACHE, "sfx", f + ".mp3")
+        p = os.path.join(ROOT, "assets", "sfx", f + ".mp3")          # the owner's saved sounds first
+        if not os.path.exists(p): p = os.path.join(CACHE, "sfx", f + ".mp3")
         if not os.path.exists(p): return None, 0.0
         raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", p, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
         a = np.frombuffer(raw, np.float32).copy()
@@ -537,7 +546,7 @@ def kit_sound(name, var):
 
 
 ep_music = {}
-SFX_DB = -11.5  # effects sit about 6 LU under the voice (owner, 2026-11-06: "the sounds are too loud"; they were 5.5 LU OVER it)
+SFX_UNDER_VOICE = -6.0  # LU. Owner, 2026-11-06: "the sounds are too loud" (they were 5.5 LU OVER the voice)
 
 
 def mix(slug, tl, dur):
@@ -555,16 +564,26 @@ def mix(slug, tl, dur):
         if t0 < 0: s = s[int(-t0 * SR):]; t0 = 0.0
         i = int(t0 * SR); seg = s[: max(0, n - i)]
         fx[i:i + len(seg)] += seg
-    fx *= 10 ** (SFX_DB / 20); out += fx
+    v_l = lufs(v)
+    fx *= 10 ** ((v_l + SFX_UNDER_VOICE - lufs(fx)) / 20); out += fx
     sf.write(os.path.join(od, "stem_voice.wav"), out[:0] if False else np.pad(v, (0, max(0, n - len(v))))[:int(dur * SR)], SR)
     sf.write(os.path.join(od, "stem_sfx.wav"), fx[:int(dur * SR)], SR)
     m = ep_music.get("cfg")
     if m:
-        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(m.get("start", 0)), "-t", str(dur + 1), "-i",
-                              os.path.join(CACHE, "music", m["file"]), "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
-        bed = np.frombuffer(raw, np.float32)[: len(out)]
-        vr = np.sqrt(np.mean(v[np.abs(v) > 0.02] ** 2)); br = np.sqrt(np.mean(bed ** 2)) + 1e-9
-        bed = bed * (vr / br) * 10 ** (m.get("under_voice_db", -7) / 20)
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", os.path.join(CACHE, "music", m["file"]), "-ac", "1", "-ar", str(SR),
+                              "-f", "f32le", "-"], capture_output=True).stdout
+        src = np.frombuffer(raw, np.float32)
+        a0 = int(m.get("start", 0) * SR)
+        if m.get("loop"):  # a short clip: play intro to the loop end, then repeat the loop (bar-aligned) with tiny crossfades
+            l0, l1 = int(m["loop"][0] * SR), int(m["loop"][1] * SR); xf = int(0.02 * SR)
+            bed = src[a0:l1].copy(); seg = src[l0:l1]
+            while len(bed) < len(out):
+                bed[-xf:] = bed[-xf:] * np.linspace(1, 0, xf) + seg[:xf] * np.linspace(0, 1, xf)
+                bed = np.concatenate([bed, seg[xf:]])
+        else:
+            bed = src[a0:]
+        bed = bed[: len(out)]
+        bed = bed * 10 ** ((v_l + m.get("under_voice_db", -5) - lufs(bed)) / 20)
         bed = bed.copy(); fo = int(0.3 * SR); bed[-fo:] *= np.linspace(1, 0, fo)
         out[: len(bed)] += bed
         sf.write(os.path.join(od, "stem_music.wav"), bed[:int(dur * SR)], SR)

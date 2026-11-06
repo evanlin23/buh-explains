@@ -153,7 +153,16 @@ def main(slug):
     os.makedirs(od, exist_ok=True)
     k = Kokoro(os.path.join(MODELS, "kokoro-v1.0.onnx"), os.path.join(MODELS, "voices-v1.0.bin"))
     model = WhisperModel("base.en", device="cpu", compute_type="int8", download_root=os.path.join(MODELS, "whisper"))
-    bites = {key: bite_audio(n, cfg, k) for key, (n, cfg) in names.items()}
+    ref, _ = k.create("This is a level check for the narrator.", voice=v["voice"], speed=v["speed"], lang="en-us")
+    ref = np.asarray(ref, np.float32); ref_rms = np.sqrt(np.mean(ref[np.abs(ref) > 0.02] ** 2))
+
+    def level(a):  # a bite plays as loud as the narrator (a touch hotter), never quieter
+        r = np.sqrt(np.mean(a[np.abs(a) > 0.02] ** 2)) + 1e-9
+        a = a * (ref_rms * 1.15 / r)
+        return a / max(1.0, np.abs(a).max() / 0.98)
+
+    bites = {key: level(bite_audio(n, cfg, k)) for key, (n, cfg) in names.items()}
+    bites_full = {key: level(bite_audio(n, dict(cfg, bite=cfg.get("bite_full") or cfg.get("bite")), k)) for key, (n, cfg) in names.items()}
     parts, words, t, report = [], [], 0.0, []
     seg_n = 0
     for li, line in enumerate(ep["lines"]):
@@ -181,7 +190,7 @@ def main(slug):
         for kind, idx in segs:
             if kind == "bite":
                 key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
-                a = bites[key]
+                a = (bites_full if len(idx) > 1 else bites)[key]
                 a = trim(a, lead=0.0, pad=0.0)
                 span = (len(a) / SR) / len(idx)
                 for j, i in enumerate(idx):  # the group's words share the bite's time, for captions

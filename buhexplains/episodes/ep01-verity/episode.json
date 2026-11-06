@@ -2,8 +2,19 @@
  "slug": "ep01-verity",
  "names": {
   "Verity": {
-   "bite": null,
-   "note": "owner, 2026-11-06: use a line from ThatMob's VERITY movie (f6f3PhauXyg). Waiting on the clip; then bite.py --cut and set bite."
+   "bite": ".cache/bites/verity_short.wav",
+   "bite_full": ".cache/bites/verity_full.wav",
+   "source": "https://www.myinstants.com/media/sounds/hey-its-me-its-verity.mp3 (\"Hey, it's me, it's Verity!\"; short bite = \"it's Verity!\")",
+   "note": "owner, 2026-11-06: the most recognizable Verity line, found online",
+   "bite_src": "https://www.myinstants.com/media/sounds/hey-its-me-its-verity.mp3",
+   "bite_cut": [
+    1.8,
+    2.72
+   ],
+   "bite_full_cut": [
+    0.0,
+    2.75
+   ]
   }
  },
  "voice": {
@@ -209,6 +220,12 @@
       780,
       620
      ]
+    },
+    {
+     "on": "love",
+     "sfx": [
+      "rizz"
+     ]
     }
    ]
   },
@@ -302,6 +319,12 @@
      ],
      "angle": -135,
      "dur": 0.8
+    },
+    {
+     "on": "friendly",
+     "sfx": [
+      "heavenly"
+     ]
     }
    ]
   },
@@ -460,15 +483,25 @@
      "sfx": [
       "impact"
      ]
+    },
+    {
+     "on": "character.",
+     "sfx": [
+      "bong"
+     ]
     }
    ]
   }
  ],
  "music": {
-  "file": "258.mp3",
-  "start": 6,
-  "under_voice_db": -6,
-  "source": "https://assets.mixkit.co/music/258/258.mp3 (Mixkit free licence)",
-  "note": "set to null to leave room for a trending song added at upload"
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -5,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
  }
 }
