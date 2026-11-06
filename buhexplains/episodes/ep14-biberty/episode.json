@@ -1,0 +1,576 @@
+{
+ "slug": "ep14-biberty",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "launch": "Liberty Mutual press release, 'Liberty Mutual Turns \"Liberty Biberty\" From Famous Ad Flub Into Its Newest Brand Character' (July 20, 2026; libertymutualgroup.com): created with Bandits & Friends; the puppet crafted by Jim Henson's Creature Shop. Primary video: Liberty Mutual's 'Tell Everyone | Liberty Biberty' (youtube.com/watch?v=c5X7YYZmhS4).",
+  "creator": "Boston Globe, 'Meet Liberty Biberty, Liberty Mutual's newest mascot' (July 24, 2026): 'The puppet, crafted by Jim Henson's Creature Shop, gets its name from' the 2019 'bad actor' ad (Tanner Novlan) who flubbed the company name. Insurance Journal (Oct 27, 2026): 'a 2019 ad in which an actor struggling to pronounce the company name calls it Liberty Biberty'; the puppet was crafted by Jim Henson's Creature Shop.",
+  "protest": "UPI, 'Dozens protest against Liberty Biberty in Boston' (Oct 28, 2026): Sunday protest outside Liberty Mutual's Boston headquarters, signs reading 'Liberty from Biberty'. Insurance Journal (Oct 27, 2026): Sunday, October 25, 2PM, 'several dozen people' (citing the Boston Globe). Know Your Meme, 'Liberty Biberty' (debut July 20, 2026; protest Oct 25, 2026). Organizer's invitation: youtube.com/watch?v=pISGBqHRva8.",
+  "henson": "Wikipedia, 'Jim Henson's Creature Shop': the effects studio founded by Jim Henson, creator of the Muppets."
+ },
+ "images": {
+  "hero": {
+   "url": "https://i.ytimg.com/vi/c5X7YYZmhS4/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/c5X7YYZmhS4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=c5X7YYZmhS4",
+   "points": {
+    "face": [
+     0.39,
+     0.52,
+     0.18
+    ],
+    "crown": [
+     0.37,
+     0.22,
+     0.08
+    ],
+    "mouth": [
+     0.42,
+     0.66,
+     0.06
+    ]
+   },
+   "focus": [
+    0.39,
+    0.5
+   ]
+  },
+  "ac": {
+   "url": "https://i.ytimg.com/vi/7w7kSMJ8S30/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/7w7kSMJ8S30/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=7w7kSMJ8S30",
+   "points": {
+    "face": [
+     0.3,
+     0.52,
+     0.2
+    ],
+    "eye": [
+     0.3,
+     0.42,
+     0.05
+    ]
+   },
+   "focus": [
+    0.3,
+    0.5
+   ]
+  },
+  "windshield": {
+   "url": "https://i.ytimg.com/vi/P1MjegzHFgI/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/P1MjegzHFgI/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=P1MjegzHFgI",
+   "points": {
+    "face": [
+     0.52,
+     0.38,
+     0.09
+    ]
+   },
+   "focus": [
+    0.52,
+    0.4
+   ]
+  },
+  "diner": {
+   "url": "https://i.ytimg.com/vi/CA3oAoUdnA4/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/CA3oAoUdnA4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=CA3oAoUdnA4",
+   "points": {
+    "biberty": [
+     0.78,
+     0.68,
+     0.07
+    ],
+    "actor": [
+     0.3,
+     0.33,
+     0.06
+    ]
+   },
+   "focus": [
+    0.7,
+    0.6
+   ]
+  },
+  "actor": {
+   "url": "https://i.ytimg.com/vi/W-FbVT4ddZQ/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/W-FbVT4ddZQ/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=W-FbVT4ddZQ",
+   "points": {
+    "face": [
+     0.6,
+     0.18,
+     0.06
+    ],
+    "statue": [
+     0.15,
+     0.28,
+     0.06
+    ]
+   },
+   "focus": [
+    0.6,
+    0.35
+   ]
+  },
+  "bungle": {
+   "url": "https://i.ytimg.com/vi/5Ji6t2rHaiM/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/5Ji6t2rHaiM/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=5Ji6t2rHaiM",
+   "points": {
+    "face": [
+     0.6,
+     0.22,
+     0.06
+    ]
+   },
+   "focus": [
+    0.6,
+    0.35
+   ]
+  },
+  "poster": {
+   "url": "https://i.ytimg.com/vi/pISGBqHRva8/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/pISGBqHRva8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=pISGBqHRva8",
+   "points": {
+    "date": [
+     0.5,
+     0.63,
+     0.16
+    ],
+    "title": [
+     0.5,
+     0.28,
+     0.18
+    ],
+    "mascot": [
+     0.13,
+     0.33,
+     0.12
+    ]
+   }
+  },
+  "protest": {
+   "url": "https://i.ytimg.com/vi/SPZAMYFOLwM/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/SPZAMYFOLwM/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=SPZAMYFOLwM",
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.72
+   ],
+   "points": {
+    "sign": [
+     0.32,
+     0.8,
+     0.08
+    ],
+    "hq": [
+     0.35,
+     0.1,
+     0.14
+    ]
+   },
+   "focus": [
+    0.4,
+    0.6
+   ]
+  },
+  "pool": {
+   "url": "https://i.ytimg.com/vi/gRluOgYBRRA/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/gRluOgYBRRA/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=gRluOgYBRRA",
+   "points": {
+    "biberty": [
+     0.8,
+     0.65,
+     0.08
+    ]
+   },
+   "focus": [
+    0.75,
+    0.6
+   ]
+  },
+  "creature": {
+   "url": "https://i.ytimg.com/vi/WQyWTivri1g/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/WQyWTivri1g/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=WQyWTivri1g",
+   "points": {
+    "head": [
+     0.55,
+     0.45,
+     0.2
+    ],
+    "eye": [
+     0.53,
+     0.27,
+     0.05
+    ]
+   },
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "henson": {
+   "url": "https://i.ytimg.com/vi/LOBn86_DAZU/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/LOBn86_DAZU/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=LOBn86_DAZU",
+   "crop": [
+    0.28,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "points": {
+    "face": [
+     0.69,
+     0.25,
+     0.08
+    ],
+    "kermit": [
+     0.14,
+     0.48,
+     0.1
+    ]
+   },
+   "focus": [
+    0.5,
+    0.4
+   ]
+  }
+ },
+ "lines": [
+  {
+   "text": "Nobody tells you who built {Liberty Biberty}.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "built",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ],
+     "dur": 0.8
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Biberty} we all know and love is a fuzzy yellow ball selling insurance.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "ac",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "fuzzy",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.7
+    },
+    {
+     "on": "selling",
+     "img": "windshield",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "insurance.",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "Liberty Mutual launched him this July.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "diner",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "launched",
+     "sticker": "arrow",
+     "target": "biberty",
+     "from": -140,
+     "dur": 0.7
+    },
+    {
+     "on": "July.",
+     "label": "JULY 2026",
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "Even his name is a mistake.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "mistake.",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "In a twenty nineteen ad, an actor tripped over the company name and said {Liberty Biberty}.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "actor",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "nineteen",
+     "label": "2019 AD",
+     "dur": 1.0
+    },
+    {
+     "on": "actor,",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.7
+    },
+    {
+     "on": "said",
+     "img": "bungle",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "said",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "But the hate didn't stay online.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "poster",
+     "fit": "blurfill",
+     "enter": "spin"
+    },
+    {
+     "on": "hate",
+     "sticker": "x",
+     "target": "mascot",
+     "dur": 0.7
+    }
+   ]
+  },
+  {
+   "text": "On October twenty fifth, dozens protested outside Liberty Mutual's Boston headquarters.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "poster",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "October",
+     "sticker": "ellipse",
+     "target": "date",
+     "dur": 0.8
+    },
+    {
+     "on": "dozens",
+     "img": "protest",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Boston",
+     "label": "BOSTON HQ",
+     "dur": 0.9
+    },
+    {
+     "on": "headquarters.",
+     "sticker": "arrow",
+     "target": "hq",
+     "from": -140,
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "Their signs said Liberty from Biberty.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "protest",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "signs",
+     "sticker": "ellipse",
+     "target": "sign",
+     "dur": 0.6
+    },
+    {
+     "on": "said",
+     "label": "\"LIBERTY FROM BIBERTY\"",
+     "dur": 1.2
+    }
+   ]
+  },
+  {
+   "text": "So who actually built this thing?",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "pool",
+     "fit": "cover",
+     "enter": "zoomblur",
+     "grade": "dark"
+    },
+    {
+     "on": "built",
+     "sticker": "interrobang",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Jim Henson's Creature Shop. Yes, the Muppets guy.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "creature",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "Creature",
+     "label": "JIM HENSON'S CREATURE SHOP",
+     "dur": 1.3
+    },
+    {
+     "on": "Creature",
+     "lightning": true
+    },
+    {
+     "on": "Yes,",
+     "img": "henson",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Muppets",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -140,
+     "dur": 0.5
+    },
+    {
+     "on": "guy.",
+     "sticker": "ellipse",
+     "target": "kermit",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "His studio built the most hated mascot on the internet.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "creature",
+     "fit": "cover",
+     "enter": "cut"
+    },
+    {
+     "on": "most",
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "hated",
+     "lightning": true
+    },
+    {
+     "on": "mascot",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  }
+ ]
+}
