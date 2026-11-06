@@ -154,3 +154,9 @@ After every 10 uploads, write what was measured into `buhexplains/LEARNINGS.md`,
 - `data-driven/research/`: `packaging-playbook.md`:16-149, `human-feel-guide.md`:37-120, `cadence-growth.md`:11-200, `gap-analysis.md`:16-31
 - `niche/docs/LESSONS.md`:66-81 and 245-290, `script-style-guide.md`:31-57
 - `content/studio/style-guide.md` showrunner notes 9, 12, 13 and 17; `content/reports/Sonified history video playbook.md`:21-29 and 163
+
+## Production notes (team, from ep04–05)
+- **Dry-run before spending Gemini requests.** Put a stand-in narration in the TTS cache (Kokoro reading the exact script), run voice.py and a sticker-frame sheet, then delete the stand-in. Every beat word resolves and every target lands before the real take is requested.
+- **Read voicecheck with care on number-heavy scripts.** Whisper writes "1994", "$60 million" and "1st", so spelled-out numbers show up as "misses" even when the voice says them perfectly (ep05: 85%, every miss a number). Look at the missed list, not just the percentage.
+- **Watch long holds on one picture.** A teaser still, a tree or a banknote held for 4+ seconds reads as static. Add a close crop of the same picture (`cover` + `crop`), a related shot, or zoom punches on the stressed words.
+- **Crop out other people's logos and titles** (A24 title cards, festival laurels) with `crop`, including on close-up variants.

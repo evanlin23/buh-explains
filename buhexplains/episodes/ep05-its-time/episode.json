@@ -290,6 +290,22 @@
      "on": "one.",
      "label": "#1",
      "dur": 0.9
+    },
+    {
+     "on": "took",
+     "punch": true
+    },
+    {
+     "on": "finally",
+     "img": "ice",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "finally",
+     "sticker": "ellipse",
+     "target": "mariah",
+     "dur": 0.5
     }
    ]
   },
@@ -298,16 +314,22 @@
    "beats": [
     {
      "on": 0,
+     "img": "sleigh",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "single",
      "img": "tree",
      "fit": "blurfill",
-     "enter": "cut"
+     "enter": "whip"
     },
     {
      "on": "December.",
      "sticker": "arrow",
      "target": "presents",
      "from": -20,
-     "dur": 0.8
+     "dur": 0.6
     }
    ]
   },
@@ -371,6 +393,14 @@
      "sticker": "ellipse",
      "target": "franklin",
      "dur": 0.8
+    },
+    {
+     "on": "million",
+     "punch": true
+    },
+    {
+     "on": "sixteen.",
+     "punch": true
     }
    ]
   },
@@ -379,14 +409,23 @@
    "beats": [
     {
      "on": 0,
-     "img": "cash",
+     "img": "close",
      "fit": "blurfill",
-     "enter": "cut"
+     "enter": "whip"
     },
     {
      "on": "two",
      "label": "$2,500,000 A YEAR",
      "dur": 1.6
+    },
+    {
+     "on": "million",
+     "img": "cash",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "wow"
+     ]
     },
     {
      "on": "year.",
