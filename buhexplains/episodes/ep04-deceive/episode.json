@@ -64,7 +64,8 @@
    }
   },
   "fielder": {
-   "url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA2gwoQ6.img?w=768&h=576&m=6&x=285&y=175&s=178&d=178",
+   "url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA2gwoQ6.img?w=1600&h=1200&m=6&x=285&y=175&s=178&d=178",
+   "fallback": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA2gwoQ6.img?w=768&h=576&m=6&x=285&y=175&s=178&d=178",
    "points": {
     "face": [
      0.33,

@@ -62,25 +62,19 @@
    }
   },
   "sing": {
-   "url": "https://i.ytimg.com/vi/W71dTvlW824/maxresdefault.jpg",
+   "url": "https://i.ytimg.com/vi/kjG6ptBm-n4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=kjG6ptBm-n4",
    "fallback": "https://i.ytimg.com/vi/W71dTvlW824/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=W71dTvlW824",
-   "crop": [
-    0.0,
-    0.04,
-    1.0,
-    0.8
-   ],
    "points": {
     "mouth": [
-     0.45,
-     0.55,
-     0.12
+     0.43,
+     0.62,
+     0.08
     ],
     "face": [
-     0.45,
+     0.44,
      0.42,
-     0.3
+     0.22
     ]
    }
   },
