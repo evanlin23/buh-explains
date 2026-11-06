@@ -2,7 +2,11 @@
 
 Uploads are **off** until every step here is done. The `upload` workflow checks for all of them and otherwise prints "uploads are off" and does nothing. Adapted from blocky-stories' `docs/youtube-setup.md`.
 
-## 1. Google Cloud (console.cloud.google.com)
+## Status
+- Step 1 is **already done**: reuse the Web OAuth client in the existing **blocky-stories** Google Cloud project (YouTube Data API v3 enabled, app published). Start at step 2.
+- Steps 2 and 3 can be done by the Claude browser extension: paste `docs/browser-setup-prompt.md` into it. It stops before turning uploads on.
+
+## 1. Google Cloud (console.cloud.google.com) (done: reuse blocky-stories' client)
 1. Create a project (`buh-explains`). Skip any billing prompt.
 2. APIs & Services → Library → **YouTube Data API v3** → Enable.
 3. OAuth consent screen: External; add the scopes `youtube.upload` and `youtube.readonly`; add yourself as a test user; then **Publish app** (in Testing mode the token dies every 7 days).
