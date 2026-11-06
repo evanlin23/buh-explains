@@ -104,31 +104,28 @@
    }
   },
   "china": {
-   "url": "https://i.ytimg.com/vi/-EBTyqJa5p8/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=-EBTyqJa5p8",
+   "url": "https://i.ytimg.com/vi/EcyrZzx2xBU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=EcyrZzx2xBU",
+   "fallback": "https://i.ytimg.com/vi/-EBTyqJa5p8/hqdefault.jpg",
    "points": {
     "gate": [
-     0.5,
-     0.15,
-     0.3
+     0.22,
+     0.4,
+     0.085
     ]
    }
   },
   "rm": {
-   "url": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
+   "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1280px-Real_Madrid_CF.svg.png",
+   "page": "https://en.wikipedia.org/wiki/File:Real_Madrid_CF.svg",
+   "fallback": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
    "points": {
     "crest": [
      0.5,
-     0.5,
-     0.15
+     0.62,
+     0.2
     ]
-   },
-   "crop": [
-    0.32,
-    0.05,
-    0.68,
-    0.95
-   ]
+   }
   },
   "laliga": {
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/960px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",

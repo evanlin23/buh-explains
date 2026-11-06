@@ -2,38 +2,38 @@
  "slug": "ep11-mbappe",
  "images": {
   "mbappe": {
-   "used": "https://i.ytimg.com/vi/6JH9HyvJSpw/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/6JH9HyvJSpw/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=6JH9HyvJSpw",
    "rights": "third-party; shown under narration as commentary"
   },
   "meme": {
-   "used": "https://i.ytimg.com/vi/rd5SdmuUl9w/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/rd5SdmuUl9w/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=rd5SdmuUl9w",
    "rights": "third-party; shown under narration as commentary"
   },
   "show": {
-   "used": "https://i.ytimg.com/vi/zd6O0p1YFOA/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/zd6O0p1YFOA/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=zd6O0p1YFOA",
    "rights": "third-party; shown under narration as commentary"
   },
   "show2": {
-   "used": "https://i.ytimg.com/vi/OuTz0_Rx1q8/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/OuTz0_Rx1q8/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=OuTz0_Rx1q8",
    "rights": "third-party; shown under narration as commentary"
   },
   "flag": {
-   "used": "https://i.ytimg.com/vi/snJwmT1K7eU/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/snJwmT1K7eU/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=snJwmT1K7eU",
    "rights": "third-party; shown under narration as commentary"
   },
   "china": {
-   "used": "https://i.ytimg.com/vi/-EBTyqJa5p8/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=-EBTyqJa5p8",
+   "used": "https://i.ytimg.com/vi/EcyrZzx2xBU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=EcyrZzx2xBU",
    "rights": "third-party; shown under narration as commentary"
   },
   "rm": {
-   "used": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
-   "page": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
+   "used": "https://thumb.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1280px-Real_Madrid_CF.svg.png",
+   "page": "https://en.wikipedia.org/wiki/File:Real_Madrid_CF.svg",
    "rights": "third-party; shown under narration as commentary"
   },
   "laliga": {
@@ -42,21 +42,21 @@
    "rights": "third-party; shown under narration as commentary"
   },
   "sponsors": {
-   "used": "https://i.ytimg.com/vi/aVIGICAIpY4/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/aVIGICAIpY4/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=aVIGICAIpY4",
    "rights": "third-party; shown under narration as commentary"
   },
   "dark": {
-   "used": "https://i.ytimg.com/vi/NGCzedAMzrc/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/NGCzedAMzrc/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=NGCzedAMzrc",
    "rights": "third-party; shown under narration as commentary"
   }
  },
  "stock": {
   "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
-  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
   "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
-  "embers": "https://mixkit.co (Mixkit free licence) 3465-720.mp4"
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
  },
  "sfx": [
   "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",
