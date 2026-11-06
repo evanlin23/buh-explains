@@ -158,7 +158,16 @@
     },
     {
      "on": "October",
-     "label": "OCT 2, 2026"
+     "label": "OCT 2, 2026",
+     "dur": 1.3
+    },
+    {
+     "on": "blew",
+     "punch": true
+    },
+    {
+     "on": "second.",
+     "punch": true
     }
    ]
   },
@@ -198,7 +207,12 @@
     },
     {
      "on": "nineteen",
-     "label": "1968"
+     "label": "1968",
+     "dur": 1.3
+    },
+    {
+     "on": "shows",
+     "punch": true
     }
    ]
   },
@@ -234,7 +248,8 @@
     },
     {
      "on": "twenty",
-     "label": "2019"
+     "label": "2019",
+     "dur": 1.3
     }
    ]
   },
@@ -297,7 +312,8 @@
      "label": "JULY 2016",
      "sfx": [
       "riser"
-     ]
+     ],
+     "dur": 1.3
     }
    ]
   },
