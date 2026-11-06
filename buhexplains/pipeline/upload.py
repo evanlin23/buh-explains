@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 EP = ROOT / "buhexplains" / "episodes"
 UPLOADS = ROOT / "buhexplains" / "uploads.json"
 REPO = os.environ.get("GITHUB_REPOSITORY", "evanlin23/buh-explains")
-SLOTS_CENTRAL = [(16, 0), (19, 30)]   # first and second upload of a day go public at 4:00 and 7:30 PM Central
+SLOTS_CENTRAL = [(12, 0), (18, 0)]   # two posts a day (owner, 2026-11-06): about noon and about 6 PM Central
+PER_DAY = 2
 
 
 def enabled() -> tuple[bool, str]:
@@ -89,8 +90,9 @@ def main() -> None:
         return
     if not a.slug:  # the daily clock (cron-job.org): one video a day, the next one in the queue
         done0 = uploads()
-        if any(e.get("uploaded_central") == central_today() for e in done0.values()):
-            print(f"already uploaded one today ({central_today()}, Central). Nothing done."); return
+        n_today = sum(1 for e in done0.values() if e.get("uploaded_central") == central_today())
+        if n_today >= PER_DAY:
+            print(f"already uploaded {n_today} today ({central_today()}, Central; the limit is {PER_DAY}). Nothing done."); return
         a.slug = next_slug(done0) or ""
         if not a.slug:
             print("queue.txt is empty: everything is uploaded. Nothing done."); return
@@ -110,7 +112,7 @@ def main() -> None:
     with tempfile.TemporaryDirectory() as td:
         mp4 = film(a.slug, Path(td))
         today = dt.datetime.now(dt.timezone.utc).date().isoformat()
-        slot = sum(1 for e in done.values() if e.get("uploaded") == today)
+        slot = sum(1 for e in done.values() if e.get("uploaded_central") == central_today())
         when = publish_at(slot)
         body = {"snippet": {"title": pkg["title"], "description": pkg["description"], "categoryId": "24"},
                 "status": {"privacyStatus": "private", "selfDeclaredMadeForKids": False, "containsSyntheticMedia": False}}

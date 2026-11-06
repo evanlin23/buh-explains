@@ -1,4 +1,4 @@
-# Upload order for the daily clock (cron-job.org -> upload.yml with no slug): one a day, top first, skipping
+# Upload order for the daily clock (cron-job.org -> upload.yml with no slug): two a day (7:07 AM and 2:07 PM Central runs), top first, skipping
 # anything already in uploads.json. Deadlines first. Edit freely; add new episodes as they're made.
 ep06-gta-wait      # before 2026-11-19 (GTA 6 release)
 ep11-mbappe       # time-critical: the story is from late October

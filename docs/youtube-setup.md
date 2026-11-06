@@ -5,7 +5,7 @@ Uploads are **off** until every step here is done. The `upload` workflow checks 
 ## Status
 - Step 1 is **already done**: reuse the Web OAuth client in the existing **blocky-stories** Google Cloud project (YouTube Data API v3 enabled, app published). Start at step 2.
 - Steps 2 and 3, plus the cron-job.org daily schedule, can be done by the Claude browser extension: paste `docs/browser-setup-prompt.md` into it, then give it the Client ID and secret in its own chat. It stops before turning uploads on.
-- **The daily clock:** cron-job.org dispatches `upload.yml` with no slug every day at 7:07 AM Central, on `main`. With no slug, the uploader takes the first episode in `buhexplains/queue.txt` (deadline order) that isn't uploaded yet, uploads at most one per Central day, and needs its `film-<slug>` artifact (from `render.yml`).
+- **The daily clock (2 posts a day, owner 2026-11-06):** cron-job.org dispatches `upload.yml` with no slug on `main` at 7:07 AM and 2:07 PM Central ("buhexplains upload" and "buhexplains upload 2"). The 1st upload of a Central day goes public about noon, the 2nd about 6 PM. With no slug, the uploader takes the first episode in `buhexplains/queue.txt` (deadline order) that isn't uploaded yet, uploads at most two per Central day, and needs its `film-<slug>` artifact (from `render.yml`).
 
 ## 1. Google Cloud (console.cloud.google.com) (done: reuse blocky-stories' client)
 1. Create a project (`buh-explains`). Skip any billing prompt.

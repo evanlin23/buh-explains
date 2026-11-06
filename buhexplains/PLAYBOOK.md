@@ -5,6 +5,7 @@ How a BuhExplains Short gets picked, written, cut and judged. Every rule here co
 The owner's words outrank everything here except accuracy. Add new owner feedback to "Owner notes" as a dated quote, in the same PR.
 
 ## Owner notes
+- 2026-11-06: "Can we do 2x per day?" / "can we post 2x per day as well?" A daily producer session makes a video at 1:23 PM and 8:41 PM Central. Uploads: 2 a day from `queue.txt`, public about noon and about 6 PM Central.
 - 2026-11-07: "The main goal is the virality (hook, build up, payoff)" and "it just needs to be able to go viral, not necessarily follow BuhExplains' old ones exactly". "My hook was like starting zoomed out and quickly zooming in." Every video now gets `render.viral_pass`:
   - **Hook:** the first shot starts at a third of its size on black and snaps to full size in 0.38 s, with a whoosh.
   - **Build-up:** no shot holds longer than about 1.2 s; long holds get jump cuts alternating a tight crop on the picture's point of interest with the full shot. A riser builds into the final line.
