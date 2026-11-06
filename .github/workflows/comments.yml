@@ -1,0 +1,39 @@
+# Posts each uploaded episode's first comment (package.json "first_comment") as the channel once the video is public.
+# Started by cron-job.org a little after the noon and 6 PM Central publish slots ("buhexplains comments"), by hand,
+# and as a catch-up step at the end of every upload run. Needs the youtube.force-ssl scope on YT_REFRESH_TOKEN.
+name: comments
+on:
+  workflow_dispatch:
+concurrency:
+  group: upload
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  comments:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: off unless enabled
+        if: ${{ vars.YT_ENABLED != 'true' }}
+        run: echo "uploads are off (repo variable YT_ENABLED is not 'true'). Nothing done."
+      - uses: actions/checkout@v4
+        if: ${{ vars.YT_ENABLED == 'true' }}
+      - uses: actions/setup-python@v5
+        if: ${{ vars.YT_ENABLED == 'true' }}
+        with:
+          python-version: "3.12"
+      - if: ${{ vars.YT_ENABLED == 'true' }}
+        run: pip install -q google-api-python-client google-auth
+      - name: comment
+        if: ${{ vars.YT_ENABLED == 'true' }}
+        env:
+          YT_ENABLED: ${{ vars.YT_ENABLED }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898729+github-actions[bot]@users.noreply.github.com"
+          python buhexplains/pipeline/comment.py

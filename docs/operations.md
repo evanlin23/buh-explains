@@ -8,6 +8,7 @@ Set up 2026-11-06. Times are US Central (America/Chicago).
 | 7:07 AM | Upload the next video in `buhexplains/queue.txt`; public about noon | cron-job.org job **"buhexplains upload"** → `upload.yml` on `main` |
 | 1:23 PM | The producer makes a new episode | Claude scheduled task **"BuhExplains: make a video (afternoon)"** (`trig_019TRe3qFnkTw1jJQqoDSMwK`) |
 | 2:07 PM | Upload the next video; public about 6 PM | cron-job.org job **"buhexplains upload 2"** → `upload.yml` on `main` |
+| 12:23 PM and 6:23 PM | Post the channel's first comment on any of our videos that just went public | cron-job.org jobs **"buhexplains comments"** and **"buhexplains comments 2"** → `comments.yml` on `main` (every upload run also does a catch-up) |
 | 8:41 PM | The producer makes another episode | Claude scheduled task **"BuhExplains: make a video (evening)"** (`trig_013Qt73kb2xaNSNXciSV1WcV`) |
 
 ## The pieces
@@ -22,6 +23,7 @@ Set up 2026-11-06. Times are US Central (America/Chicago).
   - With no slug, it takes the first slug in `queue.txt` that isn't in `buhexplains/uploads.json`, at most **2 per Central day**.
   - It downloads that slug's newest `film-<slug>` artifact from `render.yml`, uploads it **private** with a scheduled publish (1st of the day about noon, 2nd about 6 PM), and refuses if the token's channel isn't `YT_CHANNEL_ID`.
   - It commits `uploads.json` to `main` and opens a GitHub issue.
+- **The comment poster** (`comments.yml` → `buhexplains/pipeline/comment.py`) posts each episode's `package.json` → `first_comment` as the channel, once per video, after the video is public, and records `"commented": true` in `uploads.json`. YouTube's API can't pin. It needs the `youtube.force-ssl` scope on `YT_REFRESH_TOKEN`; without it, the run says "insufficient scope" and posts nothing.
 - **cron-job.org** is the clock for uploads, because GitHub's own `schedule:` never fires for this owner. It's the same account and token as blocky-stories: the fine-grained token "cron-job.org dispatch" has Actions read/write on this repo.
 - **Secrets and variables** (repo Settings → Secrets and variables → Actions):
   - secrets: `GEMINI_API_KEY`, `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`

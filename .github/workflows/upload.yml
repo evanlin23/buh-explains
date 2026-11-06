@@ -47,3 +47,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898729+github-actions[bot]@users.noreply.github.com"
           python buhexplains/pipeline/upload.py --slug "$SLUG"
+      - name: comments (catch-up; posts on any of our videos that went public since the last run)
+        if: ${{ vars.YT_ENABLED == 'true' }}
+        continue-on-error: true
+        env:
+          YT_ENABLED: ${{ vars.YT_ENABLED }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          git pull -q --rebase origin "$GITHUB_REF_NAME" || true
+          python buhexplains/pipeline/comment.py

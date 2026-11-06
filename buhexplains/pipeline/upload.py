@@ -32,6 +32,20 @@ def uploads() -> dict:
     return json.loads(UPLOADS.read_text()) if UPLOADS.exists() else {}
 
 
+def save_uploads(done: dict, msg: str) -> None:
+    """Write uploads.json, commit, and push to the branch this run is on, rebasing and retrying if main moved
+    (the producer pushes to main too). Never loses a record: an unsaved upload would be retried as a duplicate."""
+    UPLOADS.write_text(json.dumps(done, indent=1) + "\n")
+    ref = os.environ.get("GITHUB_REF_NAME", "")
+    subprocess.run(["git", "add", str(UPLOADS)], check=True)
+    subprocess.run(["git", "commit", "-m", msg], check=True)
+    if not ref: return
+    for attempt in range(5):
+        if subprocess.run(["git", "push", "origin", f"HEAD:{ref}"]).returncode == 0: return
+        subprocess.run(["git", "pull", "--rebase", "origin", ref], check=True)
+    sys.exit("could not push uploads.json after 5 tries")
+
+
 def publish_at(slot: int = 0) -> str | None:
     if os.environ.get("YT_AUTOPUBLISH", "true").strip().lower() == "false":
         return None
@@ -128,16 +142,12 @@ def main() -> None:
             if st: print(f"uploaded {int(st.progress() * 100)}%", flush=True)
         vid = resp["id"]
     done[a.slug] = {"video_id": vid, "uploaded": today, "uploaded_central": central_today(), "title": pkg["title"], "publish_at": when}
-    UPLOADS.write_text(json.dumps(done, indent=1) + "\n")
-    ref = os.environ.get("GITHUB_REF_NAME", "")
-    subprocess.run(["git", "add", str(UPLOADS)], check=True)
-    subprocess.run(["git", "commit", "-m", f"uploads: {a.slug}"], check=True)
-    if ref: subprocess.run(["git", "push", "origin", f"HEAD:{ref}"], check=True)
+    save_uploads(done, f"uploads: {a.slug}")
     body = (f"**{a.slug}** is uploaded to @BuhExplains (private"
             + (f", goes public at {when} UTC on its own" if when else "") + f").\n\n"
             f"1. Watch it: https://studio.youtube.com/video/{vid}/edit\n"
             f"2. Add the trending song in YouTube's editor if this episode leaves room for one (episode.json → music).\n"
-            f"3. Post this as the channel's first comment:\n\n> {pkg.get('first_comment', '')}\n\n"
+            f"3. The channel's first comment is posted automatically once it's public (comment.py):\n\n> {pkg.get('first_comment', '')}\n\n"
             "Made for kids: No (set by the upload).")
     subprocess.run(["gh", "issue", "create", "--repo", REPO, "--title", f"Uploaded: {pkg['title']}", "--body", body], check=True)
 

@@ -10,11 +10,11 @@ Uploads are **off** until every step here is done. The `upload` workflow checks 
 ## 1. Google Cloud (console.cloud.google.com) (done: reuse blocky-stories' client)
 1. Create a project (`buh-explains`). Skip any billing prompt.
 2. APIs & Services → Library → **YouTube Data API v3** → Enable.
-3. OAuth consent screen: External; add the scopes `youtube.upload` and `youtube.readonly`; add yourself as a test user; then **Publish app** (in Testing mode the token dies every 7 days).
+3. OAuth consent screen: External; add the scopes `youtube.upload`, `youtube.readonly` and `youtube.force-ssl` (force-ssl lets the channel post its first comment); add yourself as a test user; then **Publish app** (in Testing mode the token dies every 7 days).
 4. Clients → Create OAuth client → **Web application**, redirect URI `https://developers.google.com/oauthplayground`.
 
 ## 2. Refresh token (browser only)
-At https://developers.google.com/oauthplayground: gear icon → use your own OAuth credentials, Access type Offline, Force prompt Consent. Authorize those two scopes **as the @BuhExplains channel**, then exchange the code and copy the **refresh token**. Check it with `GET https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true` and note the channel `id` (UC...).
+At https://developers.google.com/oauthplayground: gear icon → use your own OAuth credentials, Access type Offline, Force prompt Consent. Authorize those three scopes **as the @BuhExplains channel**, then exchange the code and copy the **refresh token**. Check it with `GET https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true` and note the channel `id` (UC...).
 
 ## 3. GitHub (this repo → Settings → Secrets and variables → Actions)
 - **Secrets:** `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` (and `GEMINI_API_KEY`, already there).
