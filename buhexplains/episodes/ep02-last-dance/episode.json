@@ -96,6 +96,27 @@
      0.25
     ]
    }
+  },
+  "miku": {
+   "url": "https://static.wikia.nocookie.net/vocaloid/images/e/e4/MIKU_SP.png/revision/latest?cb=20241025033142",
+   "page": "https://vocaloid.fandom.com/wiki/Hatsune_Miku",
+   "points": {
+    "face": [
+     0.5,
+     0.12,
+     0.18
+    ]
+   }
+  },
+  "tiktok": {
+   "url": "https://www.theqgentleman.com/wp-content/uploads/2026/11/TikTok-1024x602.jpg",
+   "points": {
+    "logo": [
+     0.62,
+     0.45,
+     0.14
+    ]
+   }
   }
  },
  "sources": {
@@ -189,9 +210,9 @@
     },
     {
      "on": "isn't",
-     "img": "art",
-     "fit": "white",
-     "enter": "spin"
+     "img": "tiktok",
+     "fit": "blurfill",
+     "enter": "whip"
     },
     {
      "on": "isn't",
@@ -200,13 +221,12 @@
       540,
       760
      ],
-     "dur": 0.6
+     "dur": 0.5
     },
     {
      "on": "called",
-     "sticker": "ellipse",
-     "target": "note",
-     "dur": 0.9
+     "sticker": "x",
+     "target": "logo"
     }
    ]
   },
@@ -217,12 +237,38 @@
      "on": 0,
      "img": "art",
      "fit": "white",
-     "enter": "cut"
+     "enter": "zoomblur"
     },
     {
      "on": "name",
      "label": "fpd ff7 botsu 8",
-     "dur": 2.4
+     "dur": 2.0
+    },
+    {
+     "on": "botsu",
+     "punch": true
+    },
+    {
+     "on": "Vocaloid",
+     "img": "miku",
+     "fit": "white",
+     "enter": "spin",
+     "sfx": [
+      "heartpop"
+     ]
+    },
+    {
+     "on": "Vocaloid",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -150,
+     "dur": 0.6
+    },
+    {
+     "on": "called",
+     "img": "art",
+     "fit": "white",
+     "enter": "whip"
     },
     {
      "on": "MARETU.",
@@ -230,6 +276,41 @@
      "sfx": [
       "ding"
      ]
+    },
+    {
+     "on": "MARETU.",
+     "sticker": "ellipse",
+     "target": "note",
+     "dur": 0.8
+    },
+    {
+     "on": "P",
+     "punch": true
+    },
+    {
+     "on": "D",
+     "punch": true
+    },
+    {
+     "on": "F",
+     "punch": true
+    },
+    {
+     "on": "seven,",
+     "punch": true
+    },
+    {
+     "on": "eight,",
+     "punch": true
+    },
+    {
+     "on": "eight,",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      520
+     ],
+     "dur": 0.7
     }
    ]
   },
