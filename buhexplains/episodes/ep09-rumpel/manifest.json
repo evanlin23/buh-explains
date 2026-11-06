@@ -2,28 +2,28 @@
  "slug": "ep09-rumpel",
  "images": {
   "dance": {
-   "used": "https://i.ytimg.com/vi/Qb91OznXzbg/hq2.jpg",
-   "page": "https://www.youtube.com/watch?v=Qb91OznXzbg",
+   "used": "https://i.ytimg.com/vi/n5Rs8duHzbs/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=n5Rs8duHzbs",
    "rights": "third-party; shown under narration as commentary"
   },
   "princess": {
-   "used": "https://i.ytimg.com/vi/KMgDvum87Kk/hq1.jpg",
+   "used": "https://i.ytimg.com/vi/KMgDvum87Kk/maxres1.jpg",
    "page": "https://www.youtube.com/watch?v=KMgDvum87Kk",
    "rights": "third-party; shown under narration as commentary"
   },
   "dance2": {
-   "used": "https://i.ytimg.com/vi/lc4LBDcX_04/hq2.jpg",
-   "page": "https://www.youtube.com/watch?v=lc4LBDcX_04",
+   "used": "https://i.ytimg.com/vi/n5Rs8duHzbs/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=n5Rs8duHzbs",
    "rights": "third-party; shown under narration as commentary"
   },
   "face": {
-   "used": "https://i.ytimg.com/vi/KMgDvum87Kk/hq2.jpg",
+   "used": "https://i.ytimg.com/vi/KMgDvum87Kk/maxres2.jpg",
    "page": "https://www.youtube.com/watch?v=KMgDvum87Kk",
    "rights": "third-party; shown under narration as commentary"
   },
   "face2": {
-   "used": "https://i.ytimg.com/vi/lc4LBDcX_04/hq1.jpg",
-   "page": "https://www.youtube.com/watch?v=lc4LBDcX_04",
+   "used": "https://i.ytimg.com/vi/io05Kj2TTYc/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=io05Kj2TTYc",
    "rights": "third-party; shown under narration as commentary"
   },
   "gasp": {
@@ -32,7 +32,7 @@
    "rights": "third-party; shown under narration as commentary"
   },
   "riffvid": {
-   "used": "https://i.ytimg.com/vi/ziSj_sONyik/hq1.jpg",
+   "used": "https://i.ytimg.com/vi/ziSj_sONyik/maxres1.jpg",
    "page": "https://www.youtube.com/watch?v=ziSj_sONyik",
    "rights": "third-party; shown under narration as commentary"
   },
@@ -44,9 +44,9 @@
  },
  "stock": {
   "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
-  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
   "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
-  "embers": "https://mixkit.co (Mixkit free licence) 3465-720.mp4"
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
  },
  "sfx": [
   "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",

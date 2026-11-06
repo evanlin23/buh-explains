@@ -57,18 +57,24 @@
    }
   },
   "anime": {
-   "url": "https://i.ytimg.com/vi/xhir2hKVQf0/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=xhir2hKVQf0",
+   "url": "https://i.ytimg.com/vi/YMuSbMOTxGU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=YMuSbMOTxGU",
+   "crop": [
+    0.11,
+    0.11,
+    0.885,
+    0.885
+   ],
    "points": {
     "randy": [
-     0.52,
-     0.2,
+     0.89,
+     0.73,
      0.1
     ],
     "villain": [
-     0.33,
-     0.2,
-     0.12
+     0.4,
+     0.45,
+     0.1
     ]
    }
   },
@@ -100,29 +106,31 @@
    }
   },
   "scene": {
-   "url": "https://i.ytimg.com/vi/WoudYNeVn5E/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=WoudYNeVn5E",
+   "url": "https://i.ytimg.com/vi/hesxzjjnWx8/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=hesxzjjnWx8",
+   "fallback": "https://i.ytimg.com/vi/WoudYNeVn5E/hqdefault.jpg",
    "points": {
     "sondheim": [
-     0.52,
-     0.48,
-     0.07
+     0.535,
+     0.49,
+     0.05
     ],
     "randy": [
-     0.46,
-     0.66,
-     0.07
+     0.41,
+     0.53,
+     0.06
     ]
    }
   },
   "sondheim": {
-   "url": "https://i.ytimg.com/vi/eoUArB9oOxw/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=eoUArB9oOxw",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Danya_Polykov_and_Stephen_Sondheim%2C_04.2014%2C_NYC_%28cropped%29.jpg/1280px-Danya_Polykov_and_Stephen_Sondheim%2C_04.2014%2C_NYC_%28cropped%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Danya_Polykov_and_Stephen_Sondheim,_04.2014,_NYC_(cropped).jpg",
+   "fallback": "https://i.ytimg.com/vi/eoUArB9oOxw/hqdefault.jpg",
    "points": {
     "face": [
-     0.48,
-     0.38,
-     0.22
+     0.52,
+     0.42,
+     0.27
     ]
    }
   },

@@ -25,13 +25,19 @@
  },
  "images": {
   "dance": {
-   "url": "https://i.ytimg.com/vi/Qb91OznXzbg/hq2.jpg",
-   "page": "https://www.youtube.com/watch?v=Qb91OznXzbg",
+   "url": "https://i.ytimg.com/vi/n5Rs8duHzbs/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=n5Rs8duHzbs",
+   "crop": [
+    0.0,
+    0.0,
+    0.55,
+    1.0
+   ],
    "points": {
     "imp": [
-     0.42,
-     0.45,
-     0.2
+     0.62,
+     0.32,
+     0.25
     ]
    }
   },
@@ -47,13 +53,18 @@
    }
   },
   "dance2": {
-   "url": "https://i.ytimg.com/vi/lc4LBDcX_04/hq2.jpg",
-   "page": "https://www.youtube.com/watch?v=lc4LBDcX_04",
+   "url": "https://i.ytimg.com/vi/n5Rs8duHzbs/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=n5Rs8duHzbs",
    "points": {
     "imp": [
+     0.34,
      0.3,
-     0.5,
-     0.15
+     0.13
+    ],
+    "face": [
+     0.87,
+     0.42,
+     0.09
     ]
    }
   },
@@ -74,13 +85,13 @@
    }
   },
   "face2": {
-   "url": "https://i.ytimg.com/vi/lc4LBDcX_04/hq1.jpg",
-   "page": "https://www.youtube.com/watch?v=lc4LBDcX_04",
+   "url": "https://i.ytimg.com/vi/io05Kj2TTYc/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=io05Kj2TTYc",
    "points": {
     "grin": [
-     0.5,
+     0.53,
      0.75,
-     0.18
+     0.12
     ]
    }
   },

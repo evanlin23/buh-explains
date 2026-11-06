@@ -2,42 +2,42 @@
  "slug": "ep10-randy",
  "images": {
   "omni": {
-   "used": "https://i.ytimg.com/vi/OdhjyxT95w8/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/OdhjyxT95w8/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=OdhjyxT95w8",
    "rights": "third-party; shown under narration as commentary"
   },
   "steve": {
-   "used": "https://i.ytimg.com/vi/A2IWzc6LRWg/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/A2IWzc6LRWg/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=A2IWzc6LRWg",
    "rights": "third-party; shown under narration as commentary"
   },
   "anime": {
-   "used": "https://i.ytimg.com/vi/xhir2hKVQf0/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=xhir2hKVQf0",
+   "used": "https://i.ytimg.com/vi/YMuSbMOTxGU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=YMuSbMOTxGU",
    "rights": "third-party; shown under narration as commentary"
   },
   "omni2": {
-   "used": "https://i.ytimg.com/vi/CzEEMTh4r88/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/CzEEMTh4r88/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=CzEEMTh4r88",
    "rights": "third-party; shown under narration as commentary"
   },
   "giant": {
-   "used": "https://i.ytimg.com/vi/AfTDa6wbce4/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/AfTDa6wbce4/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=AfTDa6wbce4",
    "rights": "third-party; shown under narration as commentary"
   },
   "scene": {
-   "used": "https://i.ytimg.com/vi/WoudYNeVn5E/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=WoudYNeVn5E",
+   "used": "https://i.ytimg.com/vi/hesxzjjnWx8/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=hesxzjjnWx8",
    "rights": "third-party; shown under narration as commentary"
   },
   "sondheim": {
-   "used": "https://i.ytimg.com/vi/eoUArB9oOxw/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=eoUArB9oOxw",
+   "used": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Danya_Polykov_and_Stephen_Sondheim%2C_04.2014%2C_NYC_%28cropped%29.jpg/1280px-Danya_Polykov_and_Stephen_Sondheim%2C_04.2014%2C_NYC_%28cropped%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Danya_Polykov_and_Stephen_Sondheim,_04.2014,_NYC_(cropped).jpg",
    "rights": "third-party; shown under narration as commentary"
   },
   "wss": {
-   "used": "https://i.ytimg.com/vi/7CfPT9N9ZM0/hqdefault.jpg",
+   "used": "https://i.ytimg.com/vi/7CfPT9N9ZM0/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=7CfPT9N9ZM0",
    "rights": "third-party; shown under narration as commentary"
   },
@@ -49,9 +49,9 @@
  },
  "stock": {
   "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
-  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
   "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
-  "embers": "https://mixkit.co (Mixkit free licence) 3465-720.mp4"
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
  },
  "sfx": [
   "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",
