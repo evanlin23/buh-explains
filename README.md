@@ -13,5 +13,7 @@ Finished renders, one file per episode, at 1080x1920 and 30 fps. The code that m
 | ep07 Where did melting SpongeBob actually come from? | `ep07-tralala.mp4` | soon |
 | ep08 What is Biddy Blas actually yelling? | `ep08-biddy.mp4` | soon (Galactic Racer, October) |
 | ep09 Is the Rumpelstiltskin dance from a real 80s movie? | `ep09-rumpel.mp4` | soon |
+| ep10 Who is Randy actually squaring up to? | `ep10-randy.mp4` | soon (What's up brah peaked in October) |
+| ep11 How much did one meme cost Mbappé? | `ep11-mbappe.mp4` | **ASAP** (news from Oct 27) |
 
 All cuts have the viral pass (zoom-in hook, jump-cut build-up, payoff hit) and pass the QA audit (`buhexplains/pipeline/audit.py`): about -10 LUFS, true peak about -1 dBFS, 10-15 visual changes per 10 s.
