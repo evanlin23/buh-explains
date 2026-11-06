@@ -115,7 +115,7 @@ def build(ep, words):
     by_line = {}
     for w in words: by_line.setdefault(w["line"], []).append(w)
     names = {norm(n) for n in ep.get("names", {})}
-    tl = {k: [] for k in ("img", "sticker", "label", "flash", "lightning", "boom", "caption", "sfx", "fire")}
+    tl = {k: [] for k in ("img", "sticker", "label", "flash", "lightning", "boom", "caption", "sfx", "fire", "punch", "reframe")}
     for li, line in enumerate(ep["lines"]):
         ws = by_line[li]
         l0, l1 = ws[0]["start"] - 0.03, ws[-1]["end"]
@@ -148,6 +148,7 @@ def build(ep, words):
             if b.get("flash"): tl["flash"].append(t); tl["sfx"].append((t, "impact"))
             if b.get("lightning"): tl["lightning"].append(t); tl["sfx"].append((t, "zap"))
             if b.get("riser"): tl["sfx"].append((t, "riser"))
+            if b.get("punch"): tl["punch"].append(t)    # a zoom punch (was silently ignored before the audit)
             for extra in b.get("sfx", []): tl["sfx"].append((t, extra))
         for j, w in enumerate(ws):  # every bite (a name, or a whole {bite group}): real explosion + fire
             if (w.get("bite") or w.get("name")) and (j == 0 or not (ws[j - 1].get("bite") or ws[j - 1].get("name"))):
@@ -510,6 +511,52 @@ def shake_layer(scene, prev, cur, zoom):
     return Image.fromarray((acc / 4).astype(np.uint8)).convert("RGBA")
 
 
+HOOK_ZOOM = 0.38      # s. The owner's hook: "starting zoomed out and quickly zooming in"
+REFRAME_EVERY = 1.0   # s. Longest a shot may hold before a jump cut re-frames it (audit: holds of 3-7 s killed the build-up)
+
+
+def viral_pass(ep, tl, words, dur):
+    """Hook, build-up, payoff (owner, 2026-11-07: "the main goal is the virality (hook, build up, payoff)").
+    - Hook: the first shot starts zoomed out and snaps in (with a whoosh).
+    - Build-up: no shot holds longer than about 1.2 s; long holds get jump cuts that alternate a tight crop on the
+      picture's point of interest with the full shot. A riser builds into the final line.
+    - Payoff: the last word lands with a punch, a white flash and an impact."""
+    tl["sfx"].append((0.0, "whoosh"))
+    ev = sorted(set([e["t"] for e in tl["img"]] + [s_["t"] for s_ in tl["sticker"]] + [l["t"] for l in tl["label"]]
+                    + tl["flash"] + tl["boom"] + tl["punch"] + [0.0, dur]))
+    for a, b in zip(ev, ev[1:]):
+        if b - a <= REFRAME_EVERY + 0.25: continue
+        k, t = 0, a + REFRAME_EVERY
+        while t < b - 0.45:
+            tl["reframe"].append((t, min(b, t + REFRAME_EVERY), k % 2 == 0)); k += 1; t += REFRAME_EVERY
+    last = words[-1]; last_line = [w for w in words if w["line"] == last["line"]]
+    tl["punch"].append(last["start"]); tl["flash"].append(last["start"]); tl["sfx"].append((last["start"], "impact"))
+    if not any(n == "riser" for _, n in tl["sfx"]):
+        tl["sfx"].append((last_line[0]["start"], "riser"))     # the riser's peak lands as the final line starts
+
+
+def reframe(frame, t, tl, points):
+    """Jump-cut re-frames and zoom punches, applied to the composed picture (stickers ride along; captions don't)."""
+    z, cx, cy = 1.0, W / 2, H * 0.47
+    for t0, t1, tight in tl["reframe"]:
+        if t0 <= t < t1 and tight:
+            z = 1.32
+            if points:
+                u, v, _ = next(iter(points.values())); cx, cy = GEO["map"](u, v)
+    for pt in tl["punch"]:
+        if 0 <= t - pt < 0.28: z *= 1 + 0.16 * (1 - (t - pt) / 0.28) ** 2
+    if t < HOOK_ZOOM:                                   # the hook: zoomed out, snapping in
+        z *= 0.32 + 0.68 * ease(t / HOOK_ZOOM, 1.2)
+    if abs(z - 1) < 1e-3: return frame
+    if z > 1:
+        cw, ch = W / z, H / z
+        x0 = min(max(cx - cw / 2, 0), W - cw); y0 = min(max(cy - ch / 2, 0), H - ch)
+        return frame.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + cw, y0 + ch))
+    small = frame.resize((max(1, int(W * z)), max(1, int(H * z))), Image.BILINEAR)
+    bg = Image.new("RGBA", (W, H), (0, 0, 0, 255)); bg.alpha_composite(small, ((W - small.width) // 2, (H - small.height) // 2))
+    return bg
+
+
 def render_frame(ep, tl, t, shaker, fire, boom_frames):
     cur = None
     for ev in tl["img"]:
@@ -522,6 +569,7 @@ def render_frame(ep, tl, t, shaker, fire, boom_frames):
     for i, lt in enumerate(tl["lightning"]): bolt(frame, lt, t, i * 31)
     for fl in tl["flash"]:
         if 0 <= t - fl < 0.1: frame.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.1)))))
+    frame = reframe(frame, t, tl, ep["images"][cur["key"]].get("points"))
     prev, curpos, zoom = shaker.step(t)
     frame = shake_layer(frame, prev, curpos, zoom)
     for lab in tl["label"]:
@@ -710,7 +758,8 @@ def main(slug, preview=False):
     wj = json.load(open(os.path.join(REPO, "out", slug, "words.json")))
     tl = build(ep, wj["words"]); ep_music["cfg"] = ep.get("music")
     ep_music["bites"] = [(w["start"], w["end"]) for w in wj["words"] if w.get("bite")]
-    dur = round(wj["duration"] + 0.25, 3)
+    dur = round(min(wj["duration"] + 0.25, wj["words"][-1]["end"] + 0.2), 3)   # audit: 0.6-0.7 s of dead air hurt the loop
+    viral_pass(ep, tl, wj["words"], dur)
     fire = flame_frames(); boom_frames = stock_frames("boom")
     shaker = Shaker([s["t"] for s in tl["sticker"] if s["kind"] in ("x",)] + tl["flash"] + tl["boom"] +
                     [e["t"] for e in tl["img"] if e["enter"] in ("whip", "zoomblur")])
@@ -718,7 +767,7 @@ def main(slug, preview=False):
     od = os.path.join(REPO, "out", slug)
     outp = os.path.join(od, f"{slug}{'-preview' if preview else ''}.mp4")
     size = (540, 960) if preview else (W, H)
-    af = "acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=12,alimiter=limit=0.89:attack=1:release=30:level=false"  # about -9.7 LUFS, Tung is -8
+    af = "acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=12,alimiter=limit=0.82:attack=1:release=30:level=false"  # about -10 LUFS; true peak kept under -1 dBFS after AAC (audit)
     cmd = ["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{size[0]}x{size[1]}", "-r", str(FPS),
            "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
            "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]

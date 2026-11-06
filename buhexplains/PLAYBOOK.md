@@ -5,6 +5,11 @@ How a BuhExplains Short gets picked, written, cut and judged. Every rule here co
 The owner's words outrank everything here except accuracy. Add new owner feedback to "Owner notes" as a dated quote, in the same PR.
 
 ## Owner notes
+- 2026-11-07: "The main goal is the virality (hook, build up, payoff)" and "it just needs to be able to go viral, not necessarily follow BuhExplains' old ones exactly". "My hook was like starting zoomed out and quickly zooming in." Every video now gets `render.viral_pass`:
+  - **Hook:** the first shot starts at a third of its size on black and snaps to full size in 0.38 s, with a whoosh.
+  - **Build-up:** no shot holds longer than about 1.2 s; long holds get jump cuts alternating a tight crop on the picture's point of interest with the full shot. A riser builds into the final line.
+  - **Payoff:** the last word gets a punch, a white flash and an impact, then a cut 0.2 s later for the loop.
+  - `pipeline/audit.py` checks all of this on the finished files: hook timing, changes per 10 s, longest hold, frozen and black frames, tail, loudness, true peak and voice.
 - 2026-11-07: ep04's framing of Elizabeth Holmes (court-record facts only: convicted of defrauding investors, 11 years) is OK. On length: "we can experiment with lengths, that's fine". Vary length between about 20 s and 35 s across episodes, and let the metrics decide (log each video's length next to its numbers).
 - 2026-11-07: "the name spliced in doesn't really work, can you do just the regular voice?" The narrator says the names itself (`voice.bites: false`). The fire and explosion still hit on every name; only the audio changed. The bite tools stay in the code in case a meme's sound is ever worth bringing back.
 - 2026-11-06: TTS narration with Gemini **Achird**. This repo gets its own secrets; never reuse other repos' keys.
