@@ -162,6 +162,30 @@ Pace: fast, about 3.4 words per second. No long pauses between sentences; keep r
 Do not read these notes aloud. Speak only the transcript below, exactly as written, in order."""
 
 
+def speech_env(a, win=0.005):
+    """Loudness envelope that also counts consonant hiss: broadband RMS plus 3x the energy above 3 kHz.
+    Plain RMS calls an 's' quiet, so splices landed inside "makes"."""
+    w = max(1, int(win * SR))
+    hf = a - np.convolve(a, np.ones(16) / 16, "same")          # crude high-pass (about 3 kHz at 48 kHz)
+    full = np.sqrt(np.convolve(a ** 2, np.ones(w) / w, "same")); hiss = np.sqrt(np.convolve(hf ** 2, np.ones(w) / w, "same"))
+    return full + 3 * hiss
+
+
+def last_pause(env, i0, i1, rel=0.12, min_len=0.03):
+    """The latest real pause (env under rel x the window's speech level for >= min_len s) in [i0, i1); else the quietest point."""
+    seg = env[i0:i1]
+    if len(seg) < 4: return i0
+    thr = rel * np.percentile(seg, 90); low = seg < thr; best = None; j = len(seg) - 1
+    while j >= 0:
+        if low[j]:
+            k = j
+            while k >= 0 and low[k]: k -= 1
+            if (j - k) / SR >= min_len: best = (k + 1 + j) // 2; break
+            j = k
+        j -= 1
+    return i0 + (best if best is not None else int(np.argmin(seg)))
+
+
 def avg_spectrum(a, n=2048):
     """Average power spectrum of the voiced parts of a signal."""
     hop = n // 2; win = np.hanning(n).astype(np.float32); acc = np.zeros(n // 2 + 1); k = 0
@@ -238,12 +262,12 @@ def split_lines(audio, line_tokens, model, od):
     cp = os.path.join(od, "script_full.wav"); sf.write(cp, audio, SR)
     flat = [t for toks in line_tokens for t in toks]
     times, _ = word_times(cp, flat, model); times = fill(times, flat, len(audio) / SR)
-    env = np.sqrt(np.convolve(audio ** 2, np.ones(int(0.005 * SR)) / int(0.005 * SR), "same"))
+    env = speech_env(audio)
     cuts, k = [0], 0
     for toks in line_tokens[:-1]:
         k += len(toks); a0, a1 = int(times[k - 1][1] * SR) - int(0.03 * SR), int(times[k][0] * SR) + int(0.02 * SR)
         a0, a1 = max(cuts[-1] + 1, a0), max(a0 + 2, a1)
-        cuts.append(a0 + int(np.argmin(env[a0:a1])))
+        cuts.append(last_pause(env, a0, a1))
     cuts.append(len(audio))
     return [audio[c0:c1] for c0, c1 in zip(cuts, cuts[1:])]
 
@@ -313,7 +337,7 @@ def main(slug):
         dur = len(speak) / SR; times = fill(times, tokens, dur)
         groups = [idx for kind, idx in segs if kind == "bite"]
         pieces, cursor, shift, out_times = [], 0, 0.0, {}
-        env = np.sqrt(np.convolve(speak ** 2, np.ones(int(0.005 * SR)) / int(0.005 * SR), "same"))
+        env = speech_env(speak)
 
         def quiet(t0, t1):  # the quietest instant between t0 and t1 (seconds) in the spoken line
             i0, i1 = max(0, int(t0 * SR)), min(len(env) - 1, int(t1 * SR))
@@ -329,7 +353,9 @@ def main(slug):
             for i in range(len(tokens)):
                 if cursor <= int(times[i][0] * SR) < c0 and i not in idx:
                     out_times[i] = (times[i][0] + shift, times[i][1] + shift)
-            pieces.append(speak[cursor:c0]); joins.append(t + sum(len(p_) for p_ in pieces) / SR)
+            # the crossfade overlaps the tail of this piece, so let the piece run 25 ms past the cut:
+            # the fade then happens over the start of the name being replaced, not over this word's ending ("makes")
+            pieces.append(speak[cursor:min(len(speak), c0 + int(0.025 * SR))]); joins.append(t + sum(len(p_) for p_ in pieces) / SR)
             key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
             bite = (bites_full if len(idx) > 1 else bites)[key]
             bite = trim(bite, thr=0.01, lead=0.005, pad=0.02)
