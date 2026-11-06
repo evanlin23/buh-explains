@@ -1,0 +1,6 @@
+{
+  "name": "hellobuh-preview",
+  "private": true,
+  "dependencies": { "prismarine-viewer": "1.33.0", "mineflayer": "4.26.0", "canvas": "3.2.0" },
+  "overrides": { "prismarine-chunk": "1.38.1" }
+}
