@@ -523,7 +523,8 @@ def viral_pass(ep, tl, words, dur):
     - Payoff: the last word lands with a punch, a white flash and an impact."""
     tl["sfx"].append((0.0, "whoosh"))
     # only big changes reset attention (new picture, flash, explosion, punch, lightning); a sticker popping in doesn't
-    ev = sorted(set([e["t"] for e in tl["img"]] + tl["flash"] + tl["boom"] + tl["punch"] + tl["lightning"] + [0.0, dur]))
+    # (punches and lightning flickers are too small to count: the audit, like a viewer, barely registers them)
+    ev = sorted(set([e["t"] for e in tl["img"]] + tl["flash"] + tl["boom"] + [0.0, dur]))
     for a, b in zip(ev, ev[1:]):
         if b - a <= REFRAME_EVERY + 0.25: continue
         k, t = 0, a + REFRAME_EVERY
@@ -767,7 +768,8 @@ def main(slug, preview=False):
     od = os.path.join(REPO, "out", slug)
     outp = os.path.join(od, f"{slug}{'-preview' if preview else ''}.mp4")
     size = (540, 960) if preview else (W, H)
-    af = "acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=10,loudnorm=I=-10:TP=-1.5:LRA=7"  # about -10 LUFS; true peak kept under -1 dBFS after AAC (audit)
+    af = ("acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=15,"   # audit: about -10 LUFS, true peak about -1 dBFS
+          "aresample=192000,alimiter=limit=0.84:attack=4:release=40:level=false,aresample=48000")  # 4x oversampled: catches inter-sample peaks  # about -10 LUFS; true peak kept under -1 dBFS after AAC (audit)
     cmd = ["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{size[0]}x{size[1]}", "-r", str(FPS),
            "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
            "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]
