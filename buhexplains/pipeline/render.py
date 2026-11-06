@@ -22,7 +22,7 @@ FONT_CAP = os.path.join(ROOT, "fonts", "schibsted-grotesk", "SchibstedGrotesk-Bo
 FONT_HEAVY = os.path.join(ROOT, "fonts", "archivo-black", "ArchivoBlack-Regular.ttf")
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
 RED = (226, 20, 20, 255)
-STOCK = {"boom": ("38818-720.mp4", 0.72, 1.0), "flamewall": ("3765-720.mp4", 0, 0), "tongue": ("22834-720.mp4", 0, 0), "embers": ("3465-720.mp4", 0, 0)}
+STOCK = {"boom": ("38818-720.mp4", 0.72, 1.0), "flamewall": ("3765-1080.mp4", 0, 0), "tongue": ("22834-720.mp4", 0, 0), "embers": ("3465-1080.mp4", 0, 0)}
 
 
 def norm(w):
@@ -35,23 +35,59 @@ def font(path, px, _c={}):
 
 
 # ------------------------------------------------------------------ media
+def _get_image(u):
+    """Download (once) and open a picture; YouTube stills get their black bars cropped off."""
+    p = os.path.join(CACHE, "img", hashlib.sha1(u.encode()).hexdigest()[:16])
+    if not os.path.exists(p):
+        data = urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=20).read()
+        Image.open(io.BytesIO(data)).load()
+        open(p, "wb").write(data)
+    im = Image.open(p).convert("RGB")
+    if "ytimg" in u:  # crop letterbox (and symmetric pillarbox) bars
+        a = np.asarray(im).mean((1, 2)); rows = np.where(a > 12)[0]
+        if len(rows): im = im.crop((0, rows[0], im.width, rows[-1] + 1))
+        c = np.asarray(im).mean((0, 2)); cols = np.where(c > 12)[0]
+        if len(cols) and abs(cols[0] - (im.width - 1 - cols[-1])) < 0.04 * im.width: im = im.crop((cols[0], 0, cols[-1] + 1, im.height))
+    return im, p
+
+
+YT_STILL = re.compile(r"(https://i\.ytimg\.com/vi/[^/]+/)hq(default|\d)\.jpg$")
+
+
 def fetch_image(spec):
+    """The episode's picture, at the best resolution we can get. A YouTube hqdefault/hqN still (480x360) is swapped
+    for maxres/sd (1280x720 / 640x480) of the same frame when one exists and its framing matches (owner, 2026-11-06:
+    "why is the quality of the video uploaded so bad?" -- upscaled 480p thumbnails were most of it)."""
     os.makedirs(os.path.join(CACHE, "img"), exist_ok=True)
     for u in [spec["url"]] + ([spec["fallback"]] if spec.get("fallback") else []):
-        p = os.path.join(CACHE, "img", hashlib.sha1(u.encode()).hexdigest()[:16])
-        if not os.path.exists(p):
+        try:
+            im, p = _get_image(u)
+        except Exception as e:
+            print("  image failed:", u, e); continue
+        m = YT_STILL.match(u)
+        for pre in (("maxres", "sd") if m else ()):
             try:
-                data = urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=20).read()
-                Image.open(io.BytesIO(data)).load()
-                open(p, "wb").write(data)
-            except Exception as e:
-                print("  image failed:", u, e); continue
-        im = Image.open(p).convert("RGB")
-        if "ytimg" in u:  # crop YouTube's letterbox bars off hqdefault
-            a = np.asarray(im).mean((1, 2)); rows = np.where(a > 12)[0]
-            if len(rows): im = im.crop((0, rows[0], im.width, rows[-1] + 1))
+                big, bp = _get_image(m.group(1) + pre + m.group(2) + ".jpg")
+            except Exception:
+                continue
+            if big.width > im.width and abs(big.width / big.height - im.width / im.height) < 0.03 * im.width / im.height:
+                im, p, u = big, bp, m.group(1) + pre + m.group(2) + ".jpg"; break
+        _PATH[spec["url"]] = p
+        if min(im.size) < 600: print(f"  LOW-RES picture {im.width}x{im.height}: {u}  (find a bigger source if it fills the frame)")
         return im, u
     raise SystemExit(f"no image for {spec}")
+
+
+_PATH = {}
+MIN_SIDE = 1400   # px. Smaller pictures are upscaled with Lanczos and sharpened once, before any per-frame resize
+
+
+def enlarge(im):
+    """Upscale a small source once, properly (Lanczos + unsharp mask), instead of letting every frame stretch it bilinearly."""
+    s = MIN_SIDE / max(im.width, im.height)
+    if s <= 1: return im
+    im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
+    return im.filter(ImageFilter.UnsharpMask(radius=2.2, percent=min(140, int(60 * s)), threshold=2))
 
 
 def stock_frames(key, size=(540, 960)):
@@ -79,11 +115,11 @@ def flame_frames(dur=4.0, size=(540, 960)):
     bottom, a shorter one hanging from the top, tongues licking up both sides, embers drifting over everything and a
     warm glow from below. The middle stays clear for the subject. Screen-blended over the picture."""
     w, h = size
-    wall = _clip("3765-720.mp4", 2.0, dur, f"scale={w}:{int(w * 720 / 1280 * 1.35)}", (w, int(w * 720 / 1280 * 1.35)))
-    top = _clip("3765-720.mp4", 8.0, dur, f"scale={w}:{int(w * 720 / 1280 * 0.85)},vflip", (w, int(w * 720 / 1280 * 0.85)))
+    wall = _clip("3765-1080.mp4", 2.0, dur, f"scale={w}:{int(w * 720 / 1280 * 1.35)}", (w, int(w * 720 / 1280 * 1.35)))
+    top = _clip("3765-1080.mp4", 8.0, dur, f"scale={w}:{int(w * 720 / 1280 * 0.85)},vflip", (w, int(w * 720 / 1280 * 0.85)))
     sw, sh = int(w * 0.5), int(h * 0.62)
     side = _clip("22834-720.mp4", 5.0, dur + 1.4, f"crop=560:560:340:0,scale={sw}:{sh}", (sw, sh))
-    embers = _clip("3465-720.mp4", 3.0, dur, f"crop=ih*9/16:ih,scale={w}:{h}", (w, h))
+    embers = _clip("3465-1080.mp4", 3.0, dur, f"crop=ih*9/16:ih,scale={w}:{h}", (w, h))
     yy = np.linspace(0, 1, h)[:, None, None]
     glow = np.clip((yy - 0.55) / 0.45, 0, 1) ** 1.6 * np.array([0.55, 0.16, 0.0])
     n = min(len(wall), len(top), len(embers), len(side) - 40)
@@ -253,8 +289,8 @@ def stk(key, fn):
 
 def paste(frame, im, cx, cy, scale=1.0, rot=0.0, alpha=1.0):
     if scale <= 0.02: return
-    im = im.resize((max(1, int(im.width * scale)), max(1, int(im.height * scale))), Image.BILINEAR)
-    if rot: im = im.rotate(rot, expand=True, resample=Image.BILINEAR)
+    im = im.resize((max(1, int(im.width * scale)), max(1, int(im.height * scale))), Image.BICUBIC)
+    if rot: im = im.rotate(rot, expand=True, resample=Image.BICUBIC)
     if alpha < 1: im.putalpha(im.getchannel("A").point(lambda v: int(v * alpha)))
     frame.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
 
@@ -360,6 +396,7 @@ def picture(key, spec, grade):
         im, used = fetch_image(spec)
         if spec.get("crop"):
             l, t_, r_, b_ = spec["crop"]; im = im.crop((int(l * im.width), int(t_ * im.height), int(r_ * im.width), int(b_ * im.height)))
+        im = enlarge(im)
         im = ImageEnhance.Color(im).enhance(1.35); im = ImageEnhance.Contrast(im).enhance(1.12)
         if grade == "red": im = Image.blend(im, Image.new("RGB", im.size, (170, 0, 0)), 0.35)
         if grade == "dark": im = ImageEnhance.Brightness(im).enhance(0.55)
@@ -372,9 +409,10 @@ _RGBA = {}
 
 def picture_rgba(key, spec):
     if key not in _RGBA:
-        u = spec["url"]; p = os.path.join(CACHE, "img", hashlib.sha1(u.encode()).hexdigest()[:16])
         picture(key, spec, None)
-        im = Image.open(p).convert("RGBA")
+        im = Image.open(_PATH[spec["url"]]).convert("RGBA")
+        if "ytimg" in _IMG[(key, None)][1]: im = _IMG[(key, None)][0].convert("RGBA")   # bars already cropped
+        else: im = enlarge(im)
         if im.getchannel("A").getextrema()[0] == 255:  # no transparency: knock out a near-white background
             a = np.asarray(im).copy(); white = (a[..., :3].min(-1) > 238); a[white, 3] = 0; im = Image.fromarray(a)
         _RGBA[key] = im
@@ -390,7 +428,7 @@ def cover(im, zoom, dx, dy, focus=(0.5, 0.5)):
     box = (cx - cw / 2, cy - ch / 2, cx + cw / 2, cy + ch / 2)
     GEO["map"] = lambda u, v, cx=cx, cy=cy, s=s, iw=im.width, ih=im.height: ((u * iw - cx) * s + W / 2, (v * ih - cy) * s + H / 2)
     GEO["pxw"] = im.width * s
-    return im.resize((W, H), Image.BILINEAR, box=box)
+    return im.resize((W, H), Image.BICUBIC, box=box)
 
 
 GEO = {"map": lambda u, v: (W / 2, H / 2), "pxw": 800.0}   # set by base_frame every frame
@@ -433,7 +471,7 @@ def base_frame(ev, spec, t, fire, boom_frames, booms):
         paste(bg, im.convert("RGBA"), W / 2 + xoff, H * 0.47, sc, rot); card_geo(im.width, im.height, W / 2 + xoff, H * 0.47, sc)
         frame = bg.convert("RGB")
     elif ev["fit"] in ("band", "spin_in"):
-        bg = Image.fromarray(np.clip(fire[int(t * FPS) % len(fire)].astype(np.float32) * 0.9 + np.array([46, 6, 4]), 0, 255).astype(np.uint8)).resize((W, H), Image.BILINEAR).convert("RGB")
+        bg = Image.fromarray(np.clip(fire[int(t * FPS) % len(fire)].astype(np.float32) * 0.9 + np.array([46, 6, 4]), 0, 255).astype(np.uint8)).resize((W, H), Image.BICUBIC).convert("RGB")
         card = im.copy(); sc0 = min(W * 1.02 / card.width, H * 0.62 / card.height); card = card.resize((int(card.width * sc0), int(card.height * sc0)))
         sc = drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1)
         rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" else 4 * math.sin(a * 2)
@@ -457,12 +495,12 @@ def base_frame(ev, spec, t, fire, boom_frames, booms):
     arr = np.asarray(frame, np.float32) / 255
     if fire is not None:
         fl = fire[int(t * FPS) % len(fire)].astype(np.float32) / 255
-        fl = np.asarray(Image.fromarray((fl * 255).astype(np.uint8)).resize((W, H), Image.BILINEAR), np.float32) / 255
+        fl = np.asarray(Image.fromarray((fl * 255).astype(np.uint8)).resize((W, H), Image.BICUBIC), np.float32) / 255
         arr = screen(arr * np.array([1.0, 0.93, 0.85]), fl, 1.0)
     for b0 in booms:
         k = int((t - b0) * FPS)
         if 0 <= k < min(len(boom_frames), int(0.4 * FPS)):
-            bf = np.asarray(Image.fromarray(boom_frames[k]).resize((W, H), Image.BILINEAR), np.float32) / 255
+            bf = np.asarray(Image.fromarray(boom_frames[k]).resize((W, H), Image.BICUBIC), np.float32) / 255
             alpha = np.clip(bf.max(-1, keepdims=True) * 1.6, 0, 1) ** 0.8          # the fireball covers what's under it
             alpha *= float(np.clip((0.4 - k / FPS) / 0.15, 0, 1))                   # gone after 0.4 s, like Tung's
             arr = arr * (1 - alpha) + np.clip(bf * 1.25, 0, 1) * alpha
@@ -501,7 +539,7 @@ class Shaker:
 
 def shake_layer(scene, prev, cur, zoom):
     """Shift the scene to `cur`, with a 4-tap motion blur along the path from `prev`."""
-    big = scene.resize((int(W * 1.05 * zoom), int(H * 1.05 * zoom)), Image.BILINEAR)
+    big = scene.resize((int(W * 1.05 * zoom), int(H * 1.05 * zoom)), Image.BICUBIC)
     ox, oy = (big.width - W) / 2, (big.height - H) / 2
     acc = None
     for k in range(4):
@@ -552,8 +590,8 @@ def reframe(frame, t, tl, points):
     if z > 1:
         cw, ch = W / z, H / z
         x0 = min(max(cx - cw / 2, 0), W - cw); y0 = min(max(cy - ch / 2, 0), H - ch)
-        return frame.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + cw, y0 + ch))
-    small = frame.resize((max(1, int(W * z)), max(1, int(H * z))), Image.BILINEAR)
+        return frame.resize((W, H), Image.BICUBIC, box=(x0, y0, x0 + cw, y0 + ch))
+    small = frame.resize((max(1, int(W * z)), max(1, int(H * z))), Image.BICUBIC)
     bg = Image.new("RGBA", (W, H), (0, 0, 0, 255)); bg.alpha_composite(small, ((W - small.width) // 2, (H - small.height) // 2))
     return bg
 
@@ -771,13 +809,13 @@ def main(slug, preview=False):
     af = ("acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=15,"   # audit: about -10 LUFS, true peak about -1 dBFS
           "aresample=192000,alimiter=limit=0.84:attack=4:release=40:level=false,aresample=48000")  # 4x oversampled: catches inter-sample peaks  # about -10 LUFS; true peak kept under -1 dBFS after AAC (audit)
     cmd = ["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{size[0]}x{size[1]}", "-r", str(FPS),
-           "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+           "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "slow", "-crf", "15", "-tune", "film", "-pix_fmt", "yuv420p",
            "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     nf = int(dur * FPS)
     for i in range(nf):
         f = render_frame(ep, tl, i / FPS, shaker, fire, boom_frames).convert("RGB")
-        if preview: f = f.resize(size, Image.BILINEAR)
+        if preview: f = f.resize(size, Image.BICUBIC)
         proc.stdin.write(f.tobytes())
         if i % 150 == 0: print(f"  frame {i}/{nf}", flush=True)
     proc.stdin.close(); proc.wait()
