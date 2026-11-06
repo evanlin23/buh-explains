@@ -44,15 +44,21 @@ Then rank by gap × comment engine. Trend content ships fast: YouTube's own guid
 
 **Length:** 20–30 s, 75–110 words. Achird at about 3.8 words/s (the old videos ran about 3.3, narrated hits about 4.4). Never past 45 s.
 
+**Retention comes first: the hook opens a question, and the answer is held for the end.** **[M]** All three old videos open on a question and answer it in the last 15–20%: Tung at 26.2 s of 29 ("This makes it Indonesian"), Tralalero at 14.9 s of 19, Bombardiro at 27.5 s of 32. The hit's hook says what the meme *isn't*, so "then where?" carries the viewer to the end.
+- **The title and hook never contain the answer.** Use the negative ("isn't X"), the question ("what did it originally look like?") or the wrong belief, never the reveal itself. "Do you know Verity is from Minecraft?" fails; "Do you know Verity isn't from The Amazing Digital Circus?" passes.
+- **The middle rules out wrong answers.** Each beat closes a small question and opens a smaller one: "It looks like Caine. It isn't Caine." "It's not from the movie either." The viewer's guesses get knocked down one at a time, and the real answer gets closer without being said.
+- **Re-hook at about 10–14 s** with a turn ("Until it isn't.", "But that's not the weird part.") so there's no flat middle.
+- **The gate:** the main answer's first word lands after 70% of the runtime, and no line before it says or shows the answer, including stickers, labels and B-roll. A Minecraft grass block on screen at 3 s gives it away just like the word would.
+
 **The beats** (the house formula that won, plus what back-row taught):
 
 | Time | Beat | Rules |
 |---|---|---|
-| 0.0–2.5 s | **Hook** | The title claim, read aloud from frame 0. ≤ 10 words. Frame 1 is the meme itself, big and already moving. Never "What if", never fake suspense ("you won't believe"). |
-| 2.5–7 s | **The belief** | One line naming what everyone thinks: "You see, the X we all know and love is…". The audience already quoted this line back as our signature. It carries 2–3 picture changes. One line only, never two. |
-| ~7 s | **Turn** | "But…" / "However…". A hard cut, a fireball and a sound hit. |
-| 7–24 s | **Evidence** | 2–4 concrete facts: a name, a date, a number, a place. Each gets its own picture, and numbers get a fact label. Join them with "but" and "so", never "and then". Show, don't explain. |
-| last 2 s | **Payoff** | Restate the claim as fact, worded so it runs into the hook on the loop ("Verity is from Minecraft." → "Do you know Verity is from Minecraft?"). It's the last word, with a 0.2–0.3 s tail, then the cut. |
+| 0.0–2.5 s | **Hook** | A question, or "isn't…", read aloud from frame 0. ≤ 10 words. **No answer.** Frame 1 is the meme itself, big and already moving. Never "What if", never fake suspense ("you won't believe"). |
+| 2.5–6 s | **The belief** | One line naming what everyone thinks: "You see, the X we all know and love is…". The audience already quoted this line back as our signature. It carries 2–3 picture changes. One line only, never two. |
+| 6–19 s | **Wrong answers and clues** | 2–4 concrete beats: knock down the obvious guesses, and give real clues (a name, a date, a number) that point *toward* the answer without naming it. A re-hook turn at about 10–14 s. Each beat gets its own picture. Join them with "but" and "so", never "and then". |
+| after 70% | **The reveal** | "But…" plus a fireball, a hard cut and a sound hit, then the answer, said plainly in one line over one big picture. A short pause just before it is the only real pause in the video. |
+| last 2 s | **Payoff** | "This makes X…", the answer as a verdict and the last word, worded so it runs back into the hook on the loop. A 0.2–0.3 s tail, then the cut. |
 
 **Always:**
 - The meme's name is said 3–5 times, with the fireball stinger every time. The repetition is the rhythm.
@@ -66,7 +72,7 @@ Then rank by gap × comment engine. Trend content ships fast: YouTube's own guid
 
 ## 4. Story shapes (rotate; never the same as the last two)
 YouTube's own first example of mass-produced content is "templated storylines". A "Do you know X? … here's the original" series is that template, so the *shape* changes even when the voice and edit stay the same.
-- **Origin:** "it's from somewhere you'd never guess" (Tung, Verity).
+- **Origin:** "it isn't from where you think" (Tung, Verity). The place is the reveal.
 - **Age / timeline:** "it's way older than you think" (The Last Dance).
 - **Hoax / nothing:** "it's counting down to nothing" (the November polar bear).
 - **Mistranslation:** "it doesn't mean what you think".
@@ -93,7 +99,7 @@ The full grammar is measured in `content/research_notes/buhexplains_editing_styl
 - Audio: voice + synthesized SFX (boom on the stinger, whoosh on whips, pop on stickers), cut to the chosen song's beat grid. **No meme audio and no song in the export.** The owner adds the trending song at upload.
 
 ## 7. Packaging
-- **Title** = the hook, lowercase-casual, plus at most 3 hashtags. Note 9 applies.
+- **Title** = the hook, lowercase-casual, plus at most 3 hashtags. **It never contains the answer.** Note 9 applies.
 - **Cover** = a mid-video frame where the meme is big. One subject, 0–3 words.
 - **Description**: two plain first-person lines, then sources.
 - **First comment** (posted by the channel; the API can't pin): a question that makes people type something specific, e.g. "where did you first see verity?". Reply to comments in the first hour.

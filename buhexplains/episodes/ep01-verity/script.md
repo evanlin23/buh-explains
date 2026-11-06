@@ -1,31 +1,33 @@
-# ep01: verity is from minecraft (draft 1)
+# ep01: verity isn't from the amazing digital circus (draft 2)
 
-- **Shape:** origin · **Target:** about 25 s, 92 words at about 3.8 words/s
-- **Title:** do you know verity is from minecraft? #verity #minecraft #memes
-- **Loop:** the last line, "Verity is from Minecraft.", runs into the hook.
+- **Shape:** origin · **Target:** about 26 s, 99 words at about 3.8 words/s
+- **Title:** do you know verity isn't from the amazing digital circus? #verity #memes
+- **The question it opens:** then where is Verity from?
+- **Reveal:** "Minecraft", first said in line 8, at about 20.5 s of 26 (79%). Nothing before it says or shows Minecraft.
+- **Loop:** "This makes Verity a Minecraft character." → "Do you know Verity isn't from The Amazing Digital Circus?"
+- Draft 1 put the answer in the title and said it again at 7 s. The owner caught it ("gives away the entire story in the first bit").
 
-| # | Line (spoken exactly) | Picture / event | Source |
-|---|---|---|---|
-| 1 | Do you know Verity is from Minecraft? | f0: Verity's yellow smiley, huge, already shaking · arrow · fireball on "Verity" · scale-in Minecraft grass block on "Minecraft" | title claim; see 3 |
-| 2 | You see, the Verity we all know and love is the yellow smiley every kid yells at. | fireball + fire plate on "Verity" · heart sticker on "love" · grid of plain yellow smileys on "yellow smiley" · "!?" on "yells" | Reuters/HuffPost: kids call any yellow smiley Verity |
-| 3 | But Verity started in a Minecraft horror series by a YouTuber called ThatMob. | white flash + boom on "But" · fireball on "Verity" · our own drawn block-world plate · channel name card "THATMOB" | Wikipedia: Verity (meme); pin the first episode (date and title) from ThatMob's channel |
-| 4 | In it, Verity is a friendly AI helper. Like Clippy. | fireball on "Verity" · label "AI ASSISTANT" · paperclip doodle (ours) on "Clippy" | Wikipedia; Merriam-Webster slang entry |
-| 5 | Until it isn't. It grows way too tall, keeps smiling, and chases him through the dark. | red vignette · the smiley stretched tall (ours) · push-in · speed lines on "chases" | Wikipedia; ThatMob's video (the frame we cite) |
-| 6 | Then in July, Horror Skunx dropped a song called It's me, it's Verity. | label "JULY 2026" · fireball on "Verity" · song title card | Forbes 2026-09-27; the song's upload date |
-| 7 | Fifty seven million views later, every smiley on Earth is Verity. | label "57,000,000 VIEWS" (count on the day we render) · smiley stickers flood the frame | the song's view count (yt-dlp, render day) |
-| 8 | And no, it has nothing to do with the Anne Hathaway movie. | warning triangle on "no" · a crossed-out film-reel doodle (no poster) | Yahoo Entertainment |
-| 9 | Verity is from Minecraft. | fireball on "Verity" · grass block slam on "Minecraft" · cut at +0.25 s | — |
+| # | ~t (s) | Line (spoken exactly) | Picture / event | Retention job | Source |
+|---|---|---|---|---|---|
+| 1 | 0.0 | Do you know Verity isn't from The Amazing Digital Circus? | f0: Verity's smiley, huge, already shaking · fireball on "Verity" · red X slams on "isn't" · circus-tent doodle (ours) | opens "then where?" | — |
+| 2 | 2.5 | You see, the Verity we all know and love is the yellow smiley every kid yells at. | fire plate · heart on "love" · grid of plain yellow smileys · "!?" on "yells" | the belief | Reuters/HuffPost: any yellow smiley is "Verity" |
+| 3 | 6.7 | It looks like Caine. It isn't Caine. | side-by-side silhouettes (ours) · red X on "isn't" | knocks down guess 1 | Forbes: resembles Caine (TADC) |
+| 4 | 8.6 | It's not from the Anne Hathaway movie either. | crossed-out film reel (ours) · warning triangle on "not" | knocks down guess 2 | Yahoo Entertainment |
+| 5 | 10.7 | Verity started out as a friendly AI helper. Like Clippy. | label "AI ASSISTANT" · paperclip doodle (ours) | clue: what it *was* | Wikipedia: Verity (meme) |
+| 6 | 13.3 | Until it isn't. It grows way too tall, keeps smiling, and chases you through the dark. | hard cut to black-red vignette · tall stretched smiley (ours) · push-in · speed lines | **re-hook** at about 13 s | Wikipedia; ThatMob's video |
+| 7 | 17.5 | Then a July song, It's me, it's Verity, hit fifty seven million views. | label "JULY 2026" · "57,000,000 VIEWS" (count on render day) · smiley flood | how it spread; still not where | Forbes; the song's own count |
+| 8 | 20.5 | But Verity was born in a Minecraft horror series, by a YouTuber called ThatMob. | **pause 0.3 s before "But"** · white flash + boom · fireball on "Verity" · a big in-house grass block on "Minecraft" · "THATMOB" name card | **the reveal** | Wikipedia; pin the first episode on ThatMob's channel |
+| 9 | 24.3 | This makes Verity a Minecraft character. | grass block + smiley slam · cut at +0.25 s | verdict, last word, loops | — |
 
 ## Fact-check flags
-- Line 3: the sources disagree on the date of ThatMob's first Verity video (May vs. earlier). The script avoids dates; the fact-checker must confirm it's a Minecraft series and that ThatMob created Verity.
-- Line 4: "AI helper / like Clippy" comes from Wikipedia's description. Check it against the video.
-- Line 7: the view count is "57M" on 2026-11-06. Re-read it on render day and write the real number.
-- Line 2: "every kid yells at" is reported by teachers (Reuters). Fine as a characterisation.
+- Line 1/3: we're claiming people think Verity is Caine (TADC). Forbes notes the resemblance. Find at least one comment or post making that guess, so the hook knocks down a real belief, not a straw man.
+- Line 8: confirm ThatMob created Verity and that it's a Minecraft series. The sources disagree on the first video's date, so the script avoids dates.
+- Line 5: "AI helper like Clippy" is Wikipedia's description; check it against the video.
+- Line 7: the song is the 57M one on 2026-11-06 (Horror Skunx credited by Forbes, but the line now leaves the artist out). Re-read the count on render day.
 
 ## Picture rights
-- Verity's smiley and ThatMob's frames are third-party. Each is shown ≤ 2 s, only under narration about it.
-- The grass block, paperclip, tall smiley, film reel, stickers and plates are all drawn in-house. No Mojang textures, no movie poster.
-- "Minecraft" appears in the title as a factual reference, which is the point of the claim. Standards decides whether that's fine here (blocky stories never name Roblox, but they aren't *about* Roblox).
+- Verity's smiley and any ThatMob frame are third-party: ≤ 2 s each, only under narration about them.
+- The circus tent, silhouettes, film reel, paperclip, tall smiley, grass block, stickers and plates are all drawn in-house. No Mojang textures, no TADC art, no movie poster.
 
 ## First comment (posted by the channel)
 where did you first hear about verity?
