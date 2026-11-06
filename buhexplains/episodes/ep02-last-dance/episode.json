@@ -37,19 +37,18 @@
  },
  "images": {
   "duo": {
-   "url": "https://i.ytimg.com/vi/huBN9Dxy-mI/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/huBN9Dxy-mI/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=huBN9Dxy-mI",
+   "url": "https://i.ytimg.com/vi/Hmn3Uc-hRKU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=Hmn3Uc-hRKU",
    "points": {
     "pair": [
-     0.47,
-     0.6,
-     0.18
+     0.48,
+     0.5,
+     0.32
     ],
     "hands": [
-     0.5,
-     0.56,
-     0.06
+     0.47,
+     0.52,
+     0.05
     ]
    }
   },
@@ -66,25 +65,24 @@
    }
   },
   "duo3": {
-   "url": "https://i.ytimg.com/vi/ldgHqcJxzbU/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/ldgHqcJxzbU/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=ldgHqcJxzbU",
+   "url": "https://i.ytimg.com/vi/AJ1awkJrtJk/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=AJ1awkJrtJk",
    "points": {
     "faces": [
      0.5,
-     0.38,
-     0.28
+     0.45,
+     0.17
     ]
    }
   },
   "art": {
-   "url": "https://i1.sndcdn.com/avatars-000044597155-3j9k7z-t500x500.jpg",
-   "page": "https://soundcloud.com/maretu/fpd-ff7-botsu-8",
+   "url": "https://i.ytimg.com/vi/xfOnsk10VfA/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=xfOnsk10VfA",
    "points": {
     "note": [
-     0.45,
-     0.5,
-     0.3
+     0.31,
+     0.62,
+     0.14
     ]
    }
   },
@@ -237,7 +235,7 @@
     {
      "on": 0,
      "img": "art",
-     "fit": "white",
+     "fit": "blurfill",
      "enter": "zoomblur"
     },
     {
@@ -268,7 +266,7 @@
     {
      "on": "called",
      "img": "art",
-     "fit": "white",
+     "fit": "blurfill",
      "enter": "whip"
     },
     {

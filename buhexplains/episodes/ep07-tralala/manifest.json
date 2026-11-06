@@ -7,27 +7,27 @@
    "rights": "third-party; shown under narration as commentary"
   },
   "melt": {
-   "used": "https://i.ytimg.com/vi/eM2fjF9Lf64/hq1.jpg",
-   "page": "https://i.ytimg.com/vi/eM2fjF9Lf64/hq1.jpg",
+   "used": "https://i.ytimg.com/vi/6pqdWMXseyg/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=6pqdWMXseyg",
    "rights": "third-party; shown under narration as commentary"
   },
   "banana": {
-   "used": "https://i.ytimg.com/vi/XMl6HnhFFIA/hq1.jpg",
-   "page": "https://www.youtube.com/watch?v=XMl6HnhFFIA",
+   "used": "https://i.ytimg.com/vi/Tf7Hd8npPUU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=Tf7Hd8npPUU",
    "rights": "third-party; shown under narration as commentary"
   },
   "mickey": {
-   "used": "https://i.ytimg.com/vi/5GxuKac4VC8/hq1.jpg",
-   "page": "https://i.ytimg.com/vi/5GxuKac4VC8/hq1.jpg",
+   "used": "https://i.ytimg.com/vi/5GxuKac4VC8/maxres1.jpg",
+   "page": "https://i.ytimg.com/vi/5GxuKac4VC8/maxres1.jpg",
    "rights": "third-party; shown under narration as commentary"
   },
   "battle": {
-   "used": "https://i.ytimg.com/vi/LMI4GzwPu5s/hq3.jpg",
+   "used": "https://i.ytimg.com/vi/LMI4GzwPu5s/maxres3.jpg",
    "page": "https://www.youtube.com/@CalobiProductions",
    "rights": "third-party; shown under narration as commentary"
   },
   "pebbles_car": {
-   "used": "https://i.ytimg.com/vi/qJz18c6gw8c/hq3.jpg",
+   "used": "https://i.ytimg.com/vi/qJz18c6gw8c/maxres3.jpg",
    "page": "https://www.youtube.com/watch?v=qJz18c6gw8c",
    "rights": "third-party; shown under narration as commentary"
   },
@@ -44,9 +44,9 @@
  },
  "stock": {
   "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
-  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
   "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
-  "embers": "https://mixkit.co (Mixkit free licence) 3465-720.mp4"
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
  },
  "sfx": [
   "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",
