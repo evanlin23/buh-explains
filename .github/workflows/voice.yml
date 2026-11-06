@@ -61,4 +61,6 @@ jobs:
             out/*/voice.wav
             out/*/words.json
             out/*/joins.json
+            .cache/tts/*.wav
           retention-days: 30
+          include-hidden-files: true

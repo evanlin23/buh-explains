@@ -641,7 +641,7 @@ def mix(slug, tl, dur):
     v, vsr = sf.read(os.path.join(od, "voice.wav"), dtype="float32")
     v = np.interp(np.arange(0, len(v), vsr / SR), np.arange(len(v)), v).astype(np.float32)
     v = np.frombuffer(subprocess.run(["ffmpeg", "-loglevel", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-", "-af",
-                                      "highpass=f=90,equalizer=f=3000:t=q:w=1.0:g=3.5,equalizer=f=250:t=q:w=1.2:g=-2", "-f", "f32le", "-"],
+                                      "highpass=f=85,equalizer=f=250:t=q:w=1.2:g=-2,deesser=i=0.4,acompressor=threshold=-22dB:ratio=3:attack=4:release=90:makeup=3,equalizer=f=3000:t=q:w=1.0:g=3,alimiter=limit=0.95:level=false", "-f", "f32le", "-"],
                                      input=v.tobytes(), capture_output=True).stdout, np.float32).copy()[:len(v)]  # presence: easier to hear
     n = int(dur * SR) + SR; out = np.zeros(n, np.float32); out[:len(v)] += v * 1.0
     fx = np.zeros(n, np.float32)

@@ -162,6 +162,50 @@ Pace: fast, about 3.4 words per second. No long pauses between sentences; keep r
 Do not read these notes aloud. Speak only the transcript below, exactly as written, in order."""
 
 
+def avg_spectrum(a, n=2048):
+    """Average power spectrum of the voiced parts of a signal."""
+    hop = n // 2; win = np.hanning(n).astype(np.float32); acc = np.zeros(n // 2 + 1); k = 0
+    for i in range(0, len(a) - n, hop):
+        fr = a[i:i + n]
+        if np.sqrt(np.mean(fr ** 2)) < 0.01: continue
+        acc += np.abs(np.fft.rfft(fr * win)) ** 2; k += 1
+    return acc / max(k, 1)
+
+
+def match_tone(bite, ref_spec, n=2048, limit_db=8.0):
+    """EQ a bite toward the narrator's tone (a smoothed spectral match, capped at +-limit_db) so the voice
+    doesn't change character at the splice. The bite still sounds like itself: only the broad balance moves."""
+    b = avg_spectrum(bite, n)
+    if b.sum() == 0: return bite
+    freqs = np.fft.rfftfreq(n, 1 / SR)
+    g_db = 10 * np.log10((ref_spec + 1e-12) / (b + 1e-12))
+    # smooth across about a third of an octave so we only move the broad balance
+    sm = np.empty_like(g_db)
+    for i, f in enumerate(freqs):
+        lo, hi = f / 1.12, f * 1.12
+        sel = (freqs >= lo) & (freqs <= hi)
+        sm[i] = g_db[sel].mean() if sel.any() else g_db[i]
+    sm -= np.median(sm[(freqs > 300) & (freqs < 4000)])       # tone only; loudness is matched separately
+    sm = np.clip(sm, -limit_db, limit_db); sm[freqs < 80] = min(sm[freqs < 80].min(), 0)
+    F = np.fft.rfft(bite, n=len(bite)); fb = np.fft.rfftfreq(len(bite), 1 / SR)
+    gain = 10 ** (np.interp(fb, freqs, sm) / 20)
+    return np.fft.irfft(F * gain, n=len(bite)).astype(np.float32)
+
+
+def xfade_join(pieces, ms=25):
+    """Join pieces with equal-power crossfades (cos/sin) so splices into and out of a bite don't click or jump."""
+    xf = int(ms / 1000 * SR); out = pieces[0].astype(np.float32)
+    shifts = [0.0]
+    for p_ in pieces[1:]:
+        p_ = p_.astype(np.float32); k = min(xf, len(out) // 2, len(p_) // 2)
+        if k < 8:
+            out = np.concatenate([out, p_]); shifts.append(0.0); continue
+        t = np.linspace(0, np.pi / 2, k, dtype=np.float32)
+        mid = out[-k:] * np.cos(t) + p_[:k] * np.sin(t)
+        out = np.concatenate([out[:-k], mid, p_[k:]]); shifts.append(-k / SR)
+    return out, shifts
+
+
 def gemini_tts(text, voice):
     """One request (the free tier allows about 10 a day per model), cached by text+voice in .cache/tts."""
     import base64, hashlib, urllib.request
@@ -224,6 +268,7 @@ def main(slug):
         spoken = None
         ref, _sr = k.create("This is a level check for the narrator.", voice=v["voice"], speed=v["speed"], lang="en-us"); ref = rs(ref, _sr)
     ref_rms = np.sqrt(np.mean(ref[np.abs(ref) > 0.02] ** 2))
+    narr_spec = avg_spectrum(ref)
 
     def level(a):  # a bite plays as loud as the narrator (a touch hotter), never quieter
         r = np.sqrt(np.mean(a[np.abs(a) > 0.02] ** 2)) + 1e-9
@@ -287,7 +332,14 @@ def main(slug):
             pieces.append(speak[cursor:c0]); joins.append(t + sum(len(p_) for p_ in pieces) / SR)
             key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
             bite = (bites_full if len(idx) > 1 else bites)[key]
-            bite = trim(bite, thr=0.01, lead=0.0, pad=0.0)
+            bite = trim(bite, thr=0.01, lead=0.005, pad=0.02)
+            bite = match_tone(bite, narr_spec)
+            # loudness: match the narration in the half second either side of the splice, a touch hotter
+            around = np.concatenate([speak[max(0, c0 - int(0.5 * SR)):c0], speak[c1:c1 + int(0.5 * SR)]])
+            loud = around[np.abs(around) > 0.02]
+            target = np.sqrt(np.mean(loud ** 2)) if len(loud) > SR // 20 else ref_rms
+            br = np.sqrt(np.mean(bite[np.abs(bite) > 0.02] ** 2)) + 1e-9
+            bite = bite * (target * 1.1 / br); bite = bite / max(1.0, np.abs(bite).max() / 0.98)
             t_b = (sum(len(p_) for p_ in pieces)) / SR
             span = len(bite) / SR / len(idx)
             for j, i in enumerate(idx): out_times[i] = (t_b + j * span, t_b + (j + 1) * span)
@@ -297,12 +349,14 @@ def main(slug):
         for i in range(len(tokens)):
             if i not in out_times: out_times[i] = (times[i][0] + shift, times[i][1] + shift)
         pieces.append(speak[cursor:])
-        xf = int(0.006 * SR)  # tiny crossfades at every splice
-        for i in range(1, len(pieces)):
-            if len(pieces[i - 1]) > xf and len(pieces[i]) > xf:
-                pieces[i - 1] = pieces[i - 1].copy(); pieces[i] = pieces[i].copy()
-                pieces[i - 1][-xf:] *= np.linspace(1, 0, xf); pieces[i][:xf] *= np.linspace(0, 1, xf)
-        a = np.concatenate(pieces)
+        a, shifts = xfade_join(pieces, ms=25)
+        if len(pieces) > 1:  # each crossfade pulls everything after it 25 ms earlier
+            bounds = np.cumsum([len(p_) for p_ in pieces])[:-1] / SR
+            cum = np.cumsum(shifts[1:])
+            for i in out_times:
+                s_, e_ = out_times[i]; k = int(np.searchsorted(bounds, s_ + 1e-4, side="right"))
+                d = float(cum[k - 1]) if k > 0 else 0.0
+                out_times[i] = (s_ + d, e_ + d)
         joins.append(t + len(a) / SR)
         for i in range(len(tokens)):
             s_, e_ = out_times[i]
