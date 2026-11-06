@@ -1,6 +1,6 @@
 # buh-explains
 
-Automation for **@BuhExplains**: 20–35 s meme-lore explainer Shorts (a TTS narrator, the meme's own sound bite, real pictures edited over the top). HelloBuh lives in its own repo now (`evanlin23/hello-buh`); `hellobuh/` here is the old trial pointer only.
+Automation for **@BuhExplains**: 20–35 s meme-lore explainer Shorts (a TTS narrator, real pictures edited over the top, built for hook / build-up / payoff). HelloBuh lives in its own repo now (`evanlin23/hello-buh`); `hellobuh/` here is the old trial pointer only.
 
 ## Read first
 - `buhexplains/PLAYBOOK.md`: how ideas are picked, scripts written, pictures, sound and voice made, and videos judged. **Owner notes outrank everything except accuracy.** When the owner gives feedback, add it to the playbook as a dated quote, in the same commit.
@@ -8,7 +8,7 @@ Automation for **@BuhExplains**: 20–35 s meme-lore explainer Shorts (a TTS nar
 
 ## Layout
 - `buhexplains/episodes/<slug>/`: `episode.json` (lines, beats, pictures with `points`, name bites, music, sources), `script.md`, `package.json` (title, description, first comment), `manifest.json` (written by the render: every picture/sound source).
-- `buhexplains/pipeline/`: `fetch_assets.py` (rebuild `.cache/` from logged URLs), `voice.py` (Gemini Achird or Kokoro; bites spliced in), `render.py` (picture + sound + mix), `voicecheck.py` (clipped cuts + intelligibility in the final mix), `shake_measure.py`, `bite.py`, `upload.py`.
+- `buhexplains/pipeline/`: `fetch_assets.py` (rebuild `.cache/` from logged URLs), `voice.py` (Gemini Achird or Kokoro; the narrator says the names, `voice.bites: false`), `render.py` (picture + sound + mix), `voicecheck.py` (clipped cuts + intelligibility in the final mix), `shake_measure.py`, `bite.py`, `upload.py`, `comment.py`, `audit.py` (virality QA on the finished file).
 - `buhexplains/assets/sfx/`: the owner's own sound kit (committed). `buhexplains/assets/sfx_sources.txt`: the myinstants kit's URLs.
 
 ## Commands
@@ -27,7 +27,7 @@ buhexplains/make.sh <slug> --preview   # half-size render, no voicecheck
 `docs/operations.md`: the daily schedule (2 uploads and 2 productions a day), the producer session and its scheduled tasks, the cron-job.org jobs, secrets and variables, how to pause or reorder, and the known failure modes. Read it before changing any of them.
 
 ## Uploads
-`render.yml` (film artifact) and `upload.yml` exist but upload nothing until the owner finishes `docs/youtube-setup.md`, including the repo variable `YT_ENABLED=true`.
+**Live since 2026-11-06.** `render.yml` makes the `film-<slug>` artifact; `upload.yml` posts 2 a day from `buhexplains/queue.txt` (private, scheduled public about noon and 6 PM Central); `comments.yml` posts each video's first comment once it's public. Turn everything off by removing the repo variable `YT_ENABLED`. Details: `docs/operations.md`.
 
 ## Commit identity
 ```bash
