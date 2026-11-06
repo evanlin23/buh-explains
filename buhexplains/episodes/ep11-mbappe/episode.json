@@ -122,7 +122,13 @@
      0.5,
      0.15
     ]
-   }
+   },
+   "crop": [
+    0.32,
+    0.05,
+    0.68,
+    0.95
+   ]
   },
   "laliga": {
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/960px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -308,7 +314,7 @@
     {
      "on": 0,
      "img": "rm",
-     "fit": "white",
+     "fit": "blurfill",
      "enter": "spin",
      "sfx": [
       "ding"
@@ -372,7 +378,7 @@
      "on": "dropped",
      "sticker": "x",
      "target": "bottles",
-     "dur": 0.9
+     "dur": 0.55
     }
    ]
   },

@@ -1,0 +1,114 @@
+{
+ "slug": "ep11-mbappe",
+ "images": {
+  "mbappe": {
+   "used": "https://i.ytimg.com/vi/6JH9HyvJSpw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=6JH9HyvJSpw",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "meme": {
+   "used": "https://i.ytimg.com/vi/rd5SdmuUl9w/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=rd5SdmuUl9w",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "show": {
+   "used": "https://i.ytimg.com/vi/zd6O0p1YFOA/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=zd6O0p1YFOA",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "show2": {
+   "used": "https://i.ytimg.com/vi/OuTz0_Rx1q8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=OuTz0_Rx1q8",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "flag": {
+   "used": "https://i.ytimg.com/vi/snJwmT1K7eU/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=snJwmT1K7eU",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "china": {
+   "used": "https://i.ytimg.com/vi/-EBTyqJa5p8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=-EBTyqJa5p8",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "rm": {
+   "used": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
+   "page": "https://publish.realmadrid.com/content/dam/common/statics/public-content/internet/web/rm-spa-web/images/meta/og-image.png",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "laliga": {
+   "used": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/960px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "page": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg/960px-LaLiga_EA_Sports_2023_Vertical_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "sponsors": {
+   "used": "https://i.ytimg.com/vi/aVIGICAIpY4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=aVIGICAIpY4",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "dark": {
+   "used": "https://i.ytimg.com/vi/NGCzedAMzrc/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=NGCzedAMzrc",
+   "rights": "third-party; shown under narration as commentary"
+  }
+ },
+ "stock": {
+  "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-720.mp4",
+  "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-720.mp4"
+ },
+ "sfx": [
+  "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",
+  "anime_whoosh https://www.myinstants.com/media/sounds/anime-ahh.mp3 0.862041",
+  "whoosh https://www.myinstants.com/media/sounds/whoosh-wind.mp3 0.679184",
+  "boing https://www.myinstants.com/media/sounds/cartoon-boing_7vRWDlc.mp3 1.619592",
+  "ding https://www.myinstants.com/media/sounds/ding-sound-effect_2.mp3 2.977959",
+  "bonk https://www.myinstants.com/media/sounds/bonk_7zPAD7C.mp3 0.470204",
+  "camera_flash https://www.myinstants.com/media/sounds/camera-flash-sound-effect.mp3 2.063673",
+  "error https://www.myinstants.com/media/sounds/error_CDOxCYm.mp3 1.018776",
+  "record_scratch https://www.myinstants.com/media/sounds/record-scratch-clean.mp3 0.679184",
+  "anime_wow https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3 4.205714",
+  "dun_dun_dun https://www.myinstants.com/media/sounds/dun-dun-dun-sound-effect-brass_8nFBccR.mp3 5.146122",
+  "pop https://www.myinstants.com/media/sounds/pop_7e9Is8L.mp3 0.312000",
+  "metal_pipe https://www.myinstants.com/media/sounds/metal-pipe-clang.mp3 2.821224",
+  "swoosh_transition https://www.myinstants.com/media/sounds/woosh-informativo.mp3 7.026938",
+  "riser https://www.myinstants.com/media/sounds/popular-riser-metallic-sound-effect.mp3 2.795102",
+  "taco_bell_bong https://www.myinstants.com/media/sounds/taco-bell-bong-sfx.mp3 1.959184",
+  "fart_reverb https://www.myinstants.com/media/sounds/fart-with-reverb.mp3 3.239184",
+  "heartbeat https://www.myinstants.com/media/sounds/heart-beat-speeds-up.mp3 31.764898",
+  "emotional_damage https://www.myinstants.com/media/sounds/emotional-damage-meme.mp3 3.369796",
+  "thunder_strike_1 https://www.myinstants.com/media/sounds/lightning-strike.mp3 13.035102",
+  "thunder_strike_2 https://www.myinstants.com/media/sounds/mix_12s-audio-joiner_kPvukUQ.mp3 12.492000",
+  "thunder_strike_3 https://www.myinstants.com/media/sounds/magic-thunder-strike.mp3 13.766531",
+  "lightning_1 https://www.myinstants.com/media/sounds/nuagghhhh-scream_H3TDo14.mp3 3.576000",
+  "lightning_2 https://www.myinstants.com/media/sounds/lightning-strike-cool.mp3 6.696000",
+  "lightning_3 https://www.myinstants.com/media/sounds/ambient-thunder.mp3 8.045714",
+  "bruh_sound_effect_1 https://www.myinstants.com/media/sounds/bruh-sound-effect_WstdzdM.mp3 0.864000",
+  "bruh_sound_effect_2 https://www.myinstants.com/media/sounds/oh-my-god-bruhh.mp3 6.696000",
+  "bruh_sound_effect_3 https://www.myinstants.com/media/sounds/vine-dramatic-surprise.mp3 1.828571",
+  "explosion_1 https://www.myinstants.com/media/sounds/capcut-explosion-sound.mp3 3.239184",
+  "explosion_2 https://www.myinstants.com/media/sounds/explosion-meme_dTCfAHs.mp3 1.560000",
+  "explosion_3 https://www.myinstants.com/media/sounds/minecraft-explosion-meme-sound-effect.mp3 2.560000",
+  "fast_whoosh_1 https://www.myinstants.com/media/sounds/fast-whoosh.mp3 1.201625",
+  "sparkle_1 https://www.myinstants.com/media/sounds/fairy-sparkle.mp3 1.541224",
+  "sparkle_2 https://www.myinstants.com/media/sounds/sparkle-ascending-fop-2026.mp3 3.456000",
+  "sparkle_3 https://www.myinstants.com/media/sounds/shiny-sparkles-drama.mp3 6.191020",
+  "glitch_1 https://www.myinstants.com/media/sounds/error-glitch.mp3 1.332245",
+  "glitch_2 https://www.myinstants.com/media/sounds/glitch-transition.mp3 3.056313",
+  "glitch_3 https://www.myinstants.com/media/sounds/vhs-startup-glitch-sound.mp3 4.656000",
+  "punch_1 https://www.myinstants.com/media/sounds/punch-gaming-sound-effect-hd_RzlG1GE.mp3 1.567347",
+  "punch_2 https://www.myinstants.com/media/sounds/punch_u4LmMsr.mp3 0.391837",
+  "punch_3 https://www.myinstants.com/media/sounds/bone-crack-meme.mp3 1.097143",
+  "typing_1 https://www.myinstants.com/media/sounds/keyboard-typing-sound-effect.mp3 10.083265",
+  "typing_2 https://www.myinstants.com/media/sounds/typing-noises.mp3 6.974694",
+  "typing_3 https://www.myinstants.com/media/sounds/rage2.mp3 7.758367",
+  "notification_1 https://www.myinstants.com/media/sounds/discord-notification.mp3 0.504000",
+  "notification_2 https://www.myinstants.com/media/sounds/notification_o14egLP.mp3 4.675918",
+  "notification_3 https://www.myinstants.com/media/sounds/snapchat-message.mp3 3.032000",
+  "huh_1 https://www.myinstants.com/media/sounds/huh_37bAoRo.mp3 0.672000",
+  "huh_2 https://www.myinstants.com/media/sounds/metal-gear-alert-sound-effect_XKoHReZ.mp3 1.985306",
+  "huh_3 https://www.myinstants.com/media/sounds/ceeday-huh-sound-effect.mp3 1.201633"
+ ],
+ "name_bites": {}
+}
