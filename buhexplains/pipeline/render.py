@@ -142,14 +142,20 @@ def build(ep, words):
                 tl["sfx"].append((t, {"ellipse": "scribble", "arrow": "whipstk", "heart": "heartpop", "warning": "alarm",
                                       "interrobang": "boing", "x": "x", "number": "ding"}[kind]))
             if "label" in b:
-                tl["label"].append(dict(t=t, end=l1 + 0.15, text=b["label"]))
+                tl["label"].append(dict(t=t, end=t + b["dur"] if "dur" in b else l1 + 0.15, text=b["label"],
+                                        **({"y": {"top": 380, "lower": 1380}[b["pos"]]} if "pos" in b else {})))
                 tl["sfx"].append((t, "typing"))
             if b.get("flash"): tl["flash"].append(t); tl["sfx"].append((t, "impact"))
             if b.get("lightning"): tl["lightning"].append(t); tl["sfx"].append((t, "zap"))
             if b.get("riser"): tl["sfx"].append((t, "riser"))
             for extra in b.get("sfx", []): tl["sfx"].append((t, extra))
-        for w in ws:  # the name: sound bite + real explosion + fire, every time
-            if norm(w["word"]) in names:
+        for j, w in enumerate(ws):  # every bite (a name, or a whole {bite group}): real explosion + fire
+            if w.get("bite") and (j == 0 or not ws[j - 1].get("bite")):
+                k = j
+                while k + 1 < len(ws) and ws[k + 1].get("bite"): k += 1
+                tl["boom"].append(w["start"] - 0.05); tl["sfx"].append((w["start"] - 0.05, "boom"))
+                tl["fire"].append((w["start"], ws[k]["end"] + 0.25))
+            elif not w.get("bite") and norm(w["word"]) in names:
                 tl["boom"].append(w["start"] - 0.05); tl["sfx"].append((w["start"] - 0.05, "boom"))
                 tl["fire"].append((w["start"], w["end"] + 0.25))
         # captions: 1-2 words, every word on its own onset
@@ -300,36 +306,32 @@ def draw_sticker(frame, s, t, points=None):
 
 
 def draw_label(frame, lab, t):
-    """Pink glow label: types on letter by letter, leaves by scattering its letters."""
+    """Pink glow label: types on letter by letter, leaves by scattering its letters. Long text wraps to two lines."""
     a, left = t - lab["t"], lab["end"] - t
-    text = lab["text"]; f = font(FONT_HEAVY, 96)
-    while ImageDraw.Draw(frame).textlength(text, font=f) > 960: f = font(FONT_HEAVY, f.size - 6)
-    n = min(len(text), int(a / 0.035) + 1)
+    text = lab["text"]; f = font(FONT_HEAVY, 96); meas = ImageDraw.Draw(frame)
+    lines = [text]
+    if meas.textlength(text, font=f) > 960:  # wrap at the space nearest the middle
+        sp = [i for i, c in enumerate(text) if c == " "]
+        if sp:
+            k = min(sp, key=lambda i: abs(i - len(text) / 2)); lines = [text[:k], text[k + 1:]]
+    while max(meas.textlength(l_, font=f) for l_ in lines) > 960: f = font(FONT_HEAVY, f.size - 6)
+    y_top = lab.get("y", 380) - (len(lines) - 1) * f.size * 0.55
+    chars = []   # (char, x, y) for every letter
+    for li, l_ in enumerate(lines):
+        x0 = 540 - meas.textlength(l_, font=f) / 2; y0 = y_top + li * f.size * 1.1
+        for i, ch in enumerate(l_): chars.append((ch, x0 + meas.textlength(l_[:i], font=f), y0))
+    n = min(len(chars), int(a / 0.035) + 1)
+    rnd = random.Random(hash(text) & 0xffff); pos = []
+    for ch, cx, cy in chars[:n]:
+        ang = rnd.uniform(0, 2 * math.pi)
+        if left < 0.22:
+            p = 1 - left / 0.22; cx += math.cos(ang) * 500 * p * p; cy += math.sin(ang) * 500 * p * p
+        pos.append((ch, cx, cy))
     layer = Image.new("RGBA", frame.size, (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
-    total = d.textlength(text, font=f); x0 = 540 - total / 2; y0 = 380
-    rnd = random.Random(hash(text) & 0xffff)
-    for i, ch in enumerate(text[:n]):
-        cx = x0 + d.textlength(text[:i], font=f); cy = y0
-        if left < 0.22:
-            p = 1 - left / 0.22; ang = rnd.uniform(0, 2 * math.pi)
-            cx += math.cos(ang) * 500 * p * p; cy += math.sin(ang) * 500 * p * p
-        d.text((cx, cy), ch, font=f, fill=(255, 70, 130, 255), stroke_width=12, stroke_fill=(255, 70, 130, 255))
-    glow = layer.filter(ImageFilter.GaussianBlur(16))
-    frame.alpha_composite(glow); frame.alpha_composite(glow)
+    for ch, cx, cy in pos: d.text((cx, cy), ch, font=f, fill=(255, 70, 130, 255), stroke_width=12, stroke_fill=(255, 70, 130, 255))
+    glow = layer.filter(ImageFilter.GaussianBlur(16)); frame.alpha_composite(glow); frame.alpha_composite(glow)
     d2 = ImageDraw.Draw(frame)
-    for i, ch in enumerate(text[:n]):
-        cx = x0 + d.textlength(text[:i], font=f); cy = y0
-        if left < 0.22:
-            p = 1 - left / 0.22; rnd2 = random.Random((hash(text) & 0xffff) + i); ang = rnd2.uniform(0, 2 * math.pi)
-        rnd_i = random.Random(hash(text) & 0xffff)
-    # crisp white letters on top (same scatter maths, recomputed)
-    rnd = random.Random(hash(text) & 0xffff)
-    for i, ch in enumerate(text[:n]):
-        cx = x0 + d.textlength(text[:i], font=f); cy = y0
-        if left < 0.22:
-            p = 1 - left / 0.22; ang = rnd.uniform(0, 2 * math.pi)
-            cx += math.cos(ang) * 500 * p * p; cy += math.sin(ang) * 500 * p * p
-        d2.text((cx, cy), ch, font=f, fill=(255, 255, 255, 255))
+    for ch, cx, cy in pos: d2.text((cx, cy), ch, font=f, fill=(255, 255, 255, 255))
 
 
 def bolt(frame, t0, t, seed):

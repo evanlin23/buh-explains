@@ -1,0 +1,364 @@
+{
+ "slug": "ep03-november",
+ "names": {
+  "Polarbear": {
+   "bite": ".cache/bites/november_full.wav",
+   "bite_full": ".cache/bites/november_full.wav",
+   "bite_src": "https://www.myinstants.com/media/sounds/november-2026-is-coming.mp3",
+   "bite_cut": [
+    2.15,
+    5.45
+   ],
+   "bite_full_src": "https://www.myinstants.com/media/sounds/november-2026-is-coming.mp3",
+   "bite_full_cut": [
+    2.15,
+    5.45
+   ],
+   "note": "the singing polar bear's hook, 'Remember November, 2026 is coming' (myinstants). Plays in place of each {bite group}."
+  }
+ },
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "images": {
+  "hero": {
+   "url": "https://i.kym-cdn.com/entries/icons/facebook/000/046/624/_polarbear2026_.jpg",
+   "points": {
+    "bear": [
+     0.5,
+     0.62,
+     0.14
+    ]
+   },
+   "crop": [
+    0.35,
+    0.35,
+    0.85,
+    0.95
+   ]
+  },
+  "original": {
+   "url": "https://i.kym-cdn.com/photos/images/newsfeed/002/666/497/f3f.jpg",
+   "points": {
+    "bear": [
+     0.78,
+     0.72,
+     0.13
+    ]
+   }
+  },
+  "sing": {
+   "url": "https://i.ytimg.com/vi/W71dTvlW824/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/W71dTvlW824/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=W71dTvlW824",
+   "crop": [
+    0.0,
+    0.04,
+    1.0,
+    0.8
+   ],
+   "points": {
+    "mouth": [
+     0.45,
+     0.55,
+     0.12
+    ],
+    "face": [
+     0.45,
+     0.42,
+     0.3
+    ]
+   }
+  },
+  "apoc": {
+   "url": "https://wallpapercave.com/wp/wp9096456.jpg",
+   "points": {
+    "city": [
+     0.5,
+     0.4,
+     0.25
+    ]
+   }
+  },
+  "album": {
+   "url": "https://i2.wp.com/www.heritagechristiancollege.com/wp-content/uploads/2019/05/free-vinyl-record-template-of-vinyl-template-by-reza-chunwookiee-of-free-vinyl-record-template.jpg",
+   "points": {
+    "label": [
+     0.5,
+     0.5,
+     0.14
+    ]
+   }
+  },
+  "calendar": {
+   "url": "https://mondaymandala.com/wp-content/uploads/November-2026-Calendar-Printable-Business-2-Landscape-v2.jpg",
+   "points": {
+    "title": [
+     0.5,
+     0.09,
+     0.4
+    ]
+   }
+  },
+  "empty": {
+   "url": "https://wallpaperaccess.com/full/2726468.jpg",
+   "points": {
+    "room": [
+     0.5,
+     0.45,
+     0.2
+    ]
+   }
+  }
+ },
+ "sources": {
+  "origin": "Know Your Meme, 'Remember November 2026 Is Coming': first-discovered upload by TikTok @gmd_arahis, 2023-03-27, caption '\u044d\u0442\u043e \u043d\u043e\u044f\u0431\u0440\u044c\u0441\u043a\u0438\u0439 \u043c\u0435\u043c \u0438\u0437 2026, \u0432\u044b \u043f\u043e\u043a\u0430 \u043d\u0435 \u043f\u043e\u0439\u043c\u0435\u0442\u0435' ('this is a November meme from 2026, you won't understand yet'). https://knowyourmeme.com/memes/remember-november-2026-is-coming",
+  "singing": "KYM: @bigbakdiskk28 posted the AI singing-bear video on 2026-08-28; calendar edits spread in September 2026 (remembernovember2026.org timeline).",
+  "gta6_not_used": "GTA 6's Nov 19, 2026 date was left out: newest confirmation found is from May 2026."
+ },
+ "lines": [
+  {
+   "text": "What actually happens in November 2026?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "band",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "November",
+     "sticker": "arrow",
+     "target": "bear",
+     "from": -30,
+     "dur": 0.9
+    },
+    {
+     "on": "2026?",
+     "sticker": "ellipse",
+     "target": "bear"
+    },
+    {
+     "on": "2026?",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Remember November 2026 is coming} bear we all know and love has been warning us for months.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "sing",
+     "enter": "zoomblur",
+     "fit": "blurfill"
+    },
+    {
+     "on": "bear",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.8
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.9,
+     "sfx": [
+      "rizz"
+     ]
+    },
+    {
+     "on": "warning",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.8
+    },
+    {
+     "on": "months.",
+     "sticker": "arrow",
+     "target": "mouth",
+     "from": -20
+    }
+   ]
+  },
+  {
+   "text": "The end of the world? A secret album? Nobody says.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "apoc",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "world?",
+     "sticker": "ellipse",
+     "target": "city",
+     "dur": 0.7
+    },
+    {
+     "on": "secret",
+     "img": "album",
+     "fit": "white",
+     "enter": "spin"
+    },
+    {
+     "on": "album?",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      600
+     ]
+    },
+    {
+     "on": "Nobody",
+     "img": "hero",
+     "fit": "band",
+     "enter": "cut",
+     "sfx": [
+      "boing"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In August, a TikToker made it sing, and the calendar edits took over.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "sing",
+     "enter": "whip",
+     "fit": "blurfill"
+    },
+    {
+     "on": "August,",
+     "label": "AUGUST 2026",
+     "dur": 1.1
+    },
+    {
+     "on": "sing,",
+     "sticker": "arrow",
+     "target": "mouth",
+     "from": -150,
+     "dur": 0.7
+    },
+    {
+     "on": "calendar",
+     "img": "calendar",
+     "fit": "white",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "edits",
+     "sticker": "ellipse",
+     "target": "title"
+    }
+   ]
+  },
+  {
+   "text": "But the bear is older than the song.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "lightning": true
+    },
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "band",
+     "enter": "cut",
+     "grade": "dark",
+     "sfx": [
+      "glitch"
+     ]
+    },
+    {
+     "on": "older",
+     "sticker": "arrow",
+     "target": "bear",
+     "from": -30
+    }
+   ]
+  },
+  {
+   "text": "It was posted in March 2023, captioned: a November meme from 2026 you won't understand yet.",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": 0,
+     "img": "original",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "March",
+     "label": "MARCH 2023"
+    },
+    {
+     "on": "2023,",
+     "sticker": "ellipse",
+     "target": "bear",
+     "dur": 0.9
+    },
+    {
+     "on": "meme",
+     "label": "\"YOU WON'T UNDERSTAND YET\"",
+     "pos": "lower"
+    }
+   ],
+   "pause_before": 0.25
+  },
+  {
+   "text": "So in November... nothing happens.",
+   "beats": [
+    {
+     "on": "nothing",
+     "img": "empty",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "happens.",
+     "sticker": "ellipse",
+     "target": "room",
+     "sfx": [
+      "bong"
+     ]
+    }
+   ]
+  }
+ ]
+}
