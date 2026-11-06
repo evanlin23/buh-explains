@@ -23,6 +23,9 @@ buhexplains/make.sh <slug> --preview   # half-size render, no voicecheck
 ## Media policy
 `.cache/` (models, stock clips, myinstants sounds, music, bites, pictures, raw TTS) is never committed: the repo is public and these are other people's files. Every one has its URL logged (`episode.json`, `sfx_sources.txt`, `render.STOCK`), and `fetch_assets.py <slug>` rebuilds it. Renders (`out/`) aren't committed either.
 
+## Operations
+`docs/operations.md`: the daily schedule (2 uploads and 2 productions a day), the producer session and its scheduled tasks, the cron-job.org jobs, secrets and variables, how to pause or reorder, and the known failure modes. Read it before changing any of them.
+
 ## Uploads
 `render.yml` (film artifact) and `upload.yml` exist but upload nothing until the owner finishes `docs/youtube-setup.md`, including the repo variable `YT_ENABLED=true`.
 
