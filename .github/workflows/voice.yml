@@ -4,12 +4,20 @@
 name: voice
 on:
   push:
-    paths: ["buhexplains/episodes/**/episode.json", "buhexplains/pipeline/voice.py", ".github/workflows/voice.yml"]
+    paths:
+      - "buhexplains/episodes/**/episode.json"
+      - "buhexplains/pipeline/voice.py"
+      - ".github/workflows/voice.yml"
   workflow_dispatch:
     inputs:
-      slug: {description: "episode slug (blank = every Gemini episode)", default: ""}
-permissions: {contents: read}
-concurrency: {group: voice-${{ github.ref }}, cancel-in-progress: false}
+      slug:
+        description: "episode slug (blank = every Gemini episode)"
+        default: ""
+permissions:
+  contents: read
+concurrency:
+  group: voice-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   voice:
     runs-on: ubuntu-latest
@@ -17,13 +25,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.12"}
+        with:
+          python-version: "3.12"
       - uses: actions/cache@v4
-        with: {path: .cache/models/whisper, key: whisper-base-en-v1}
+        with:
+          path: .cache/models/whisper
+          key: whisper-base-en-v1
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
       - run: pip install -q numpy soundfile librosa faster-whisper
       - name: narrate
-        env: {GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", VOICE_ONLY: "1", SLUG: "${{ inputs.slug }}"}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VOICE_ONLY: "1"
+          SLUG: ${{ inputs.slug }}
         run: |
           slugs="$SLUG"
           if [ -z "$slugs" ]; then
