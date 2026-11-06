@@ -1,0 +1,68 @@
+{
+ "slug": "ep14-biberty",
+ "images": {
+  "hero": {
+   "used": "https://i.ytimg.com/vi/c5X7YYZmhS4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=c5X7YYZmhS4",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "ac": {
+   "used": "https://i.ytimg.com/vi/7w7kSMJ8S30/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=7w7kSMJ8S30",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "windshield": {
+   "used": "https://i.ytimg.com/vi/P1MjegzHFgI/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=P1MjegzHFgI",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "diner": {
+   "used": "https://i.ytimg.com/vi/CA3oAoUdnA4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=CA3oAoUdnA4",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "actor": {
+   "used": "https://i.ytimg.com/vi/W-FbVT4ddZQ/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=W-FbVT4ddZQ",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "bungle": {
+   "used": "https://i.ytimg.com/vi/5Ji6t2rHaiM/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=5Ji6t2rHaiM",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "poster": {
+   "used": "https://i.ytimg.com/vi/pISGBqHRva8/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=pISGBqHRva8",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "protest": {
+   "used": "https://i.ytimg.com/vi/SPZAMYFOLwM/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=SPZAMYFOLwM",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "pool": {
+   "used": "https://i.ytimg.com/vi/gRluOgYBRRA/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=gRluOgYBRRA",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "creature": {
+   "used": "https://i.ytimg.com/vi/WQyWTivri1g/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=WQyWTivri1g",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "henson": {
+   "used": "https://i.ytimg.com/vi/LOBn86_DAZU/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=LOBn86_DAZU",
+   "rights": "third-party; shown under narration as commentary"
+  }
+ },
+ "stock": {
+  "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
+  "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
+ },
+ "sfx": "synthesized",
+ "name_bites": {}
+}
