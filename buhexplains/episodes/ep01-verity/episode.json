@@ -1,314 +1,482 @@
 {
  "slug": "ep01-verity",
- "names": [
-  "Verity"
- ],
+ "names": {
+  "Verity": {
+   "bite": null,
+   "note": "owner to pick: song bite / ThatMob movie bite / synthetic. Placeholder = crushed second voice."
+  }
+ },
  "voice": {
   "engine": "kokoro",
   "voice": "am_michael",
-  "speed": 1.32,
-  "gap": 0.04
+  "speed": 1.34,
+  "gap": 0.03
+ },
+ "images": {
+  "verity_box": {
+   "url": "https://i.ytimg.com/vi/etrNRCzVzWc/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/etrNRCzVzWc/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=etrNRCzVzWc"
+  },
+  "smiley_box": {
+   "url": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/vc5BKrz0JaE/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE"
+  },
+  "verity_chainsaw": {
+   "url": "https://i.ytimg.com/vi/neqOGUI1WNc/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/neqOGUI1WNc/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=neqOGUI1WNc",
+   "focus": [
+    0.45,
+    0.5
+   ]
+  },
+  "verity_scary": {
+   "url": "https://i.ytimg.com/vi/nrMSqvQvBsw/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/nrMSqvQvBsw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=nrMSqvQvBsw"
+  },
+  "song": {
+   "url": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/tVlKLpxyCBY/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=tVlKLpxyCBY"
+  },
+  "caine_stage": {
+   "url": "https://static.wikia.nocookie.net/tadc/images/a/a0/Caine.png/revision/latest?cb=20231022122929&path-prefix=pl",
+   "focus": [
+    0.5,
+    0.35
+   ]
+  },
+  "caine": {
+   "url": "https://static.wikitide.net/greatcharacterswiki/thumb/9/96/Caine_render.png/450px-Caine_render.png",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "verity_film": {
+   "url": "https://www.my9jarocks.bz/wp-content/uploads/2026/10/Verity_Poster.jpg",
+   "focus": [
+    0.5,
+    0.35
+   ]
+  },
+  "kid_yell": {
+   "url": "https://i.imgflip.com/1wuibi.jpg"
+  },
+  "clippy": {
+   "url": "https://upload.wikimedia.org/wikipedia/en/d/db/Clippy-letter.PNG",
+   "page": "https://en.wikipedia.org/wiki/Office_Assistant"
+  },
+  "thatmob_movie": {
+   "url": "https://i.ytimg.com/vi/f6f3PhauXyg/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/f6f3PhauXyg/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=f6f3PhauXyg"
+  },
+  "thatmob_2": {
+   "url": "https://i.ytimg.com/vi/g3TVNBA3Jzw/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/g3TVNBA3Jzw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=g3TVNBA3Jzw"
+  },
+  "minecraft": {
+   "url": "https://en.shiftdelete.net/wp-content/uploads/2023/02/Minecraft.jpeg"
+  }
  },
  "lines": [
   {
    "text": "Do you know Verity isn't from The Amazing Digital Circus?",
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "plate",
-     "plate": "black"
+     "img": "verity_box",
+     "fx": "fire",
+     "enter": "zoomblur",
+     "fit": "band"
     },
     {
      "on": 0,
-     "type": "image",
-     "art": "smiley",
-     "enter": "scale_in"
+     "sticker": "arrow",
+     "at": [
+      560,
+      1350
+     ],
+     "angle": -30
     },
     {
-     "on": "Verity",
-     "type": "plate",
-     "plate": "fire"
+     "on": 0,
+     "sticker": "ellipse",
+     "at": [
+      540,
+      860
+     ],
+     "size": [
+      620,
+      520
+     ]
     },
     {
      "on": "isn't",
-     "type": "sticker",
-     "art": "red_x",
-     "pos": [
+     "sticker": "warning",
+     "at": [
       540,
-      900
-     ],
-     "size": 520,
-     "dur": 0.6
+      820
+     ]
     },
     {
      "on": "Amazing",
-     "type": "image",
-     "art": "circus_tent",
-     "enter": "slam"
+     "img": "caine_stage",
+     "enter": "whip"
     },
     {
      "on": "Circus?",
-     "type": "sticker",
-     "art": "red_x",
-     "pos": [
+     "sticker": "ellipse",
+     "at": [
       540,
-      900
+      800
      ],
-     "size": 760,
-     "dur": 0.9
+     "size": [
+      560,
+      700
+     ]
+    },
+    {
+     "on": "Circus?",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
     }
    ]
   },
   {
    "text": "You see, the Verity we all know and love is the yellow smiley every kid yells at.",
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "image",
-     "art": "smiley",
-     "enter": "push"
+     "img": "verity_scary",
+     "fx": "fire",
+     "enter": "zoomblur",
+     "fit": "band"
     },
     {
      "on": "love",
-     "type": "sticker",
-     "art": "heart",
-     "pos": [
-      800,
-      560
-     ],
-     "size": 300,
-     "dur": 0.8
+     "sticker": "heart",
+     "dur": 1.0
     },
     {
      "on": "yellow",
-     "type": "image",
-     "art": "smiley_grid",
-     "enter": "scale_in"
+     "img": "smiley_box",
+     "enter": "whip",
+     "fit": "band"
+    },
+    {
+     "on": "smiley",
+     "sticker": "ellipse",
+     "at": [
+      540,
+      960
+     ],
+     "size": [
+      700,
+      420
+     ]
+    },
+    {
+     "on": "kid",
+     "img": "kid_yell",
+     "enter": "cut"
     },
     {
      "on": "yells",
-     "type": "sticker",
-     "art": "interrobang",
-     "pos": [
+     "sticker": "interrobang",
+     "at": [
       780,
-      560
-     ],
-     "size": 320,
-     "dur": 0.9
+      620
+     ]
+    },
+    {
+     "on": "yells",
+     "lightning": true
     }
    ]
   },
   {
    "text": "It looks like Caine. It isn't Caine.",
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "plate",
-     "plate": "speedlines"
+     "img": "caine",
+     "enter": "zoomblur"
     },
     {
-     "on": "looks",
-     "type": "image",
-     "art": "tophat",
-     "enter": "slam"
+     "on": "Caine.",
+     "sticker": "arrow",
+     "at": [
+      300,
+      1300
+     ],
+     "angle": -50
     },
     {
      "on": "isn't",
-     "type": "sticker",
-     "art": "red_x",
-     "pos": [
+     "sticker": "x",
+     "at": [
       540,
       900
-     ],
-     "size": 700,
-     "dur": 1.0
+     ]
+    },
+    {
+     "on": "isn't",
+     "flash": true
     }
    ]
   },
   {
    "text": "It's not from the Anne Hathaway movie either.",
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "plate",
-     "plate": "black"
-    },
-    {
-     "on": 0,
-     "type": "image",
-     "art": "film_reel",
-     "enter": "scale_in"
+     "img": "verity_film",
+     "enter": "whip"
     },
     {
      "on": "not",
-     "type": "sticker",
-     "art": "warning",
-     "pos": [
-      790,
-      520
-     ],
-     "size": 300,
-     "dur": 0.8
+     "sticker": "warning",
+     "at": [
+      540,
+      780
+     ]
     },
     {
      "on": "movie",
-     "type": "sticker",
-     "art": "red_x",
-     "pos": [
+     "sticker": "ellipse",
+     "at": [
+      540,
+      1150
+     ],
+     "size": [
+      640,
+      380
+     ]
+    },
+    {
+     "on": "either.",
+     "sticker": "x",
+     "at": [
       540,
       900
-     ],
-     "size": 700,
-     "dur": 1.0
+     ]
     }
    ]
   },
   {
    "text": "Verity started out as a friendly AI helper. Like Clippy.",
-   "events": [
+   "beats": [
     {
-     "on": "started",
-     "type": "image",
-     "art": "smiley_wave",
-     "enter": "scale_in"
+     "on": 0,
+     "img": "verity_box",
+     "fx": "fire",
+     "enter": "zoomblur",
+     "fit": "band"
     },
     {
      "on": "AI",
-     "type": "label",
-     "text": "AI ASSISTANT",
-     "pos": "lower"
+     "label": "AI ASSISTANT"
+    },
+    {
+     "on": "helper.",
+     "sticker": "heart",
+     "dur": 0.8
+    },
+    {
+     "on": "Like",
+     "img": "clippy",
+     "fit": "band",
+     "enter": "spin"
     },
     {
      "on": "Clippy.",
-     "type": "image",
-     "art": "paperclip",
-     "enter": "slam"
+     "sticker": "arrow",
+     "at": [
+      760,
+      1250
+     ],
+     "angle": -140
     }
    ]
   },
   {
    "text": "Until it isn't. It grows way too tall, keeps smiling, and chases you through the dark.",
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "flash"
+     "flash": true
     },
     {
      "on": 0,
-     "type": "plate",
-     "plate": "vignette"
+     "lightning": true
     },
     {
-     "on": "It",
-     "type": "image",
-     "art": "tall_smiley",
-     "enter": "push"
+     "on": 0,
+     "img": "verity_chainsaw",
+     "enter": "zoomblur",
+     "grade": "red"
+    },
+    {
+     "on": "tall,",
+     "img": "verity_scary",
+     "enter": "cut",
+     "zoom": 1.5,
+     "fit": "band"
     },
     {
      "on": "smiling,",
-     "type": "punch"
+     "sticker": "ellipse",
+     "at": [
+      540,
+      900
+     ],
+     "size": [
+      520,
+      520
+     ]
     },
     {
      "on": "chases",
-     "type": "plate",
-     "plate": "speedlines"
+     "img": "verity_chainsaw",
+     "enter": "whip",
+     "grade": "dark"
     },
     {
      "on": "dark.",
-     "type": "plate",
-     "plate": "black"
+     "lightning": true
     }
    ]
   },
   {
-   "text": "Then a July song, It's me, it's Verity, hit fifty seven million views.",
-   "events": [
+   "text": "Then a July song, {It's me, it's Verity,} hit fifty seven million views.",
+   "beats": [
     {
      "on": 0,
-     "type": "plate",
-     "plate": "fire"
+     "img": "song",
+     "fx": "fire",
+     "enter": "zoomblur",
+     "fit": "band"
     },
     {
      "on": "July",
-     "type": "label",
-     "text": "JULY 2026",
-     "pos": "top"
-    },
-    {
-     "on": "song,",
-     "type": "image",
-     "art": "song_card",
-     "enter": "slam"
+     "label": "JULY 2026"
     },
     {
      "on": "fifty",
-     "type": "label",
-     "text": "57,000,000 VIEWS",
-     "pos": "top",
-     "note": "re-read the real count on render day"
+     "label": "57,000,000 VIEWS",
+     "note": "re-read the count on render day"
     },
     {
      "on": "views.",
-     "type": "image",
-     "art": "smiley_flood",
-     "enter": "scale_in"
+     "sticker": "number",
+     "text": "57M",
+     "at": [
+      540,
+      1250
+     ]
     }
    ]
   },
   {
    "text": "But Verity was born in a Minecraft horror series, by a YouTuber called ThatMob.",
    "pause_before": 0.35,
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "flash"
+     "flash": true
     },
     {
      "on": 0,
-     "type": "plate",
-     "plate": "black"
+     "lightning": true
+    },
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": "Verity",
+     "img": "thatmob_movie",
+     "fx": "fire",
+     "enter": "zoomblur",
+     "fit": "band"
     },
     {
      "on": "Minecraft",
-     "type": "image",
-     "art": "grass_block",
-     "enter": "slam"
+     "img": "minecraft",
+     "enter": "spin"
     },
     {
      "on": "Minecraft",
-     "type": "plate",
-     "plate": "fire"
+     "sticker": "ellipse",
+     "at": [
+      540,
+      900
+     ],
+     "size": [
+      700,
+      600
+     ]
     },
     {
      "on": "horror",
-     "type": "plate",
-     "plate": "vignette"
+     "img": "thatmob_movie",
+     "enter": "whip",
+     "grade": "dark",
+     "fit": "band"
     },
     {
      "on": "ThatMob.",
-     "type": "image",
-     "art": "name_card",
-     "enter": "slam"
+     "img": "thatmob_2",
+     "enter": "zoomblur",
+     "fit": "band"
+    },
+    {
+     "on": "ThatMob.",
+     "label": "THATMOB"
+    },
+    {
+     "on": "ThatMob.",
+     "sticker": "arrow",
+     "at": [
+      300,
+      1300
+     ],
+     "angle": -40
     }
    ]
   },
   {
    "text": "This makes Verity a Minecraft character.",
-   "events": [
+   "beats": [
     {
      "on": 0,
-     "type": "plate",
-     "plate": "fire"
-    },
-    {
-     "on": 0,
-     "type": "image",
-     "art": "smiley_on_block",
-     "enter": "slam"
+     "img": "thatmob_movie",
+     "fx": "fire",
+     "enter": "cut",
+     "fit": "band"
     },
     {
      "on": "Minecraft",
-     "type": "punch"
+     "img": "minecraft",
+     "fit": "spin_in",
+     "enter": "spin"
+    },
+    {
+     "on": "character.",
+     "sticker": "interrobang",
+     "at": [
+      780,
+      600
+     ]
     }
    ]
   }

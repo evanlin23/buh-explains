@@ -111,40 +111,88 @@ def fill(times, tokens, dur):
     return out
 
 
+def bite_audio(name, cfg, kokoro):
+    """The meme's own sound bite (owner, 2026-11-06). cfg["bite"] = path to the real clip once chosen.
+    Until then: a placeholder, a second voice saying the name, pitched down and crushed so it reads as "not the narrator"."""
+    path = cfg.get("bite")
+    if path:
+        a, sr = sf.read(os.path.join(REPO, path), dtype="float32", always_2d=True)
+        a = a.mean(1)
+        return np.interp(np.arange(0, len(a), sr / SR), np.arange(len(a)), a).astype(np.float32)
+    a, _ = kokoro.create(name + "!", voice="am_onyx", speed=1.15, lang="en-us")
+    a = trim(np.asarray(a, np.float32))
+    a = np.interp(np.arange(0, len(a), 0.9), np.arange(len(a)), a).astype(np.float32)  # a bit lower
+    a = np.tanh(a * 4.0) * 0.8                                                            # crushed
+    echo = np.zeros(len(a) + int(0.06 * SR), np.float32); echo[:len(a)] += a; echo[int(0.06 * SR):] += a * 0.35
+    return echo
+
+
 def main(slug):
+    from kokoro_onnx import Kokoro
+    from faster_whisper import WhisperModel
     ep = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))
     v = ep["voice"]
+    names = {norm(n): (n, cfg) for n, cfg in ep.get("names", {}).items()}
     od = os.path.join(REPO, "out", slug)
     os.makedirs(od, exist_ok=True)
-    texts = [l["text"] for l in ep["lines"]]
-    clips = synth_kokoro(texts, v["voice"], v["speed"])
-    from faster_whisper import WhisperModel
+    k = Kokoro(os.path.join(MODELS, "kokoro-v1.0.onnx"), os.path.join(MODELS, "voices-v1.0.bin"))
     model = WhisperModel("base.en", device="cpu", compute_type="int8", download_root=os.path.join(MODELS, "whisper"))
+    bites = {key: bite_audio(n, cfg, k) for key, (n, cfg) in names.items()}
     parts, words, t, report = [], [], 0.0, []
-    for li, (line, clip) in enumerate(zip(ep["lines"], clips)):
+    seg_n = 0
+    for li, line in enumerate(ep["lines"]):
         gap = line.get("pause_before", v["gap"]) if li else 0.0
-        parts.append(np.zeros(int(gap * SR), np.float32))
-        t += gap
-        cp = os.path.join(od, f"line{li:02d}.wav")
-        sf.write(cp, clip, SR)
+        parts.append(np.zeros(int(gap * SR), np.float32)); t += gap
         tokens = line["text"].split()
-        times, heard = word_times(cp, tokens, model)
-        missing = [tokens[i] for i, x in enumerate(times) if x is None]
-        coverage = 1 - len(missing) / len(tokens)
-        report.append((li, round(coverage, 2), missing, " ".join(heard)))
-        dur = len(clip) / SR
-        for i, (w, (s, e)) in enumerate(zip(tokens, fill(times, tokens, dur))):
-            words.append({"line": li, "i": i, "word": w, "start": round(t + s, 3), "end": round(t + min(e, dur), 3)})
-        parts.append(clip)
-        t += dur
-    voice = np.concatenate(parts)
-    sf.write(os.path.join(od, "voice.wav"), voice, SR)
+        segs, cur, grp = [], [], None
+        for i, tok in enumerate(tokens):  # speech runs, split around the meme's name or a {bite group}
+            if tok.startswith("{"):
+                grp = []
+            if grp is not None:
+                grp.append(i)
+                if tok.rstrip(",.?!").endswith("}"):
+                    if cur: segs.append(("say", cur)); cur = []
+                    segs.append(("bite", grp)); grp = None
+                continue
+            if norm(tok) in names:
+                if cur: segs.append(("say", cur)); cur = []
+                segs.append(("bite", [i]))
+            else:
+                cur.append(i)
+        if cur: segs.append(("say", cur))
+        tokens = [tok.replace("{", "").replace("}", "") for tok in tokens]
+        matched = total = 0; heard_all = []
+        for kind, idx in segs:
+            if kind == "bite":
+                key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
+                a = bites[key]
+                a = np.concatenate([np.zeros(int(0.02 * SR), np.float32), a, np.zeros(int(0.02 * SR), np.float32)])
+                span = (len(a) / SR - 0.04) / len(idx)
+                for j, i in enumerate(idx):  # the group's words share the bite's time, for captions
+                    words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + 0.02 + j * span, 3),
+                                  "end": round(t + 0.02 + (j + 1) * span, 3), "bite": True})
+                heard_all.append("[BITE]")
+            else:
+                sub = [tokens[i] for i in idx]
+                a, _ = k.create(" ".join(sub), voice=v["voice"], speed=v["speed"], lang="en-us")
+                a = trim(np.asarray(a, np.float32), lead=0.09 if idx[0] == 0 else 0.03)
+                cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1
+                sf.write(cp, a, SR)
+                times, heard = word_times(cp, sub, model)
+                matched += sum(1 for x in times if x); total += len(sub); heard_all += heard
+                dur = len(a) / SR
+                for i, (s_, e_) in zip(idx, fill(times, sub, dur)):
+                    words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + s_, 3), "end": round(t + min(e_, dur), 3)})
+            parts.append(a); t += len(a) / SR
+        cov = matched / total if total else 1.0
+        report.append((li, round(cov, 2), " ".join(heard_all)))
+    words.sort(key=lambda w: (w["line"], w["i"]))
+    sf.write(os.path.join(od, "voice.wav"), np.concatenate(parts), SR)
     json.dump({"duration": round(t, 3), "words": words}, open(os.path.join(od, "words.json"), "w"), indent=1)
-    for li, cov, miss, heard in report:
-        flag = "" if cov >= 0.6 else "   <-- FAIL: line not voiced cleanly"
-        print(f"line {li}: {cov:.0%} matched {miss or ''}{flag}\n   heard: {heard}")
+    for li, cov, heard in report:
+        print(f"line {li}: {cov:.0%} of spoken words matched{'   <-- FAIL' if cov < 0.6 else ''}\n   heard: {heard}")
     print(f"voice: {t:.2f} s, {len(words)} words, {len(words) / t:.2f} words/s")
-    if any(cov < 0.6 for _, cov, _, _ in report):
+    if any(cov < 0.6 for _, cov, _ in report):
         sys.exit(1)
 
 

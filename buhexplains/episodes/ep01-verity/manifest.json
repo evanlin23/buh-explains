@@ -1,0 +1,79 @@
+{
+ "slug": "ep01-verity",
+ "images": {
+  "verity_box": {
+   "used": "https://i.ytimg.com/vi/etrNRCzVzWc/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=etrNRCzVzWc",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "smiley_box": {
+   "used": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "verity_chainsaw": {
+   "used": "https://i.ytimg.com/vi/neqOGUI1WNc/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=neqOGUI1WNc",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "verity_scary": {
+   "used": "https://i.ytimg.com/vi/nrMSqvQvBsw/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=nrMSqvQvBsw",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "song": {
+   "used": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=tVlKLpxyCBY",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "caine_stage": {
+   "used": "https://static.wikia.nocookie.net/tadc/images/a/a0/Caine.png/revision/latest?cb=20231022122929&path-prefix=pl",
+   "page": "https://static.wikia.nocookie.net/tadc/images/a/a0/Caine.png/revision/latest?cb=20231022122929&path-prefix=pl",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "caine": {
+   "used": "https://static.wikitide.net/greatcharacterswiki/thumb/9/96/Caine_render.png/450px-Caine_render.png",
+   "page": "https://static.wikitide.net/greatcharacterswiki/thumb/9/96/Caine_render.png/450px-Caine_render.png",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "verity_film": {
+   "used": "https://www.my9jarocks.bz/wp-content/uploads/2026/10/Verity_Poster.jpg",
+   "page": "https://www.my9jarocks.bz/wp-content/uploads/2026/10/Verity_Poster.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "kid_yell": {
+   "used": "https://i.imgflip.com/1wuibi.jpg",
+   "page": "https://i.imgflip.com/1wuibi.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "clippy": {
+   "used": "https://upload.wikimedia.org/wikipedia/en/d/db/Clippy-letter.PNG",
+   "page": "https://en.wikipedia.org/wiki/Office_Assistant",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "thatmob_movie": {
+   "used": "https://i.ytimg.com/vi/f6f3PhauXyg/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=f6f3PhauXyg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "thatmob_2": {
+   "used": "https://i.ytimg.com/vi/g3TVNBA3Jzw/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=g3TVNBA3Jzw",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "minecraft": {
+   "used": "https://en.shiftdelete.net/wp-content/uploads/2023/02/Minecraft.jpeg",
+   "page": "https://en.shiftdelete.net/wp-content/uploads/2023/02/Minecraft.jpeg",
+   "rights": "third-party; shown under narration as commentary"
+  }
+ },
+ "stock": {
+  "fire": "https://mixkit.co (Mixkit free licence) 12318-720.mp4",
+  "fire2": "https://mixkit.co (Mixkit free licence) 1242-720.mp4",
+  "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4"
+ },
+ "sfx": "all synthesized in render.py",
+ "name_bites": {
+  "Verity": "placeholder (synthetic)"
+ }
+}

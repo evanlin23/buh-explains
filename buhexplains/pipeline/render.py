@@ -1,223 +1,460 @@
-"""Render a BuhExplains Short from episode.json + out/<slug>/words.json (made by voice.py).
+"""Render a BuhExplains Short: real pictures, edited over the top.
 
   python buhexplains/pipeline/render.py ep01-verity [--preview]
 
-Writes out/<slug>/<slug>.mp4 (1080x1920, 30 fps; --preview: 540x960) and prints the pacing stats that
-PLAYBOOK.md section 6 gates on. Audio = narration + synthesized SFX only (the song is added at upload).
+Inputs: episodes/<slug>/episode.json (beats), out/<slug>/words.json + voice.wav (voice.py).
+Pictures are downloaded from the URLs in episode.json into .cache/img (never committed; sources go in the
+manifest). Fire/explosion footage: Mixkit free licence clips in .cache/stock. All SFX are synthesized here.
+The look is measured from the original Tung Short (reference/TUNG_BREAKDOWN.md): full-bleed pictures that
+never sit still, real fire over the picture, a real explosion on every name bite, live stickers, typed
+labels, lightning, the whole frame shaking (captions too), loud flat master.
 """
-import json, math, os, re, subprocess, sys
+import hashlib, io, json, math, os, random, re, subprocess, sys, urllib.request
 import numpy as np
 import soundfile as sf
-from PIL import Image, ImageDraw, ImageFilter
-
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import art
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.path.dirname(ROOT)
+CACHE = os.path.join(REPO, ".cache")
 W, H, FPS, SR = 1080, 1920, 30, 48000
-IMG_CENTER = (540, 880)
-CAPTION_Y = 1270
-LABEL_Y = {"top": 360, "lower": 1420}
+FONT_CAP = os.path.join(ROOT, "fonts", "schibsted-grotesk", "SchibstedGrotesk-Bold.ttf")
+FONT_HEAVY = os.path.join(ROOT, "fonts", "archivo-black", "ArchivoBlack-Regular.ttf")
+UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
+RED = (226, 20, 20, 255)
+STOCK = {"fire": ("12318-720.mp4", 1.0, 4.0), "fire2": ("1242-720.mp4", 1.0, 4.0), "boom": ("38818-720.mp4", 0.3, 1.2)}
 
 
 def norm(w):
     return re.sub(r"[^a-z0-9]", "", w.lower())
 
 
+def font(path, px, _c={}):
+    if (path, px) not in _c: _c[(path, px)] = ImageFont.truetype(path, px)
+    return _c[(path, px)]
+
+
+# ------------------------------------------------------------------ media
+def fetch_image(spec):
+    os.makedirs(os.path.join(CACHE, "img"), exist_ok=True)
+    for u in [spec["url"]] + ([spec["fallback"]] if spec.get("fallback") else []):
+        p = os.path.join(CACHE, "img", hashlib.sha1(u.encode()).hexdigest()[:16])
+        if not os.path.exists(p):
+            try:
+                data = urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=20).read()
+                Image.open(io.BytesIO(data)).load()
+                open(p, "wb").write(data)
+            except Exception as e:
+                print("  image failed:", u, e); continue
+        im = Image.open(p).convert("RGB")
+        if "ytimg" in u:  # crop YouTube's letterbox bars off hqdefault
+            a = np.asarray(im).mean((1, 2)); rows = np.where(a > 12)[0]
+            if len(rows): im = im.crop((0, rows[0], im.width, rows[-1] + 1))
+        return im, u
+    raise SystemExit(f"no image for {spec}")
+
+
+def stock_frames(key, size=(540, 960)):
+    """Decode a stock clip once into a list of RGB arrays, centre-cropped to 9:16."""
+    f, t0, dur = STOCK[key]
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(t0), "-t", str(dur), "-i", os.path.join(CACHE, "stock", f),
+                          "-vf", f"fps={FPS},crop=ih*9/16:ih,scale={size[0]}:{size[1]}", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+                         capture_output=True, check=True).stdout
+    return np.frombuffer(raw, np.uint8).reshape(-1, size[1], size[0], 3)
+
+
+_YY, _XX = np.mgrid[0:H, 0:W].astype(np.float32)
+EDGE = np.clip(np.hypot((_XX - W / 2) / (W * 0.42), (_YY - H * 0.47) / (H * 0.30)), 0, 1)[..., None] ** 1.6  # 0 centre, 1 edges
+FIRE_MASK = 0.28 + 0.72 * EDGE
+
+
+def screen(base, over, amount=1.0):
+    """Screen blend (how fire footage on black sits on top of a picture). Arrays are float 0..1."""
+    return 1 - (1 - base) * (1 - over * amount)
+
+
 # ------------------------------------------------------------------ timeline
 def build(ep, words):
     by_line = {}
-    for w in words:
-        by_line.setdefault(w["line"], []).append(w)
-    names = {norm(n) for n in ep.get("names", [])}
-    tl = {k: [] for k in ("plate", "image", "sticker", "label", "flash", "stinger", "punch", "caption", "sfx")}
+    for w in words: by_line.setdefault(w["line"], []).append(w)
+    names = {norm(n) for n in ep.get("names", {})}
+    tl = {k: [] for k in ("img", "sticker", "label", "flash", "lightning", "boom", "caption", "sfx", "fire")}
     for li, line in enumerate(ep["lines"]):
         ws = by_line[li]
-        line_start, line_end = ws[0]["start"] - 0.04, ws[-1]["end"]
+        l0, l1 = ws[0]["start"] - 0.03, ws[-1]["end"]
 
         def at(on):
-            if isinstance(on, int):
-                return line_start if on == 0 else ws[on]["start"]
+            if on == 0: return max(0.0, l0)
+            if isinstance(on, int): return ws[on]["start"]
             for w in ws:
-                if w["word"] == on or norm(w["word"]) == norm(on):
-                    return w["start"]
-            raise SystemExit(f"line {li}: no word {on!r} in {line['text']!r}")
+                if w["word"] == on or norm(w["word"]) == norm(on): return w["start"]
+            raise SystemExit(f"line {li}: no word {on!r}")
 
-        for ev in line.get("events", []):
-            t = max(0.0, at(ev["on"]))
-            kind = ev["type"]
-            if kind == "plate": tl["plate"].append((t, ev["plate"]))
-            elif kind == "image":
-                tl["image"].append((t, ev["art"], ev.get("enter", "scale_in")))
-                tl["sfx"].append((t, {"slam": "slam", "scale_in": "whoosh", "push": "whoosh"}[ev.get("enter", "scale_in")]))
-            elif kind == "sticker":
-                tl["sticker"].append((t, ev["art"], tuple(ev.get("pos", IMG_CENTER)), ev.get("size", 300), ev.get("dur", 0.8)))
-                tl["sfx"].append((t, "slam" if ev["art"] == "red_x" else "pop"))
-            elif kind == "label": tl["label"].append((t, line_end + 0.15, ev["text"], ev.get("pos", "top")))
-            elif kind == "flash": tl["flash"].append(t); tl["sfx"].append((t, "boom"))
-            elif kind == "punch": tl["punch"].append(t)
-        for w in ws:  # the name stinger: every time the meme's name is said
+        for b in line["beats"]:
+            t = at(b["on"])
+            if "img" in b:
+                tl["img"].append(dict(t=t, key=b["img"], enter=b.get("enter", "cut"), fit=b.get("fit", "cover"),
+                                      grade=b.get("grade"), zoom=b.get("zoom", 1.0)))
+                if b.get("fx") == "fire": tl["fire"].append((t, l1 + 0.05))
+                tl["sfx"].append((t, {"zoomblur": "whoosh", "whip": "whip", "spin": "spin", "cut": "pop"}[b.get("enter", "cut")]))
+            if "sticker" in b:
+                kind = b["sticker"]
+                tl["sticker"].append(dict(t=t, end=t + b["dur"] if "dur" in b else l1 + 0.1, kind=kind, at=b.get("at", [540, 900]),
+                                          size=b.get("size"), angle=b.get("angle", 0), text=b.get("text"), seed=len(tl["sticker"])))
+                tl["sfx"].append((t, {"ellipse": "scribble", "arrow": "whip", "heart": "heartpop", "warning": "alarm",
+                                      "interrobang": "boing", "x": "impact", "number": "ding"}[kind]))
+            if "label" in b:
+                tl["label"].append(dict(t=t, end=l1 + 0.15, text=b["label"]))
+                tl["sfx"].append((t, "typing"))
+            if b.get("flash"): tl["flash"].append(t); tl["sfx"].append((t, "impact"))
+            if b.get("lightning"): tl["lightning"].append(t); tl["sfx"].append((t, "zap"))
+            if b.get("riser"): tl["sfx"].append((t - 1.0, "riser"))
+        for w in ws:  # the name: sound bite + real explosion + fire, every time
             if norm(w["word"]) in names:
-                tl["stinger"].append(w["start"] - 0.06); tl["sfx"].append((w["start"] - 0.06, "fwoomp"))
-        # captions: 1-2 words, break after punctuation, never wider than the frame allows
+                tl["boom"].append(w["start"] - 0.05); tl["sfx"].append((w["start"] - 0.05, "boom"))
+                tl["fire"].append((w["start"], w["end"] + 0.25))
+        # captions: 1-2 words, every word on its own onset
         chunk = []
         for i, w in enumerate(ws):
-            chunk.append(w)
+            chunk.append(w); nxt = ws[i + 1] if i + 1 < len(ws) else None
             text = " ".join(c["word"] for c in chunk)
-            nxt = ws[i + 1] if i + 1 < len(ws) else None
-            if (len(chunk) == 2 or re.search(r"[.,?!]$", w["word"]) or nxt is None
-                    or len(text + " " + nxt["word"]) > 14):
-                tl["caption"].append([chunk[0]["start"], None, re.sub(r"[.,]$", "", text)])
-                chunk = []
+            if len(chunk) == 2 or re.search(r"[.,?!]$", w["word"]) or nxt is None or len(text + " " + nxt["word"]) > 13:
+                tl["caption"].append([chunk[0]["start"], None, re.sub(r"[.,]$", "", text)]); chunk = []
     caps = tl["caption"]
-    for a, b in zip(caps, caps[1:]):
-        a[1] = min(b[0], a[0] + 1.6)
-    caps[-1][1] = caps[-1][0] + 1.6
-    for k in ("plate", "image"):
-        tl[k].sort(key=lambda e: e[0])
+    for a, b in zip(caps, caps[1:]): a[1] = b[0]
+    caps[-1][1] = caps[-1][0] + 1.5
+    tl["img"].sort(key=lambda e: e["t"])
     return tl
 
 
-def stats(tl, dur):
-    """Visible picture changes: images, plates, stickers, labels, flashes, stingers, punches (not captions)."""
-    ts = sorted([e[0] for k in ("plate", "image", "sticker", "label") for e in tl[k]] + tl["flash"] + tl["stinger"] + tl["punch"])
-    ts = sorted(set(round(t, 2) for t in ts))
-    gaps = np.diff([0] + ts + [dur])
-    return {"changes": len(ts), "per_10s": round(len(ts) / dur * 10, 1), "longest_gap_s": round(float(gaps.max()), 2),
-            "gap_at_s": round(float(([0] + ts)[int(gaps.argmax())]), 2)}
-
-
-# ------------------------------------------------------------------ drawing
-def ease_out_back(x, k=1.7):
-    x = min(max(x, 0), 1) - 1
+# ------------------------------------------------------------------ stickers (alive)
+def ease(x, k=1.8):
+    x = min(max(x, 0.0), 1.0) - 1
     return 1 + (k + 1) * x ** 3 + k * x ** 2
 
 
-def current(events, t):
-    cur = None
-    for e in events:
-        if e[0] <= t: cur = e
-        else: break
-    return cur
+def draw_ellipse(frame, cx, cy, rx, ry, rot, progress, seed):
+    """Hand-drawn double red loop. progress 0..1 draws it on."""
+    rnd = random.Random(seed); layer = Image.new("RGBA", frame.size, (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
+    turns = 1.85; n = int(140 * progress) + 2
+    pts = []
+    for i in range(n):
+        a = i / 139 * turns * 2 * math.pi
+        wob = 1 + 0.05 * math.sin(a * 3 + seed) + 0.03 * (i / 140)
+        x, y = rx * wob * math.cos(a), ry * wob * math.sin(a)
+        r = math.radians(rot)
+        pts.append((cx + x * math.cos(r) - y * math.sin(r), cy + x * math.sin(r) + y * math.cos(r)))
+    d.line(pts, fill=(0, 0, 0, 120), width=22, joint="curve")
+    d.line(pts, fill=RED, width=15, joint="curve")
+    frame.alpha_composite(layer)
 
 
-def place(frame, img, center, scale, rot=0.0):
-    if scale <= 0.01: return
-    w, h = max(1, int(img.width * scale)), max(1, int(img.height * scale))
-    im = img.resize((w, h), Image.BILINEAR)
-    if rot: im = im.rotate(rot, expand=True, resample=Image.BILINEAR)
-    frame.alpha_composite(im, (int(center[0] - im.width / 2), int(center[1] - im.height / 2)))
-
-
-def fit(img, box=(900, 1000)):
-    return min(box[0] / img.width, box[1] / img.height)
-
-
-def text_layer(text, px, glow=None, maxw=940):
-    f = art.font(px)
-    while px > 40 and ImageDraw.Draw(Image.new("L", (1, 1))).textlength(text, font=f) > maxw:
-        px -= 4; f = art.font(px)
-    pad = 60
-    tw = int(ImageDraw.Draw(Image.new("L", (1, 1))).textlength(text, font=f)) + pad * 2
-    th = px + pad * 2
-    im = Image.new("RGBA", (tw, th), (0, 0, 0, 0))
-    if glow:
-        g = Image.new("RGBA", im.size, (0, 0, 0, 0))
-        ImageDraw.Draw(g).text((tw / 2, th / 2), text, font=f, fill=glow, anchor="mm", stroke_width=10, stroke_fill=glow)
-        im.alpha_composite(g.filter(ImageFilter.GaussianBlur(14)))
-        im.alpha_composite(g.filter(ImageFilter.GaussianBlur(5)))
-    else:
-        sh = Image.new("RGBA", im.size, (0, 0, 0, 0))
-        ImageDraw.Draw(sh).text((tw / 2 + 7, th / 2 + 8), text, font=f, fill=(0, 0, 0, 255), anchor="mm", stroke_width=9, stroke_fill=(0, 0, 0, 255))
-        im.alpha_composite(sh)
-    ImageDraw.Draw(im).text((tw / 2, th / 2), text, font=f, fill=(252, 253, 252, 255), anchor="mm",
-                            stroke_width=0 if glow else 9, stroke_fill=(10, 10, 10, 255))
+def arrow_img(size=360):
+    im = Image.new("RGBA", (size, size), (0, 0, 0, 0)); d = ImageDraw.Draw(im); s = size
+    shaft = [(s * .38, s * .95), (s * .62, s * .95), (s * .62, s * .45), (s * .38, s * .45)]
+    head = [(s * .12, s * .5), (s * .5, s * .04), (s * .88, s * .5)]
+    off = 14
+    for poly in (shaft, head):  # extruded dark side, then lit face: a cheap 3D look
+        d.polygon([(x + off, y + off) for x, y in poly], fill=(110, 0, 0, 255))
+    for poly in (shaft, head): d.polygon(poly, fill=(232, 30, 30, 255))
+    d.polygon([(s * .5, s * .04), (s * .88, s * .5), (s * .62, s * .5), (s * .5, s * .2)], fill=(255, 110, 110, 255))
+    d.polygon([(s * .5, s * .45), (s * .62, s * .45), (s * .62, s * .95), (s * .55, s * .95)], fill=(255, 90, 90, 255))
     return im
 
 
-_cache = {}
+def heart_img(size=220):
+    im = Image.new("RGBA", (size, size), (0, 0, 0, 0)); d = ImageDraw.Draw(im); pts = []
+    for k in range(120):
+        t = k / 120 * 2 * math.pi
+        x = 16 * math.sin(t) ** 3; y = 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
+        pts.append((size / 2 + x * size / 36, size * .46 - y * size / 36))
+    d.polygon([(x + 6, y + 8) for x, y in pts], fill=(0, 0, 0, 110)); d.polygon(pts, fill=(235, 30, 50, 255))
+    d.ellipse([size * .25, size * .2, size * .4, size * .33], fill=(255, 160, 170, 255))
+    return im
 
 
-def cached(key, fn):
-    if key not in _cache: _cache[key] = fn()
-    return _cache[key]
+def warning_img(size=420):
+    im = Image.new("RGBA", (size, size), (0, 0, 0, 0)); g = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    tri = [(size / 2, size * .1), (size * .92, size * .86), (size * .08, size * .86)]
+    ImageDraw.Draw(g).line(tri + [tri[0]], fill=(255, 40, 90, 255), width=26, joint="curve")
+    im.alpha_composite(g.filter(ImageFilter.GaussianBlur(14))); im.alpha_composite(g.filter(ImageFilter.GaussianBlur(4))); im.alpha_composite(g)
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle([size * .46, size * .34, size * .54, size * .64], 10, fill=(255, 220, 0, 255))
+    d.ellipse([size * .45, size * .69, size * .55, size * .78], fill=(255, 220, 0, 255))
+    return im
 
 
-def frame_at(tl, t, dur):
-    p = current(tl["plate"], t)
-    frame = art.plate(p[1] if p else "black", t).copy()
-    im = current(tl["image"], t)
-    if im:
-        t0, name, enter = im
-        a = t - t0
-        img = cached(("art", name), lambda: art.get(name))
-        base = fit(img)
-        if enter == "scale_in": s = base * (0.15 + 0.85 * ease_out_back(a / 0.2))
-        elif enter == "slam": s = base * (1 + 0.6 * max(0, 1 - a / 0.12) ** 2)
-        else: s = base * (0.92 + 0.16 * min(a / 2.5, 1))  # push: slow zoom
-        for pt in tl["punch"]:
-            if 0 <= t - pt < 0.25: s *= 1 + 0.14 * (1 - (t - pt) / 0.25)
-        spin = 8 * math.sin(a * 2.3) if name.startswith("smiley") else 0
-        place(frame, img, IMG_CENTER, s, spin)
-    for t0, name, pos, size, d in tl["sticker"]:
-        if t0 <= t < t0 + d:
-            img = cached(("art", name, size), lambda: art.get(name, size) if name not in ("smiley_grid",) else art.get(name))
-            place(frame, img, pos, 0.3 + 0.7 * ease_out_back((t - t0) / 0.14, 2.4))
-    for t0, t1, text, pos in tl["label"]:
-        if t0 <= t < t1 and not any(o[0] > t0 and o[0] <= t and o[3] == pos for o in tl["label"]):
-            lab = cached(("label", text), lambda: text_layer(text, 104, glow=(228, 56, 104, 255)))
-            place(frame, lab, (540, LABEL_Y[pos]), 0.6 + 0.4 * ease_out_back((t - t0) / 0.15, 2))
-    # constant shake (the owner: "everything shakes and is intense")
-    dx = 11 * (math.sin(t * 37) + 0.6 * math.sin(t * 61 + 1.3)); dy = 11 * (math.sin(t * 43 + 2) + 0.6 * math.sin(t * 71))
-    rot = 0.9 * math.sin(t * 29 + 0.5)
-    frame = frame.resize((int(W * 1.04), int(H * 1.04)), Image.BILINEAR).crop((21, 38, 21 + W, 38 + H))
-    frame = frame.rotate(rot, resample=Image.BILINEAR, translate=(dx, dy), fillcolor=(8, 8, 10, 255))
-    for st in tl["stinger"]:
-        a = t - st
-        if 0 <= a < 0.34:
-            fb = art.fireball(); s = (0.7 + a * 5.0) * 1.6
-            place(frame, fb, (540, 900), s * 0.6)
-            if a > 0.2:
-                frame = Image.blend(frame, frame, 1)
-    for t0, t1, text in tl["caption"]:
-        if t0 <= t < t1:
-            cap = cached(("cap", text), lambda: text_layer(text, 112))
-            pop = 0.85 + 0.15 * ease_out_back((t - t0) / 0.08, 2)
-            place(frame, cap, (540, CAPTION_Y), pop)
+def text_sticker(text, px, fill, stroke=10):
+    f = font(FONT_HEAVY, px); w = int(ImageDraw.Draw(Image.new("L", (1, 1))).textlength(text, font=f)) + 60
+    im = Image.new("RGBA", (w, px + 60), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.text((w / 2 + 6, (px + 60) / 2 + 8), text, font=f, fill=(0, 0, 0, 150), anchor="mm", stroke_width=stroke, stroke_fill=(0, 0, 0, 150))
+    d.text((w / 2, (px + 60) / 2), text, font=f, fill=fill, anchor="mm", stroke_width=stroke, stroke_fill=(15, 10, 10, 255))
+    return im
+
+
+def number_tile(text, px=170):
+    t = text_sticker(text, px, (232, 40, 40, 255), 6); im = Image.new("RGBA", (t.width + 40, t.height + 30), (30, 30, 34, 235))
+    im.alpha_composite(t, (20, 15)); return im
+
+
+_STK = {}
+
+
+def stk(key, fn):
+    if key not in _STK: _STK[key] = fn()
+    return _STK[key]
+
+
+def paste(frame, im, cx, cy, scale=1.0, rot=0.0, alpha=1.0):
+    if scale <= 0.02: return
+    im = im.resize((max(1, int(im.width * scale)), max(1, int(im.height * scale))), Image.BILINEAR)
+    if rot: im = im.rotate(rot, expand=True, resample=Image.BILINEAR)
+    if alpha < 1: im.putalpha(im.getchannel("A").point(lambda v: int(v * alpha)))
+    frame.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
+
+
+def draw_sticker(frame, s, t):
+    a = t - s["t"]; k = s["kind"]; x, y = s["at"]; rnd = random.Random(s["seed"])
+    if k == "ellipse":
+        rx, ry = (s["size"] or [560, 480])[0] / 2, (s["size"] or [560, 480])[1] / 2
+        draw_ellipse(frame, x + 30 * math.cos(a * 7), y + 22 * math.sin(a * 9), rx, ry, 12 * math.sin(a * 5) + s["seed"] * 17,
+                     min(1, a / 0.18), s["seed"])
+    elif k == "arrow":
+        ang = s["angle"]; slide = (1 - ease(a / 0.14)) * 400; bob = 28 * math.sin(a * 2 * math.pi * 2.6)
+        r = math.radians(ang + 90)
+        paste(frame, stk("arrow", arrow_img), x + math.cos(r) * (slide + bob), y + math.sin(r) * (slide + bob), 1.0, -ang)
+    elif k == "heart":
+        hop = int(a / 0.27); r2 = random.Random(s["seed"] * 100 + hop)
+        hx, hy = r2.uniform(220, 860), r2.uniform(420, 1300)
+        paste(frame, stk("heart", heart_img), hx, hy, (0.9 + 0.25 * math.sin(a * 30)) * ease((a % 0.27) / 0.08), r2.uniform(-25, 25))
+        r3 = random.Random(s["seed"] * 77 + hop)
+        paste(frame, stk("heart", heart_img), r3.uniform(220, 860), r3.uniform(420, 1300), 0.6 * ease((a % 0.27) / 0.08), r3.uniform(-25, 25))
+    elif k == "warning":
+        if int(a / 0.125) % 2 == 0:
+            paste(frame, stk("warning", warning_img), x, y, ease(min(1, a / 0.1)) * (1 + 0.05 * math.sin(a * 40)))
+    elif k == "interrobang":
+        paste(frame, stk("ib", lambda: text_sticker("!?", 200, (232, 30, 30, 255))), x, y, ease(a / 0.15, 3), 15 * math.sin(a * 11))
+    elif k == "x":
+        paste(frame, stk("x", lambda: text_sticker("X", 520, (232, 20, 20, 255), 14)), x + rnd.uniform(-1, 1) * 8 * math.sin(a * 50), y,
+              (1.6 - 0.6 * ease(a / 0.12, 2.5)), -8 + 4 * math.sin(a * 13))
+    elif k == "number":
+        hop = int(a / 0.3); r2 = random.Random(s["seed"] + hop)
+        paste(frame, stk(("num", s["text"]), lambda: number_tile(s["text"])), x + r2.uniform(-260, 260), y + r2.uniform(-300, 200),
+              ease((a % 0.3) / 0.08), r2.uniform(-12, 12))
+
+
+def draw_label(frame, lab, t):
+    """Pink glow label: types on letter by letter, leaves by scattering its letters."""
+    a, left = t - lab["t"], lab["end"] - t
+    text = lab["text"]; f = font(FONT_HEAVY, 96)
+    while ImageDraw.Draw(frame).textlength(text, font=f) > 960: f = font(FONT_HEAVY, f.size - 6)
+    n = min(len(text), int(a / 0.035) + 1)
+    layer = Image.new("RGBA", frame.size, (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
+    total = d.textlength(text, font=f); x0 = 540 - total / 2; y0 = 380
+    rnd = random.Random(hash(text) & 0xffff)
+    for i, ch in enumerate(text[:n]):
+        cx = x0 + d.textlength(text[:i], font=f); cy = y0
+        if left < 0.22:
+            p = 1 - left / 0.22; ang = rnd.uniform(0, 2 * math.pi)
+            cx += math.cos(ang) * 500 * p * p; cy += math.sin(ang) * 500 * p * p
+        d.text((cx, cy), ch, font=f, fill=(255, 70, 130, 255), stroke_width=12, stroke_fill=(255, 70, 130, 255))
+    glow = layer.filter(ImageFilter.GaussianBlur(16))
+    frame.alpha_composite(glow); frame.alpha_composite(glow)
+    d2 = ImageDraw.Draw(frame)
+    for i, ch in enumerate(text[:n]):
+        cx = x0 + d.textlength(text[:i], font=f); cy = y0
+        if left < 0.22:
+            p = 1 - left / 0.22; rnd2 = random.Random((hash(text) & 0xffff) + i); ang = rnd2.uniform(0, 2 * math.pi)
+        rnd_i = random.Random(hash(text) & 0xffff)
+    # crisp white letters on top (same scatter maths, recomputed)
+    rnd = random.Random(hash(text) & 0xffff)
+    for i, ch in enumerate(text[:n]):
+        cx = x0 + d.textlength(text[:i], font=f); cy = y0
+        if left < 0.22:
+            p = 1 - left / 0.22; ang = rnd.uniform(0, 2 * math.pi)
+            cx += math.cos(ang) * 500 * p * p; cy += math.sin(ang) * 500 * p * p
+        d2.text((cx, cy), ch, font=f, fill=(255, 255, 255, 255))
+
+
+def bolt(frame, t0, t, seed):
+    """Procedural lightning: a jagged bolt with glow plus a blue-white wash, flickering twice."""
+    a = t - t0
+    if not (0 <= a < 0.3) or (0.08 < a < 0.14): return
+    rnd = random.Random(seed + int(a > 0.14))
+    pts = [(rnd.uniform(200, 880), -20)]
+    while pts[-1][1] < H * 0.85:
+        x, y = pts[-1]; pts.append((x + rnd.uniform(-90, 90), y + rnd.uniform(60, 140)))
+    layer = Image.new("RGBA", frame.size, (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
+    d.line(pts, fill=(170, 200, 255, 255), width=26); glow = layer.filter(ImageFilter.GaussianBlur(22))
+    d2 = ImageDraw.Draw(layer); d2.line(pts, fill=(255, 255, 255, 255), width=8)
+    wash = Image.new("RGBA", frame.size, (200, 215, 255, int(130 * (1 - a / 0.3))))
+    frame.alpha_composite(wash); frame.alpha_composite(glow); frame.alpha_composite(glow); frame.alpha_composite(layer)
+
+
+# ------------------------------------------------------------------ pictures
+_IMG = {}
+
+
+def picture(key, spec, grade):
+    ck = (key, grade)
+    if ck not in _IMG:
+        im, used = fetch_image(spec)
+        im = ImageEnhance.Color(im).enhance(1.35); im = ImageEnhance.Contrast(im).enhance(1.12)
+        if grade == "red": im = Image.blend(im, Image.new("RGB", im.size, (170, 0, 0)), 0.35)
+        if grade == "dark": im = ImageEnhance.Brightness(im).enhance(0.55)
+        _IMG[ck] = (im, used)
+    return _IMG[ck][0]
+
+
+def cover(im, zoom, dx, dy, focus=(0.5, 0.5)):
+    """Fill 1080x1920 from any aspect, zoomed and drifted around a focus point (0..1)."""
+    s = max(W / im.width, H / im.height) * zoom
+    cw, ch = W / s, H / s
+    fx = min(max(focus[0] * im.width, cw / 2), im.width - cw / 2); fy = min(max(focus[1] * im.height, ch / 2), im.height - ch / 2)
+    cx = fx + dx * min(fx - cw / 2, im.width - cw / 2 - fx) * 0.6; cy = fy + dy * min(fy - ch / 2, im.height - ch / 2 - fy) * 0.6
+    box = (cx - cw / 2, cy - ch / 2, cx + cw / 2, cy + ch / 2)
+    return im.resize((W, H), Image.BILINEAR, box=box)
+
+
+def base_frame(ev, spec, t, fire, boom_frames, booms):
+    a = t - ev["t"]; im = picture(ev["key"], spec, ev["grade"]); foc = tuple(spec.get("focus", (0.5, 0.5)))
+    drift = 1.06 + 0.10 * min(a / 3.0, 1) + 0.035 * math.sin(a * 3.1)          # never still: slow push + breathe
+    dx, dy = 0.35 * math.sin(a * 1.3 + hash(ev["key"]) % 7), 0.25 * math.cos(a * 1.7)
+    if ev["fit"] in ("band", "spin_in"):
+        bg = Image.fromarray(fire[int(t * FPS) % len(fire)]).resize((W, H), Image.BILINEAR).convert("RGB")
+        card = im.copy(); sc0 = min(W * 1.02 / card.width, H * 0.62 / card.height); card = card.resize((int(card.width * sc0), int(card.height * sc0)))
+        sc = drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1)
+        rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" else 4 * math.sin(a * 2)
+        fr = bg.convert("RGBA"); paste(fr, card.convert("RGBA"), W / 2, H * 0.47, sc, rot); frame = fr.convert("RGB")
+    else:
+        z = drift * ev["zoom"]
+        if ev["enter"] == "zoomblur" and a < 0.2:
+            p = 1 - a / 0.2
+            layers = [np.asarray(cover(im, z * (1 + 0.45 * p + 0.1 * k * p), dx, dy, foc), np.float32) for k in range(4)]
+            frame = Image.fromarray((sum(layers) / 4).astype(np.uint8))
+        elif ev["enter"] == "whip" and a < 0.16:
+            p = 1 - a / 0.16; base = cover(im, z, dx, dy, foc); arr = np.asarray(base, np.float32)
+            shifts = [int(W * p * 0.9) - k * 40 for k in range(5)]
+            frame = Image.fromarray((sum(np.roll(arr, s_, axis=1) for s_ in shifts) / 5).astype(np.uint8))
+        elif ev["enter"] == "spin" and a < 0.3:
+            fr = cover(im, z, dx, dy, foc).convert("RGBA"); bgc = Image.new("RGBA", (W, H), (10, 10, 12, 255))
+            paste(bgc, fr, W / 2, H / 2, max(0.05, ease(a / 0.3, 1.4)), (1 - ease(a / 0.3, 1.2)) * 300); frame = bgc.convert("RGB")
+        else:
+            frame = cover(im, z, dx, dy, foc)
+    arr = np.asarray(frame, np.float32) / 255
+    if fire is not None:
+        fl = fire[int(t * FPS) % len(fire)].astype(np.float32) / 255
+        fl = np.asarray(Image.fromarray((fl * 255).astype(np.uint8)).resize((W, H), Image.BILINEAR), np.float32) / 255
+        arr = screen(arr * np.array([1.0, 0.9, 0.8]), fl * FIRE_MASK, 0.95)
+    for b0 in booms:
+        k = int((t - b0) * FPS)
+        if 0 <= k < len(boom_frames):
+            bf = np.asarray(Image.fromarray(boom_frames[k]).resize((W, H), Image.BILINEAR), np.float32) / 255
+            arr = screen(arr, bf, 0.9)
+    return Image.fromarray((np.clip(arr, 0, 1) * 255).astype(np.uint8)).convert("RGBA")
+
+
+def caption(frame, text, a):
+    f = font(FONT_CAP, 86)
+    pop = 0.9 + 0.1 * ease(a / 0.07, 2)
+    layer = Image.new("RGBA", (1000, 220), (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
+    d.text((500, 118), text, font=f, fill=(0, 0, 0, 200), anchor="mm", stroke_width=4, stroke_fill=(0, 0, 0, 200))
+    sh = layer.filter(ImageFilter.GaussianBlur(6))
+    top = Image.new("RGBA", layer.size, (0, 0, 0, 0))
+    ImageDraw.Draw(top).text((500, 110), text, font=f, fill=(255, 255, 255, 255), anchor="mm", stroke_width=3, stroke_fill=(20, 20, 20, 255))
+    sh.alpha_composite(top)
+    paste(frame, sh, W / 2, 1000, pop)
+
+
+# ------------------------------------------------------------------ the frame
+class Shaker:
+    """Whole-frame handheld shake: jittery noise, bigger bursts on hits. Applied last, so captions shake too."""
+    def __init__(self, hits):
+        self.hits = sorted(hits); self.rng = np.random.default_rng(4); self.x = self.y = self.r = 0.0
+
+    def step(self, t):
+        burst = 1 + sum(2.2 * max(0, 1 - (t - h) / 0.3) for h in self.hits if 0 <= t - h < 0.3)
+        self.x = 0.45 * self.x + 0.55 * self.rng.normal(0, 9 * burst)
+        self.y = 0.45 * self.y + 0.55 * self.rng.normal(0, 9 * burst)
+        self.r = 0.5 * self.r + 0.5 * self.rng.normal(0, 0.8 * burst)
+        return float(np.clip(self.x, -40, 40)), float(np.clip(self.y, -40, 40)), float(np.clip(self.r, -2.2, 2.2))
+
+
+def render_frame(ep, tl, t, shaker, fire, boom_frames):
+    cur = None
+    for ev in tl["img"]:
+        if ev["t"] <= t: cur = ev
+    on_fire = any(a <= t < b for a, b in tl["fire"])
+    frame = base_frame(cur, ep["images"][cur["key"]], t, fire if on_fire or cur["fit"] in ("band", "spin_in") else None,
+                       boom_frames, tl["boom"]) if on_fire or cur["fit"] in ("band", "spin_in") else \
+        base_frame(cur, ep["images"][cur["key"]], t, None, boom_frames, tl["boom"])
+    for s in tl["sticker"]:
+        if s["t"] <= t < s["end"]: draw_sticker(frame, s, t)
+    for lab in tl["label"]:
+        later = [o for o in tl["label"] if lab["t"] < o["t"] <= t]
+        if lab["t"] <= t < lab["end"] and not later: draw_label(frame, lab, t)
+    for i, lt in enumerate(tl["lightning"]): bolt(frame, lt, t, i * 31)
+    for c0, c1, text in tl["caption"]:
+        if c0 <= t < c1: caption(frame, text, t - c0)
     for fl in tl["flash"]:
-        if 0 <= t - fl < 0.13:
-            white = Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.13))))
-            frame.alpha_composite(white)
-    return frame
+        if 0 <= t - fl < 0.1: frame.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.1)))))
+    dx, dy, rot = shaker.step(t)
+    frame = frame.resize((int(W * 1.14), int(H * 1.14)), Image.BILINEAR).crop((76, 134, 76 + W, 134 + H))
+    return frame.rotate(rot, resample=Image.BILINEAR, translate=(dx, dy), fillcolor=(0, 0, 0, 255))
 
 
-# ------------------------------------------------------------------ sound effects (synthesized, no samples)
-def sfx(name, rng=np.random.default_rng(1)):
-    def env(n, a=0.004, d=0.2):
-        t = np.arange(n) / SR
-        return np.minimum(t / a, 1) * np.exp(-t / d)
-    def lowpass(x, k):
-        y = np.empty_like(x); acc = 0.0
-        for i, v in enumerate(x):
-            acc += k * (v - acc); y[i] = acc
-        return y
-    if name in ("boom", "fwoomp"):
-        n = int(SR * (0.7 if name == "boom" else 0.4)); t = np.arange(n) / SR
-        f = 70 * np.exp(-t * 5) + 32
-        body = np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, 0.003, 0.28 if name == "boom" else 0.15)
-        noise = lowpass(rng.standard_normal(n), 0.05) * env(n, 0.002, 0.12) * 3
-        return (body + noise) * (0.9 if name == "boom" else 0.55)
-    if name == "whoosh":
-        n = int(SR * 0.28); t = np.arange(n) / SR
-        x = lowpass(rng.standard_normal(n), 0.12) * np.sin(np.pi * t / t[-1]) ** 2
-        return x * 0.5
-    if name == "slam":
-        n = int(SR * 0.3); t = np.arange(n) / SR
-        return (np.sin(2 * np.pi * 95 * t) * env(n, 0.002, 0.07) + lowpass(rng.standard_normal(n), 0.3) * env(n, 0.001, 0.02)) * 0.8
+# ------------------------------------------------------------------ sound effects (all synthesized)
+def _lp(x, k):
+    ks = np.broadcast_to(np.asarray(k, np.float64), x.shape)
+    y = np.empty_like(x); acc = 0.0
+    for i in range(len(x)): acc += ks[i] * (x[i] - acc); y[i] = acc
+    return y
+
+
+def sfx(name, var=0):
+    rng = np.random.default_rng(var + 3)
+    def T(d): return np.arange(int(SR * d)) / SR
+    def env(t, a, d): return np.minimum(t / a, 1) * np.exp(-t / d)
+    if name in ("boom", "impact"):
+        t = T(0.9 if name == "boom" else 0.5); f = 75 * np.exp(-t * 6) + 30
+        body = np.sin(2 * np.pi * np.cumsum(f) / SR) * env(t, 0.002, 0.35 if name == "boom" else 0.15)
+        crack = _lp(rng.standard_normal(len(t)), 0.5 if name == "impact" else 0.08) * env(t, 0.001, 0.05 if name == "impact" else 0.15)
+        return np.tanh((body * 1.2 + crack * 1.5) * 1.6) * 0.9
+    if name in ("whoosh", "whip", "spin"):
+        d = {"whoosh": 0.35, "whip": 0.18, "spin": 0.45}[name]; t = T(d)
+        n = rng.standard_normal(len(t)); hp = n - _lp(n, 0.05); x = _lp(hp, 0.25 if name != "whip" else 0.45)
+        e = np.sin(np.pi * t / t[-1]) ** (2 if name != "whip" else 4)
+        out = x * e * 1.4
+        if name == "spin": out += np.sin(2 * np.pi * np.cumsum(300 + 900 * t / d) / SR) * e * 0.25
+        return out
     if name == "pop":
-        n = int(SR * 0.08); t = np.arange(n) / SR
-        return np.sin(2 * np.pi * (950 - 4000 * t) * t) * env(n, 0.001, 0.025) * 0.5
+        t = T(0.09); return np.sin(2 * np.pi * (700 - 3000 * t) * t) * env(t, 0.001, 0.03) * 0.7
+    if name == "heartpop":
+        t = T(0.35); return (np.sin(2 * np.pi * (500 + 900 * t) * t) * env(t, 0.001, 0.05) * 0.6 +
+                             sum(np.sin(2 * np.pi * f * t) * env(t, 0.002, 0.18) for f in (1568, 2093)) * 0.18)
+    if name == "ding":
+        t = T(0.6); return sum(np.sin(2 * np.pi * f * t) * env(t, 0.002, 0.25) / (i + 1) for i, f in enumerate((1318, 2637, 3951))) * 0.45
+    if name == "scribble":
+        t = T(0.3); n = _lp(rng.standard_normal(len(t)), 0.35); am = 0.5 + 0.5 * np.sin(2 * np.pi * 22 * t)
+        return n * am * env(t, 0.01, 0.2) * 1.1
+    if name == "alarm":
+        t = T(0.5); sq = np.sign(np.sin(2 * np.pi * 880 * t)) * 0.3
+        return sq * ((t % 0.25) < 0.12) * np.exp(-t * 2)
+    if name == "boing":
+        t = T(0.4); f = 220 + 160 * np.sin(2 * np.pi * 9 * t) * np.exp(-t * 6)
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(t, 0.002, 0.18) * 0.6
+    if name == "zap":
+        t = T(0.4); n = rng.standard_normal(len(t)); crackle = n * (rng.random(len(t)) < 0.08)
+        return (crackle * 2.0 + (n - _lp(n, 0.2)) * 0.6) * env(t, 0.001, 0.15)
+    if name == "riser":
+        t = T(1.0); n = rng.standard_normal(len(t)); x = n - _lp(n, 0.02 + 0.3 * t)
+        return (x * 0.5 + np.sin(2 * np.pi * np.cumsum(200 + 1400 * t ** 2) / SR) * 0.3) * (t / t[-1]) ** 2
+    if name == "typing":
+        out = np.zeros(int(SR * 0.45))
+        for k in range(9):
+            i = int(k * 0.045 * SR); c = rng.standard_normal(200) * np.exp(-np.arange(200) / 30)
+            out[i:i + 200] += c * 0.5
+        return out
     raise KeyError(name)
 
 
@@ -225,44 +462,53 @@ def mix(slug, tl, dur):
     od = os.path.join(REPO, "out", slug)
     v, vsr = sf.read(os.path.join(od, "voice.wav"), dtype="float32")
     v = np.interp(np.arange(0, len(v), vsr / SR), np.arange(len(v)), v).astype(np.float32)
-    n = int(dur * SR) + SR
-    out = np.zeros(n, np.float32); out[:len(v)] += v
-    bank = {}
-    for t, name in tl["sfx"]:
-        s = bank.setdefault(name, sfx(name).astype(np.float32))
-        i = int(max(0, t) * SR); seg = s[: max(0, n - i)]
-        out[i:i + len(seg)] += seg * 0.32
+    n = int(dur * SR) + SR; out = np.zeros(n, np.float32); out[:len(v)] += v * 1.0
+    count = {}
+    for t, name in sorted(tl["sfx"]):
+        count[name] = count.get(name, 0) + 1
+        s = sfx(name, count[name] % 3).astype(np.float32)
+        i = int(max(0.0, t) * SR); seg = s[: max(0, n - i)]
+        out[i:i + len(seg)] += seg * 0.42
     out = out[: int(dur * SR)]
     p = os.path.join(od, "mix.wav"); sf.write(p, out, SR)
-    return p
+    return p, sum(count.values())
 
 
-# ------------------------------------------------------------------ main
+def manifest(slug, ep):
+    m = {"slug": slug, "images": {}, "stock": {k: f"https://mixkit.co (Mixkit free licence) {v[0]}" for k, v in STOCK.items()},
+         "sfx": "all synthesized in render.py", "name_bites": {n: c.get("bite") or "placeholder (synthetic)" for n, c in ep["names"].items()}}
+    for k, spec in ep["images"].items():
+        used = _IMG.get((k, None), _IMG.get((k, "red"), _IMG.get((k, "dark"), (None, spec["url"]))))[1]
+        m["images"][k] = {"used": used, "page": spec.get("page", used), "rights": "third-party; shown under narration as commentary"}
+    json.dump(m, open(os.path.join(ROOT, "episodes", slug, "manifest.json"), "w"), indent=1)
+
+
 def main(slug, preview=False):
     ep = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))
     wj = json.load(open(os.path.join(REPO, "out", slug, "words.json")))
     tl = build(ep, wj["words"])
-    dur = round(wj["duration"] + 0.25, 3)  # payoff is the last word, then a 0.25 s tail and the cut (loop)
-    st = stats(tl, dur)
-    print(json.dumps(st))
-    audio = mix(slug, tl, dur)
+    dur = round(wj["duration"] + 0.25, 3)
+    fire = stock_frames("fire"); boom_frames = stock_frames("boom")
+    shaker = Shaker([s["t"] for s in tl["sticker"] if s["kind"] in ("x",)] + tl["flash"] + tl["boom"] +
+                    [e["t"] for e in tl["img"] if e["enter"] in ("whip", "zoomblur")])
+    audio, n_sfx = mix(slug, tl, dur)
     od = os.path.join(REPO, "out", slug)
     outp = os.path.join(od, f"{slug}{'-preview' if preview else ''}.mp4")
     size = (540, 960) if preview else (W, H)
-    cmd = ["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{size[0]}x{size[1]}",
-           "-r", str(FPS), "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-           "-pix_fmt", "yuv420p", "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k",
-           "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]
+    af = "acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=12,alimiter=limit=0.89:attack=1:release=30:level=false"  # about -9.7 LUFS, Tung is -8
+    cmd = ["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{size[0]}x{size[1]}", "-r", str(FPS),
+           "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+           "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     nf = int(dur * FPS)
     for i in range(nf):
-        f = frame_at(tl, i / FPS, dur).convert("RGB")
+        f = render_frame(ep, tl, i / FPS, shaker, fire, boom_frames).convert("RGB")
         if preview: f = f.resize(size, Image.BILINEAR)
         proc.stdin.write(f.tobytes())
         if i % 150 == 0: print(f"  frame {i}/{nf}", flush=True)
     proc.stdin.close(); proc.wait()
-    json.dump(st, open(os.path.join(od, "stats.json"), "w"))
-    print("wrote", outp)
+    manifest(slug, ep)
+    print(f"wrote {outp}  ({dur:.2f} s, {n_sfx} sound effects, {len(tl['boom'])} name bites)")
 
 
 if __name__ == "__main__":
