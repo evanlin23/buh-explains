@@ -61,6 +61,7 @@ Then rank by gap × comment engine. Trend content ships fast: YouTube's own guid
 | last 2 s | **Payoff** | "This makes X…", the answer as a verdict and the last word, worded so it runs back into the hook on the loop. A 0.2–0.3 s tail, then the cut. |
 
 **Always:**
+- **The name is the meme's own sound bite**, not the narrator (owner, 2026-11-06; measured on Tung). Every time the name comes up, the meme's signature clip (about 1 s) plays under the fireball stinger. The script marks it `{name}` and the TTS skips it. Every bite is logged in the manifest with its source. **Copyright risk:** a clip from a commercially released song can draw a Content ID claim, even for 1 s. A claimed Short stays up, but its ad money goes to the rights holder. A bite from an original TikTok or an AI voice meme is lower risk. Decide per meme.
 - The meme's name is said 3–5 times, with the fireball stinger every time. The repetition is the rhythm.
 - Mock-serious register: deadpan documentary seriousness about absurd lore, plus one real-world fact. The register clash is the joke.
 - A pause only right before the reveal. Elsewhere, no gaps.

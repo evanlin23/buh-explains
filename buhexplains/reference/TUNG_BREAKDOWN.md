@@ -15,6 +15,9 @@ Source: the owner's upload of `--iwNivqlo4`, 2026-11-06 (720×1280, 30 fps, 28.9
 | Pauses | only 3 over 0.25 s (3.4 s, 21.2 s, 25.8 s) | No air. Pauses only before "You see" and before the payoff |
 | Percussive hits | 21 onsets; clusters at 0–1.5 s, 16–19.6 s and 26–27.6 s | Booms and whooshes on the stingers, densest at the opening and the ending |
 
+## The name is the meme's own sound bite (owner, 2026-11-06)
+"When it says 'tung tung tung sahur' it uses the tung tung tung sahur sound byte." The narrator never says the name; the meme's original audio clip plays instead. Measured: mentions 2–4 (4.1, 10.9, 17.8 s) are one clip (MFCC similarity 0.56–0.80, against about 0.1 for the narration around them). Mentions 1 and 5 have the opening and ending SFX stacked on them. Each runs about 1.0 s. This is why the name's length never varied and Whisper heard it the same way every time.
+
 ## Picture
 | Measure | Value |
 |---|---|
