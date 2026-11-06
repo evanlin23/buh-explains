@@ -11,3 +11,5 @@ ep08-biddy
 ep07-tralala
 ep02-last-dance
 ep10-randy
+ep12-duckroll      # buffer (evergreen)
+ep13-harold        # buffer (evergreen)
