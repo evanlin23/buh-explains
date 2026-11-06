@@ -31,6 +31,11 @@ jobs:
         with:
           path: .cache/models/whisper
           key: whisper-base-en-v1
+      - uses: actions/cache@v4
+        with:
+          path: .cache/tts
+          key: tts-${{ hashFiles('buhexplains/episodes/**/episode.json', 'buhexplains/pipeline/voice.py') }}
+          restore-keys: tts-
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
       - run: pip install -q numpy soundfile librosa faster-whisper
       - name: narrate

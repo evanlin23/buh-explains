@@ -276,7 +276,8 @@ def main(slug):
 
         for idx in groups:
             prev_end = times[idx[0] - 1][1] if idx[0] > 0 else 0.0
-            c0 = quiet(max(prev_end, times[idx[0]][0] - 0.08), times[idx[0]][0] + 0.04) if idx[0] > 0 else 0
+            lo = max(prev_end + 0.03, times[idx[0]][0] - 0.08)          # never inside the previous word's tail ("makes")
+            c0 = quiet(lo, max(lo + 0.02, times[idx[0]][0] + 0.06)) if idx[0] > 0 else 0
             nxt = idx[-1] + 1
             c1 = quiet(times[idx[-1]][1] - 0.04, min(times[nxt][0] + 0.02, dur)) if nxt < len(tokens) else len(speak)
             c0 = max(c0, cursor)

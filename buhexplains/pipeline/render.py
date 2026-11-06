@@ -655,7 +655,13 @@ def mix(slug, tl, dur):
         i = int(t0 * SR); seg = s[: max(0, n - i)]
         fx[i:i + len(seg)] += seg
     v_l = lufs(v)
-    fx *= 10 ** ((v_l + SFX_UNDER_VOICE - lufs(fx)) / 20); out += fx
+    fx *= 10 ** ((v_l + SFX_UNDER_VOICE - lufs(fx)) / 20)
+    # effects step back 6 dB while the narrator is talking, so a hit on a word never masks it (the bites are exempt)
+    w_ = int(0.04 * SR); venv = np.convolve(np.abs(np.pad(v, (0, max(0, n - len(v))))[:n]), np.ones(w_) / w_, "same")
+    talk = (venv > 0.015).astype(np.float32)
+    for b0, b1 in ep_music.get("bites", []): talk[int(b0 * SR):int(b1 * SR)] = 0
+    gain = 1 - 0.5 * np.convolve(talk, np.ones(int(0.03 * SR)) / int(0.03 * SR), "same")
+    fx *= gain.astype(np.float32); out += fx
     sf.write(os.path.join(od, "stem_voice.wav"), out[:0] if False else np.pad(v, (0, max(0, n - len(v))))[:int(dur * SR)], SR)
     sf.write(os.path.join(od, "stem_sfx.wav"), fx[:int(dur * SR)], SR)
     m = ep_music.get("cfg")
