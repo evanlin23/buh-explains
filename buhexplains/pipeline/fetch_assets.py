@@ -23,14 +23,16 @@ def get(url, path):
 
 
 def main(slug):
-    for f in ("kokoro-v1.0.onnx", "voices-v1.0.bin"):
+    engine = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))["voice"].get("engine")
+    for f in (("kokoro-v1.0.onnx", "voices-v1.0.bin") if engine != "gemini" else ()):
         get(f"https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/{f}", os.path.join(C, "models", f))
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import render
-    for f, _, _ in render.STOCK.values():
+    if os.environ.get("VOICE_ONLY"): render = None
+    else: import render
+    for f, _, _ in (render.STOCK.values() if render else []):
         vid = f.split("-")[0]; get(f"https://assets.mixkit.co/videos/{vid}/{f}", os.path.join(C, "stock", f))
     srcs = {l.split()[0]: l.split()[1] for l in open(os.path.join(ROOT, "assets", "sfx_sources.txt")) if l.strip()}
-    for files in render.KIT.values():
+    for files in (render.KIT.values() if render else []):
         for f in files:
             if not os.path.exists(os.path.join(ROOT, "assets", "sfx", f + ".mp3")) and f in srcs:
                 get(srcs[f], os.path.join(C, "sfx", f + ".mp3"))

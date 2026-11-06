@@ -83,6 +83,10 @@ YouTube's own first example of mass-produced content is "templated storylines". 
 The hook wording varies too: "Do you know…", "X isn't…", "X is older than…", "Nobody tells you…". Titles alternate between question and claim, and we measure which wins (blocky data had 0 question titles in its top 10%; our only BuhExplains hit was a question).
 
 ## 5. Voice (Gemini TTS, Achird)
+- **It runs on GitHub Actions** (`.github/workflows/voice.yml`), because `GEMINI_API_KEY` is a repo secret only Actions can read (owner, 2026-11-06: "I only added to the repo"). The job runs on any push that changes an episode script or the voice code, and makes the artifact `voice` (voice.wav, words.json, joins.json per episode). The render step uses it.
+- **The whole script goes in one request**, cached by text, then is cut into lines at the quietest point between them, by word timing. The free tier allows about 10 requests a day per model, and one take keeps the delivery consistent.
+- **Never clip a word** (owner, 2026-11-06: "make sure the voice doesn't get cut off"). Trims keep 40 ms before and 70 ms after the speech, and only gaps over 0.2 s get squeezed (to 0.1 s). Splices snap to the quietest instant near the word boundary, never inside the previous word, with 6 ms crossfades. `pipeline/voicecheck.py` reports any cut made while the voice was still sounding, and how much of the narration Whisper understands in the finished mix.
+- **The voice sits on top:** a presence lift (+3.5 dB at 3 kHz, −2 dB at 250 Hz), music 8 LU and effects 7 LU under the voice, and the music dips 3 dB whenever the narrator talks.
 - Use Google's layout: AUDIO PROFILE + DIRECTOR'S NOTES, then `## TRANSCRIPT`. A loose instruction line gets read aloud.
 - Direction: "a dead-serious lore documentary narrator who knows this is absurd; quick, confident, a real lift on the turn and the reveal".
 - One request per script, then split by Whisper word timings. Fail the build if any line's words aren't heard (Gemini sometimes skips lines) or if words are added. Trim the tail noise burst it sometimes adds.

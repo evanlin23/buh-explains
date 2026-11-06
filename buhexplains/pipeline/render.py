@@ -633,13 +633,16 @@ def kit_sound(name, var):
 
 
 ep_music = {}
-SFX_UNDER_VOICE = -6.0  # LU. Owner, 2026-11-06: "the sounds are too loud" (they were 5.5 LU OVER the voice)
+SFX_UNDER_VOICE = -7.0  # LU. Owner, 2026-11-06: "the sounds are too loud" (they were 5.5 LU OVER the voice)
 
 
 def mix(slug, tl, dur):
     od = os.path.join(REPO, "out", slug)
     v, vsr = sf.read(os.path.join(od, "voice.wav"), dtype="float32")
     v = np.interp(np.arange(0, len(v), vsr / SR), np.arange(len(v)), v).astype(np.float32)
+    v = np.frombuffer(subprocess.run(["ffmpeg", "-loglevel", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-", "-af",
+                                      "highpass=f=90,equalizer=f=3000:t=q:w=1.0:g=3.5,equalizer=f=250:t=q:w=1.2:g=-2", "-f", "f32le", "-"],
+                                     input=v.tobytes(), capture_output=True).stdout, np.float32).copy()[:len(v)]  # presence: easier to hear
     n = int(dur * SR) + SR; out = np.zeros(n, np.float32); out[:len(v)] += v * 1.0
     fx = np.zeros(n, np.float32)
     count = {}
@@ -671,10 +674,11 @@ def mix(slug, tl, dur):
             bed = src[a0:]
         bed = bed[: len(out)]
         bed = bed * 10 ** ((v_l + m.get("under_voice_db", -5) - lufs(bed)) / 20)
-        duck = np.ones(len(bed), np.float32); r = int(0.03 * SR)
+        venv = np.convolve(np.abs(np.pad(v, (0, max(0, len(bed) - len(v))))[:len(bed)]), np.ones(int(0.05 * SR)) / int(0.05 * SR), "same")
+        duck = np.where(venv > 0.01, 0.7, 1.0).astype(np.float32); r = int(0.03 * SR)   # dip under speech
         for w0, w1 in ep_music.get("bites", []):  # the name pops out of the music
             i0, i1 = max(0, int(w0 * SR) - r), min(len(duck), int(w1 * SR) + r)
-            duck[i0:i1] = 0.5
+            duck[i0:i1] = 0.45
         duck = np.convolve(duck, np.ones(r) / r, "same").astype(np.float32); bed = bed * duck
         bed = bed.copy(); fo = int(0.3 * SR); bed[-fo:] *= np.linspace(1, 0, fo)
         out[: len(bed)] += bed

@@ -40,10 +40,11 @@ def synth_kokoro(lines, voice, speed):
     return out
 
 
-def squeeze(a, thr=0.012, longest=0.12, keep=0.05):
-    """Shorten every internal silence longer than `longest` to `keep` seconds (Tung barely pauses)."""
+def squeeze(a, thr=0.006, longest=0.20, keep=0.10):
+    """Shorten every internal silence longer than `longest` to `keep` seconds (Tung barely pauses). Judged on RMS
+    with a low threshold so quiet word endings ("-py", "-n't", "s") count as sound and are never cut."""
     hop = int(0.01 * SR); n = len(a) // hop
-    loud = np.array([np.abs(a[i * hop:(i + 1) * hop]).max() > thr for i in range(n)])
+    loud = np.array([np.sqrt(np.mean(a[i * hop:(i + 1) * hop] ** 2)) > thr for i in range(n)])
     out, i = [], 0
     while i < n:
         j = i
@@ -153,18 +154,76 @@ def bite_audio(name, cfg, kokoro):
     return echo
 
 
+GEMINI_STYLE = """# AUDIO PROFILE: narrator of a fast meme-lore explainer Shorts channel.
+
+## DIRECTOR'S NOTES
+Style: a dead-serious lore documentary narrator who knows the subject is absurd. Confident and quick, with a real lift on the turn ("But...", "Until it isn't") and on the final reveal. American accent.
+Pace: fast, about 3.4 words per second. No long pauses between sentences; keep rolling from one line to the next.
+Do not read these notes aloud. Speak only the transcript below, exactly as written, in order."""
+
+
+def gemini_tts(text, voice):
+    """One request (the free tier allows about 10 a day per model), cached by text+voice in .cache/tts."""
+    import base64, hashlib, urllib.request
+    key = os.environ.get("GEMINI_API_KEY", "")
+    cache = os.path.join(REPO, ".cache", "tts", hashlib.sha1((voice + GEMINI_STYLE + text).encode()).hexdigest()[:16] + ".wav")
+    if os.path.exists(cache):
+        a, sr = sf.read(cache, dtype="float32"); return a, sr
+    if not key: raise SystemExit("GEMINI_API_KEY is not set (it's a GitHub secret: run this on Actions, workflow 'voice')")
+    api = "https://generativelanguage.googleapis.com/v1beta"
+    def req(path, body=None):
+        r = urllib.request.Request(f"{api}/{path}", data=json.dumps(body).encode() if body else None,
+                                   headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+        return json.load(urllib.request.urlopen(r, timeout=300))
+    model = os.environ.get("GEMINI_TTS_MODEL") or sorted(
+        [m["name"].split("/", 1)[1] for m in req("models?pageSize=1000")["models"] if "tts" in m["name"].lower()],
+        key=lambda n: ([float(x) for x in re.findall(r"(\d+(?:\.\d+)?)", n)[:1]] or [0], "flash" in n, "preview" not in n), reverse=True)[0]
+    print("gemini model:", model, "voice:", voice)
+    body = {"contents": [{"parts": [{"text": f"{GEMINI_STYLE}\n\n## TRANSCRIPT\n{text}"}]}],
+            "generationConfig": {"responseModalities": ["AUDIO"],
+                                 "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}}}}
+    out = req(f"models/{model}:generateContent", body)
+    pcm = base64.b64decode(out["candidates"][0]["content"]["parts"][0]["inlineData"]["data"])
+    a = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768
+    os.makedirs(os.path.dirname(cache), exist_ok=True); sf.write(cache, a, 24000)
+    return a, 24000
+
+
+def split_lines(audio, line_tokens, model, od):
+    """Cut one long narration into its lines at the quietest point between each line's last and next line's first word."""
+    cp = os.path.join(od, "script_full.wav"); sf.write(cp, audio, SR)
+    flat = [t for toks in line_tokens for t in toks]
+    times, _ = word_times(cp, flat, model); times = fill(times, flat, len(audio) / SR)
+    env = np.sqrt(np.convolve(audio ** 2, np.ones(int(0.005 * SR)) / int(0.005 * SR), "same"))
+    cuts, k = [0], 0
+    for toks in line_tokens[:-1]:
+        k += len(toks); a0, a1 = int(times[k - 1][1] * SR) - int(0.03 * SR), int(times[k][0] * SR) + int(0.02 * SR)
+        a0, a1 = max(cuts[-1] + 1, a0), max(a0 + 2, a1)
+        cuts.append(a0 + int(np.argmin(env[a0:a1])))
+    cuts.append(len(audio))
+    return [audio[c0:c1] for c0, c1 in zip(cuts, cuts[1:])]
+
+
 def main(slug):
-    from kokoro_onnx import Kokoro
     from faster_whisper import WhisperModel
     ep = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))
     v = ep["voice"]
     names = {norm(n): (n, cfg) for n, cfg in ep.get("names", {}).items()}
     od = os.path.join(REPO, "out", slug)
     os.makedirs(od, exist_ok=True)
-    k = Kokoro(os.path.join(MODELS, "kokoro-v1.0.onnx"), os.path.join(MODELS, "voices-v1.0.bin"))
     model = WhisperModel("base.en", device="cpu", compute_type="int8", download_root=os.path.join(MODELS, "whisper"))
-    ref, _sr = k.create("This is a level check for the narrator.", voice=v["voice"], speed=v["speed"], lang="en-us")
-    ref = rs(ref, _sr); ref_rms = np.sqrt(np.mean(ref[np.abs(ref) > 0.02] ** 2))
+    clean = [[t.replace("{", "").replace("}", "") for t in l["text"].split()] for l in ep["lines"]]
+    if v.get("engine") == "gemini":
+        k = None
+        full, _sr = gemini_tts("\n".join(" ".join(t) for t in clean), v.get("voice", "Achird"))
+        spoken = split_lines(rs(full, _sr), clean, model, od)
+        ref = np.concatenate(spoken)
+    else:
+        from kokoro_onnx import Kokoro
+        k = Kokoro(os.path.join(MODELS, "kokoro-v1.0.onnx"), os.path.join(MODELS, "voices-v1.0.bin"))
+        spoken = None
+        ref, _sr = k.create("This is a level check for the narrator.", voice=v["voice"], speed=v["speed"], lang="en-us"); ref = rs(ref, _sr)
+    ref_rms = np.sqrt(np.mean(ref[np.abs(ref) > 0.02] ** 2))
 
     def level(a):  # a bite plays as loud as the narrator (a touch hotter), never quieter
         r = np.sqrt(np.mean(a[np.abs(a) > 0.02] ** 2)) + 1e-9
@@ -174,7 +233,7 @@ def main(slug):
     bites = {key: level(bite_audio(n, cfg, k)) for key, (n, cfg) in names.items()}
     bites_full = {key: level(bite_audio(n, dict(cfg, bite=cfg.get("bite_full") or cfg.get("bite")), k)) for key, (n, cfg) in names.items()}
     parts, words, t, report = [], [], 0.0, []
-    seg_n = 0
+    seg_n = 0; joins = []
     for li, line in enumerate(ep["lines"]):
         gap = line.get("pause_before", v["gap"]) if li else 0.0
         parts.append(np.zeros(int(gap * SR), np.float32)); t += gap
@@ -198,35 +257,52 @@ def main(slug):
         tokens = [tok.replace("{", "").replace("}", "") for tok in tokens]
         # Speak the whole line in one breath, then swap the spoken name for the bite inside it. Synthesizing the
         # pieces separately made "Do you know" end like a finished sentence before the bite (owner: "did you know [pause] verity").
-        speak, _sr = k.create(" ".join(tokens), voice=v["voice"], speed=v["speed"], lang="en-us")
-        speak = squeeze(trim(rs(speak, _sr), thr=0.012, lead=0.06 if li == 0 else 0.015, pad=0.0))
+        if spoken is not None:
+            speak = squeeze(trim(spoken[li], thr=0.004, lead=0.04, pad=0.07))
+        else:
+            speak, _sr = k.create(" ".join(tokens), voice=v["voice"], speed=v["speed"], lang="en-us")
+            speak = squeeze(trim(rs(speak, _sr), thr=0.004, lead=0.04, pad=0.07))
         cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1; sf.write(cp, speak, SR)
         times, heard = word_times(cp, tokens, model)
         matched = sum(1 for x in times if x); total = len(tokens); heard_all = heard
         dur = len(speak) / SR; times = fill(times, tokens, dur)
         groups = [idx for kind, idx in segs if kind == "bite"]
         pieces, cursor, shift, out_times = [], 0, 0.0, {}
+        env = np.sqrt(np.convolve(speak ** 2, np.ones(int(0.005 * SR)) / int(0.005 * SR), "same"))
+
+        def quiet(t0, t1):  # the quietest instant between t0 and t1 (seconds) in the spoken line
+            i0, i1 = max(0, int(t0 * SR)), min(len(env) - 1, int(t1 * SR))
+            return i0 if i1 <= i0 else i0 + int(np.argmin(env[i0:i1]))
+
         for idx in groups:
-            c0 = int(max(0.0, times[idx[0]][0] - 0.02) * SR)
+            prev_end = times[idx[0] - 1][1] if idx[0] > 0 else 0.0
+            c0 = quiet(max(prev_end, times[idx[0]][0] - 0.08), times[idx[0]][0] + 0.04) if idx[0] > 0 else 0
             nxt = idx[-1] + 1
-            c1 = int((times[nxt][0] - 0.01 if nxt < len(tokens) else dur) * SR)
+            c1 = quiet(times[idx[-1]][1] - 0.04, min(times[nxt][0] + 0.02, dur)) if nxt < len(tokens) else len(speak)
+            c0 = max(c0, cursor)
             for i in range(len(tokens)):
                 if cursor <= int(times[i][0] * SR) < c0 and i not in idx:
                     out_times[i] = (times[i][0] + shift, times[i][1] + shift)
-            pieces.append(speak[cursor:c0])
+            pieces.append(speak[cursor:c0]); joins.append(t + sum(len(p_) for p_ in pieces) / SR)
             key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
             bite = (bites_full if len(idx) > 1 else bites)[key]
             bite = trim(bite, thr=0.01, lead=0.0, pad=0.0)
             t_b = (sum(len(p_) for p_ in pieces)) / SR
             span = len(bite) / SR / len(idx)
             for j, i in enumerate(idx): out_times[i] = (t_b + j * span, t_b + (j + 1) * span)
-            pieces.append(bite)
+            pieces.append(bite); joins.append(t + sum(len(p_) for p_ in pieces) / SR)
             shift += len(bite) / SR - (c1 - c0) / SR
             cursor = c1
         for i in range(len(tokens)):
             if i not in out_times: out_times[i] = (times[i][0] + shift, times[i][1] + shift)
         pieces.append(speak[cursor:])
+        xf = int(0.006 * SR)  # tiny crossfades at every splice
+        for i in range(1, len(pieces)):
+            if len(pieces[i - 1]) > xf and len(pieces[i]) > xf:
+                pieces[i - 1] = pieces[i - 1].copy(); pieces[i] = pieces[i].copy()
+                pieces[i - 1][-xf:] *= np.linspace(1, 0, xf); pieces[i][:xf] *= np.linspace(0, 1, xf)
         a = np.concatenate(pieces)
+        joins.append(t + len(a) / SR)
         for i in range(len(tokens)):
             s_, e_ = out_times[i]
             words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + s_, 3), "end": round(t + e_, 3),
@@ -237,6 +313,7 @@ def main(slug):
     words.sort(key=lambda w: (w["line"], w["i"]))
     sf.write(os.path.join(od, "voice.wav"), np.concatenate(parts), SR)
     json.dump({"duration": round(t, 3), "words": words}, open(os.path.join(od, "words.json"), "w"), indent=1)
+    json.dump([round(x, 3) for x in joins], open(os.path.join(od, "joins.json"), "w"))
     for li, cov, heard in report:
         print(f"line {li}: {cov:.0%} of spoken words matched{'   <-- FAIL' if cov < 0.6 else ''}\n   heard: {heard}")
     print(f"voice: {t:.2f} s, {len(words)} words, {len(words) / t:.2f} words/s")

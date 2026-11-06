@@ -1,0 +1,45 @@
+# Makes an episode's narration with Gemini TTS (voice Achird), using the repo secret GEMINI_API_KEY, which only
+# Actions can read. Output: artifact voice-<slug> with voice.wav, words.json, joins.json. The render reads them.
+# Runs when an episode script or the voice code changes on a branch, or by hand.
+name: voice
+on:
+  push:
+    paths: ["buhexplains/episodes/**/episode.json", "buhexplains/pipeline/voice.py", ".github/workflows/voice.yml"]
+  workflow_dispatch:
+    inputs:
+      slug: {description: "episode slug (blank = every Gemini episode)", default: ""}
+permissions: {contents: read}
+concurrency: {group: voice-${{ github.ref }}, cancel-in-progress: false}
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - uses: actions/cache@v4
+        with: {path: .cache/models/whisper, key: whisper-base-en-v1}
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+      - run: pip install -q numpy soundfile librosa faster-whisper
+      - name: narrate
+        env: {GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", VOICE_ONLY: "1", SLUG: "${{ inputs.slug }}"}
+        run: |
+          slugs="$SLUG"
+          if [ -z "$slugs" ]; then
+            slugs=$(for f in buhexplains/episodes/*/episode.json; do python -c "import json,sys;e=json.load(open('$f'));print(e['slug'] if e['voice'].get('engine')=='gemini' else '')"; done)
+          fi
+          for s in $slugs; do
+            echo "== $s"
+            python buhexplains/pipeline/fetch_assets.py "$s"
+            python buhexplains/pipeline/voice.py "$s"
+          done
+          echo "SLUGS=$(echo $slugs | tr ' ' ',')" >> $GITHUB_ENV
+      - uses: actions/upload-artifact@v4
+        with:
+          name: voice
+          path: |
+            out/*/voice.wav
+            out/*/words.json
+            out/*/joins.json
+          retention-days: 30

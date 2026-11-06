@@ -18,10 +18,14 @@
   }
  },
  "voice": {
-  "engine": "kokoro",
-  "voice": "am_michael",
-  "speed": 1.22,
-  "gap": 0.0
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "fallback": {
+   "engine": "kokoro",
+   "voice": "am_michael",
+   "speed": 1.22
+  }
  },
  "images": {
   "hero": {
@@ -292,7 +296,7 @@
  },
  "lines": [
   {
-   "text": "Do you know Verity isn't from The Amazing Digital Circus?",
+   "text": "Did you know Verity isn't from The Amazing Digital Circus?",
    "beats": [
     {
      "on": 0,
@@ -699,7 +703,7 @@
    2.18,
    13.37
   ],
-  "under_voice_db": -5,
+  "under_voice_db": -8,
   "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
   "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
  }
