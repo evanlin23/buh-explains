@@ -3,7 +3,7 @@
  "names": {
   "Verity": {
    "bite": null,
-   "note": "owner to pick: song bite / ThatMob movie bite / synthetic. Placeholder = crushed second voice."
+   "note": "owner, 2026-11-06: use a line from ThatMob's VERITY movie (f6f3PhauXyg). Waiting on the clip; then bite.py --cut and set bite."
   }
  },
  "voice": {
@@ -467,7 +467,7 @@
  "music": {
   "file": "258.mp3",
   "start": 6,
-  "under_voice_db": -7,
+  "under_voice_db": -6,
   "source": "https://assets.mixkit.co/music/258/258.mp3 (Mixkit free licence)",
   "note": "set to null to leave room for a trending song added at upload"
  }

@@ -537,6 +537,7 @@ def kit_sound(name, var):
 
 
 ep_music = {}
+SFX_DB = -11.5  # effects sit about 6 LU under the voice (owner, 2026-11-06: "the sounds are too loud"; they were 5.5 LU OVER it)
 
 
 def mix(slug, tl, dur):
@@ -544,6 +545,7 @@ def mix(slug, tl, dur):
     v, vsr = sf.read(os.path.join(od, "voice.wav"), dtype="float32")
     v = np.interp(np.arange(0, len(v), vsr / SR), np.arange(len(v)), v).astype(np.float32)
     n = int(dur * SR) + SR; out = np.zeros(n, np.float32); out[:len(v)] += v * 1.0
+    fx = np.zeros(n, np.float32)
     count = {}
     for t, name in sorted(tl["sfx"]):
         count[name] = count.get(name, 0) + 1
@@ -552,7 +554,10 @@ def mix(slug, tl, dur):
         t0 = t - lead
         if t0 < 0: s = s[int(-t0 * SR):]; t0 = 0.0
         i = int(t0 * SR); seg = s[: max(0, n - i)]
-        out[i:i + len(seg)] += seg
+        fx[i:i + len(seg)] += seg
+    fx *= 10 ** (SFX_DB / 20); out += fx
+    sf.write(os.path.join(od, "stem_voice.wav"), out[:0] if False else np.pad(v, (0, max(0, n - len(v))))[:int(dur * SR)], SR)
+    sf.write(os.path.join(od, "stem_sfx.wav"), fx[:int(dur * SR)], SR)
     m = ep_music.get("cfg")
     if m:
         raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(m.get("start", 0)), "-t", str(dur + 1), "-i",
@@ -562,6 +567,7 @@ def mix(slug, tl, dur):
         bed = bed * (vr / br) * 10 ** (m.get("under_voice_db", -7) / 20)
         bed = bed.copy(); fo = int(0.3 * SR); bed[-fo:] *= np.linspace(1, 0, fo)
         out[: len(bed)] += bed
+        sf.write(os.path.join(od, "stem_music.wav"), bed[:int(dur * SR)], SR)
     out = out[: int(dur * SR)]
     p = os.path.join(od, "mix.wav"); sf.write(p, out, SR)
     return p, sum(count.values())
