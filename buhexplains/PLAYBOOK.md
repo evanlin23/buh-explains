@@ -94,6 +94,11 @@ The hook wording varies too: "Do you know…", "X isn't…", "X is older than…
 - The character sits over a **photographic fire/smoke plate** (real-looking flames filling the frame), or is letterboxed in a middle band with fire above and below.
 - Red **hand-drawn ellipse** and **3D red arrow** pointing at the named detail; a warning sign, a heart and flags as stickers.
 - Pink-glow labels for numbers and definitions ("TUNG = SOUND OF A DRUM", "3:00 AM").
+- **Something always moves, and the whole screen shakes, captions included** (owner, 2026-11-06: "we had like something moving on screen at all times, and the entire screen was shaking. also like red circles moving around and hearts etc"). Measured on Tung: only 2.8% of frames are near-still; 45% of frames move ≥ 4 px.
+- **Stickers are alive:** red circles draw on, then orbit and slide; hearts jump to a new spot every beat; the warning sign blinks about 4×/s; arrows bob; flags wave; labels type on and scatter off.
+- **Loudness:** Tung is mastered at −8 LUFS with a 1.6 LU range: loud and flat. Ours targets about −9 LUFS.
+- **Cut on the voice, not the music.** Tung's cuts land 0.07 s from a word onset, and no closer to the beat than chance.
+- Full measurements: `reference/TUNG_BREAKDOWN.md`.
 - The pictures are found per beat by search (YouTube thumbnails, Fandom wikis, image search), each logged with its source URL in the episode's manifest.
 The full grammar is measured in `content/research_notes/buhexplains_editing_style.md`. In short:
 - A new picture or sticker every 2–3 words, ≥ 15 visible changes per 10 s, no still frame over 0.5 s. Captions don't count as motion.
