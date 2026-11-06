@@ -9,7 +9,9 @@ Set up YouTube upload access and a daily upload schedule for my @BuhExplains cha
    d. Click "Exchange authorization code for tokens". Keep the Refresh token in this tab for step 3.
    e. Check: in Step 3, request GET https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true and confirm the channel title is "Buh Explains" (handle @BuhExplains). Note its "id" (it starts with UC). If it shows any other channel, start step 1 again and pick BuhExplains.
 
-2. GitHub repo evanlin23/buh-explains → Settings → Actions → General → Workflow permissions: select "Read and write permissions" → Save.
+2. GitHub repo evanlin23/buh-explains:
+   a. Settings → General → Default branch: switch it to "main" (it currently says claude/sleepy-ptolemy-8eyek4) and confirm.
+   b. Settings → Actions → General → Workflow permissions: select "Read and write permissions" → Save.
 
 3. GitHub repo evanlin23/buh-explains → Settings → Secrets and variables → Actions:
    - Secrets tab → New repository secret, three times:
