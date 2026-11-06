@@ -1,0 +1,9 @@
+{
+  "name": "hellobuh-trial",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "mineflayer": "4.39.0",
+    "vec3": "0.1.10"
+  }
+}
