@@ -1,29 +1,9 @@
 {
  "slug": "ep01-verity",
  "images": {
-  "verity_box": {
-   "used": "https://i.ytimg.com/vi/etrNRCzVzWc/maxresdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=etrNRCzVzWc",
-   "rights": "third-party; shown under narration as commentary"
-  },
-  "smiley_box": {
-   "used": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE",
-   "rights": "third-party; shown under narration as commentary"
-  },
-  "verity_chainsaw": {
-   "used": "https://i.ytimg.com/vi/neqOGUI1WNc/maxresdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=neqOGUI1WNc",
-   "rights": "third-party; shown under narration as commentary"
-  },
-  "verity_scary": {
-   "used": "https://i.ytimg.com/vi/nrMSqvQvBsw/maxresdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=nrMSqvQvBsw",
-   "rights": "third-party; shown under narration as commentary"
-  },
-  "song": {
-   "used": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=tVlKLpxyCBY",
+  "hero": {
+   "used": "https://static.wikia.nocookie.net/verityminecraft/images/7/74/BricketyNew.png/revision/latest?cb=20261016235133",
+   "page": "https://verityminecraft.fandom.com",
    "rights": "third-party; shown under narration as commentary"
   },
   "caine_stage": {
@@ -51,14 +31,49 @@
    "page": "https://en.wikipedia.org/wiki/Office_Assistant",
    "rights": "third-party; shown under narration as commentary"
   },
+  "smiley_box": {
+   "used": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "song": {
+   "used": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=tVlKLpxyCBY",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "emoji": {
+   "used": "https://static.vecteezy.com/system/resources/previews/051/664/173/non_2x/grinning-face-emoji-realistic-free-png.png",
+   "page": "https://static.vecteezy.com/system/resources/previews/051/664/173/non_2x/grinning-face-emoji-realistic-free-png.png",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "tall": {
+   "used": "https://i.pinimg.com/originals/53/eb/c5/53ebc520ac607c6da03a98db1a2ecbe4.jpg?nii=t",
+   "page": "https://i.pinimg.com/originals/53/eb/c5/53ebc520ac607c6da03a98db1a2ecbe4.jpg?nii=t",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "grin": {
+   "used": "https://i.pinimg.com/736x/6d/d1/78/6dd1782894c3b06d94c877b4dc2481eb.jpg",
+   "page": "https://i.pinimg.com/736x/6d/d1/78/6dd1782894c3b06d94c877b4dc2481eb.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "chase": {
+   "used": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ff74ba26-04a3-4424-8c6f-8dfeab0c7f1d/dfhlzjk-2f383b73-cda4-4770-b688-4cea1c18a116.jpg/v1/fill/w_1280,h_1280,q_75,strp/scary_monster_by_willem505_dfhlzjk-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2ZmNzRiYTI2LTA0YTMtNDQyNC04YzZmLThkZmVhYjBjN2YxZFwvZGZobHpqay0yZjM4M2I3My1jZGE0LTQ3NzAtYjY4OC00Y2VhMWMxOGExMTYuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.YUmEqRhhT8GDoVnT-RajMqHsJJQ8IwFizo0IqVaf2BE",
+   "page": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ff74ba26-04a3-4424-8c6f-8dfeab0c7f1d/dfhlzjk-2f383b73-cda4-4770-b688-4cea1c18a116.jpg/v1/fill/w_1280,h_1280,q_75,strp/scary_monster_by_willem505_dfhlzjk-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2ZmNzRiYTI2LTA0YTMtNDQyNC04YzZmLThkZmVhYjBjN2YxZFwvZGZobHpqay0yZjM4M2I3My1jZGE0LTQ3NzAtYjY4OC00Y2VhMWMxOGExMTYuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.YUmEqRhhT8GDoVnT-RajMqHsJJQ8IwFizo0IqVaf2BE",
+   "rights": "third-party; shown under narration as commentary"
+  },
   "thatmob_movie": {
    "used": "https://i.ytimg.com/vi/f6f3PhauXyg/maxresdefault.jpg",
    "page": "https://www.youtube.com/watch?v=f6f3PhauXyg",
    "rights": "third-party; shown under narration as commentary"
   },
-  "thatmob_2": {
-   "used": "https://i.ytimg.com/vi/g3TVNBA3Jzw/maxresdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=g3TVNBA3Jzw",
+  "skeleton": {
+   "used": "https://static.wikia.nocookie.net/verityminecraft/images/4/48/Brickety_in_his_ultima_form.png/revision/latest?cb=20261016001024",
+   "page": "https://verityminecraft.fandom.com",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "avatar": {
+   "used": "https://yt3.googleusercontent.com/aLcQD7ClHlpkdIsF_gEgZgbp4dO4pDFANnYTtw0-v2fuaBavnE7uje6j7rEnkZ3hvuOhYJLcFw=s900-c-k-c0x00ffffff-no-rj",
+   "page": "https://www.youtube.com/@ThatMob",
    "rights": "third-party; shown under narration as commentary"
   },
   "minecraft": {
@@ -72,7 +87,58 @@
   "fire2": "https://mixkit.co (Mixkit free licence) 1242-720.mp4",
   "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4"
  },
- "sfx": "all synthesized in render.py",
+ "sfx": [
+  "vine_boom https://www.myinstants.com/media/sounds/vine-boom.mp3 1.306122",
+  "anime_whoosh https://www.myinstants.com/media/sounds/anime-ahh.mp3 0.862041",
+  "whoosh https://www.myinstants.com/media/sounds/whoosh-wind.mp3 0.679184",
+  "boing https://www.myinstants.com/media/sounds/cartoon-boing_7vRWDlc.mp3 1.619592",
+  "ding https://www.myinstants.com/media/sounds/ding-sound-effect_2.mp3 2.977959",
+  "bonk https://www.myinstants.com/media/sounds/bonk_7zPAD7C.mp3 0.470204",
+  "camera_flash https://www.myinstants.com/media/sounds/camera-flash-sound-effect.mp3 2.063673",
+  "error https://www.myinstants.com/media/sounds/error_CDOxCYm.mp3 1.018776",
+  "record_scratch https://www.myinstants.com/media/sounds/record-scratch-clean.mp3 0.679184",
+  "anime_wow https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3 4.205714",
+  "dun_dun_dun https://www.myinstants.com/media/sounds/dun-dun-dun-sound-effect-brass_8nFBccR.mp3 5.146122",
+  "pop https://www.myinstants.com/media/sounds/pop_7e9Is8L.mp3 0.312000",
+  "metal_pipe https://www.myinstants.com/media/sounds/metal-pipe-clang.mp3 2.821224",
+  "swoosh_transition https://www.myinstants.com/media/sounds/woosh-informativo.mp3 7.026938",
+  "riser https://www.myinstants.com/media/sounds/popular-riser-metallic-sound-effect.mp3 2.795102",
+  "taco_bell_bong https://www.myinstants.com/media/sounds/taco-bell-bong-sfx.mp3 1.959184",
+  "fart_reverb https://www.myinstants.com/media/sounds/fart-with-reverb.mp3 3.239184",
+  "heartbeat https://www.myinstants.com/media/sounds/heart-beat-speeds-up.mp3 31.764898",
+  "emotional_damage https://www.myinstants.com/media/sounds/emotional-damage-meme.mp3 3.369796",
+  "thunder_strike_1 https://www.myinstants.com/media/sounds/lightning-strike.mp3 13.035102",
+  "thunder_strike_2 https://www.myinstants.com/media/sounds/mix_12s-audio-joiner_kPvukUQ.mp3 12.492000",
+  "thunder_strike_3 https://www.myinstants.com/media/sounds/magic-thunder-strike.mp3 13.766531",
+  "lightning_1 https://www.myinstants.com/media/sounds/nuagghhhh-scream_H3TDo14.mp3 3.576000",
+  "lightning_2 https://www.myinstants.com/media/sounds/lightning-strike-cool.mp3 6.696000",
+  "lightning_3 https://www.myinstants.com/media/sounds/ambient-thunder.mp3 8.045714",
+  "bruh_sound_effect_1 https://www.myinstants.com/media/sounds/bruh-sound-effect_WstdzdM.mp3 0.864000",
+  "bruh_sound_effect_2 https://www.myinstants.com/media/sounds/oh-my-god-bruhh.mp3 6.696000",
+  "bruh_sound_effect_3 https://www.myinstants.com/media/sounds/vine-dramatic-surprise.mp3 1.828571",
+  "explosion_1 https://www.myinstants.com/media/sounds/capcut-explosion-sound.mp3 3.239184",
+  "explosion_2 https://www.myinstants.com/media/sounds/explosion-meme_dTCfAHs.mp3 1.560000",
+  "explosion_3 https://www.myinstants.com/media/sounds/minecraft-explosion-meme-sound-effect.mp3 2.560000",
+  "fast_whoosh_1 https://www.myinstants.com/media/sounds/fast-whoosh.mp3 1.201625",
+  "sparkle_1 https://www.myinstants.com/media/sounds/fairy-sparkle.mp3 1.541224",
+  "sparkle_2 https://www.myinstants.com/media/sounds/sparkle-ascending-fop-2026.mp3 3.456000",
+  "sparkle_3 https://www.myinstants.com/media/sounds/shiny-sparkles-drama.mp3 6.191020",
+  "glitch_1 https://www.myinstants.com/media/sounds/error-glitch.mp3 1.332245",
+  "glitch_2 https://www.myinstants.com/media/sounds/glitch-transition.mp3 3.056313",
+  "glitch_3 https://www.myinstants.com/media/sounds/vhs-startup-glitch-sound.mp3 4.656000",
+  "punch_1 https://www.myinstants.com/media/sounds/punch-gaming-sound-effect-hd_RzlG1GE.mp3 1.567347",
+  "punch_2 https://www.myinstants.com/media/sounds/punch_u4LmMsr.mp3 0.391837",
+  "punch_3 https://www.myinstants.com/media/sounds/bone-crack-meme.mp3 1.097143",
+  "typing_1 https://www.myinstants.com/media/sounds/keyboard-typing-sound-effect.mp3 10.083265",
+  "typing_2 https://www.myinstants.com/media/sounds/typing-noises.mp3 6.974694",
+  "typing_3 https://www.myinstants.com/media/sounds/rage2.mp3 7.758367",
+  "notification_1 https://www.myinstants.com/media/sounds/discord-notification.mp3 0.504000",
+  "notification_2 https://www.myinstants.com/media/sounds/notification_o14egLP.mp3 4.675918",
+  "notification_3 https://www.myinstants.com/media/sounds/snapchat-message.mp3 3.032000",
+  "huh_1 https://www.myinstants.com/media/sounds/huh_37bAoRo.mp3 0.672000",
+  "huh_2 https://www.myinstants.com/media/sounds/metal-gear-alert-sound-effect_XKoHReZ.mp3 1.985306",
+  "huh_3 https://www.myinstants.com/media/sounds/ceeday-huh-sound-effect.mp3 1.201633"
+ ],
  "name_bites": {
   "Verity": "placeholder (synthetic)"
  }

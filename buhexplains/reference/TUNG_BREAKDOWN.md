@@ -45,3 +45,13 @@ Source: the owner's upload of `--iwNivqlo4`, 2026-11-06 (720×1280, 30 fps, 28.9
 > Did you know that tung tung tung tung sahur isn't actually Italian? You see, the tung tung tung tung sahur we all know and love is the iconic Italian brainrot woodman carrying a bat. But the origin of tung tung tung tung sahur lies in its name. It is said that if someone is called for sahur three times and does not answer, then tung tung tung tung sahur will come to their house. You see, in Indonesia, sahur is the meal consumed by Muslims before dawn during the month of Ramadan. This makes tung tung tung tung sahur actually Indonesian.
 
 The answer ("Indonesian") is the last word, at 28.0 s. "Indonesia" is first said at 20.6 s (71%), and the map with the arrow arrives with it. The name is said 5 times, each with a stinger. This is the exact shape PLAYBOOK §3 now requires.
+
+## Shake, frame by frame (2026-11-06, `pipeline/shake_measure.py`)
+The owner: "right now its too much and not fast enough". Measured with sub-pixel phase correlation on Tung's stable shots, which have no cuts (the poster 12.5–14.4 s, the map, the food, the sunset; the fire shots 4.6–5.5, 11.1–12.4 and 18.3–19.2 s):
+- **It snaps, it doesn't wobble.** The picture sits dead still, jumps hard for 1–3 frames, then holds again. Nothing eases or glides between positions.
+- **An 8-frame cycle, 0.27 s (about 3.7 Hz).** Normal shots: about 33% of frames move, about 13 px per step (p90 22 px), with still holds of about 2–4 frames. Fire and name shots: about 54% of frames move, steps of 6–36 px.
+- **Mostly sideways.** The x steps are about twice the y steps.
+- **No rotation and no zoom wobble.** Rotation and scale measured 0.
+- Separately, some photos get a **deliberate pan in bursts** (the monument: about 33 px a frame for about 7 frames, then a hold).
+
+Draft 2 of ep01 was a smoothed random wobble with up to ±2.2° of rotation: 97% of frames moved, with 1-frame holds. That is the "too much and not fast enough" the owner saw. Draft 3's `Shaker` replays the measured pattern: 2 of 8 frames snap on normal shots (3 of 8 on hits), 12–17 px, no rotation.

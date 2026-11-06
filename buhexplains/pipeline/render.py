@@ -101,14 +101,15 @@ def build(ep, words):
                 kind = b["sticker"]
                 tl["sticker"].append(dict(t=t, end=t + b["dur"] if "dur" in b else l1 + 0.1, kind=kind, at=b.get("at", [540, 900]),
                                           size=b.get("size"), angle=b.get("angle", 0), text=b.get("text"), seed=len(tl["sticker"])))
-                tl["sfx"].append((t, {"ellipse": "scribble", "arrow": "whip", "heart": "heartpop", "warning": "alarm",
-                                      "interrobang": "boing", "x": "impact", "number": "ding"}[kind]))
+                tl["sfx"].append((t, {"ellipse": "scribble", "arrow": "whipstk", "heart": "heartpop", "warning": "alarm",
+                                      "interrobang": "boing", "x": "x", "number": "ding"}[kind]))
             if "label" in b:
                 tl["label"].append(dict(t=t, end=l1 + 0.15, text=b["label"]))
                 tl["sfx"].append((t, "typing"))
             if b.get("flash"): tl["flash"].append(t); tl["sfx"].append((t, "impact"))
             if b.get("lightning"): tl["lightning"].append(t); tl["sfx"].append((t, "zap"))
             if b.get("riser"): tl["sfx"].append((t - 1.0, "riser"))
+            for extra in b.get("sfx", []): tl["sfx"].append((t, extra))
         for w in ws:  # the name: sound bite + real explosion + fire, every time
             if norm(w["word"]) in names:
                 tl["boom"].append(w["start"] - 0.05); tl["sfx"].append((w["start"] - 0.05, "boom"))
@@ -306,6 +307,20 @@ def picture(key, spec, grade):
     return _IMG[ck][0]
 
 
+_RGBA = {}
+
+
+def picture_rgba(key, spec):
+    if key not in _RGBA:
+        u = spec["url"]; p = os.path.join(CACHE, "img", hashlib.sha1(u.encode()).hexdigest()[:16])
+        picture(key, spec, None)
+        im = Image.open(p).convert("RGBA")
+        if im.getchannel("A").getextrema()[0] == 255:  # no transparency: knock out a near-white background
+            a = np.asarray(im).copy(); white = (a[..., :3].min(-1) > 238); a[white, 3] = 0; im = Image.fromarray(a)
+        _RGBA[key] = im
+    return _RGBA[key]
+
+
 def cover(im, zoom, dx, dy, focus=(0.5, 0.5)):
     """Fill 1080x1920 from any aspect, zoomed and drifted around a focus point (0..1)."""
     s = max(W / im.width, H / im.height) * zoom
@@ -318,16 +333,22 @@ def cover(im, zoom, dx, dy, focus=(0.5, 0.5)):
 
 def base_frame(ev, spec, t, fire, boom_frames, booms):
     a = t - ev["t"]; im = picture(ev["key"], spec, ev["grade"]); foc = tuple(spec.get("focus", (0.5, 0.5)))
-    drift = 1.06 + 0.10 * min(a / 3.0, 1) + 0.035 * math.sin(a * 3.1)          # never still: slow push + breathe
-    dx, dy = 0.35 * math.sin(a * 1.3 + hash(ev["key"]) % 7), 0.25 * math.cos(a * 1.7)
-    if ev["fit"] in ("band", "spin_in"):
+    drift = 1.06 + 0.05 * min(a / 3.0, 1)                                         # a slow push; the snaps and stickers do the moving
+    dx, dy = 0.0, 0.0
+    if ev["fit"] == "white":
+        card = picture_rgba(ev["key"], spec); sc0 = min(W * 0.8 / card.width, H * 0.5 / card.height)
+        fr = Image.new("RGBA", (W, H), (250, 250, 250, 255))
+        rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" and a < 0.3 else 3 * math.sin(a * 2.2)
+        paste(fr, card, W / 2, H * 0.46, sc0 * drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1), rot)
+        frame = fr.convert("RGB")
+    elif ev["fit"] in ("band", "spin_in"):
         bg = Image.fromarray(fire[int(t * FPS) % len(fire)]).resize((W, H), Image.BILINEAR).convert("RGB")
         card = im.copy(); sc0 = min(W * 1.02 / card.width, H * 0.62 / card.height); card = card.resize((int(card.width * sc0), int(card.height * sc0)))
         sc = drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1)
         rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" else 4 * math.sin(a * 2)
         fr = bg.convert("RGBA"); paste(fr, card.convert("RGBA"), W / 2, H * 0.47, sc, rot); frame = fr.convert("RGB")
     else:
-        z = drift * ev["zoom"]
+        z = drift * ev["zoom"] * spec.get("zoom", 1.0)
         if ev["enter"] == "zoomblur" and a < 0.2:
             p = 1 - a / 0.2
             layers = [np.asarray(cover(im, z * (1 + 0.45 * p + 0.1 * k * p), dx, dy, foc), np.float32) for k in range(4)]
@@ -368,16 +389,25 @@ def caption(frame, text, a):
 
 # ------------------------------------------------------------------ the frame
 class Shaker:
-    """Whole-frame handheld shake: jittery noise, bigger bursts on hits. Applied last, so captions shake too."""
+    """Snap shake, measured frame by frame on the original Tung (reference/TUNG_BREAKDOWN.md, shake section).
+    An 8-frame cycle (0.27 s): a few frames of hard snaps to a random offset, mostly sideways, then dead still.
+    Normal shots: 3 of 8 frames snap, about 13 px. Hits (name, flash, slam): 4 of 8, about 22 px.
+    No rotation and no easing: Tung never rotates and never glides. Applied last, so captions shake too."""
+    CYCLE = 8
+
     def __init__(self, hits):
-        self.hits = sorted(hits); self.rng = np.random.default_rng(4); self.x = self.y = self.r = 0.0
+        self.hits = sorted(hits); self.rng = np.random.default_rng(4); self.f = 0
 
     def step(self, t):
-        burst = 1 + sum(2.2 * max(0, 1 - (t - h) / 0.3) for h in self.hits if 0 <= t - h < 0.3)
-        self.x = 0.45 * self.x + 0.55 * self.rng.normal(0, 9 * burst)
-        self.y = 0.45 * self.y + 0.55 * self.rng.normal(0, 9 * burst)
-        self.r = 0.5 * self.r + 0.5 * self.rng.normal(0, 0.8 * burst)
-        return float(np.clip(self.x, -40, 40)), float(np.clip(self.y, -40, 40)), float(np.clip(self.r, -2.2, 2.2))
+        f = self.f; self.f += 1
+        hot = any(0 <= t - h < 0.45 for h in self.hits)
+        on = 3 if hot else 2
+        if f % self.CYCLE >= on:
+            return 0.0, 0.0, 0.0                       # the hold: dead still
+        amp = 17.0 if hot else 12.0
+        x = self.rng.choice([-1, 1]) * amp * self.rng.uniform(0.6, 1.4)
+        y = self.rng.choice([-1, 1]) * amp * self.rng.uniform(0.0, 0.6) if self.rng.random() < 0.5 else 0.0
+        return float(x), float(y), 0.0
 
 
 def render_frame(ep, tl, t, shaker, fire, boom_frames):
@@ -399,8 +429,16 @@ def render_frame(ep, tl, t, shaker, fire, boom_frames):
     for fl in tl["flash"]:
         if 0 <= t - fl < 0.1: frame.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.1)))))
     dx, dy, rot = shaker.step(t)
-    frame = frame.resize((int(W * 1.14), int(H * 1.14)), Image.BILINEAR).crop((76, 134, 76 + W, 134 + H))
-    return frame.rotate(rot, resample=Image.BILINEAR, translate=(dx, dy), fillcolor=(0, 0, 0, 255))
+    dx, dy = int(round(dx)), int(round(dy))
+    if dx == 0 and dy == 0: return frame
+    # snap: shift the whole frame by whole pixels, fill the exposed strip by stretching the edge (no black bars)
+    pad = Image.new("RGBA", (W, H)); pad.paste(frame.resize((int(W * 1.07), int(H * 1.07)), Image.BILINEAR).crop((38, 67, 38 + W, 67 + H)))
+    out = Image.new("RGBA", (W, H)); out.paste(pad, (int(dx), int(dy)))
+    if dx > 0: out.paste(pad.crop((0, 0, 1, H)).resize((int(dx) + 1, H)), (0, int(dy)))
+    if dx < 0: out.paste(pad.crop((W - 1, 0, W, H)).resize((int(-dx) + 1, H)), (W + int(dx) - 1, int(dy)))
+    if dy > 0: out.paste(out.crop((0, int(dy), W, int(dy) + 1)).resize((W, int(dy))), (0, 0))
+    if dy < 0: out.paste(out.crop((0, H + int(dy) - 1, W, H + int(dy))).resize((W, int(-dy))), (0, H + int(dy)))
+    return out
 
 
 # ------------------------------------------------------------------ sound effects (all synthesized)
@@ -458,6 +496,37 @@ def sfx(name, var=0):
     raise KeyError(name)
 
 
+KIT = {  # event -> myinstants files in .cache/sfx (sources in .cache/sfx/sources.txt, copied to the manifest)
+    "whoosh": ["fast_whoosh_1", "whoosh", "anime_whoosh"], "whip": ["fast_whoosh_1", "whoosh"], "spin": ["whoosh"],
+    "pop": ["pop"], "boom": ["explosion_2"], "impact": ["vine_boom"], "scribble": ["pop"], "whipstk": ["fast_whoosh_1"],
+    "heartpop": ["sparkle_1"], "alarm": ["huh_2"], "boing": ["huh_3", "huh_1"], "x": ["error", "bonk"], "ding": ["notification_1"],
+    "typing": ["notification_1"], "zap": ["lightning_2"], "riser": ["riser"], "glitch": ["glitch_1"], "wow": ["anime_wow"],
+    "mcboom": ["explosion_3"], "reveal": ["bruh_sound_effect_3"],
+}
+GAIN = {"boom": 0.45, "whoosh": 0.5, "whip": 0.5, "spin": 0.5, "pop": 0.6, "impact": 0.9, "zap": 0.6, "riser": 0.6, "wow": 0.7,
+        "alarm": 0.7, "x": 0.8, "heartpop": 0.5, "ding": 0.6, "typing": 0.5, "scribble": 0.4, "boing": 0.8, "mcboom": 0.8, "reveal": 0.9}
+MAXLEN = {"zap": 1.6, "riser": 1.2, "wow": 1.4, "heartpop": 0.9, "ding": 0.6, "alarm": 1.2, "x": 0.9, "reveal": 1.8, "mcboom": 1.6}
+_KIT = {}
+
+
+def kit_sound(name, var):
+    files = KIT.get(name)
+    if not files: return None
+    f = files[var % len(files)]
+    if f not in _KIT:
+        p = os.path.join(CACHE, "sfx", f + ".mp3")
+        if not os.path.exists(p): return None
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", p, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
+        a = np.frombuffer(raw, np.float32).copy()
+        idx = np.where(np.abs(a) > 0.02)[0]
+        if len(idx): a = a[max(0, idx[0] - 50):]
+        n = int(MAXLEN.get(name, 1.0) * SR)
+        if len(a) > n: a = a[:n]; a[-int(0.08 * SR):] *= np.linspace(1, 0, int(0.08 * SR))
+        a /= max(1e-6, np.abs(a).max())
+        _KIT[f] = a
+    return _KIT[f]
+
+
 def mix(slug, tl, dur):
     od = os.path.join(REPO, "out", slug)
     v, vsr = sf.read(os.path.join(od, "voice.wav"), dtype="float32")
@@ -466,9 +535,10 @@ def mix(slug, tl, dur):
     count = {}
     for t, name in sorted(tl["sfx"]):
         count[name] = count.get(name, 0) + 1
-        s = sfx(name, count[name] % 3).astype(np.float32)
+        smp = kit_sound(name, count[name])
+        s = (smp * GAIN.get(name, 0.6)) if smp is not None else sfx(name, count[name] % 3).astype(np.float32) * 0.42
         i = int(max(0.0, t) * SR); seg = s[: max(0, n - i)]
-        out[i:i + len(seg)] += seg * 0.42
+        out[i:i + len(seg)] += seg
     out = out[: int(dur * SR)]
     p = os.path.join(od, "mix.wav"); sf.write(p, out, SR)
     return p, sum(count.values())
@@ -476,7 +546,7 @@ def mix(slug, tl, dur):
 
 def manifest(slug, ep):
     m = {"slug": slug, "images": {}, "stock": {k: f"https://mixkit.co (Mixkit free licence) {v[0]}" for k, v in STOCK.items()},
-         "sfx": "all synthesized in render.py", "name_bites": {n: c.get("bite") or "placeholder (synthetic)" for n, c in ep["names"].items()}}
+         "sfx": open(os.path.join(CACHE, "sfx", "sources.txt")).read().splitlines() if os.path.exists(os.path.join(CACHE, "sfx", "sources.txt")) else "synthesized", "name_bites": {n: c.get("bite") or "placeholder (synthetic)" for n, c in ep["names"].items()}}
     for k, spec in ep["images"].items():
         used = _IMG.get((k, None), _IMG.get((k, "red"), _IMG.get((k, "dark"), (None, spec["url"]))))[1]
         m["images"][k] = {"used": used, "page": spec.get("page", used), "rights": "third-party; shown under narration as commentary"}

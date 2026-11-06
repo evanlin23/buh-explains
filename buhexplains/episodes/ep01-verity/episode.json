@@ -13,34 +13,14 @@
   "gap": 0.03
  },
  "images": {
-  "verity_box": {
-   "url": "https://i.ytimg.com/vi/etrNRCzVzWc/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/etrNRCzVzWc/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=etrNRCzVzWc"
-  },
-  "smiley_box": {
-   "url": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/vc5BKrz0JaE/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE"
-  },
-  "verity_chainsaw": {
-   "url": "https://i.ytimg.com/vi/neqOGUI1WNc/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/neqOGUI1WNc/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=neqOGUI1WNc",
+  "hero": {
+   "url": "https://static.wikia.nocookie.net/verityminecraft/images/7/74/BricketyNew.png/revision/latest?cb=20261016235133",
    "focus": [
-    0.45,
-    0.5
-   ]
-  },
-  "verity_scary": {
-   "url": "https://i.ytimg.com/vi/nrMSqvQvBsw/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/nrMSqvQvBsw/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=nrMSqvQvBsw"
-  },
-  "song": {
-   "url": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/tVlKLpxyCBY/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=tVlKLpxyCBY"
+    0.5,
+    0.36
+   ],
+   "page": "https://verityminecraft.fandom.com",
+   "zoom": 1.4
   },
   "caine_stage": {
    "url": "https://static.wikia.nocookie.net/tadc/images/a/a0/Caine.png/revision/latest?cb=20231022122929&path-prefix=pl",
@@ -70,15 +50,52 @@
    "url": "https://upload.wikimedia.org/wikipedia/en/d/db/Clippy-letter.PNG",
    "page": "https://en.wikipedia.org/wiki/Office_Assistant"
   },
+  "smiley_box": {
+   "url": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/vc5BKrz0JaE/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE"
+  },
+  "song": {
+   "url": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/tVlKLpxyCBY/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=tVlKLpxyCBY",
+   "focus": [
+    0.78,
+    0.5
+   ]
+  },
+  "emoji": {
+   "url": "https://static.vecteezy.com/system/resources/previews/051/664/173/non_2x/grinning-face-emoji-realistic-free-png.png"
+  },
+  "tall": {
+   "url": "https://i.pinimg.com/originals/53/eb/c5/53ebc520ac607c6da03a98db1a2ecbe4.jpg?nii=t",
+   "focus": [
+    0.5,
+    0.4
+   ]
+  },
+  "grin": {
+   "url": "https://i.pinimg.com/736x/6d/d1/78/6dd1782894c3b06d94c877b4dc2481eb.jpg"
+  },
+  "chase": {
+   "url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ff74ba26-04a3-4424-8c6f-8dfeab0c7f1d/dfhlzjk-2f383b73-cda4-4770-b688-4cea1c18a116.jpg/v1/fill/w_1280,h_1280,q_75,strp/scary_monster_by_willem505_dfhlzjk-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2ZmNzRiYTI2LTA0YTMtNDQyNC04YzZmLThkZmVhYjBjN2YxZFwvZGZobHpqay0yZjM4M2I3My1jZGE0LTQ3NzAtYjY4OC00Y2VhMWMxOGExMTYuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.YUmEqRhhT8GDoVnT-RajMqHsJJQ8IwFizo0IqVaf2BE"
+  },
   "thatmob_movie": {
    "url": "https://i.ytimg.com/vi/f6f3PhauXyg/maxresdefault.jpg",
    "fallback": "https://i.ytimg.com/vi/f6f3PhauXyg/hqdefault.jpg",
    "page": "https://www.youtube.com/watch?v=f6f3PhauXyg"
   },
-  "thatmob_2": {
-   "url": "https://i.ytimg.com/vi/g3TVNBA3Jzw/maxresdefault.jpg",
-   "fallback": "https://i.ytimg.com/vi/g3TVNBA3Jzw/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=g3TVNBA3Jzw"
+  "skeleton": {
+   "url": "https://static.wikia.nocookie.net/verityminecraft/images/4/48/Brickety_in_his_ultima_form.png/revision/latest?cb=20261016001024",
+   "focus": [
+    0.35,
+    0.5
+   ],
+   "page": "https://verityminecraft.fandom.com"
+  },
+  "avatar": {
+   "url": "https://yt3.googleusercontent.com/aLcQD7ClHlpkdIsF_gEgZgbp4dO4pDFANnYTtw0-v2fuaBavnE7uje6j7rEnkZ3hvuOhYJLcFw=s900-c-k-c0x00ffffff-no-rj",
+   "page": "https://www.youtube.com/@ThatMob"
   },
   "minecraft": {
    "url": "https://en.shiftdelete.net/wp-content/uploads/2023/02/Minecraft.jpeg"
@@ -90,56 +107,45 @@
    "beats": [
     {
      "on": 0,
-     "img": "verity_box",
-     "fx": "fire",
-     "enter": "zoomblur",
-     "fit": "band"
+     "img": "hero",
+     "enter": "zoomblur"
     },
     {
      "on": 0,
      "sticker": "arrow",
      "at": [
       560,
-      1350
+      1380
      ],
-     "angle": -30
+     "angle": -25,
+     "dur": 0.9
     },
     {
      "on": 0,
      "sticker": "ellipse",
      "at": [
       540,
-      860
+      820
      ],
      "size": [
-      620,
-      520
-     ]
+      640,
+      560
+     ],
+     "dur": 0.9
     },
     {
      "on": "isn't",
      "sticker": "warning",
      "at": [
       540,
-      820
-     ]
+      760
+     ],
+     "dur": 0.7
     },
     {
      "on": "Amazing",
      "img": "caine_stage",
      "enter": "whip"
-    },
-    {
-     "on": "Circus?",
-     "sticker": "ellipse",
-     "at": [
-      540,
-      800
-     ],
-     "size": [
-      560,
-      700
-     ]
     },
     {
      "on": "Circus?",
@@ -156,21 +162,24 @@
    "beats": [
     {
      "on": 0,
-     "img": "verity_scary",
-     "fx": "fire",
-     "enter": "zoomblur",
-     "fit": "band"
+     "img": "hero",
+     "enter": "cut"
+    },
+    {
+     "on": "love",
+     "img": "emoji",
+     "fit": "white",
+     "enter": "cut"
     },
     {
      "on": "love",
      "sticker": "heart",
-     "dur": 1.0
+     "dur": 0.9
     },
     {
      "on": "yellow",
      "img": "smiley_box",
-     "enter": "whip",
-     "fit": "band"
+     "enter": "whip"
     },
     {
      "on": "smiley",
@@ -180,14 +189,15 @@
       960
      ],
      "size": [
-      700,
-      420
-     ]
+      760,
+      460
+     ],
+     "dur": 0.8
     },
     {
      "on": "kid",
      "img": "kid_yell",
-     "enter": "cut"
+     "enter": "zoomblur"
     },
     {
      "on": "yells",
@@ -196,10 +206,6 @@
       780,
       620
      ]
-    },
-    {
-     "on": "yells",
-     "lightning": true
     }
    ]
   },
@@ -209,23 +215,27 @@
     {
      "on": 0,
      "img": "caine",
-     "enter": "zoomblur"
+     "enter": "whip"
     },
     {
      "on": "Caine.",
-     "sticker": "arrow",
+     "sticker": "ellipse",
      "at": [
-      300,
-      1300
+      540,
+      700
      ],
-     "angle": -50
+     "size": [
+      620,
+      560
+     ],
+     "dur": 0.6
     },
     {
      "on": "isn't",
      "sticker": "x",
      "at": [
       540,
-      900
+      860
      ]
     },
     {
@@ -247,27 +257,16 @@
      "sticker": "warning",
      "at": [
       540,
-      780
-     ]
-    },
-    {
-     "on": "movie",
-     "sticker": "ellipse",
-     "at": [
-      540,
-      1150
+      760
      ],
-     "size": [
-      640,
-      380
-     ]
+     "dur": 0.6
     },
     {
      "on": "either.",
      "sticker": "x",
      "at": [
       540,
-      900
+      860
      ]
     }
    ]
@@ -277,34 +276,28 @@
    "beats": [
     {
      "on": 0,
-     "img": "verity_box",
-     "fx": "fire",
-     "enter": "zoomblur",
-     "fit": "band"
+     "img": "hero",
+     "enter": "zoomblur"
     },
     {
      "on": "AI",
      "label": "AI ASSISTANT"
     },
     {
-     "on": "helper.",
-     "sticker": "heart",
-     "dur": 0.8
-    },
-    {
      "on": "Like",
      "img": "clippy",
-     "fit": "band",
+     "fit": "white",
      "enter": "spin"
     },
     {
      "on": "Clippy.",
      "sticker": "arrow",
      "at": [
-      760,
-      1250
+      790,
+      1200
      ],
-     "angle": -140
+     "angle": -135,
+     "dur": 0.8
     }
    ]
   },
@@ -321,34 +314,30 @@
     },
     {
      "on": 0,
-     "img": "verity_chainsaw",
-     "enter": "zoomblur",
-     "grade": "red"
+     "img": "hero",
+     "enter": "cut",
+     "grade": "red",
+     "sfx": [
+      "glitch"
+     ]
     },
     {
-     "on": "tall,",
-     "img": "verity_scary",
-     "enter": "cut",
-     "zoom": 1.5,
-     "fit": "band"
+     "on": "grows",
+     "img": "tall",
+     "enter": "zoomblur"
     },
     {
      "on": "smiling,",
-     "sticker": "ellipse",
-     "at": [
-      540,
-      900
-     ],
-     "size": [
-      520,
-      520
+     "img": "grin",
+     "enter": "cut",
+     "sfx": [
+      "impact"
      ]
     },
     {
      "on": "chases",
-     "img": "verity_chainsaw",
-     "enter": "whip",
-     "grade": "dark"
+     "img": "chase",
+     "enter": "whip"
     },
     {
      "on": "dark.",
@@ -362,9 +351,7 @@
     {
      "on": 0,
      "img": "song",
-     "fx": "fire",
-     "enter": "zoomblur",
-     "fit": "band"
+     "enter": "zoomblur"
     },
     {
      "on": "July",
@@ -373,22 +360,14 @@
     {
      "on": "fifty",
      "label": "57,000,000 VIEWS",
-     "note": "re-read the count on render day"
-    },
-    {
-     "on": "views.",
-     "sticker": "number",
-     "text": "57M",
-     "at": [
-      540,
-      1250
+     "sfx": [
+      "wow"
      ]
     }
    ]
   },
   {
    "text": "But Verity was born in a Minecraft horror series, by a YouTuber called ThatMob.",
-   "pause_before": 0.35,
    "beats": [
     {
      "on": 0,
@@ -400,19 +379,23 @@
     },
     {
      "on": 0,
-     "riser": true
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
     },
     {
      "on": "Verity",
      "img": "thatmob_movie",
-     "fx": "fire",
-     "enter": "zoomblur",
-     "fit": "band"
+     "enter": "zoomblur"
     },
     {
      "on": "Minecraft",
      "img": "minecraft",
-     "enter": "spin"
+     "enter": "spin",
+     "sfx": [
+      "mcboom"
+     ]
     },
     {
      "on": "Minecraft",
@@ -422,22 +405,22 @@
       900
      ],
      "size": [
-      700,
-      600
-     ]
+      760,
+      620
+     ],
+     "dur": 0.7
     },
     {
      "on": "horror",
-     "img": "thatmob_movie",
+     "img": "skeleton",
      "enter": "whip",
-     "grade": "dark",
-     "fit": "band"
+     "grade": "dark"
     },
     {
-     "on": "ThatMob.",
-     "img": "thatmob_2",
+     "on": "YouTuber",
+     "img": "avatar",
      "enter": "zoomblur",
-     "fit": "band"
+     "fit": "white"
     },
     {
      "on": "ThatMob.",
@@ -447,12 +430,14 @@
      "on": "ThatMob.",
      "sticker": "arrow",
      "at": [
-      300,
-      1300
+      540,
+      1400
      ],
-     "angle": -40
+     "angle": 0,
+     "dur": 0.8
     }
-   ]
+   ],
+   "pause_before": 0.35
   },
   {
    "text": "This makes Verity a Minecraft character.",
@@ -460,22 +445,15 @@
     {
      "on": 0,
      "img": "thatmob_movie",
-     "fx": "fire",
-     "enter": "cut",
-     "fit": "band"
+     "enter": "cut"
     },
     {
      "on": "Minecraft",
      "img": "minecraft",
      "fit": "spin_in",
-     "enter": "spin"
-    },
-    {
-     "on": "character.",
-     "sticker": "interrobang",
-     "at": [
-      780,
-      600
+     "enter": "spin",
+     "sfx": [
+      "impact"
      ]
     }
    ]

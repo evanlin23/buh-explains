@@ -96,7 +96,9 @@ The hook wording varies too: "Do you know…", "X isn't…", "X is older than…
 - Red **hand-drawn ellipse** and **3D red arrow** pointing at the named detail; a warning sign, a heart and flags as stickers.
 - Pink-glow labels for numbers and definitions ("TUNG = SOUND OF A DRUM", "3:00 AM").
 - **Something always moves, and the whole screen shakes, captions included** (owner, 2026-11-06: "we had like something moving on screen at all times, and the entire screen was shaking. also like red circles moving around and hearts etc"). Measured on Tung: only 2.8% of frames are near-still; 45% of frames move ≥ 4 px.
+- **The shake snaps, it doesn't wobble** (measured frame by frame, `reference/TUNG_BREAKDOWN.md`): hard 12–17 px jumps on 2–3 frames out of every 8 (a 0.27 s cycle), dead still in between, mostly sideways, never rotating.
 - **Stickers are alive:** red circles draw on, then orbit and slide; hearts jump to a new spot every beat; the warning sign blinks about 4×/s; arrows bob; flags wave; labels type on and scatter off.
+- **Sound effects come from myinstants** (owner, 2026-11-06): the classic meme kit (vine boom, fast whoosh, the Metal Gear alert, huh, bonk, the Discord ping, anime wow, the Minecraft explosion, a thunder strike, a glitch, a riser). Each file and its URL goes in the manifest. These are other people's uploads, so a claim is possible. If one gets claimed, swap that sound out.
 - **A ton of sound effects** (owner, 2026-11-06: "theres a ton a ton of sound effects and over the top editing"). Every picture change, sticker, label, flash and name gets its own hit. ep01 draft 2 has 57 in 28 s.
 - **Loudness:** Tung is mastered at −8 LUFS with a 1.6 LU range: loud and flat. Ours targets about −9 LUFS.
 - **Cut on the voice, not the music.** Tung's cuts land 0.07 s from a word onset, and no closer to the beat than chance.
