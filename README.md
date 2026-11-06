@@ -19,3 +19,4 @@ Finished renders, one file per episode, at 1080x1920 and 30 fps. The code that m
 | ep13 Who is Hide the Pain Harold in real life? | `ep13-harold.mp4` | buffer (evergreen) |
 
 All cuts have the viral pass (zoom-in hook, jump-cut build-up, payoff hit) and pass the QA audit (`buhexplains/pipeline/audit.py`): about -10 LUFS, true peak about -1 dBFS, 10-15 visual changes per 10 s.
+| ep14 Who built the mascot the internet wants dead? | `ep14-biberty.mp4` | **ASAP** (Boston protest was Oct 25) |
