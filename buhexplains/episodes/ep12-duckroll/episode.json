@@ -1,0 +1,324 @@
+{
+ "slug": "ep12-duckroll",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "duckroll": "Know Your Meme, 'Duckroll': a bait-and-switch from 4chan in 2006; moot's word filter changed 'egg' to 'duck', so 'eggroll' became 'duckroll'; the link led to a picture of a duck on wheels. It is the precursor of the Rickroll.",
+  "rickroll": "Know Your Meme, 'Rickroll': began on 4chan in May 2007 as a variant of the duckroll, with Rick Astley's 'Never Gonna Give You Up' (1987).",
+  "press": "TechCrunch, 'Duckroll' (2008 explainer of the 4chan word filter and the duck on wheels); wordorigins.org, 'Rickroll'."
+ },
+ "images": {
+  "rick": {
+   "url": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+   "points": {
+    "face": [
+     0.68,
+     0.28,
+     0.1
+    ]
+   }
+  },
+  "mask": {
+   "url": "https://i.ytimg.com/vi/vLqE4G9wieo/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=vLqE4G9wieo",
+   "points": {
+    "face": [
+     0.58,
+     0.35,
+     0.15
+    ]
+   }
+  },
+  "clover": {
+   "url": "https://i.ytimg.com/vi/e2bXmcab5y4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=e2bXmcab5y4",
+   "points": {
+    "clover": [
+     0.5,
+     0.5,
+     0.15
+    ]
+   }
+  },
+  "roll": {
+   "url": "https://i.ytimg.com/vi/58xOZwOJ9q8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=58xOZwOJ9q8",
+   "points": {
+    "roll": [
+     0.72,
+     0.4,
+     0.18
+    ]
+   }
+  },
+  "chan": {
+   "url": "https://i.ytimg.com/vi/Rxoy399wq9c/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=Rxoy399wq9c",
+   "points": {
+    "clover": [
+     0.75,
+     0.5,
+     0.15
+    ]
+   }
+  },
+  "duck": {
+   "url": "https://i.ytimg.com/vi/YbaTur4A1OU/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=YbaTur4A1OU",
+   "points": {
+    "head": [
+     0.12,
+     0.33,
+     0.08
+    ],
+    "duck": [
+     0.45,
+     0.55,
+     0.3
+    ],
+    "wheels": [
+     0.35,
+     0.85,
+     0.1
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "What did the internet trick you with before the {Rickroll}?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "rick",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "before",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.6
+    },
+    {
+     "on": "Rickroll?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Rickroll} we all know and love sends you to Rick Astley.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "rick",
+     "fit": "cover",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "Astley.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "But before Rick, there was another trap.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "mask",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "grade": "red"
+    },
+    {
+     "on": "trap.",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Back in two thousand six, four chan had a word filter.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "clover",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "six,",
+     "label": "2006",
+     "dur": 1.2
+    },
+    {
+     "on": "filter.",
+     "sticker": "ellipse",
+     "target": "clover",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Every time you typed egg, it turned into duck.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "roll",
+     "fit": "blurfill",
+     "enter": "cut",
+     "sfx": [
+      "pop"
+     ]
+    },
+    {
+     "on": "egg,",
+     "label": "EGG = DUCK",
+     "dur": 1.6
+    },
+    {
+     "on": "duck.",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "So eggroll became duckroll.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "roll",
+     "fit": "cover",
+     "enter": "spin"
+    },
+    {
+     "on": "eggroll",
+     "sticker": "arrow",
+     "target": "roll",
+     "from": -140,
+     "dur": 0.6
+    },
+    {
+     "on": "became",
+     "label": "EGGROLL = DUCKROLL",
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "People posted links promising something juicy.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "chan",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "juicy.",
+     "sticker": "ellipse",
+     "target": "clover",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "But click one, and you got...",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "mask",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "grade": "dark"
+    },
+    {
+     "on": "click",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -140,
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "a duck on wheels.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "duck",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "duck",
+     "sticker": "ellipse",
+     "target": "head",
+     "dur": 0.6
+    },
+    {
+     "on": "wheels.",
+     "sticker": "arrow",
+     "target": "wheels",
+     "from": -30,
+     "dur": 0.6
+    }
+   ]
+  }
+ ]
+}

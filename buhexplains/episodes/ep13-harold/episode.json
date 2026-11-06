@@ -1,0 +1,356 @@
+{
+ "slug": "ep13-harold",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "meme": "Know Your Meme, 'Hide the Pain Harold': stock photos of a Hungarian man on Dreamstime; the meme began on the Facepunch forums in 2011, where users named him Harold.",
+  "person": "Wikipedia / Wikiwand, 'András Arató': Hungarian retired electrical engineer from Kőszeg; a photographer saw his holiday photos online and asked him to model for stock photos; he later embraced the meme (commercials, TEDx talk).",
+  "now": "Know Your Meme editorial, 'Where Are They Now: András Arató'; Daily Dot and BroBible interviews (he was unhappy at first, then embraced it); YouTube: 'Waking up as a meme-hero | Andras Arato | TEDxKyiv'; Cloud 9+ 'Hide The Pain' (Official Music Video)."
+ },
+ "images": {
+  "suit": {
+   "url": "https://i.ytimg.com/vi/sYo-AlpcdZE/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=sYo-AlpcdZE",
+   "points": {
+    "face": [
+     0.42,
+     0.45,
+     0.17
+    ]
+   }
+  },
+  "meme": {
+   "url": "https://i.ytimg.com/vi/a3WnvDtDD2M/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=a3WnvDtDD2M",
+   "points": {
+    "face": [
+     0.7,
+     0.45,
+     0.15
+    ],
+    "stock": [
+     0.2,
+     0.45,
+     0.2
+    ]
+   }
+  },
+  "stock": {
+   "url": "https://i.ytimg.com/vi/a3WnvDtDD2M/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=a3WnvDtDD2M",
+   "crop": [
+    0.0,
+    0.0,
+    0.5,
+    1.0
+   ],
+   "points": {
+    "photos": [
+     0.5,
+     0.5,
+     0.35
+    ]
+   }
+  },
+  "town": {
+   "url": "https://i.ytimg.com/vi/uFUgziUeYrg/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=uFUgziUeYrg",
+   "crop": [
+    0.0,
+    0.1,
+    0.45,
+    1.0
+   ],
+   "points": {
+    "tower": [
+     0.35,
+     0.35,
+     0.2
+    ]
+   }
+  },
+  "tv": {
+   "url": "https://i.ytimg.com/vi/QHVJD7k1km8/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=QHVJD7k1km8",
+   "points": {
+    "face": [
+     0.57,
+     0.38,
+     0.15
+    ]
+   }
+  },
+  "coke": {
+   "url": "https://i.ytimg.com/vi/HGjWpF-trlg/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=HGjWpF-trlg",
+   "points": {
+    "face": [
+     0.47,
+     0.37,
+     0.12
+    ],
+    "bottle": [
+     0.27,
+     0.75,
+     0.06
+    ]
+   }
+  },
+  "mv": {
+   "url": "https://i.ytimg.com/vi/9Z04WcR1KIY/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=9Z04WcR1KIY",
+   "points": {
+    "face": [
+     0.25,
+     0.45,
+     0.12
+    ]
+   }
+  },
+  "news": {
+   "url": "https://i.ytimg.com/vi/RUfgoEfqzIo/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=RUfgoEfqzIo",
+   "points": {
+    "face": [
+     0.4,
+     0.38,
+     0.15
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "Who is {Hide the Pain Harold} in real life?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "suit",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "real",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.6
+    },
+    {
+     "on": "life?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Harold} we all know and love smiles through the pain in every stock photo.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "meme",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "pain",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.7
+    },
+    {
+     "on": "stock",
+     "img": "stock",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "photo.",
+     "sticker": "ellipse",
+     "target": "photos",
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "A photographer found his holiday pictures online and asked him to model.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "town",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "holiday",
+     "sticker": "ellipse",
+     "target": "tower",
+     "dur": 0.7
+    },
+    {
+     "on": "model.",
+     "img": "stock",
+     "fit": "cover",
+     "enter": "cut",
+     "sfx": [
+      "pop"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Then in twenty eleven, a forum found the photos and named him Harold.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "meme",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "eleven,",
+     "label": "2011",
+     "dur": 1.2
+    },
+    {
+     "on": "Harold.",
+     "label": "\"HAROLD\"",
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "At first, he wasn't happy about it.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "tv",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "happy",
+     "sticker": "x",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Then he leaned in. Commercials, a TEDx talk, even a music video.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "coke",
+     "fit": "blurfill",
+     "enter": "spin",
+     "sfx": [
+      "ding"
+     ]
+    },
+    {
+     "on": "Commercials,",
+     "sticker": "arrow",
+     "target": "bottle",
+     "from": -140,
+     "dur": 0.6
+    },
+    {
+     "on": "TEDx",
+     "label": "TEDx TALK",
+     "dur": 1.0
+    },
+    {
+     "on": "music",
+     "img": "mv",
+     "fit": "blurfill",
+     "enter": "whip"
+    }
+   ]
+  },
+  {
+   "text": "But his name isn't even Harold.",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "suit",
+     "fit": "cover",
+     "enter": "zoomblur",
+     "grade": "dark"
+    },
+    {
+     "on": "isn't",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "He's {András Arató}, a retired electrical engineer from Hungary.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "news",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "retired",
+     "label": "ELECTRICAL ENGINEER",
+     "dur": 1.6
+    },
+    {
+     "on": "Hungary.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  }
+ ]
+}
