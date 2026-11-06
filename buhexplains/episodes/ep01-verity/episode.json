@@ -32,40 +32,124 @@
     0.03,
     0.96,
     0.8
-   ]
+   ],
+   "points": {
+    "face": [
+     0.5,
+     0.45,
+     0.36
+    ],
+    "smile": [
+     0.5,
+     0.72,
+     0.3
+    ],
+    "eyes": [
+     0.5,
+     0.42,
+     0.16
+    ]
+   }
   },
   "caine_stage": {
    "url": "https://static.wikia.nocookie.net/tadc/images/a/a0/Caine.png/revision/latest?cb=20231022122929&path-prefix=pl",
    "focus": [
     0.5,
     0.35
-   ]
+   ],
+   "points": {
+    "head": [
+     0.4,
+     0.19,
+     0.17
+    ]
+   }
   },
   "caine": {
    "url": "https://static.wikitide.net/greatcharacterswiki/thumb/9/96/Caine_render.png/450px-Caine_render.png",
    "focus": [
     0.5,
     0.3
-   ]
+   ],
+   "points": {
+    "face": [
+     0.63,
+     0.27,
+     0.28
+    ],
+    "eye": [
+     0.72,
+     0.22,
+     0.1
+    ]
+   }
   },
   "verity_film": {
    "url": "https://www.my9jarocks.bz/wp-content/uploads/2026/10/Verity_Poster.jpg",
    "focus": [
     0.5,
     0.35
-   ]
+   ],
+   "points": {
+    "title": [
+     0.58,
+     0.81,
+     0.38
+    ],
+    "face": [
+     0.3,
+     0.24,
+     0.18
+    ]
+   }
   },
   "kid_yell": {
-   "url": "https://i.imgflip.com/1wuibi.jpg"
+   "url": "https://i.imgflip.com/1wuibi.jpg",
+   "points": {
+    "mouth": [
+     0.58,
+     0.33,
+     0.09
+    ],
+    "face": [
+     0.55,
+     0.28,
+     0.2
+    ]
+   }
   },
   "clippy": {
    "url": "https://upload.wikimedia.org/wikipedia/en/d/db/Clippy-letter.PNG",
-   "page": "https://en.wikipedia.org/wiki/Office_Assistant"
+   "page": "https://en.wikipedia.org/wiki/Office_Assistant",
+   "points": {
+    "clippy": [
+     0.47,
+     0.8,
+     0.22
+    ],
+    "bubble": [
+     0.5,
+     0.33,
+     0.45
+    ]
+   }
   },
   "smiley_box": {
    "url": "https://i.ytimg.com/vi/vc5BKrz0JaE/maxresdefault.jpg",
    "fallback": "https://i.ytimg.com/vi/vc5BKrz0JaE/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE"
+   "page": "https://www.youtube.com/watch?v=vc5BKrz0JaE",
+   "points": {
+    "smileys": [
+     0.5,
+     0.62,
+     0.24
+    ],
+    "one": [
+     0.36,
+     0.66,
+     0.05
+    ]
+   }
   },
   "song": {
    "url": "https://i.ytimg.com/vi/tVlKLpxyCBY/maxresdefault.jpg",
@@ -74,28 +158,90 @@
    "focus": [
     0.78,
     0.5
-   ]
+   ],
+   "points": {
+    "monster": [
+     0.85,
+     0.42,
+     0.14
+    ],
+    "title": [
+     0.32,
+     0.48,
+     0.27
+    ]
+   }
   },
   "emoji": {
-   "url": "https://static.vecteezy.com/system/resources/previews/051/664/173/non_2x/grinning-face-emoji-realistic-free-png.png"
+   "url": "https://static.vecteezy.com/system/resources/previews/051/664/173/non_2x/grinning-face-emoji-realistic-free-png.png",
+   "points": {
+    "face": [
+     0.5,
+     0.5,
+     0.34
+    ]
+   }
   },
   "tall": {
    "url": "https://i.pinimg.com/originals/53/eb/c5/53ebc520ac607c6da03a98db1a2ecbe4.jpg?nii=t",
    "focus": [
     0.5,
     0.4
-   ]
+   ],
+   "points": {
+    "face": [
+     0.22,
+     0.33,
+     0.16
+    ]
+   }
   },
   "grin": {
-   "url": "https://i.pinimg.com/736x/6d/d1/78/6dd1782894c3b06d94c877b4dc2481eb.jpg"
+   "url": "https://i.pinimg.com/736x/6d/d1/78/6dd1782894c3b06d94c877b4dc2481eb.jpg",
+   "points": {
+    "mouth": [
+     0.5,
+     0.82,
+     0.27
+    ],
+    "eyes": [
+     0.5,
+     0.42,
+     0.33
+    ]
+   }
   },
   "chase": {
-   "url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ff74ba26-04a3-4424-8c6f-8dfeab0c7f1d/dfhlzjk-2f383b73-cda4-4770-b688-4cea1c18a116.jpg/v1/fill/w_1280,h_1280,q_75,strp/scary_monster_by_willem505_dfhlzjk-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2ZmNzRiYTI2LTA0YTMtNDQyNC04YzZmLThkZmVhYjBjN2YxZFwvZGZobHpqay0yZjM4M2I3My1jZGE0LTQ3NzAtYjY4OC00Y2VhMWMxOGExMTYuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.YUmEqRhhT8GDoVnT-RajMqHsJJQ8IwFizo0IqVaf2BE"
+   "url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ff74ba26-04a3-4424-8c6f-8dfeab0c7f1d/dfhlzjk-2f383b73-cda4-4770-b688-4cea1c18a116.jpg/v1/fill/w_1280,h_1280,q_75,strp/scary_monster_by_willem505_dfhlzjk-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2ZmNzRiYTI2LTA0YTMtNDQyNC04YzZmLThkZmVhYjBjN2YxZFwvZGZobHpqay0yZjM4M2I3My1jZGE0LTQ3NzAtYjY4OC00Y2VhMWMxOGExMTYuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.YUmEqRhhT8GDoVnT-RajMqHsJJQ8IwFizo0IqVaf2BE",
+   "points": {
+    "eyes": [
+     0.6,
+     0.3,
+     0.14
+    ],
+    "monster": [
+     0.56,
+     0.5,
+     0.3
+    ]
+   }
   },
   "thatmob_movie": {
    "url": "https://i.ytimg.com/vi/f6f3PhauXyg/maxresdefault.jpg",
    "fallback": "https://i.ytimg.com/vi/f6f3PhauXyg/hqdefault.jpg",
-   "page": "https://www.youtube.com/watch?v=f6f3PhauXyg"
+   "page": "https://www.youtube.com/watch?v=f6f3PhauXyg",
+   "points": {
+    "verity": [
+     0.45,
+     0.62,
+     0.16
+    ],
+    "figure": [
+     0.48,
+     0.2,
+     0.09
+    ]
+   }
   },
   "skeleton": {
    "url": "https://static.wikia.nocookie.net/verityminecraft/images/4/48/Brickety_in_his_ultima_form.png/revision/latest?cb=20261016001024",
@@ -103,14 +249,45 @@
     0.35,
     0.5
    ],
-   "page": "https://verityminecraft.fandom.com"
+   "page": "https://verityminecraft.fandom.com",
+   "points": {
+    "body": [
+     0.2,
+     0.45,
+     0.17
+    ],
+    "smiley": [
+     0.52,
+     0.47,
+     0.07
+    ]
+   }
   },
   "avatar": {
    "url": "https://yt3.googleusercontent.com/aLcQD7ClHlpkdIsF_gEgZgbp4dO4pDFANnYTtw0-v2fuaBavnE7uje6j7rEnkZ3hvuOhYJLcFw=s900-c-k-c0x00ffffff-no-rj",
-   "page": "https://www.youtube.com/@ThatMob"
+   "page": "https://www.youtube.com/@ThatMob",
+   "points": {
+    "eyes": [
+     0.5,
+     0.4,
+     0.3
+    ]
+   }
   },
   "minecraft": {
-   "url": "https://en.shiftdelete.net/wp-content/uploads/2023/02/Minecraft.jpeg"
+   "url": "https://en.shiftdelete.net/wp-content/uploads/2023/02/Minecraft.jpeg",
+   "points": {
+    "steve": [
+     0.55,
+     0.42,
+     0.12
+    ],
+    "creeper": [
+     0.72,
+     0.76,
+     0.07
+    ]
+   }
   }
  },
  "lines": [
@@ -120,31 +297,21 @@
     {
      "on": 0,
      "img": "hero",
-     "enter": "zoomblur",
-     "fit": "band"
-    },
-    {
-     "on": 0,
-     "sticker": "arrow",
-     "at": [
-      560,
-      1380
-     ],
-     "angle": -25,
-     "dur": 0.9
+     "fit": "band",
+     "enter": "zoomblur"
     },
     {
      "on": 0,
      "sticker": "ellipse",
-     "at": [
-      540,
-      830
-     ],
-     "size": [
-      760,
-      560
-     ],
+     "target": "face",
      "dur": 0.9
+    },
+    {
+     "on": 0,
+     "sticker": "arrow",
+     "target": "face",
+     "dur": 0.9,
+     "from": -20
     },
     {
      "on": "isn't",
@@ -158,15 +325,19 @@
     {
      "on": "Amazing",
      "img": "caine_stage",
-     "enter": "whip"
+     "enter": "whip",
+     "fit": "blurfill"
+    },
+    {
+     "on": "Digital",
+     "sticker": "arrow",
+     "target": "head",
+     "from": 30
     },
     {
      "on": "Circus?",
-     "sticker": "interrobang",
-     "at": [
-      790,
-      560
-     ]
+     "sticker": "ellipse",
+     "target": "head"
     }
    ]
   },
@@ -176,14 +347,17 @@
     {
      "on": 0,
      "img": "hero",
-     "enter": "cut",
-     "fit": "band"
+     "fit": "band",
+     "enter": "cut"
     },
     {
      "on": "love",
      "img": "emoji",
      "fit": "white",
-     "enter": "cut"
+     "enter": "cut",
+     "sfx": [
+      "rizz"
+     ]
     },
     {
      "on": "love",
@@ -193,39 +367,26 @@
     {
      "on": "yellow",
      "img": "smiley_box",
-     "enter": "whip"
+     "enter": "whip",
+     "fit": "blurfill"
     },
     {
      "on": "smiley",
      "sticker": "ellipse",
-     "at": [
-      540,
-      960
-     ],
-     "size": [
-      760,
-      460
-     ],
-     "dur": 0.8
+     "target": "smileys",
+     "dur": 0.9
     },
     {
      "on": "kid",
      "img": "kid_yell",
-     "enter": "zoomblur"
+     "enter": "zoomblur",
+     "fit": "blurfill"
     },
     {
      "on": "yells",
-     "sticker": "interrobang",
-     "at": [
-      780,
-      620
-     ]
-    },
-    {
-     "on": "love",
-     "sfx": [
-      "rizz"
-     ]
+     "sticker": "arrow",
+     "target": "mouth",
+     "from": -30
     }
    ]
   },
@@ -238,25 +399,15 @@
      "enter": "whip"
     },
     {
-     "on": "Caine.",
+     "on": "looks",
      "sticker": "ellipse",
-     "at": [
-      540,
-      700
-     ],
-     "size": [
-      620,
-      560
-     ],
-     "dur": 0.6
+     "target": "face",
+     "dur": 0.8
     },
     {
      "on": "isn't",
      "sticker": "x",
-     "at": [
-      540,
-      860
-     ]
+     "target": "face"
     },
     {
      "on": "isn't",
@@ -279,15 +430,18 @@
       540,
       760
      ],
-     "dur": 0.6
+     "dur": 0.5
+    },
+    {
+     "on": "movie",
+     "sticker": "ellipse",
+     "target": "title",
+     "dur": 0.9
     },
     {
      "on": "either.",
      "sticker": "x",
-     "at": [
-      540,
-      860
-     ]
+     "target": "title"
     }
    ]
   },
@@ -297,12 +451,24 @@
     {
      "on": 0,
      "img": "hero",
-     "enter": "zoomblur",
-     "fit": "band"
+     "fit": "band",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "friendly",
+     "sfx": [
+      "heavenly"
+     ]
     },
     {
      "on": "AI",
      "label": "AI ASSISTANT"
+    },
+    {
+     "on": "helper.",
+     "sticker": "ellipse",
+     "target": "eyes",
+     "dur": 0.5
     },
     {
      "on": "Like",
@@ -313,18 +479,8 @@
     {
      "on": "Clippy.",
      "sticker": "arrow",
-     "at": [
-      790,
-      1200
-     ],
-     "angle": -135,
-     "dur": 0.8
-    },
-    {
-     "on": "friendly",
-     "sfx": [
-      "heavenly"
-     ]
+     "target": "clippy",
+     "from": -140
     }
    ]
   },
@@ -342,17 +498,24 @@
     {
      "on": 0,
      "img": "hero",
+     "fit": "band",
      "enter": "cut",
      "grade": "red",
      "sfx": [
       "glitch"
-     ],
-     "fit": "band"
+     ]
     },
     {
      "on": "grows",
      "img": "tall",
-     "enter": "zoomblur"
+     "enter": "zoomblur",
+     "fit": "blurfill"
+    },
+    {
+     "on": "tall,",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -45
     },
     {
      "on": "smiling,",
@@ -360,12 +523,24 @@
      "enter": "cut",
      "sfx": [
       "impact"
-     ]
+     ],
+     "fit": "blurfill"
+    },
+    {
+     "on": "smiling,",
+     "sticker": "ellipse",
+     "target": "mouth"
     },
     {
      "on": "chases",
      "img": "chase",
-     "enter": "whip"
+     "enter": "whip",
+     "fit": "blurfill"
+    },
+    {
+     "on": "dark.",
+     "sticker": "ellipse",
+     "target": "eyes"
     },
     {
      "on": "dark.",
@@ -379,11 +554,18 @@
     {
      "on": 0,
      "img": "song",
-     "enter": "zoomblur"
+     "enter": "zoomblur",
+     "fit": "blurfill"
     },
     {
      "on": "July",
      "label": "JULY 2026"
+    },
+    {
+     "on": "It's",
+     "sticker": "ellipse",
+     "target": "title",
+     "dur": 1.6
     },
     {
      "on": "fifty",
@@ -391,6 +573,12 @@
      "sfx": [
       "wow"
      ]
+    },
+    {
+     "on": "views.",
+     "sticker": "arrow",
+     "target": "monster",
+     "from": -20
     }
    ]
   },
@@ -415,7 +603,14 @@
     {
      "on": "Verity",
      "img": "thatmob_movie",
-     "enter": "zoomblur"
+     "enter": "zoomblur",
+     "fit": "blurfill"
+    },
+    {
+     "on": "Verity",
+     "sticker": "ellipse",
+     "target": "verity",
+     "dur": 0.7
     },
     {
      "on": "Minecraft",
@@ -423,32 +618,34 @@
      "enter": "spin",
      "sfx": [
       "mcboom"
-     ]
-    },
-    {
-     "on": "Minecraft",
-     "sticker": "ellipse",
-     "at": [
-      540,
-      900
      ],
-     "size": [
-      760,
-      620
-     ],
-     "dur": 0.7
+     "fit": "blurfill"
     },
     {
      "on": "horror",
+     "sticker": "arrow",
+     "target": "creeper",
+     "from": -150,
+     "dur": 0.45
+    },
+    {
+     "on": "series,",
      "img": "skeleton",
      "enter": "whip",
-     "grade": "dark"
+     "grade": "dark",
+     "fit": "blurfill"
+    },
+    {
+     "on": "series,",
+     "sticker": "ellipse",
+     "target": "body",
+     "dur": 0.6
     },
     {
      "on": "YouTuber",
      "img": "avatar",
-     "enter": "zoomblur",
-     "fit": "white"
+     "fit": "white",
+     "enter": "zoomblur"
     },
     {
      "on": "ThatMob.",
@@ -457,12 +654,8 @@
     {
      "on": "ThatMob.",
      "sticker": "arrow",
-     "at": [
-      540,
-      1400
-     ],
-     "angle": 0,
-     "dur": 0.8
+     "target": "eyes",
+     "from": 0
     }
    ],
    "pause_before": 0.25
@@ -473,7 +666,13 @@
     {
      "on": 0,
      "img": "thatmob_movie",
-     "enter": "cut"
+     "enter": "cut",
+     "fit": "blurfill"
+    },
+    {
+     "on": "Verity",
+     "sticker": "ellipse",
+     "target": "verity"
     },
     {
      "on": "Minecraft",

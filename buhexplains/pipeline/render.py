@@ -100,7 +100,8 @@ def build(ep, words):
             if "sticker" in b:
                 kind = b["sticker"]
                 tl["sticker"].append(dict(t=t, end=t + b["dur"] if "dur" in b else l1 + 0.1, kind=kind, at=b.get("at", [540, 900]),
-                                          size=b.get("size"), angle=b.get("angle", 0), text=b.get("text"), seed=len(tl["sticker"])))
+                                          size=b.get("size"), angle=b.get("angle", 0), text=b.get("text"), seed=len(tl["sticker"]),
+                                          target=b.get("target"), **({"from": b["from"]} if "from" in b else {})))
                 tl["sfx"].append((t, {"ellipse": "scribble", "arrow": "whipstk", "heart": "heartpop", "warning": "alarm",
                                       "interrobang": "boing", "x": "x", "number": "ding"}[kind]))
             if "label" in b:
@@ -214,8 +215,25 @@ def paste(frame, im, cx, cy, scale=1.0, rot=0.0, alpha=1.0):
     frame.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
 
 
-def draw_sticker(frame, s, t):
+def draw_sticker(frame, s, t, points=None):
     a = t - s["t"]; k = s["kind"]; x, y = s["at"]; rnd = random.Random(s["seed"])
+    tgt = (points or {}).get(s.get("target")) if s.get("target") else None
+    if tgt:  # lock onto a meaningful spot in the picture, wherever the picture is right now
+        x, y = GEO["map"](tgt[0], tgt[1]); rad = tgt[2] * GEO["pxw"]
+        if k == "ellipse":
+            draw_ellipse(frame, x + 10 * math.cos(a * 9), y + 8 * math.sin(a * 11), rad * 1.25, rad * 1.0,
+                         8 * math.sin(a * 6) + s["seed"] * 17, min(1, a / 0.18), s["seed"])
+            return
+        if k == "arrow":  # the tip touches the target; it comes in from `from` degrees (0 = from below)
+            ang = s.get("from", -25); r = math.radians(ang)
+            px_, py_ = -math.sin(r), -math.cos(r)            # the way the arrow points
+            back = rad * 1.05 + 150 + (1 - ease(a / 0.14)) * 380 + 22 * (0.5 + 0.5 * math.sin(a * 2 * math.pi * 2.6))
+            paste(frame, stk("arrow", arrow_img), x - px_ * back, y - py_ * back, 1.0, ang)
+            return
+        if k == "x":
+            paste(frame, stk("x", lambda: text_sticker("X", 520, (232, 20, 20, 255), 14)), x, y,
+                  max(0.4, min(1.4, rad / 260)) * (1.6 - 0.6 * ease(a / 0.12, 2.5)), -8 + 4 * math.sin(a * 13))
+            return
     if k == "ellipse":
         rx, ry = (s["size"] or [560, 480])[0] / 2, (s["size"] or [560, 480])[1] / 2
         draw_ellipse(frame, x + 30 * math.cos(a * 7), y + 22 * math.sin(a * 9), rx, ry, 12 * math.sin(a * 5) + s["seed"] * 17,
@@ -330,25 +348,57 @@ def cover(im, zoom, dx, dy, focus=(0.5, 0.5)):
     fx = min(max(focus[0] * im.width, cw / 2), im.width - cw / 2); fy = min(max(focus[1] * im.height, ch / 2), im.height - ch / 2)
     cx = fx + dx * min(fx - cw / 2, im.width - cw / 2 - fx) * 0.6; cy = fy + dy * min(fy - ch / 2, im.height - ch / 2 - fy) * 0.6
     box = (cx - cw / 2, cy - ch / 2, cx + cw / 2, cy + ch / 2)
+    GEO["map"] = lambda u, v, cx=cx, cy=cy, s=s, iw=im.width, ih=im.height: ((u * iw - cx) * s + W / 2, (v * ih - cy) * s + H / 2)
+    GEO["pxw"] = im.width * s
     return im.resize((W, H), Image.BILINEAR, box=box)
+
+
+GEO = {"map": lambda u, v: (W / 2, H / 2), "pxw": 800.0}   # set by base_frame every frame
+
+
+def card_geo(card_w, card_h, cx, cy, scale):
+    GEO["map"] = lambda u, v: (cx + (u - 0.5) * card_w * scale, cy + (v - 0.5) * card_h * scale)
+    GEO["pxw"] = card_w * scale
+
+
+_BLUR = {}
+
+
+def blur_bg(key, im):
+    """The picture itself, filling the frame, heavily blurred and darkened: the backdrop for a whole-picture shot."""
+    if key not in _BLUR:
+        b = cover(im, 1.15, 0, 0).filter(ImageFilter.GaussianBlur(40)); _BLUR[key] = ImageEnhance.Brightness(b).enhance(0.55)
+    return _BLUR[key]
 
 
 def base_frame(ev, spec, t, fire, boom_frames, booms):
     a = t - ev["t"]; im = picture(ev["key"], spec, ev["grade"]); foc = tuple(spec.get("focus", (0.5, 0.5)))
-    drift = 1.06 + 0.05 * min(a / 3.0, 1)                                         # a slow push; the snaps and stickers do the moving
+    drift = 1.0 + 0.04 * min(a / 3.0, 1)        # a gentle push only (owner: "is the stuff too zoomed in?" it was: 22-39% visible)
     dx, dy = 0.0, 0.0
     if ev["fit"] == "white":
         card = picture_rgba(ev["key"], spec); sc0 = min(W * 0.8 / card.width, H * 0.5 / card.height)
         fr = Image.new("RGBA", (W, H), (250, 250, 250, 255))
         rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" and a < 0.3 else 3 * math.sin(a * 2.2)
-        paste(fr, card, W / 2, H * 0.46, sc0 * drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1), rot)
+        sc = sc0 * drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1)
+        paste(fr, card, W / 2, H * 0.46, sc, rot); card_geo(card.width, card.height, W / 2, H * 0.46, sc)
         frame = fr.convert("RGB")
+    elif ev["fit"] == "blurfill":
+        # the whole picture, full width, over a blurred copy of itself: nothing important gets cropped
+        bg = blur_bg(ev["key"] + str(ev["grade"]), im).copy().convert("RGBA")
+        sc0 = min(W * 1.04 / im.width, H * 0.72 / im.height); sc = sc0 * drift
+        if ev["enter"] == "zoomblur" and a < 0.2: sc *= 1 + 0.35 * (1 - a / 0.2)
+        rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" and a < 0.3 else 0
+        if ev["enter"] == "spin": sc *= max(0.05, ease(a / 0.3, 1.4))
+        xoff = W * 0.9 * (1 - ease(a / 0.16, 1.0)) if ev["enter"] == "whip" and a < 0.16 else 0
+        paste(bg, im.convert("RGBA"), W / 2 + xoff, H * 0.47, sc, rot); card_geo(im.width, im.height, W / 2 + xoff, H * 0.47, sc)
+        frame = bg.convert("RGB")
     elif ev["fit"] in ("band", "spin_in"):
         bg = Image.fromarray(fire[int(t * FPS) % len(fire)]).resize((W, H), Image.BILINEAR).convert("RGB")
         card = im.copy(); sc0 = min(W * 1.02 / card.width, H * 0.62 / card.height); card = card.resize((int(card.width * sc0), int(card.height * sc0)))
         sc = drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1)
         rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" else 4 * math.sin(a * 2)
         fr = bg.convert("RGBA"); paste(fr, card.convert("RGBA"), W / 2, H * 0.47, sc, rot); frame = fr.convert("RGB")
+        card_geo(card.width, card.height, W / 2, H * 0.47, sc)
     else:
         z = drift * ev["zoom"] * spec.get("zoom", 1.0)
         if ev["enter"] == "zoomblur" and a < 0.2:
@@ -403,7 +453,7 @@ class Shaker:
         hot = any(0 <= t - h < 0.4 for h in self.hits)
         amp = 16.0 if hot else 8.0
         x = 0.3 * self.prev[0] + self.rng.normal(0, amp); y = 0.3 * self.prev[1] + self.rng.normal(0, amp * 0.55)
-        x, y = float(np.clip(x, -3 * amp, 3 * amp)), float(np.clip(y, -3 * amp, 3 * amp))
+        x, y = float(np.clip(x, -1.6 * amp, 1.6 * amp)), float(np.clip(y, -1.6 * amp, 1.6 * amp))
         zoom = 1.0 + abs(self.rng.normal(0, 0.012 if hot else 0.006))
         prev, self.prev = self.prev, (x, y)
         return prev, (x, y), zoom
@@ -411,7 +461,7 @@ class Shaker:
 
 def shake_layer(scene, prev, cur, zoom):
     """Shift the scene to `cur`, with a 4-tap motion blur along the path from `prev`."""
-    big = scene.resize((int(W * 1.08 * zoom), int(H * 1.08 * zoom)), Image.BILINEAR)
+    big = scene.resize((int(W * 1.05 * zoom), int(H * 1.05 * zoom)), Image.BILINEAR)
     ox, oy = (big.width - W) / 2, (big.height - H) / 2
     acc = None
     for k in range(4):
@@ -429,7 +479,7 @@ def render_frame(ep, tl, t, shaker, fire, boom_frames):
     use_fire = on_fire or cur["fit"] in ("band", "spin_in")
     frame = base_frame(cur, ep["images"][cur["key"]], t, fire if use_fire else None, boom_frames, tl["boom"])
     for s_ in tl["sticker"]:
-        if s_["t"] <= t < s_["end"]: draw_sticker(frame, s_, t)
+        if s_["t"] <= t < s_["end"]: draw_sticker(frame, s_, t, ep["images"][cur["key"]].get("points"))
     for i, lt in enumerate(tl["lightning"]): bolt(frame, lt, t, i * 31)
     for fl in tl["flash"]:
         if 0 <= t - fl < 0.1: frame.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.1)))))

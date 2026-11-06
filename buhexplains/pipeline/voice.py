@@ -196,29 +196,42 @@ def main(slug):
                 cur.append(i)
         if cur: segs.append(("say", cur))
         tokens = [tok.replace("{", "").replace("}", "") for tok in tokens]
-        matched = total = 0; heard_all = []
-        for kind, idx in segs:
-            if kind == "bite":
-                key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
-                a = (bites_full if len(idx) > 1 else bites)[key]
-                a = trim(a, lead=0.0, pad=0.0)
-                span = (len(a) / SR) / len(idx)
-                for j, i in enumerate(idx):  # the group's words share the bite's time, for captions
-                    words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + j * span, 3),
-                                  "end": round(t + (j + 1) * span, 3), "bite": True})
-                heard_all.append("[BITE]")
-            else:
-                sub = [tokens[i] for i in idx]
-                a, _sr = k.create(" ".join(sub), voice=v["voice"], speed=v["speed"], lang="en-us"); a = rs(a, _sr)
-                a = squeeze(trim(np.asarray(a, np.float32), thr=0.012, lead=0.06 if (li == 0 and idx[0] == 0) else 0.015, pad=0.0))
-                cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1
-                sf.write(cp, a, SR)
-                times, heard = word_times(cp, sub, model)
-                matched += sum(1 for x in times if x); total += len(sub); heard_all += heard
-                dur = len(a) / SR
-                for i, (s_, e_) in zip(idx, fill(times, sub, dur)):
-                    words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + s_, 3), "end": round(t + min(e_, dur), 3)})
-            parts.append(a); t += len(a) / SR
+        # Speak the whole line in one breath, then swap the spoken name for the bite inside it. Synthesizing the
+        # pieces separately made "Do you know" end like a finished sentence before the bite (owner: "did you know [pause] verity").
+        speak, _sr = k.create(" ".join(tokens), voice=v["voice"], speed=v["speed"], lang="en-us")
+        speak = squeeze(trim(rs(speak, _sr), thr=0.012, lead=0.06 if li == 0 else 0.015, pad=0.0))
+        cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1; sf.write(cp, speak, SR)
+        times, heard = word_times(cp, tokens, model)
+        matched = sum(1 for x in times if x); total = len(tokens); heard_all = heard
+        dur = len(speak) / SR; times = fill(times, tokens, dur)
+        groups = [idx for kind, idx in segs if kind == "bite"]
+        pieces, cursor, shift, out_times = [], 0, 0.0, {}
+        for idx in groups:
+            c0 = int(max(0.0, times[idx[0]][0] - 0.02) * SR)
+            nxt = idx[-1] + 1
+            c1 = int((times[nxt][0] - 0.01 if nxt < len(tokens) else dur) * SR)
+            for i in range(len(tokens)):
+                if cursor <= int(times[i][0] * SR) < c0 and i not in idx:
+                    out_times[i] = (times[i][0] + shift, times[i][1] + shift)
+            pieces.append(speak[cursor:c0])
+            key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
+            bite = (bites_full if len(idx) > 1 else bites)[key]
+            bite = trim(bite, thr=0.01, lead=0.0, pad=0.0)
+            t_b = (sum(len(p_) for p_ in pieces)) / SR
+            span = len(bite) / SR / len(idx)
+            for j, i in enumerate(idx): out_times[i] = (t_b + j * span, t_b + (j + 1) * span)
+            pieces.append(bite)
+            shift += len(bite) / SR - (c1 - c0) / SR
+            cursor = c1
+        for i in range(len(tokens)):
+            if i not in out_times: out_times[i] = (times[i][0] + shift, times[i][1] + shift)
+        pieces.append(speak[cursor:])
+        a = np.concatenate(pieces)
+        for i in range(len(tokens)):
+            s_, e_ = out_times[i]
+            words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + s_, 3), "end": round(t + e_, 3),
+                          **({"bite": True} if any(i in g for g in groups) else {})})
+        parts.append(a); t += len(a) / SR
         cov = matched / total if total else 1.0
         report.append((li, round(cov, 2), " ".join(heard_all)))
     words.sort(key=lambda w: (w["line"], w["i"]))
