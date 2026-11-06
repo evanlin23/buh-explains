@@ -13,7 +13,16 @@ import soundfile as sf
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.path.dirname(ROOT)
 MODELS = os.path.join(REPO, ".cache", "models")
-SR = 24000
+SR = 48000  # whole voice track at 48 kHz: a 24 kHz track cut the bites' top end (owner: "muffled")
+
+
+def rs(a, sr_in):
+    import librosa
+    a = np.asarray(a, np.float32)
+    return a if sr_in == SR else librosa.resample(a, orig_sr=sr_in, target_sr=SR, res_type="soxr_hq").astype(np.float32)
+
+
+BITE_EQ = "highpass=f=110,equalizer=f=3500:t=q:w=1.2:g=4,highshelf=f=6500:g=4,aexciter=amount=1.5:drive=5:freq=5000"
 
 
 def norm(w):
@@ -132,10 +141,11 @@ def bite_audio(name, cfg, kokoro):
     Until then: a placeholder, a second voice saying the name, pitched down and crushed so it reads as "not the narrator"."""
     path = cfg.get("bite")
     if path:
-        a, sr = sf.read(os.path.join(REPO, path), dtype="float32", always_2d=True)
-        a = a.mean(1)
-        return np.interp(np.arange(0, len(a), sr / SR), np.arange(len(a)), a).astype(np.float32)
-    a, _ = kokoro.create(name + "!", voice="am_onyx", speed=1.15, lang="en-us")
+        import subprocess
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", os.path.join(REPO, path), "-af", BITE_EQ, "-ac", "1", "-ar", str(SR),
+                              "-f", "f32le", "-"], capture_output=True, check=True).stdout
+        return np.frombuffer(raw, np.float32).copy()
+    a, _sr = kokoro.create(name + "!", voice="am_onyx", speed=1.15, lang="en-us"); a = rs(a, _sr)
     a = trim(np.asarray(a, np.float32))
     a = np.interp(np.arange(0, len(a), 0.9), np.arange(len(a)), a).astype(np.float32)  # a bit lower
     a = np.tanh(a * 4.0) * 0.8                                                            # crushed
@@ -153,8 +163,8 @@ def main(slug):
     os.makedirs(od, exist_ok=True)
     k = Kokoro(os.path.join(MODELS, "kokoro-v1.0.onnx"), os.path.join(MODELS, "voices-v1.0.bin"))
     model = WhisperModel("base.en", device="cpu", compute_type="int8", download_root=os.path.join(MODELS, "whisper"))
-    ref, _ = k.create("This is a level check for the narrator.", voice=v["voice"], speed=v["speed"], lang="en-us")
-    ref = np.asarray(ref, np.float32); ref_rms = np.sqrt(np.mean(ref[np.abs(ref) > 0.02] ** 2))
+    ref, _sr = k.create("This is a level check for the narrator.", voice=v["voice"], speed=v["speed"], lang="en-us")
+    ref = rs(ref, _sr); ref_rms = np.sqrt(np.mean(ref[np.abs(ref) > 0.02] ** 2))
 
     def level(a):  # a bite plays as loud as the narrator (a touch hotter), never quieter
         r = np.sqrt(np.mean(a[np.abs(a) > 0.02] ** 2)) + 1e-9
@@ -199,7 +209,7 @@ def main(slug):
                 heard_all.append("[BITE]")
             else:
                 sub = [tokens[i] for i in idx]
-                a, _ = k.create(" ".join(sub), voice=v["voice"], speed=v["speed"], lang="en-us")
+                a, _sr = k.create(" ".join(sub), voice=v["voice"], speed=v["speed"], lang="en-us"); a = rs(a, _sr)
                 a = squeeze(trim(np.asarray(a, np.float32), thr=0.012, lead=0.06 if (li == 0 and idx[0] == 0) else 0.015, pad=0.0))
                 cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1
                 sf.write(cp, a, SR)

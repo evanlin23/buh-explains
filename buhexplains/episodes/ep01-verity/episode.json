@@ -4,17 +4,17 @@
   "Verity": {
    "bite": ".cache/bites/verity_short.wav",
    "bite_full": ".cache/bites/verity_full.wav",
-   "source": "https://www.myinstants.com/media/sounds/hey-its-me-its-verity.mp3 (\"Hey, it's me, it's Verity!\"; short bite = \"it's Verity!\")",
-   "note": "owner, 2026-11-06: the most recognizable Verity line, found online",
-   "bite_src": "https://www.myinstants.com/media/sounds/hey-its-me-its-verity.mp3",
+   "bite_src": "https://www.myinstants.com/media/sounds/verity-minecraft-greeting.mp3",
    "bite_cut": [
-    1.8,
-    2.72
+    1.28,
+    1.8
    ],
+   "bite_full_src": "https://www.myinstants.com/media/sounds/hey-its-me-its-verity.mp3",
    "bite_full_cut": [
     0.0,
     2.75
-   ]
+   ],
+   "note": "owner, 2026-11-06: most recognizable line, found online; 'muffled' fixed. Single mentions = 'Verity!' from ThatMob's movie greeting ('Hello, I'm Verity, your personal helper friend'), clear on its own. Song-title mention = the meme line 'Hey, it's me, it's Verity!' (sung 'Varity', unclear when cut to one word)."
   }
  },
  "voice": {

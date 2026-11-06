@@ -505,7 +505,7 @@ KIT = {  # event -> files in buhexplains/assets/sfx (the owner's saved sounds) o
     "typing": ["ding-sound-effect_2"], "zap": ["lightning_2"], "riser": ["riser"], "glitch": ["glitch_1"], "wow": ["anime_wow"],
     "mcboom": ["explosion_3"], "reveal": ["among-us-role-reveal-sound"], "rizz": ["rizz-sound-effect"], "heavenly": ["heavenly"], "bong": ["taco-bell-bong-sfx"],
 }
-GAIN = {"boom": 0.45, "whoosh": 0.5, "whip": 0.5, "spin": 0.5, "pop": 0.6, "impact": 0.9, "zap": 0.6, "riser": 0.6, "wow": 0.7,
+GAIN = {"boom": 0.18, "whoosh": 0.5, "whip": 0.5, "spin": 0.5, "pop": 0.6, "impact": 0.9, "zap": 0.6, "riser": 0.6, "wow": 0.7,
         "alarm": 0.7, "x": 0.8, "heartpop": 0.5, "ding": 0.6, "typing": 0.5, "scribble": 0.4, "boing": 0.8, "mcboom": 0.8, "reveal": 0.9, "rizz": 0.8, "heavenly": 0.7, "bong": 0.9}
 ALIGN_PEAK = {"whoosh", "whip", "spin", "whipstk", "riser", "boom"}   # build-ups: their peak lands on the event
 MAXLEN = {"zap": 2.2, "wow": 3.0, "x": 1.4, "reveal": 2.6, "heavenly": 1.6, "ding": 1.2, "typing": 1.0}                                      # only very long files get capped
@@ -584,6 +584,11 @@ def mix(slug, tl, dur):
             bed = src[a0:]
         bed = bed[: len(out)]
         bed = bed * 10 ** ((v_l + m.get("under_voice_db", -5) - lufs(bed)) / 20)
+        duck = np.ones(len(bed), np.float32); r = int(0.03 * SR)
+        for w0, w1 in ep_music.get("bites", []):  # the name pops out of the music
+            i0, i1 = max(0, int(w0 * SR) - r), min(len(duck), int(w1 * SR) + r)
+            duck[i0:i1] = 0.5
+        duck = np.convolve(duck, np.ones(r) / r, "same").astype(np.float32); bed = bed * duck
         bed = bed.copy(); fo = int(0.3 * SR); bed[-fo:] *= np.linspace(1, 0, fo)
         out[: len(bed)] += bed
         sf.write(os.path.join(od, "stem_music.wav"), bed[:int(dur * SR)], SR)
@@ -605,6 +610,7 @@ def main(slug, preview=False):
     ep = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))
     wj = json.load(open(os.path.join(REPO, "out", slug, "words.json")))
     tl = build(ep, wj["words"]); ep_music["cfg"] = ep.get("music")
+    ep_music["bites"] = [(w["start"], w["end"]) for w in wj["words"] if w.get("bite")]
     dur = round(wj["duration"] + 0.25, 3)
     fire = stock_frames("fire"); boom_frames = stock_frames("boom")
     shaker = Shaker([s["t"] for s in tl["sticker"] if s["kind"] in ("x",)] + tl["flash"] + tl["boom"] +
