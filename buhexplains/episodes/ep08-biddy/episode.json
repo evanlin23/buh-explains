@@ -1,0 +1,336 @@
+{
+ "slug": "ep08-biddy",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "game": "Star Wars: Galactic Racer, released October 2026; Biddy Blas's lines are subtitled 'BIDDY BLAS (Huttese)' in the game (frames from 'Biddy Blas all scenes' uploads).",
+  "meme": "PC Gamer, 'The algorithm continues to properly prioritise Mister Biddy Blas' (Oct 2026): 'shrill Huttese quips'; 'scrib doon' means 'write it down'. Know Your Meme weekly roundup, Oct 16, 2026 (Biddy Blas / Scrib Doon).",
+  "actor": "PC Gamer, Oct 17, 2026, 'I am overwhelmed and overstimulated': voice actor Richard Summers-Calvert, a British wrestler. GamesRadar+, Oct 13-15, 2026.",
+  "huttese": "Huttese is the language of the Hutts (Jabba the Hutt) - Wookieepedia."
+ },
+ "images": {
+  "biddy": {
+   "url": "https://i.ytimg.com/vi/udF8djozQek/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=udF8djozQek",
+   "points": {
+    "face": [
+     0.62,
+     0.35,
+     0.16
+    ]
+   }
+  },
+  "biddysub": {
+   "url": "https://i.ytimg.com/vi/h_Fmf5Kwx54/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=h_Fmf5Kwx54",
+   "points": {
+    "face": [
+     0.4,
+     0.3,
+     0.18
+    ],
+    "sub": [
+     0.5,
+     0.82,
+     0.2
+    ]
+   }
+  },
+  "biddysub2": {
+   "url": "https://i.ytimg.com/vi/yxvD8ZMbCR8/hq2.jpg",
+   "page": "https://www.youtube.com/watch?v=yxvD8ZMbCR8",
+   "points": {
+    "face": [
+     0.5,
+     0.35,
+     0.18
+    ],
+    "sub": [
+     0.55,
+     0.8,
+     0.2
+    ]
+   }
+  },
+  "keyart": {
+   "url": "https://i.ytimg.com/vi/pR-V3j-sc7s/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=pR-V3j-sc7s",
+   "points": {
+    "logo": [
+     0.2,
+     0.17,
+     0.14
+    ],
+    "racer": [
+     0.48,
+     0.45,
+     0.15
+    ]
+   }
+  },
+  "actor": {
+   "url": "https://i.ytimg.com/vi/6t5cnAp9pL8/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=6t5cnAp9pL8",
+   "crop": [
+    0.55,
+    0.0,
+    1.0,
+    0.62
+   ],
+   "points": {
+    "face": [
+     0.62,
+     0.4,
+     0.22
+    ]
+   }
+  },
+  "jabba": {
+   "url": "https://static.wikia.nocookie.net/starwars/images/f/fe/Jabba_MMSWCA.png/revision/latest?cb=20231031040818",
+   "page": "https://starwars.fandom.com/Jabba_Desilijic_Tiure",
+   "points": {
+    "face": [
+     0.35,
+     0.3,
+     0.25
+    ]
+   }
+  },
+  "huttese": {
+   "url": "https://static.wikia.nocookie.net/starwars/images/7/71/Written_Huttese_TCW.png/revision/latest?cb=20220131162742",
+   "page": "https://starwars.fandom.com/Huttese",
+   "points": {
+    "text": [
+     0.5,
+     0.5,
+     0.4
+    ]
+   }
+  },
+  "writing": {
+   "url": "https://i.ytimg.com/vi/6V2mG40FnpU/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=6V2mG40FnpU",
+   "points": {
+    "pen": [
+     0.55,
+     0.3,
+     0.15
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "What is {Biddy Blas} actually yelling?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "biddy",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "yelling?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Biddy Blas} we all know and love is the loudmouth racer from Star Wars Galactic Racer.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "biddy",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "loudmouth",
+     "img": "keyart",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Star",
+     "sticker": "ellipse",
+     "target": "logo",
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "And his catchphrase is two words. Scrib doon.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "biddysub",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "two",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.6
+    },
+    {
+     "on": "Scrib",
+     "label": "SCRIB DOON",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Scrib",
+     "punch": true
+    },
+    {
+     "on": "doon.",
+     "punch": true
+    }
+   ]
+  },
+  {
+   "text": "He's voiced by a real British pro wrestler, Richard Summers-Calvert.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "actor",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "wrestler,",
+     "label": "PRO WRESTLER",
+     "sfx": [
+      "boing"
+     ]
+    },
+    {
+     "on": "Richard",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -20,
+     "dur": 0.8
+    }
+   ]
+  },
+  {
+   "text": "And scrib doon isn't gibberish. It's Huttese, the language Jabba speaks.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "biddysub2",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "gibberish.",
+     "sticker": "ellipse",
+     "target": "sub",
+     "dur": 0.8
+    },
+    {
+     "on": "Huttese,",
+     "img": "huttese",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "Jabba",
+     "img": "jabba",
+     "fit": "blurfill",
+     "enter": "whip",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "speaks.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "It means write it down.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "writing",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "ding"
+     ]
+    },
+    {
+     "on": "write",
+     "label": "WRITE IT DOWN",
+     "dur": 1.6
+    },
+    {
+     "on": "down.",
+     "sticker": "arrow",
+     "target": "pen",
+     "from": -30,
+     "dur": 0.35
+    }
+   ]
+  },
+  {
+   "text": "So {Biddy Blas} is just telling you to write it down.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "biddy",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "telling",
+     "punch": true
+    },
+    {
+     "on": "down.",
+     "sfx": [
+      "bong"
+     ]
+    }
+   ]
+  }
+ ]
+}

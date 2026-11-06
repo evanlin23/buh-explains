@@ -1,0 +1,359 @@
+{
+ "slug": "ep09-rumpel",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "origin": "Know Your Meme, 'AI Rumpelstiltskin / Tip Toein' In My Jordans': AI video co-posted on Instagram by Stroinaya (Tatyana Tereshchenko, AI artist), Neuroferma and Anna Glinskaya on Aug 27, 2026; TikTok @6aimbot9 paired it with Riff Raff on Sept 29, 2026. Many viewers tied it to the 1987 film. EarlyGame: 'a movie that never existed'. NBC (syndicated): AI-generated Rumpelstiltskin meme.",
+  "song": "'Tip Toe Wing in My Jawwdinz', Riff Raff, released June 10, 2014 (second single from Neon Icon) - Wikipedia.",
+  "film1987": "Rumpelstiltskin (1987), Cannon Movie Tales, Billy Barty and Amy Irving - Wikipedia; poster via moriareviews.com."
+ },
+ "images": {
+  "dance": {
+   "url": "https://i.ytimg.com/vi/Qb91OznXzbg/hq2.jpg",
+   "page": "https://www.youtube.com/watch?v=Qb91OznXzbg",
+   "points": {
+    "imp": [
+     0.42,
+     0.45,
+     0.2
+    ]
+   }
+  },
+  "princess": {
+   "url": "https://i.ytimg.com/vi/KMgDvum87Kk/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=KMgDvum87Kk",
+   "points": {
+    "face": [
+     0.48,
+     0.4,
+     0.15
+    ]
+   }
+  },
+  "dance2": {
+   "url": "https://i.ytimg.com/vi/lc4LBDcX_04/hq2.jpg",
+   "page": "https://www.youtube.com/watch?v=lc4LBDcX_04",
+   "points": {
+    "imp": [
+     0.3,
+     0.5,
+     0.15
+    ]
+   }
+  },
+  "face": {
+   "url": "https://i.ytimg.com/vi/KMgDvum87Kk/hq2.jpg",
+   "page": "https://www.youtube.com/watch?v=KMgDvum87Kk",
+   "points": {
+    "grin": [
+     0.5,
+     0.75,
+     0.18
+    ],
+    "eyes": [
+     0.45,
+     0.35,
+     0.25
+    ]
+   }
+  },
+  "face2": {
+   "url": "https://i.ytimg.com/vi/lc4LBDcX_04/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=lc4LBDcX_04",
+   "points": {
+    "grin": [
+     0.5,
+     0.75,
+     0.18
+    ]
+   }
+  },
+  "gasp": {
+   "url": "https://i.ytimg.com/vi/Qb91OznXzbg/hq3.jpg",
+   "page": "https://www.youtube.com/watch?v=Qb91OznXzbg",
+   "points": {
+    "face": [
+     0.5,
+     0.45,
+     0.18
+    ]
+   }
+  },
+  "riffvid": {
+   "url": "https://i.ytimg.com/vi/ziSj_sONyik/hq1.jpg",
+   "page": "https://www.youtube.com/watch?v=ziSj_sONyik",
+   "points": {
+    "face": [
+     0.4,
+     0.35,
+     0.15
+    ]
+   }
+  },
+  "poster": {
+   "url": "https://moriareviews.com/rongulator/wp-content/uploads/rumpelstiltskin-1987-poster.jpg",
+   "page": "https://moriareviews.com/fantasy/rumpelstiltskin-1987.htm",
+   "points": {
+    "title": [
+     0.5,
+     0.09,
+     0.32
+    ],
+    "barty": [
+     0.85,
+     0.02,
+     0.12
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "Is the {Rumpelstiltskin} dance from a real eighties movie?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "dance",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "imp",
+     "dur": 0.9
+    },
+    {
+     "on": "real",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    },
+    {
+     "on": "movie?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Rumpelstiltskin} we all know and love tip toes for a princess while Riff Raff plays.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "face",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "tip",
+     "img": "dance2",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "princess",
+     "img": "princess",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "princess",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.6
+    },
+    {
+     "on": "Riff",
+     "img": "riffvid",
+     "fit": "blurfill",
+     "enter": "whip"
+    }
+   ]
+  },
+  {
+   "text": "The song is real. Riff Raff put it out in twenty fourteen.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "riffvid",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "real.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.8
+    },
+    {
+     "on": "twenty",
+     "label": "JUNE 2014",
+     "sfx": [
+      "ding"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "And there really was a Rumpelstiltskin movie in nineteen eighty seven.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "poster",
+     "enter": "zoomblur",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Rumpelstiltskin",
+     "sticker": "ellipse",
+     "target": "title",
+     "dur": 1.0
+    },
+    {
+     "on": "nineteen",
+     "label": "1987"
+    },
+    {
+     "on": "really",
+     "punch": true
+    },
+    {
+     "on": "seven.",
+     "punch": true
+    }
+   ]
+  },
+  {
+   "text": "So the clip must be from that, right?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "gasp",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "right?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Nope. That dance was never in it.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "poster",
+     "enter": "cut"
+    },
+    {
+     "on": "never",
+     "sticker": "x",
+     "target": "title",
+     "sfx": [
+      "x"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "The whole clip was made with AI, and posted on Instagram this August.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "lightning": true
+    },
+    {
+     "on": 0,
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "whole",
+     "img": "face2",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "AI,",
+     "label": "AI-GENERATED",
+     "sfx": [
+      "glitch"
+     ]
+    },
+    {
+     "on": "AI,",
+     "sticker": "ellipse",
+     "target": "grin",
+     "dur": 0.8
+    },
+    {
+     "on": "Instagram",
+     "label": "AUG 27, 2026"
+    }
+   ]
+  },
+  {
+   "text": "So {Rumpelstiltskin} is from an eighties movie that never existed.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "dance",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "never",
+     "punch": true
+    },
+    {
+     "on": "existed.",
+     "sfx": [
+      "bong"
+     ]
+    }
+   ]
+  }
+ ]
+}
