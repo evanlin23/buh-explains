@@ -89,6 +89,12 @@ The hook wording varies too: "Do you know…", "X isn't…", "X is older than…
 - Don't fake "um"s; punctuation does the pacing. Write years as digits.
 
 ## 6. Picture and sound (the edit)
+**The visual identity is real pictures pulled from online, edited over the top** (owner, 2026-11-06). Seen in the old frames (`content/research_notes/buhexplains_frames/`):
+- **Full-bleed photos and renders** fill the 9:16 frame: the meme's own character art, fan art, merch photos, landmarks, maps, food, a full-screen flag. They are not small drawings on a dark background (draft 1 of ep01 got this wrong).
+- The character sits over a **photographic fire/smoke plate** (real-looking flames filling the frame), or is letterboxed in a middle band with fire above and below.
+- Red **hand-drawn ellipse** and **3D red arrow** pointing at the named detail; a warning sign, a heart and flags as stickers.
+- Pink-glow labels for numbers and definitions ("TUNG = SOUND OF A DRUM", "3:00 AM").
+- The pictures are found per beat by search (YouTube thumbnails, Fandom wikis, image search), each logged with its source URL in the episode's manifest.
 The full grammar is measured in `content/research_notes/buhexplains_editing_style.md`. In short:
 - A new picture or sticker every 2–3 words, ≥ 15 visible changes per 10 s, no still frame over 0.5 s. Captions don't count as motion.
 - Fireball stinger + fire plate on every name mention. Constant shake, punch-ins and white flashes, never calm (owner).

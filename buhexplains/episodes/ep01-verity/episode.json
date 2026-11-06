@@ -1,0 +1,316 @@
+{
+ "slug": "ep01-verity",
+ "names": [
+  "Verity"
+ ],
+ "voice": {
+  "engine": "kokoro",
+  "voice": "am_michael",
+  "speed": 1.32,
+  "gap": 0.04
+ },
+ "lines": [
+  {
+   "text": "Do you know Verity isn't from The Amazing Digital Circus?",
+   "events": [
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "black"
+    },
+    {
+     "on": 0,
+     "type": "image",
+     "art": "smiley",
+     "enter": "scale_in"
+    },
+    {
+     "on": "Verity",
+     "type": "plate",
+     "plate": "fire"
+    },
+    {
+     "on": "isn't",
+     "type": "sticker",
+     "art": "red_x",
+     "pos": [
+      540,
+      900
+     ],
+     "size": 520,
+     "dur": 0.6
+    },
+    {
+     "on": "Amazing",
+     "type": "image",
+     "art": "circus_tent",
+     "enter": "slam"
+    },
+    {
+     "on": "Circus?",
+     "type": "sticker",
+     "art": "red_x",
+     "pos": [
+      540,
+      900
+     ],
+     "size": 760,
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "You see, the Verity we all know and love is the yellow smiley every kid yells at.",
+   "events": [
+    {
+     "on": 0,
+     "type": "image",
+     "art": "smiley",
+     "enter": "push"
+    },
+    {
+     "on": "love",
+     "type": "sticker",
+     "art": "heart",
+     "pos": [
+      800,
+      560
+     ],
+     "size": 300,
+     "dur": 0.8
+    },
+    {
+     "on": "yellow",
+     "type": "image",
+     "art": "smiley_grid",
+     "enter": "scale_in"
+    },
+    {
+     "on": "yells",
+     "type": "sticker",
+     "art": "interrobang",
+     "pos": [
+      780,
+      560
+     ],
+     "size": 320,
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "It looks like Caine. It isn't Caine.",
+   "events": [
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "speedlines"
+    },
+    {
+     "on": "looks",
+     "type": "image",
+     "art": "tophat",
+     "enter": "slam"
+    },
+    {
+     "on": "isn't",
+     "type": "sticker",
+     "art": "red_x",
+     "pos": [
+      540,
+      900
+     ],
+     "size": 700,
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "It's not from the Anne Hathaway movie either.",
+   "events": [
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "black"
+    },
+    {
+     "on": 0,
+     "type": "image",
+     "art": "film_reel",
+     "enter": "scale_in"
+    },
+    {
+     "on": "not",
+     "type": "sticker",
+     "art": "warning",
+     "pos": [
+      790,
+      520
+     ],
+     "size": 300,
+     "dur": 0.8
+    },
+    {
+     "on": "movie",
+     "type": "sticker",
+     "art": "red_x",
+     "pos": [
+      540,
+      900
+     ],
+     "size": 700,
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "Verity started out as a friendly AI helper. Like Clippy.",
+   "events": [
+    {
+     "on": "started",
+     "type": "image",
+     "art": "smiley_wave",
+     "enter": "scale_in"
+    },
+    {
+     "on": "AI",
+     "type": "label",
+     "text": "AI ASSISTANT",
+     "pos": "lower"
+    },
+    {
+     "on": "Clippy.",
+     "type": "image",
+     "art": "paperclip",
+     "enter": "slam"
+    }
+   ]
+  },
+  {
+   "text": "Until it isn't. It grows way too tall, keeps smiling, and chases you through the dark.",
+   "events": [
+    {
+     "on": 0,
+     "type": "flash"
+    },
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "vignette"
+    },
+    {
+     "on": "It",
+     "type": "image",
+     "art": "tall_smiley",
+     "enter": "push"
+    },
+    {
+     "on": "smiling,",
+     "type": "punch"
+    },
+    {
+     "on": "chases",
+     "type": "plate",
+     "plate": "speedlines"
+    },
+    {
+     "on": "dark.",
+     "type": "plate",
+     "plate": "black"
+    }
+   ]
+  },
+  {
+   "text": "Then a July song, It's me, it's Verity, hit fifty seven million views.",
+   "events": [
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "fire"
+    },
+    {
+     "on": "July",
+     "type": "label",
+     "text": "JULY 2026",
+     "pos": "top"
+    },
+    {
+     "on": "song,",
+     "type": "image",
+     "art": "song_card",
+     "enter": "slam"
+    },
+    {
+     "on": "fifty",
+     "type": "label",
+     "text": "57,000,000 VIEWS",
+     "pos": "top",
+     "note": "re-read the real count on render day"
+    },
+    {
+     "on": "views.",
+     "type": "image",
+     "art": "smiley_flood",
+     "enter": "scale_in"
+    }
+   ]
+  },
+  {
+   "text": "But Verity was born in a Minecraft horror series, by a YouTuber called ThatMob.",
+   "pause_before": 0.35,
+   "events": [
+    {
+     "on": 0,
+     "type": "flash"
+    },
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "black"
+    },
+    {
+     "on": "Minecraft",
+     "type": "image",
+     "art": "grass_block",
+     "enter": "slam"
+    },
+    {
+     "on": "Minecraft",
+     "type": "plate",
+     "plate": "fire"
+    },
+    {
+     "on": "horror",
+     "type": "plate",
+     "plate": "vignette"
+    },
+    {
+     "on": "ThatMob.",
+     "type": "image",
+     "art": "name_card",
+     "enter": "slam"
+    }
+   ]
+  },
+  {
+   "text": "This makes Verity a Minecraft character.",
+   "events": [
+    {
+     "on": 0,
+     "type": "plate",
+     "plate": "fire"
+    },
+    {
+     "on": 0,
+     "type": "image",
+     "art": "smiley_on_block",
+     "enter": "slam"
+    },
+    {
+     "on": "Minecraft",
+     "type": "punch"
+    }
+   ]
+  }
+ ]
+}
