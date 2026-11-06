@@ -49,7 +49,11 @@
      0.45,
      0.2
     ]
-   }
+   },
+   "focus": [
+    0.7,
+    0.45
+   ]
   },
   "stock": {
    "url": "https://i.ytimg.com/vi/a3WnvDtDD2M/hqdefault.jpg",
@@ -73,15 +77,15 @@
    "page": "https://www.youtube.com/watch?v=uFUgziUeYrg",
    "crop": [
     0.0,
-    0.1,
-    0.45,
+    0.15,
+    0.36,
     1.0
    ],
    "points": {
     "tower": [
-     0.35,
-     0.35,
-     0.2
+     0.42,
+     0.3,
+     0.22
     ]
    }
   },
@@ -92,10 +96,20 @@
    "points": {
     "face": [
      0.45,
-     0.33,
+     0.42,
      0.12
     ]
-   }
+   },
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.78
+   ],
+   "focus": [
+    0.45,
+    0.45
+   ]
   },
   "coke": {
    "url": "https://i.ytimg.com/vi/HGjWpF-trlg/hqdefault.jpg",
@@ -135,6 +149,24 @@
      0.13
     ]
    }
+  },
+  "ted": {
+   "url": "https://i.ytimg.com/vi/FScfGU7rQaM/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/FScfGU7rQaM/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=FScfGU7rQaM",
+   "points": {
+    "face": [
+     0.57,
+     0.22,
+     0.1
+    ]
+   },
+   "crop": [
+    0.0,
+    0.0,
+    0.62,
+    1.0
+   ]
   }
  },
  "lines": [
@@ -256,7 +288,7 @@
    "beats": [
     {
      "on": 0,
-     "img": "tv",
+     "img": "news",
      "fit": "blurfill",
      "enter": "whip"
     },
@@ -281,6 +313,16 @@
      ]
     },
     {
+     "on": "leaned",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.4
+    },
+    {
+     "on": "Commercials,",
+     "lightning": true
+    },
+    {
      "on": "Commercials,",
      "sticker": "arrow",
      "target": "bottle",
@@ -289,14 +331,27 @@
     },
     {
      "on": "TEDx",
+     "img": "ted",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "TEDx",
      "label": "TEDx TALK",
-     "dur": 1.0
+     "dur": 0.9
     },
     {
      "on": "music",
      "img": "mv",
      "fit": "blurfill",
      "enter": "whip"
+    },
+    {
+     "on": "talk,",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.5
     }
    ]
   },
@@ -334,8 +389,8 @@
     },
     {
      "on": 0,
-     "img": "news",
-     "fit": "blurfill",
+     "img": "tv",
+     "fit": "cover",
      "enter": "zoomblur",
      "sfx": [
       "reveal"
@@ -345,6 +400,17 @@
      "on": "retired",
      "label": "ELECTRICAL ENGINEER",
      "dur": 1.6
+    },
+    {
+     "on": "retired",
+     "lightning": true
+    },
+    {
+     "on": "engineer",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -140,
+     "dur": 0.5
     },
     {
      "on": "Hungary.",

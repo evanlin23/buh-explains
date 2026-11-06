@@ -257,15 +257,18 @@ def gemini_tts(text, voice):
     return a, 24000
 
 
-def split_lines(audio, line_tokens, model, od):
+def split_lines(audio, line_tokens, model, od, reach=None):
     """Cut one long narration into its lines at the quietest point between each line's last and next line's first word."""
     cp = os.path.join(od, "script_full.wav"); sf.write(cp, audio, SR)
     flat = [t for toks in line_tokens for t in toks]
     times, _ = word_times(cp, flat, model); times = fill(times, flat, len(audio) / SR)
     env = speech_env(audio)
     cuts, k = [0], 0
-    for toks in line_tokens[:-1]:
+    for li, toks in enumerate(line_tokens[:-1]):
         k += len(toks); a0, a1 = int(times[k - 1][1] * SR) - int(0.03 * SR), int(times[k][0] * SR) + int(0.02 * SR)
+        # a line's "split_reach" (s) lets the cut look that far into the next line's first word, for when Whisper
+        # stretches that word over the pause and the cut would land inside a drawn-out last word ("got... a duck")
+        if reach and reach[li + 1]: a1 = max(a1, int((times[k][0] + reach[li + 1]) * SR))
         a0, a1 = max(cuts[-1] + 1, a0), max(a0 + 2, a1)
         cuts.append(last_pause(env, a0, a1))
     cuts.append(len(audio))
@@ -284,7 +287,7 @@ def main(slug):
     if v.get("engine") == "gemini":
         k = None
         full, _sr = gemini_tts("\n".join(" ".join(t) for t in clean), v.get("voice", "Achird"))
-        spoken = split_lines(rs(full, _sr), clean, model, od)
+        spoken = split_lines(rs(full, _sr), clean, model, od, [l.get("split_reach") for l in ep["lines"]])
         ref = np.concatenate(spoken)
     else:
         from kokoro_onnx import Kokoro
