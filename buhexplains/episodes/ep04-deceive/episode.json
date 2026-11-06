@@ -1,0 +1,426 @@
+{
+ "slug": "ep04-deceive",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "images": {
+  "teaser": {
+   "url": "https://i.ytimg.com/vi/GGJSRFWALTI/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=GGJSRFWALTI",
+   "crop": [
+    0.15,
+    0.18,
+    1.0,
+    0.86
+   ],
+   "points": {
+    "eyes": [
+     0.47,
+     0.25,
+     0.18
+    ],
+    "face": [
+     0.47,
+     0.42,
+     0.24
+    ]
+   }
+  },
+  "teaser2": {
+   "url": "https://i.ytimg.com/vi/6O7Vk0ZCjN8/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=6O7Vk0ZCjN8",
+   "crop": [
+    0.12,
+    0.12,
+    0.82,
+    0.78
+   ],
+   "points": {
+    "eyes": [
+     0.53,
+     0.48,
+     0.2
+    ],
+    "face": [
+     0.53,
+     0.62,
+     0.27
+    ]
+   }
+  },
+  "fielder": {
+   "url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA2gwoQ6.img?w=768&h=576&m=6&x=285&y=175&s=178&d=178",
+   "points": {
+    "face": [
+     0.33,
+     0.25,
+     0.12
+    ]
+   }
+  },
+  "baby": {
+   "url": "https://images.squarespace-cdn.com/content/v1/52eeeae9e4b04af4cf9542bb/1692115544101-IFXK8L431DQVBX5BMDN9/intown-atlanta-decatur-buckhead-studio-maternity-african-american-family-newborn-baby-girl-pictures_3029.jpg",
+   "points": {
+    "face": [
+     0.3,
+     0.33,
+     0.1
+    ]
+   }
+  },
+  "court": {
+   "url": "https://luxlux.net/lux/wp-content/uploads/elizabeth-holmes-3-2-scaled.jpeg",
+   "points": {
+    "holmes": [
+     0.32,
+     0.22,
+     0.07
+    ],
+    "body": [
+     0.32,
+     0.5,
+     0.15
+    ]
+   }
+  },
+  "theranos": {
+   "url": "https://www.statnews.com/wp-content/uploads/2016/04/Theranos_AP_821088992676-1600x900.jpg",
+   "points": {
+    "logo": [
+     0.52,
+     0.45,
+     0.2
+    ]
+   }
+  },
+  "portrait": {
+   "url": "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_2560,h_2560/https://uatwitch.com/wp-content/uploads/2025/12/2Fmethode2Ftimes2Fprod2Fweb2Fbin2F91696f54-6313-11ec-ab46-99cae2b0f128-scaled.jpg",
+   "points": {
+    "face": [
+     0.5,
+     0.32,
+     0.2
+    ],
+    "hand": [
+     0.13,
+     0.4,
+     0.08
+    ]
+   }
+  },
+  "prison": {
+   "url": "https://www.howwegettonext.com/wp-content/uploads/2015/06/3c44e-1j67_21qhcvjkdiyvipntvq.jpeg",
+   "points": {
+    "hall": [
+     0.5,
+     0.6,
+     0.2
+    ]
+   }
+  },
+  "cash": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Obverse_of_the_series_2009_%24100_Federal_Reserve_Note.jpg/1280px-Obverse_of_the_series_2009_%24100_Federal_Reserve_Note.jpg",
+   "page": "https://commons.wikimedia.org (US government work, public domain)",
+   "points": {
+    "franklin": [
+     0.33,
+     0.45,
+     0.15
+    ],
+    "hundred": [
+     0.9,
+     0.85,
+     0.07
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "Why is {Why would I deceive you} so funny?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "teaser",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "Why",
+     "sticker": "ellipse",
+     "target": "eyes",
+     "dur": 0.8
+    },
+    {
+     "on": "funny?",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the meme we all know and love is a woman staring way too deep into a man's eyes.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "teaser2",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.8,
+     "sfx": [
+      "rizz"
+     ]
+    },
+    {
+     "on": "staring",
+     "sticker": "arrow",
+     "target": "eyes",
+     "from": -20,
+     "dur": 0.9
+    },
+    {
+     "on": "man's",
+     "img": "fielder",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "eyes.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "The man is Nathan Fielder. It's from the teaser for his A24 documentary.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "fielder",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "Fielder.",
+     "label": "NATHAN FIELDER",
+     "dur": 1.2,
+     "sfx": [
+      "ding"
+     ]
+    },
+    {
+     "on": "teaser",
+     "img": "teaser",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "A24",
+     "label": "A24",
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "Is it the stare? The baby noises in the background? Nope.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "teaser2",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "stare?",
+     "sticker": "ellipse",
+     "target": "eyes",
+     "dur": 0.6
+    },
+    {
+     "on": "baby",
+     "img": "baby",
+     "fit": "blurfill",
+     "enter": "whip",
+     "sfx": [
+      "boing"
+     ]
+    },
+    {
+     "on": "Nope.",
+     "sticker": "x",
+     "target": "face"
+    }
+   ]
+  },
+  {
+   "text": "It's who she is.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "portrait",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "she",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.8
+    }
+   ]
+  },
+  {
+   "text": "She's Elizabeth Holmes, who founded Theranos, a blood testing company once worth nine billion dollars.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "portrait",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "Holmes,",
+     "label": "ELIZABETH HOLMES",
+     "dur": 1.2,
+     "sfx": [
+      "ding"
+     ]
+    },
+    {
+     "on": "Theranos,",
+     "img": "theranos",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Theranos,",
+     "sticker": "ellipse",
+     "target": "logo",
+     "dur": 0.9
+    },
+    {
+     "on": "nine",
+     "img": "cash",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "wow"
+     ]
+    },
+    {
+     "on": "nine",
+     "label": "$9,000,000,000",
+     "dur": 1.3
+    }
+   ]
+  },
+  {
+   "text": "Then it all fell apart, and in twenty twenty two she was convicted of defrauding investors.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "lightning": true
+    },
+    {
+     "on": 0,
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": 0,
+     "img": "court",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "convicted",
+     "sticker": "ellipse",
+     "target": "holmes",
+     "dur": 0.9
+    },
+    {
+     "on": "defrauding",
+     "label": "GUILTY: FRAUD",
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "Eleven years in prison.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "prison",
+     "fit": "blurfill",
+     "enter": "whip",
+     "sfx": [
+      "impact"
+     ]
+    },
+    {
+     "on": "Eleven",
+     "label": "11 YEARS",
+     "dur": 1.2
+    }
+   ]
+  },
+  {
+   "text": "That's why {why would I deceive you} is so funny.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "teaser",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "funny.",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ],
+     "sfx": [
+      "bong"
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": {
+  "teaser": "A24 teaser for You Can See Everything (Nathan Fielder, Lance Oppenheim), released after the Telluride screening, Sept 2026 (Euronews 2026-09-07; Awards Radar 2026-09-07); Holmes asks Fielder 'Why would I deceive you'; a newborn is heard in the background. KYM: 'Elizabeth Holmes and Nathan Fielder \"Why Would I Deceive You?\"'.",
+  "verdict": "Jan 3, 2022: guilty on four counts (one conspiracy, three wire fraud) of defrauding investors; acquitted on the patient counts (NPR/CT Public, Stanford Daily).",
+  "sentence": "Nov 2022: 11 years 3 months in federal prison (NBC, LAist; US Attorney Stephanie Hinds statement).",
+  "valuation": "Theranos valued at about $9 billion before the 2015 WSJ expos\u00e9 (Stanford Daily; GEN)."
+ }
+}

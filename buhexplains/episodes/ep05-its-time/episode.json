@@ -1,0 +1,426 @@
+{
+ "slug": "ep05-its-time",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "images": {
+  "hero": {
+   "url": "https://i.ytimg.com/vi/2qIZ1A3P8po/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=2qIZ1A3P8po",
+   "points": {
+    "face": [
+     0.45,
+     0.3,
+     0.12
+    ],
+    "body": [
+     0.43,
+     0.6,
+     0.25
+    ]
+   },
+   "crop": [
+    0.3,
+    0.0,
+    0.7,
+    1.0
+   ]
+  },
+  "close": {
+   "url": "https://i.ytimg.com/vi/XpSdD63j7Y4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=XpSdD63j7Y4",
+   "points": {
+    "face": [
+     0.55,
+     0.4,
+     0.25
+    ]
+   }
+  },
+  "ice": {
+   "url": "https://i.ytimg.com/vi/1giQVuoTAFM/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=1giQVuoTAFM",
+   "points": {
+    "mariah": [
+     0.5,
+     0.5,
+     0.15
+    ]
+   }
+  },
+  "sleigh": {
+   "url": "https://i.ytimg.com/vi/2qIZ1A3P8po/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=2qIZ1A3P8po",
+   "points": {
+    "face": [
+     0.45,
+     0.3,
+     0.12
+    ],
+    "body": [
+     0.43,
+     0.6,
+     0.25
+    ]
+   },
+   "crop": [
+    0.3,
+    0.0,
+    0.7,
+    1.0
+   ]
+  },
+  "tour": {
+   "url": "https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?cs=srgb&dl=pexels-thibault-trillet-44912-167636.jpg&fm=jpg",
+   "points": {
+    "stage": [
+     0.5,
+     0.45,
+     0.3
+    ]
+   }
+  },
+  "album": {
+   "url": "https://storables.com/wp-content/uploads/2023/10/how-to-store-vinyl-records-1697637239.jpg",
+   "points": {
+    "record": [
+     0.55,
+     0.35,
+     0.17
+    ]
+   }
+  },
+  "november": {
+   "url": "https://wallpaperaccess.com/full/1497168.jpg",
+   "points": {
+    "word": [
+     0.5,
+     0.4,
+     0.25
+    ]
+   }
+  },
+  "tree": {
+   "url": "https://www.marthastewart.com/thmb/QLJ2ymBE9wpzU11WirJx_yBH5vI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/muted-ornaments-christmas-tree-102821018-2896471d00c34f6fa95b8aa822dfbdb2.jpg",
+   "points": {
+    "tree": [
+     0.4,
+     0.45,
+     0.3
+    ],
+    "presents": [
+     0.4,
+     0.9,
+     0.25
+    ]
+   }
+  },
+  "cash": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Obverse_of_the_series_2009_%24100_Federal_Reserve_Note.jpg/1280px-Obverse_of_the_series_2009_%24100_Federal_Reserve_Note.jpg",
+   "page": "https://commons.wikimedia.org (US government work, public domain)",
+   "points": {
+    "franklin": [
+     0.33,
+     0.45,
+     0.15
+    ],
+    "hundred": [
+     0.9,
+     0.85,
+     0.07
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "How much is {Mariah} Carey's {It's time} actually worth?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "Carey's",
+     "sticker": "ellipse",
+     "target": "body",
+     "dur": 0.8
+    },
+    {
+     "on": "worth?",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You see, the video we all know and love drops every November first.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "ice",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.8,
+     "sfx": [
+      "rizz"
+     ]
+    },
+    {
+     "on": "November",
+     "img": "november",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "first.",
+     "sticker": "ellipse",
+     "target": "word",
+     "dur": 0.7
+    }
+   ]
+  },
+  {
+   "text": "She's not announcing a tour. Or a new album.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "tour",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "tour.",
+     "sticker": "x",
+     "target": "stage"
+    },
+    {
+     "on": "album.",
+     "img": "album",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "album.",
+     "sticker": "x",
+     "target": "record"
+    }
+   ]
+  },
+  {
+   "text": "She's announcing one song from nineteen ninety four.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "close",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "song",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -25,
+     "dur": 0.8
+    },
+    {
+     "on": "nineteen",
+     "label": "1994",
+     "dur": 1.2,
+     "sfx": [
+      "ding"
+     ]
+    }
+   ]
+  },
+  {
+   "text": "All I Want for Christmas Is You took twenty five years to finally hit number one.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "tree",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Christmas",
+     "sticker": "ellipse",
+     "target": "tree",
+     "dur": 0.8
+    },
+    {
+     "on": "twenty",
+     "label": "25 YEARS",
+     "dur": 1.1
+    },
+    {
+     "on": "number",
+     "img": "sleigh",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "wow"
+     ]
+    },
+    {
+     "on": "one.",
+     "label": "#1",
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "And now it comes back every single December.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "tree",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "December.",
+     "sticker": "arrow",
+     "target": "presents",
+     "from": -20,
+     "dur": 0.8
+    }
+   ]
+  },
+  {
+   "text": "So The Economist did the math on that one song.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "close",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Economist",
+     "label": "THE ECONOMIST",
+     "dur": 1.2,
+     "sfx": [
+      "ding"
+     ]
+    },
+    {
+     "on": "math",
+     "sticker": "interrobang",
+     "at": [
+      790,
+      560
+     ]
+    }
+   ]
+  },
+  {
+   "text": "About sixty million dollars in royalties by twenty sixteen.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "riser": true,
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": 0,
+     "img": "cash",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "sixty",
+     "label": "$60,000,000",
+     "dur": 1.5,
+     "sfx": [
+      "wow"
+     ]
+    },
+    {
+     "on": "royalties",
+     "sticker": "ellipse",
+     "target": "franklin",
+     "dur": 0.8
+    }
+   ]
+  },
+  {
+   "text": "That's two and a half million dollars a year.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "cash",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "two",
+     "label": "$2,500,000 A YEAR",
+     "dur": 1.6
+    },
+    {
+     "on": "year.",
+     "sticker": "arrow",
+     "target": "hundred",
+     "from": -150,
+     "dur": 0.4
+    }
+   ]
+  },
+  {
+   "text": "So yes, {it's time}. Time to get paid.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "hero",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "paid.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.8,
+     "sfx": [
+      "bong"
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": {
+  "its_time": "Mariah Carey posts an 'It's time' video every Nov 1 (2026 edition: Paris Match 2026-11-01; Know Your Meme traces the defrost joke to 2017-2018).",
+  "number_one": "'All I Want for Christmas Is You' (1994) first topped the Billboard Hot 100 on the chart dated Dec 21, 2019 (Billboard via CBS News 2019-12-16; The Fader).",
+  "royalties": "The Economist (2017): about $60 million in royalties 1994-2016, roughly $2.6 million a year (cited by The Independent, Daily Beast)."
+ }
+}
