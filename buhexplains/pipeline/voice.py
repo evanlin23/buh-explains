@@ -31,6 +31,22 @@ def synth_kokoro(lines, voice, speed):
     return out
 
 
+def squeeze(a, thr=0.012, longest=0.12, keep=0.05):
+    """Shorten every internal silence longer than `longest` to `keep` seconds (Tung barely pauses)."""
+    hop = int(0.01 * SR); n = len(a) // hop
+    loud = np.array([np.abs(a[i * hop:(i + 1) * hop]).max() > thr for i in range(n)])
+    out, i = [], 0
+    while i < n:
+        j = i
+        while j < n and loud[j] == loud[i]: j += 1
+        seg = a[i * hop:j * hop]
+        if not loud[i] and (j - i) * 0.01 > longest:
+            k = int(keep * SR); seg = np.concatenate([seg[:k // 2], seg[-(k - k // 2):]])
+        out.append(seg); i = j
+    out.append(a[n * hop:])
+    return np.concatenate(out)
+
+
 def trim(a, thr=0.005, pad=0.02, lead=0.09):
     idx = np.where(np.abs(a) > thr)[0]
     if not len(idx):
@@ -166,16 +182,16 @@ def main(slug):
             if kind == "bite":
                 key = next((norm(tokens[i]) for i in idx if norm(tokens[i]) in names), next(iter(names)))
                 a = bites[key]
-                a = np.concatenate([np.zeros(int(0.02 * SR), np.float32), a, np.zeros(int(0.02 * SR), np.float32)])
-                span = (len(a) / SR - 0.04) / len(idx)
+                a = trim(a, lead=0.0, pad=0.0)
+                span = (len(a) / SR) / len(idx)
                 for j, i in enumerate(idx):  # the group's words share the bite's time, for captions
-                    words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + 0.02 + j * span, 3),
-                                  "end": round(t + 0.02 + (j + 1) * span, 3), "bite": True})
+                    words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + j * span, 3),
+                                  "end": round(t + (j + 1) * span, 3), "bite": True})
                 heard_all.append("[BITE]")
             else:
                 sub = [tokens[i] for i in idx]
                 a, _ = k.create(" ".join(sub), voice=v["voice"], speed=v["speed"], lang="en-us")
-                a = trim(np.asarray(a, np.float32), lead=0.09 if idx[0] == 0 else 0.03)
+                a = squeeze(trim(np.asarray(a, np.float32), thr=0.012, lead=0.06 if (li == 0 and idx[0] == 0) else 0.015, pad=0.0))
                 cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1
                 sf.write(cp, a, SR)
                 times, heard = word_times(cp, sub, model)

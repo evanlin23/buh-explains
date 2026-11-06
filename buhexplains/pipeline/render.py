@@ -22,7 +22,7 @@ FONT_CAP = os.path.join(ROOT, "fonts", "schibsted-grotesk", "SchibstedGrotesk-Bo
 FONT_HEAVY = os.path.join(ROOT, "fonts", "archivo-black", "ArchivoBlack-Regular.ttf")
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
 RED = (226, 20, 20, 255)
-STOCK = {"fire": ("12318-720.mp4", 1.0, 4.0), "fire2": ("1242-720.mp4", 1.0, 4.0), "boom": ("38818-720.mp4", 0.3, 1.2)}
+STOCK = {"fire": ("12318-720.mp4", 1.0, 4.0), "fire2": ("1242-720.mp4", 1.0, 4.0), "boom": ("38818-720.mp4", 0.72, 1.0)}
 
 
 def norm(w):
@@ -108,7 +108,7 @@ def build(ep, words):
                 tl["sfx"].append((t, "typing"))
             if b.get("flash"): tl["flash"].append(t); tl["sfx"].append((t, "impact"))
             if b.get("lightning"): tl["lightning"].append(t); tl["sfx"].append((t, "zap"))
-            if b.get("riser"): tl["sfx"].append((t - 1.0, "riser"))
+            if b.get("riser"): tl["sfx"].append((t, "riser"))
             for extra in b.get("sfx", []): tl["sfx"].append((t, extra))
         for w in ws:  # the name: sound bite + real explosion + fire, every time
             if norm(w["word"]) in names:
@@ -300,6 +300,8 @@ def picture(key, spec, grade):
     ck = (key, grade)
     if ck not in _IMG:
         im, used = fetch_image(spec)
+        if spec.get("crop"):
+            l, t_, r_, b_ = spec["crop"]; im = im.crop((int(l * im.width), int(t_ * im.height), int(r_ * im.width), int(b_ * im.height)))
         im = ImageEnhance.Color(im).enhance(1.35); im = ImageEnhance.Contrast(im).enhance(1.12)
         if grade == "red": im = Image.blend(im, Image.new("RGB", im.size, (170, 0, 0)), 0.35)
         if grade == "dark": im = ImageEnhance.Brightness(im).enhance(0.55)
@@ -369,15 +371,17 @@ def base_frame(ev, spec, t, fire, boom_frames, booms):
         arr = screen(arr * np.array([1.0, 0.9, 0.8]), fl * FIRE_MASK, 0.95)
     for b0 in booms:
         k = int((t - b0) * FPS)
-        if 0 <= k < len(boom_frames):
+        if 0 <= k < min(len(boom_frames), int(0.4 * FPS)):
             bf = np.asarray(Image.fromarray(boom_frames[k]).resize((W, H), Image.BILINEAR), np.float32) / 255
-            arr = screen(arr, bf, 0.9)
+            alpha = np.clip(bf.max(-1, keepdims=True) * 1.6, 0, 1) ** 0.8          # the fireball covers what's under it
+            alpha *= float(np.clip((0.4 - k / FPS) / 0.15, 0, 1))                   # gone after 0.4 s, like Tung's
+            arr = arr * (1 - alpha) + np.clip(bf * 1.25, 0, 1) * alpha
     return Image.fromarray((np.clip(arr, 0, 1) * 255).astype(np.uint8)).convert("RGBA")
 
 
 def caption(frame, text, a):
     f = font(FONT_CAP, 86)
-    pop = 0.9 + 0.1 * ease(a / 0.07, 2)
+    pop = (0.9 + 0.1 * ease(a / 0.07, 2)) * (1 + 0.12 * ((hash(text) % 7) - 3) / 3 * math.exp(-a * 12))
     layer = Image.new("RGBA", (1000, 220), (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
     d.text((500, 118), text, font=f, fill=(0, 0, 0, 200), anchor="mm", stroke_width=4, stroke_fill=(0, 0, 0, 200))
     sh = layer.filter(ImageFilter.GaussianBlur(6))
@@ -389,25 +393,32 @@ def caption(frame, text, a):
 
 # ------------------------------------------------------------------ the frame
 class Shaker:
-    """Snap shake, measured frame by frame on the original Tung (reference/TUNG_BREAKDOWN.md, shake section).
-    An 8-frame cycle (0.27 s): a few frames of hard snaps to a random offset, mostly sideways, then dead still.
-    Normal shots: 3 of 8 frames snap, about 13 px. Hits (name, flash, slam): 4 of 8, about 22 px.
-    No rotation and no easing: Tung never rotates and never glides. Applied last, so captions shake too."""
-    CYCLE = 8
-
+    """Continuous shake (owner, 2026-11-06: "the shake is like continuous"), like Tung's: a new offset every
+    frame, smeared with motion blur from the last offset, plus a small zoom pulse. Mostly sideways, no rotation.
+    Bigger on hits. It moves the picture and stickers; captions and labels stay put (Tung's captions don't move)."""
     def __init__(self, hits):
-        self.hits = sorted(hits); self.rng = np.random.default_rng(4); self.f = 0
+        self.hits = sorted(hits); self.rng = np.random.default_rng(4); self.prev = (0.0, 0.0)
 
     def step(self, t):
-        f = self.f; self.f += 1
-        hot = any(0 <= t - h < 0.45 for h in self.hits)
-        on = 3 if hot else 2
-        if f % self.CYCLE >= on:
-            return 0.0, 0.0, 0.0                       # the hold: dead still
-        amp = 17.0 if hot else 12.0
-        x = self.rng.choice([-1, 1]) * amp * self.rng.uniform(0.6, 1.4)
-        y = self.rng.choice([-1, 1]) * amp * self.rng.uniform(0.0, 0.6) if self.rng.random() < 0.5 else 0.0
-        return float(x), float(y), 0.0
+        hot = any(0 <= t - h < 0.4 for h in self.hits)
+        amp = 16.0 if hot else 8.0
+        x = 0.3 * self.prev[0] + self.rng.normal(0, amp); y = 0.3 * self.prev[1] + self.rng.normal(0, amp * 0.55)
+        x, y = float(np.clip(x, -3 * amp, 3 * amp)), float(np.clip(y, -3 * amp, 3 * amp))
+        zoom = 1.0 + abs(self.rng.normal(0, 0.012 if hot else 0.006))
+        prev, self.prev = self.prev, (x, y)
+        return prev, (x, y), zoom
+
+
+def shake_layer(scene, prev, cur, zoom):
+    """Shift the scene to `cur`, with a 4-tap motion blur along the path from `prev`."""
+    big = scene.resize((int(W * 1.08 * zoom), int(H * 1.08 * zoom)), Image.BILINEAR)
+    ox, oy = (big.width - W) / 2, (big.height - H) / 2
+    acc = None
+    for k in range(4):
+        f = (k + 1) / 4; x = prev[0] + (cur[0] - prev[0]) * f; y = prev[1] + (cur[1] - prev[1]) * f
+        crop = np.asarray(big.crop((int(ox - x), int(oy - y), int(ox - x) + W, int(oy - y) + H)).convert("RGB"), np.float32)
+        acc = crop if acc is None else acc + crop
+    return Image.fromarray((acc / 4).astype(np.uint8)).convert("RGBA")
 
 
 def render_frame(ep, tl, t, shaker, fire, boom_frames):
@@ -415,30 +426,21 @@ def render_frame(ep, tl, t, shaker, fire, boom_frames):
     for ev in tl["img"]:
         if ev["t"] <= t: cur = ev
     on_fire = any(a <= t < b for a, b in tl["fire"])
-    frame = base_frame(cur, ep["images"][cur["key"]], t, fire if on_fire or cur["fit"] in ("band", "spin_in") else None,
-                       boom_frames, tl["boom"]) if on_fire or cur["fit"] in ("band", "spin_in") else \
-        base_frame(cur, ep["images"][cur["key"]], t, None, boom_frames, tl["boom"])
-    for s in tl["sticker"]:
-        if s["t"] <= t < s["end"]: draw_sticker(frame, s, t)
+    use_fire = on_fire or cur["fit"] in ("band", "spin_in")
+    frame = base_frame(cur, ep["images"][cur["key"]], t, fire if use_fire else None, boom_frames, tl["boom"])
+    for s_ in tl["sticker"]:
+        if s_["t"] <= t < s_["end"]: draw_sticker(frame, s_, t)
+    for i, lt in enumerate(tl["lightning"]): bolt(frame, lt, t, i * 31)
+    for fl in tl["flash"]:
+        if 0 <= t - fl < 0.1: frame.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.1)))))
+    prev, curpos, zoom = shaker.step(t)
+    frame = shake_layer(frame, prev, curpos, zoom)
     for lab in tl["label"]:
         later = [o for o in tl["label"] if lab["t"] < o["t"] <= t]
         if lab["t"] <= t < lab["end"] and not later: draw_label(frame, lab, t)
-    for i, lt in enumerate(tl["lightning"]): bolt(frame, lt, t, i * 31)
     for c0, c1, text in tl["caption"]:
         if c0 <= t < c1: caption(frame, text, t - c0)
-    for fl in tl["flash"]:
-        if 0 <= t - fl < 0.1: frame.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - (t - fl) / 0.1)))))
-    dx, dy, rot = shaker.step(t)
-    dx, dy = int(round(dx)), int(round(dy))
-    if dx == 0 and dy == 0: return frame
-    # snap: shift the whole frame by whole pixels, fill the exposed strip by stretching the edge (no black bars)
-    pad = Image.new("RGBA", (W, H)); pad.paste(frame.resize((int(W * 1.07), int(H * 1.07)), Image.BILINEAR).crop((38, 67, 38 + W, 67 + H)))
-    out = Image.new("RGBA", (W, H)); out.paste(pad, (int(dx), int(dy)))
-    if dx > 0: out.paste(pad.crop((0, 0, 1, H)).resize((int(dx) + 1, H)), (0, int(dy)))
-    if dx < 0: out.paste(pad.crop((W - 1, 0, W, H)).resize((int(-dx) + 1, H)), (W + int(dx) - 1, int(dy)))
-    if dy > 0: out.paste(out.crop((0, int(dy), W, int(dy) + 1)).resize((W, int(dy))), (0, 0))
-    if dy < 0: out.paste(out.crop((0, H + int(dy) - 1, W, H + int(dy))).resize((W, int(-dy))), (0, H + int(dy)))
-    return out
+    return frame
 
 
 # ------------------------------------------------------------------ sound effects (all synthesized)
@@ -505,26 +507,36 @@ KIT = {  # event -> myinstants files in .cache/sfx (sources in .cache/sfx/source
 }
 GAIN = {"boom": 0.45, "whoosh": 0.5, "whip": 0.5, "spin": 0.5, "pop": 0.6, "impact": 0.9, "zap": 0.6, "riser": 0.6, "wow": 0.7,
         "alarm": 0.7, "x": 0.8, "heartpop": 0.5, "ding": 0.6, "typing": 0.5, "scribble": 0.4, "boing": 0.8, "mcboom": 0.8, "reveal": 0.9}
-MAXLEN = {"zap": 1.6, "riser": 1.2, "wow": 1.4, "heartpop": 0.9, "ding": 0.6, "alarm": 1.2, "x": 0.9, "reveal": 1.8, "mcboom": 1.6}
+ALIGN_PEAK = {"whoosh", "whip", "spin", "whipstk", "riser", "boom"}   # build-ups: their peak lands on the event
+MAXLEN = {"zap": 2.2, "wow": 3.0}                                      # only very long files get capped
 _KIT = {}
 
 
 def kit_sound(name, var):
+    """Returns (samples, lead): `lead` seconds of the file come before the moment that should hit the event."""
     files = KIT.get(name)
-    if not files: return None
+    if not files: return None, 0.0
     f = files[var % len(files)]
-    if f not in _KIT:
+    key = (f, name)
+    if key not in _KIT:
         p = os.path.join(CACHE, "sfx", f + ".mp3")
-        if not os.path.exists(p): return None
+        if not os.path.exists(p): return None, 0.0
         raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", p, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
         a = np.frombuffer(raw, np.float32).copy()
-        idx = np.where(np.abs(a) > 0.02)[0]
-        if len(idx): a = a[max(0, idx[0] - 50):]
-        n = int(MAXLEN.get(name, 1.0) * SR)
-        if len(a) > n: a = a[:n]; a[-int(0.08 * SR):] *= np.linspace(1, 0, int(0.08 * SR))
+        env = np.sqrt(np.convolve(a ** 2, np.ones(1200) / 1200, "same")); pk = env.max()
+        onset = int(np.argmax(env > pk * 0.1)); peak = int(np.argmax(env))
+        tail = len(env) - int(np.argmax(env[::-1] > pk * 0.01))
+        start = max(0, onset - int(0.01 * SR))
+        endi = min(len(a), tail + int(0.05 * SR), start + int(MAXLEN.get(name, 99) * SR))
+        a = a[start:endi].copy(); fade = min(len(a) // 4, int((0.25 if name in MAXLEN else 0.04) * SR))
+        if fade: a[-fade:] *= np.linspace(1, 0, fade)
         a /= max(1e-6, np.abs(a).max())
-        _KIT[f] = a
-    return _KIT[f]
+        lead = (peak - start) / SR if name in ALIGN_PEAK else 0.0
+        _KIT[key] = (a, lead)
+    return _KIT[key]
+
+
+ep_music = {}
 
 
 def mix(slug, tl, dur):
@@ -535,10 +547,21 @@ def mix(slug, tl, dur):
     count = {}
     for t, name in sorted(tl["sfx"]):
         count[name] = count.get(name, 0) + 1
-        smp = kit_sound(name, count[name])
+        smp, lead = kit_sound(name, count[name])
         s = (smp * GAIN.get(name, 0.6)) if smp is not None else sfx(name, count[name] % 3).astype(np.float32) * 0.42
-        i = int(max(0.0, t) * SR); seg = s[: max(0, n - i)]
+        t0 = t - lead
+        if t0 < 0: s = s[int(-t0 * SR):]; t0 = 0.0
+        i = int(t0 * SR); seg = s[: max(0, n - i)]
         out[i:i + len(seg)] += seg
+    m = ep_music.get("cfg")
+    if m:
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(m.get("start", 0)), "-t", str(dur + 1), "-i",
+                              os.path.join(CACHE, "music", m["file"]), "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
+        bed = np.frombuffer(raw, np.float32)[: len(out)]
+        vr = np.sqrt(np.mean(v[np.abs(v) > 0.02] ** 2)); br = np.sqrt(np.mean(bed ** 2)) + 1e-9
+        bed = bed * (vr / br) * 10 ** (m.get("under_voice_db", -7) / 20)
+        bed = bed.copy(); fo = int(0.3 * SR); bed[-fo:] *= np.linspace(1, 0, fo)
+        out[: len(bed)] += bed
     out = out[: int(dur * SR)]
     p = os.path.join(od, "mix.wav"); sf.write(p, out, SR)
     return p, sum(count.values())
@@ -556,7 +579,7 @@ def manifest(slug, ep):
 def main(slug, preview=False):
     ep = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))
     wj = json.load(open(os.path.join(REPO, "out", slug, "words.json")))
-    tl = build(ep, wj["words"])
+    tl = build(ep, wj["words"]); ep_music["cfg"] = ep.get("music")
     dur = round(wj["duration"] + 0.25, 3)
     fire = stock_frames("fire"); boom_frames = stock_frames("boom")
     shaker = Shaker([s["t"] for s in tl["sticker"] if s["kind"] in ("x",)] + tl["flash"] + tl["boom"] +
