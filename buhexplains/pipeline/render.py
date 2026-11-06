@@ -22,7 +22,7 @@ FONT_CAP = os.path.join(ROOT, "fonts", "schibsted-grotesk", "SchibstedGrotesk-Bo
 FONT_HEAVY = os.path.join(ROOT, "fonts", "archivo-black", "ArchivoBlack-Regular.ttf")
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
 RED = (226, 20, 20, 255)
-STOCK = {"fire": ("12318-720.mp4", 1.0, 4.0), "fire2": ("1242-720.mp4", 1.0, 4.0), "boom": ("38818-720.mp4", 0.72, 1.0)}
+STOCK = {"boom": ("38818-720.mp4", 0.72, 1.0), "flamewall": ("3765-720.mp4", 0, 0), "tongue": ("22834-720.mp4", 0, 0), "embers": ("3465-720.mp4", 0, 0)}
 
 
 def norm(w):
@@ -66,6 +66,43 @@ def stock_frames(key, size=(540, 960)):
 _YY, _XX = np.mgrid[0:H, 0:W].astype(np.float32)
 EDGE = np.clip(np.hypot((_XX - W / 2) / (W * 0.42), (_YY - H * 0.47) / (H * 0.30)), 0, 1)[..., None] ** 1.6  # 0 centre, 1 edges
 FIRE_MASK = 0.28 + 0.72 * EDGE
+
+
+def _clip(f, t0, dur, vf, size):
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(t0), "-t", str(dur), "-i", os.path.join(CACHE, "stock", f),
+                          "-vf", f"fps={FPS},{vf}", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True, check=True).stdout
+    return np.frombuffer(raw, np.uint8).reshape(-1, size[1], size[0], 3).astype(np.float32) / 255
+
+
+def flame_frames(dur=4.0, size=(540, 960)):
+    """A CapCut-style flame overlay, built from real flames shot on black (Mixkit): a wall of flames rising from the
+    bottom, a shorter one hanging from the top, tongues licking up both sides, embers drifting over everything and a
+    warm glow from below. The middle stays clear for the subject. Screen-blended over the picture."""
+    w, h = size
+    wall = _clip("3765-720.mp4", 2.0, dur, f"scale={w}:{int(w * 720 / 1280 * 1.35)}", (w, int(w * 720 / 1280 * 1.35)))
+    top = _clip("3765-720.mp4", 8.0, dur, f"scale={w}:{int(w * 720 / 1280 * 0.85)},vflip", (w, int(w * 720 / 1280 * 0.85)))
+    sw, sh = int(w * 0.5), int(h * 0.62)
+    side = _clip("22834-720.mp4", 5.0, dur + 1.4, f"crop=560:560:340:0,scale={sw}:{sh}", (sw, sh))
+    embers = _clip("3465-720.mp4", 3.0, dur, f"crop=ih*9/16:ih,scale={w}:{h}", (w, h))
+    yy = np.linspace(0, 1, h)[:, None, None]
+    glow = np.clip((yy - 0.55) / 0.45, 0, 1) ** 1.6 * np.array([0.55, 0.16, 0.0])
+    n = min(len(wall), len(top), len(embers), len(side) - 40)
+    out = []
+    for k in range(n):
+        c = np.zeros((h, w, 3), np.float32)
+        def scr(layer, x, y, amt=1.0):
+            lh, lw = layer.shape[:2]; x0, y0 = max(0, x), max(0, y); x1, y1 = min(w, x + lw), min(h, y + lh)
+            if x1 <= x0 or y1 <= y0: return
+            sub = layer[y0 - y:y1 - y, x0 - x:x1 - x] * amt
+            c[y0:y1, x0:x1] = 1 - (1 - c[y0:y1, x0:x1]) * (1 - sub)
+        scr(wall[k], 0, h - wall.shape[1])
+        scr(top[k], 0, 0, 0.75)
+        scr(side[k], -int(sw * 0.38), h - sh - int(h * 0.05), 0.9)
+        scr(side[k + 40][:, ::-1], w - int(sw * 0.62), h - sh - int(h * 0.12), 0.9)
+        scr(embers[k], 0, 0, 0.9)
+        c = 1 - (1 - c) * (1 - glow)
+        out.append((np.clip(c, 0, 1) * 255).astype(np.uint8))
+    return np.stack(out)
 
 
 def screen(base, over, amount=1.0):
@@ -393,7 +430,7 @@ def base_frame(ev, spec, t, fire, boom_frames, booms):
         paste(bg, im.convert("RGBA"), W / 2 + xoff, H * 0.47, sc, rot); card_geo(im.width, im.height, W / 2 + xoff, H * 0.47, sc)
         frame = bg.convert("RGB")
     elif ev["fit"] in ("band", "spin_in"):
-        bg = Image.fromarray(fire[int(t * FPS) % len(fire)]).resize((W, H), Image.BILINEAR).convert("RGB")
+        bg = Image.fromarray(np.clip(fire[int(t * FPS) % len(fire)].astype(np.float32) * 0.9 + np.array([46, 6, 4]), 0, 255).astype(np.uint8)).resize((W, H), Image.BILINEAR).convert("RGB")
         card = im.copy(); sc0 = min(W * 1.02 / card.width, H * 0.62 / card.height); card = card.resize((int(card.width * sc0), int(card.height * sc0)))
         sc = drift * (ease(a / 0.3, 1.4) if ev["enter"] == "spin" else 1)
         rot = (1 - ease(a / 0.3, 1.2)) * 300 if ev["enter"] == "spin" else 4 * math.sin(a * 2)
@@ -418,7 +455,7 @@ def base_frame(ev, spec, t, fire, boom_frames, booms):
     if fire is not None:
         fl = fire[int(t * FPS) % len(fire)].astype(np.float32) / 255
         fl = np.asarray(Image.fromarray((fl * 255).astype(np.uint8)).resize((W, H), Image.BILINEAR), np.float32) / 255
-        arr = screen(arr * np.array([1.0, 0.9, 0.8]), fl * FIRE_MASK, 0.95)
+        arr = screen(arr * np.array([1.0, 0.93, 0.85]), fl, 1.0)
     for b0 in booms:
         k = int((t - b0) * FPS)
         if 0 <= k < min(len(boom_frames), int(0.4 * FPS)):
@@ -662,7 +699,7 @@ def main(slug, preview=False):
     tl = build(ep, wj["words"]); ep_music["cfg"] = ep.get("music")
     ep_music["bites"] = [(w["start"], w["end"]) for w in wj["words"] if w.get("bite")]
     dur = round(wj["duration"] + 0.25, 3)
-    fire = stock_frames("fire"); boom_frames = stock_frames("boom")
+    fire = flame_frames(); boom_frames = stock_frames("boom")
     shaker = Shaker([s["t"] for s in tl["sticker"] if s["kind"] in ("x",)] + tl["flash"] + tl["boom"] +
                     [e["t"] for e in tl["img"] if e["enter"] in ("whip", "zoomblur")])
     audio, n_sfx = mix(slug, tl, dur)
