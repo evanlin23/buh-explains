@@ -5,6 +5,7 @@ How a BuhExplains Short gets picked, written, cut and judged. Every rule here co
 The owner's words outrank everything here except accuracy. Add new owner feedback to "Owner notes" as a dated quote, in the same PR.
 
 ## Owner notes
+- 2026-11-07: "the name spliced in doesn't really work, can you do just the regular voice?" The narrator says the names itself (`voice.bites: false`). The fire and explosion still hit on every name; only the audio changed. The bite tools stay in the code in case a meme's sound is ever worth bringing back.
 - 2026-11-06: TTS narration with Gemini **Achird**. This repo gets its own secrets; never reuse other repos' keys.
 - 2026-11-06: "6 7 is old, we need to be more trendy and recent." Only memes that are live right now.
 - 2026-11-06: "Why cant we be controversial or political." Controversy and politics are allowed here. This replaces the blocky channel's "nothing that would decrease the possible audience size" rule for BuhExplains only. House approach: the viewers argue, and the channel doesn't take a party side.

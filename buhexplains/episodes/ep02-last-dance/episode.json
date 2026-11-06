@@ -21,7 +21,8 @@
  "voice": {
   "engine": "gemini",
   "voice": "Achird",
-  "gap": 0.0
+  "gap": 0.0,
+  "bites": false
  },
  "music": {
   "file": "montagem-alquimia.mp3",

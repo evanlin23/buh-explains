@@ -25,7 +25,8 @@
    "engine": "kokoro",
    "voice": "am_michael",
    "speed": 1.22
-  }
+  },
+  "bites": false
  },
  "images": {
   "hero": {

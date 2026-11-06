@@ -336,6 +336,9 @@ def main(slug):
         matched = sum(1 for x in times if x); total = len(tokens); heard_all = heard
         dur = len(speak) / SR; times = fill(times, tokens, dur)
         groups = [idx for kind, idx in segs if kind == "bite"]
+        name_groups = groups
+        if not v.get("bites", True):   # owner, 2026-11-07: "the name spliced in doesn't really work" -> the narrator says it
+            groups = []
         pieces, cursor, shift, out_times = [], 0, 0.0, {}
         env = speech_env(speak)
 
@@ -387,7 +390,8 @@ def main(slug):
         for i in range(len(tokens)):
             s_, e_ = out_times[i]
             words.append({"line": li, "i": i, "word": tokens[i], "start": round(t + s_, 3), "end": round(t + e_, 3),
-                          **({"bite": True} if any(i in g for g in groups) else {})})
+                          **({"bite": True} if any(i in g for g in groups) else {}),
+                          **({"name": True} if any(i in g for g in name_groups) else {})})
         parts.append(a); t += len(a) / SR
         cov = matched / total if total else 1.0
         report.append((li, round(cov, 2), " ".join(heard_all)))

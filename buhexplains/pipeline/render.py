@@ -150,12 +150,12 @@ def build(ep, words):
             if b.get("riser"): tl["sfx"].append((t, "riser"))
             for extra in b.get("sfx", []): tl["sfx"].append((t, extra))
         for j, w in enumerate(ws):  # every bite (a name, or a whole {bite group}): real explosion + fire
-            if w.get("bite") and (j == 0 or not ws[j - 1].get("bite")):
+            if (w.get("bite") or w.get("name")) and (j == 0 or not (ws[j - 1].get("bite") or ws[j - 1].get("name"))):
                 k = j
-                while k + 1 < len(ws) and ws[k + 1].get("bite"): k += 1
+                while k + 1 < len(ws) and (ws[k + 1].get("bite") or ws[k + 1].get("name")): k += 1
                 tl["boom"].append(w["start"] - 0.05); tl["sfx"].append((w["start"] - 0.05, "boom"))
                 tl["fire"].append((w["start"], ws[k]["end"] + 0.25))
-            elif not w.get("bite") and norm(w["word"]) in names:
+            elif not (w.get("bite") or w.get("name")) and norm(w["word"]) in names:
                 tl["boom"].append(w["start"] - 0.05); tl["sfx"].append((w["start"] - 0.05, "boom"))
                 tl["fire"].append((w["start"], w["end"] + 0.25))
         # captions: 1-2 words, every word on its own onset
