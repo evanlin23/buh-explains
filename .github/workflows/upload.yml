@@ -7,8 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: "episode slug to upload, e.g. ep01-verity"
-        required: true
+        description: "episode slug to upload, e.g. ep06-gta-wait (blank = the next one in buhexplains/queue.txt, at most one a day)"
+        required: false
+        default: ""
 concurrency:
   group: upload
   cancel-in-progress: false

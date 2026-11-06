@@ -62,13 +62,39 @@ def youtube():
     return build("youtube", "v3", credentials=creds, cache_discovery=False)
 
 
+QUEUE = ROOT / "buhexplains" / "queue.txt"
+
+
+def central_today() -> str:
+    """Today's date in US Central (the owner's time zone; UTC-6 in winter, UTC-5 in summer)."""
+    from zoneinfo import ZoneInfo
+    return dt.datetime.now(ZoneInfo("America/Chicago")).date().isoformat()
+
+
+def next_slug(done: dict) -> str | None:
+    """The first slug in queue.txt (deadline order) that isn't uploaded yet and has an episode folder."""
+    for line in QUEUE.read_text().splitlines():
+        s = line.split("#")[0].strip()
+        if s and s not in done and (EP / s / "package.json").exists():
+            return s
+    return None
+
+
 def main() -> None:
-    ap = argparse.ArgumentParser(); ap.add_argument("--slug", required=True); ap.add_argument("--dry-run", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--slug", default=""); ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     ok, missing = enabled()
     if not ok:
         print(f"uploads are off (missing: {missing}). Nothing done.")
         return
+    if not a.slug:  # the daily clock (cron-job.org): one video a day, the next one in the queue
+        done0 = uploads()
+        if any(e.get("uploaded_central") == central_today() for e in done0.values()):
+            print(f"already uploaded one today ({central_today()}, Central). Nothing done."); return
+        a.slug = next_slug(done0) or ""
+        if not a.slug:
+            print("queue.txt is empty: everything is uploaded. Nothing done."); return
+        print("next in queue:", a.slug)
     pkg = json.loads((EP / a.slug / "package.json").read_text())
     done = uploads()
     if a.slug in done:
@@ -99,7 +125,7 @@ def main() -> None:
             st, resp = req.next_chunk()
             if st: print(f"uploaded {int(st.progress() * 100)}%", flush=True)
         vid = resp["id"]
-    done[a.slug] = {"video_id": vid, "uploaded": today, "title": pkg["title"], "publish_at": when}
+    done[a.slug] = {"video_id": vid, "uploaded": today, "uploaded_central": central_today(), "title": pkg["title"], "publish_at": when}
     UPLOADS.write_text(json.dumps(done, indent=1) + "\n")
     ref = os.environ.get("GITHUB_REF_NAME", "")
     subprocess.run(["git", "add", str(UPLOADS)], check=True)

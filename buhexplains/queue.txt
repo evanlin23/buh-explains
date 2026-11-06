@@ -1,0 +1,13 @@
+# Upload order for the daily clock (cron-job.org -> upload.yml with no slug): one a day, top first, skipping
+# anything already in uploads.json. Deadlines first. Edit freely; add new episodes as they're made.
+ep06-gta-wait      # before 2026-11-19 (GTA 6 release)
+ep03-november      # before late November
+ep01-verity
+ep04-deceive       # while the Holmes doc is in theatres
+ep05-its-time      # November to December
+ep09-rumpel
+ep08-biddy
+ep07-tralala
+ep02-last-dance
+ep10-randy
+ep11-mbappe
