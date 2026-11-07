@@ -22,6 +22,26 @@ FONT_CAP = os.path.join(ROOT, "fonts", "schibsted-grotesk", "SchibstedGrotesk-Bo
 FONT_HEAVY = os.path.join(ROOT, "fonts", "archivo-black", "ArchivoBlack-Regular.ttf")
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
 RED = (226, 20, 20, 255)
+
+# Per-episode look (2026-11-07 research: YouTube cuts Shorts-feed reach for "templated" / mass-produced channels, so
+# every episode gets its own accent, captions, hook move, backdrop and grade, picked from the slug; an episode can
+# override any of them with "style": {...} in episode.json). The hook / build-up / payoff structure stays.
+ACCENTS = {"red": (226, 20, 20), "magenta": (235, 40, 160), "yellow": (255, 205, 0), "cyan": (0, 200, 235),
+           "lime": (120, 230, 40), "orange": (255, 120, 0), "violet": (150, 70, 255)}
+STYLE = {"accent": "red", "caption": "white", "hook": "zoomout", "backdrop": "blur", "grade": "neutral", "cap_y": 1000}
+
+
+def style_for(slug, ep):
+    r = random.Random(int(hashlib.md5(slug.encode()).hexdigest()[:8], 16))
+    st = {"accent": r.choice(list(ACCENTS)), "caption": r.choice(["white", "yellow", "boxed", "outline"]),
+          "hook": r.choice(["zoomout", "slam", "whip", "drop"]), "backdrop": r.choice(["blur", "tint", "stripes", "halftone"]),
+          "grade": r.choice(["neutral", "warm", "cool", "punchy"]), "cap_y": r.choice([960, 1000, 1040, 1100])}
+    st.update(ep.get("style", {}))
+    return st
+
+
+def accent(a=255):
+    return ACCENTS.get(STYLE["accent"], ACCENTS["red"]) + (a,)
 STOCK = {"boom": ("38818-720.mp4", 0.72, 1.0), "flamewall": ("3765-1080.mp4", 0, 0), "tongue": ("22834-720.mp4", 0, 0), "embers": ("3465-1080.mp4", 0, 0)}
 
 
@@ -227,7 +247,7 @@ def draw_ellipse(frame, cx, cy, rx, ry, rot, progress, seed):
         r = math.radians(rot)
         pts.append((cx + x * math.cos(r) - y * math.sin(r), cy + x * math.sin(r) + y * math.cos(r)))
     d.line(pts, fill=(0, 0, 0, 120), width=22, joint="curve")
-    d.line(pts, fill=RED, width=15, joint="curve")
+    d.line(pts, fill=accent(), width=15, joint="curve")
     frame.alpha_composite(layer)
 
 
@@ -342,6 +362,10 @@ def draw_sticker(frame, s, t, points=None):
               ease((a % 0.3) / 0.08), r2.uniform(-12, 12))
 
 
+def _glow():
+    r, g, b, _ = accent(); return (min(255, r + 30), min(255, g + 50), min(255, b + 80), 255)
+
+
 def draw_label(frame, lab, t):
     """Pink glow label: types on letter by letter, leaves by scattering its letters. Long text wraps to two lines."""
     a, left = t - lab["t"], lab["end"] - t
@@ -365,7 +389,7 @@ def draw_label(frame, lab, t):
             p = 1 - left / 0.22; cx += math.cos(ang) * 500 * p * p; cy += math.sin(ang) * 500 * p * p
         pos.append((ch, cx, cy))
     layer = Image.new("RGBA", frame.size, (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
-    for ch, cx, cy in pos: d.text((cx, cy), ch, font=f, fill=(255, 70, 130, 255), stroke_width=12, stroke_fill=(255, 70, 130, 255))
+    for ch, cx, cy in pos: d.text((cx, cy), ch, font=f, fill=_glow(), stroke_width=12, stroke_fill=_glow())
     glow = layer.filter(ImageFilter.GaussianBlur(16)); frame.alpha_composite(glow); frame.alpha_composite(glow)
     d2 = ImageDraw.Draw(frame)
     for ch, cx, cy in pos: d2.text((cx, cy), ch, font=f, fill=(255, 255, 255, 255))
@@ -398,6 +422,10 @@ def picture(key, spec, grade):
             l, t_, r_, b_ = spec["crop"]; im = im.crop((int(l * im.width), int(t_ * im.height), int(r_ * im.width), int(b_ * im.height)))
         im = enlarge(im)
         im = ImageEnhance.Color(im).enhance(1.35); im = ImageEnhance.Contrast(im).enhance(1.12)
+        g = STYLE["grade"]
+        if g == "warm": im = Image.blend(im, Image.new("RGB", im.size, (255, 150, 60)), 0.10)
+        elif g == "cool": im = Image.blend(im, Image.new("RGB", im.size, (40, 120, 255)), 0.10)
+        elif g == "punchy": im = ImageEnhance.Contrast(ImageEnhance.Color(im).enhance(1.15)).enhance(1.12)
         if grade == "red": im = Image.blend(im, Image.new("RGB", im.size, (170, 0, 0)), 0.35)
         if grade == "dark": im = ImageEnhance.Brightness(im).enhance(0.55)
         _IMG[ck] = (im, used)
@@ -445,7 +473,19 @@ _BLUR = {}
 def blur_bg(key, im):
     """The picture itself, filling the frame, heavily blurred and darkened: the backdrop for a whole-picture shot."""
     if key not in _BLUR:
-        b = cover(im, 1.15, 0, 0).filter(ImageFilter.GaussianBlur(40)); _BLUR[key] = ImageEnhance.Brightness(b).enhance(0.55)
+        b = cover(im, 1.15, 0, 0).filter(ImageFilter.GaussianBlur(40)); b = ImageEnhance.Brightness(b).enhance(0.55)
+        kind = STYLE["backdrop"]
+        if kind != "blur":
+            b = Image.blend(b.convert("RGB"), Image.new("RGB", b.size, accent()[:3]), 0.28 if kind == "tint" else 0.18)
+            ov = Image.new("RGBA", b.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
+            if kind == "stripes":
+                for x in range(-H, W, 90): d.line([(x, H), (x + H, 0)], fill=(255, 255, 255, 26), width=30)
+            elif kind == "halftone":
+                for yy in range(0, H, 36):
+                    for xx in range((yy // 36 % 2) * 18, W, 36):
+                        rr = 3 + 9 * (yy / H); d.ellipse((xx - rr, yy - rr, xx + rr, yy + rr), fill=(0, 0, 0, 70))
+            b = Image.alpha_composite(b.convert("RGBA"), ov)
+        _BLUR[key] = b
     return _BLUR[key]
 
 
@@ -508,15 +548,27 @@ def base_frame(ev, spec, t, fire, boom_frames, booms):
 
 
 def caption(frame, text, a):
-    f = font(FONT_CAP, 86)
+    kind = STYLE["caption"]
+    f = font(FONT_HEAVY if kind in ("yellow", "boxed") else FONT_CAP, 80 if kind in ("yellow", "boxed") else 86)
+    if kind == "boxed": text = text.upper()
     pop = (0.9 + 0.1 * ease(a / 0.07, 2)) * (1 + 0.12 * ((hash(text) % 7) - 3) / 3 * math.exp(-a * 12))
     layer = Image.new("RGBA", (1000, 220), (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
-    d.text((500, 118), text, font=f, fill=(0, 0, 0, 200), anchor="mm", stroke_width=4, stroke_fill=(0, 0, 0, 200))
+    if kind != "boxed":
+        d.text((500, 118), text, font=f, fill=(0, 0, 0, 200), anchor="mm", stroke_width=4, stroke_fill=(0, 0, 0, 200))
     sh = layer.filter(ImageFilter.GaussianBlur(6))
-    top = Image.new("RGBA", layer.size, (0, 0, 0, 0))
-    ImageDraw.Draw(top).text((500, 110), text, font=f, fill=(255, 255, 255, 255), anchor="mm", stroke_width=3, stroke_fill=(20, 20, 20, 255))
+    top = Image.new("RGBA", layer.size, (0, 0, 0, 0)); dt_ = ImageDraw.Draw(top)
+    if kind == "white":
+        dt_.text((500, 110), text, font=f, fill=(255, 255, 255, 255), anchor="mm", stroke_width=3, stroke_fill=(20, 20, 20, 255))
+    elif kind == "yellow":
+        dt_.text((500, 110), text, font=f, fill=(255, 226, 40, 255), anchor="mm", stroke_width=7, stroke_fill=(0, 0, 0, 255))
+    elif kind == "outline":
+        dt_.text((500, 110), text, font=f, fill=(255, 255, 255, 255), anchor="mm", stroke_width=8, stroke_fill=accent())
+    else:  # boxed: white type on an accent slab
+        x0, y0, x1, y1 = dt_.textbbox((500, 110), text, font=f, anchor="mm")
+        dt_.rounded_rectangle((x0 - 26, y0 - 16, x1 + 26, y1 + 16), 18, fill=accent(235))
+        dt_.text((500, 110), text, font=f, fill=(255, 255, 255, 255), anchor="mm")
     sh.alpha_composite(top)
-    paste(frame, sh, W / 2, 1000, pop)
+    paste(frame, sh, W / 2, STYLE["cap_y"], pop)
 
 
 # ------------------------------------------------------------------ the frame
@@ -584,8 +636,18 @@ def reframe(frame, t, tl, points):
                 u, v, _ = next(iter(points.values())); cx, cy = GEO["map"](u, v)
     for pt in tl["punch"]:
         if 0 <= t - pt < 0.28: z *= 1 + 0.16 * (1 - (t - pt) / 0.28) ** 2
-    if t < HOOK_ZOOM:                                   # the hook: zoomed out, snapping in
+    hook = STYLE["hook"]
+    if t < HOOK_ZOOM and hook == "zoomout":             # the hook: zoomed out, snapping in
         z *= 0.32 + 0.68 * ease(t / HOOK_ZOOM, 1.2)
+    elif t < HOOK_ZOOM and hook == "slam":              # starts huge and slams down to frame
+        z *= 1 + 0.9 * (1 - ease(t / HOOK_ZOOM, 1.4))
+    elif t < HOOK_ZOOM and hook in ("whip", "drop"):    # slides in from the side / drops in from the top, motion-blurred
+        p = 1 - ease(t / HOOK_ZOOM, 1.3); off = int((W if hook == "whip" else H) * 0.6 * p)
+        if off > 0:
+            bg = Image.new("RGBA", (W, H), (0, 0, 0, 255)); fr = frame
+            if p > 0.05: fr = fr.filter(ImageFilter.BoxBlur(int(6 + 30 * p)))
+            bg.alpha_composite(fr, (off, 0) if hook == "whip" else (0, -off))
+            frame = bg
     if abs(z - 1) < 1e-3: return frame
     if z > 1:
         cw, ch = W / z, H / z
@@ -795,6 +857,7 @@ def manifest(slug, ep):
 def main(slug, preview=False):
     ep = json.load(open(os.path.join(ROOT, "episodes", slug, "episode.json")))
     wj = json.load(open(os.path.join(REPO, "out", slug, "words.json")))
+    STYLE.update(style_for(slug, ep)); print("  style:", STYLE)
     tl = build(ep, wj["words"]); ep_music["cfg"] = ep.get("music")
     ep_music["bites"] = [(w["start"], w["end"]) for w in wj["words"] if w.get("bite")]
     dur = round(min(wj["duration"] + 0.25, wj["words"][-1]["end"] + 0.2), 3)   # audit: 0.6-0.7 s of dead air hurt the loop

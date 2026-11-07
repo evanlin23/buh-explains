@@ -33,7 +33,7 @@ buhexplains/make.sh <slug> --preview   # half-size render, no voicecheck
 `docs/operations.md`: the daily schedule (2 uploads and 2 productions a day), the producer session and its scheduled tasks, the cron-job.org jobs, secrets and variables, how to pause or reorder, and the known failure modes. Read it before changing any of them.
 
 ## Uploads
-**Live since 2026-11-06.** `render.yml` makes the `film-<slug>` artifact; `upload.yml` posts 2 a day from `buhexplains/queue.txt` (private, scheduled public about noon and 6 PM Central); `comments.yml` posts each video's first comment once it's public. Turn everything off by removing the repo variable `YT_ENABLED`. Details: `docs/operations.md`.
+**Live since 2026-11-06.** `render.yml` makes the `film-<slug>` artifact; `upload.yml` posts from `buhexplains/queue.txt`, 1 a day at a varied time by default (`YT_PER_DAY`), private then scheduled public; **paused while `buhexplains/PAUSED` exists**; `comments.yml` posts each video's first comment once it's public. Turn everything off by removing the repo variable `YT_ENABLED`. Details: `docs/operations.md`.
 
 ## Commit identity
 ```bash
