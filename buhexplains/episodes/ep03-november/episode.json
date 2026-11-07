@@ -24,16 +24,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep03-november-phonk.wav",
-  "start": 0,
+  "file": "ncs-executioner.mp3",
+  "start": 15.053,
   "loop": [
-   3.9024,
-   40.9756
+   15.053,
+   31.052
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep03-november)",
-  "note": "owner note 2026-11-07 (PLAYBOOK \u00a76): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/6cd2e920-4901-448e-9630-dddaa78fc7cf",
+  "page": "https://ncs.io/EXECUTIONER",
+  "credit": "Song: DJ FKU - EXECUTIONER [NCS Release]\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/EXECUTIONER\nWatch: http://ncs.lnk.to/EXECUTIONERAT/youtube",
+  "note": "NCS EXECUTIONER (120 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK \u00a76)."
  },
  "images": {
   "hero": {

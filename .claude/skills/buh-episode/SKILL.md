@@ -15,9 +15,9 @@ Run /buh-scout (or use an unmade pitch from the newest `buhexplains/pitches/` fi
 
 ## 3. Write it (`buhexplains/episodes/epNN-<slug>/`)
 - `script.md`: facts with two sources (one primary). Held reveal: the hook is a question, the answer lands after 70% and never in the title. Years written as spoken. The narrator says names (`voice.bites: false`). Length varies, about 20–35 s.
-- `episode.json`: `lines` with `beats` (img/fit/enter, stickers with `target`, labels, flash, punch, sfx), `images` with `url`, `page`, optional `crop`/`focus`, and `points` for every sticker target. `music` = the phonk bed used by recent episodes. `voice` = gemini Achird.
+- `episode.json`: `lines` with `beats` (img/fit/enter, stickers with `target`, labels, flash, punch, sfx), `images` with `url`, `page`, optional `crop`/`focus`, and `points` for every sticker target. `music` = an NCS phonk track from `buhexplains/assets/ncs_tracks.txt` that the last few episodes (and the neighbouring queue slots) didn't use: `file`, `source` (its ncs.io download link), `page`, `credit`, `start` on the drop's downbeat and `loop` on bar lines (PLAYBOOK §6), `under_voice_db: -8`. `voice` = gemini Achird.
 - **Pictures:** at least 1000 px on the long side (YouTube `maxresdefault`, Wikimedia/Fandom original-file URLs, `/originals/` paths). Nothing under 600 px: the render prints `LOW-RES picture` for those, so replace them. Every circle/arrow/X must land on something meaningful: draw each point on the picture and look before rendering.
-- `package.json`: title (the hook, lowercase, 1–2 hashtags, no answer), description with sources, `first_comment`.
+- `package.json`: title (the hook, lowercase, 1–2 hashtags, no answer), description with sources and then the track's NCS credit block exactly as in `music.credit`, `first_comment`.
 - **Never** commit `.cache/`, `out/` or any downloaded media (public repo); only URLs.
 
 ## 4. Voice (Gemini only runs on Actions)

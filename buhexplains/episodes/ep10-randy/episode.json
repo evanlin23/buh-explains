@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep10-randy-phonk.wav",
-  "start": 0,
+  "file": "ncs-bane.mp3",
+  "start": 70.887,
   "loop": [
-   3.609,
-   41.5038
+   70.887,
+   98.311
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep10-randy)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/bb070aaa-1e96-410f-a59f-4510005e9af6",
+  "page": "https://ncs.io/BANE",
+  "credit": "Song: Emin Nilsen - BANE [NCS Release]\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/BANE\nWatch: http://ncs.lnk.to/BANEAT/youtube",
+  "note": "NCS BANE (140 BPM): starts on the drop, loops 16 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "sources": {
   "meme": "Know Your Meme, 'Randy Marsh vs. / What's Up Brah?': resurged Oct 2026 on TikTok/Instagram Reels (edits vs Minecraft Steve, Omni-Man, Absolute Bane); scene from 'Broadway Bro Down'. KYM weekly roundup (Oct 16, 2026).",

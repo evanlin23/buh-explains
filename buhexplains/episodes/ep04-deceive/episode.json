@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep04-deceive-phonk.wav",
-  "start": 0,
+  "file": "ncs-fearlessfunk.mp3",
+  "start": 33.015,
   "loop": [
-   3.5556,
-   40.8889
+   33.015,
+   47.784
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep04-deceive)",
-  "note": "owner note 2026-11-07 (PLAYBOOK \u00a76): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/8783cd5f-c6c7-434c-b1a9-a064f1db6baa",
+  "page": "https://ncs.io/FearlessFunk",
+  "credit": "Song: DR M\u00d8B - Fearless Funk\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/FearlessFunk\nWatch: http://ncs.lnk.to/FearlessFunkAT/youtube",
+  "note": "NCS Fearless Funk (130 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK \u00a76)."
  },
  "images": {
   "teaser": {

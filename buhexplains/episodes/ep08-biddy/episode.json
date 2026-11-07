@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep08-biddy-phonk.wav",
-  "start": 0,
+  "file": "ncs-montagemindia.mp3",
+  "start": 73.633,
   "loop": [
-   4.0678,
-   40.678
+   73.633,
+   88.402
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep08-biddy)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/345ceb62-1d76-4b2a-b403-a5c65063b75c",
+  "page": "https://ncs.io/montagemindia",
+  "credit": "Song: GxL - MONTAGEM INDIA\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/montagemindia\nWatch: http://ncs.lnk.to/montagemindiaAT/youtube",
+  "note": "NCS MONTAGEM INDIA (130 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "sources": {
   "game": "Star Wars: Galactic Racer, released October 2026; Biddy Blas's lines are subtitled 'BIDDY BLAS (Huttese)' in the game (frames from 'Biddy Blas all scenes' uploads).",

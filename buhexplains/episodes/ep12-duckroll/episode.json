@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep12-duckroll-phonk.wav",
-  "start": 0,
+  "file": "ncs-montagemfavela.mp3",
+  "start": 10.185,
   "loop": [
-   3.5556,
-   40.8889
+   10.185,
+   25.301
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep12-duckroll)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/ce219d28-5aa8-42fe-a537-95583564f44e",
+  "page": "https://ncs.io/MONTAGEMFAVELA",
+  "credit": "Song: CHASHKAKEFIRA - MONTAGEM FAVELA\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/MONTAGEMFAVELA\nWatch: http://ncs.lnk.to/MONTAGEMFAVELAAT/youtube",
+  "note": "NCS MONTAGEM FAVELA (127.2 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "sources": {
   "duckroll": "Know Your Meme, 'Duckroll': a bait-and-switch from 4chan in 2006; moot's word filter changed 'egg' to 'duck', so 'eggroll' became 'duckroll'; the link led to a picture of a duck on wheels. It is the precursor of the Rickroll.",

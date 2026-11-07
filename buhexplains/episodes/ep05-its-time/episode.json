@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep05-its-time-phonk.wav",
-  "start": 0,
+  "file": "ncs-playasneverdie.mp3",
+  "start": 30.365,
   "loop": [
-   4.1026,
-   41.0256
+   30.365,
+   42.752
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep05-its-time)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/94e06ebf-9500-4451-8cbb-4b9ccbe1a9d1",
+  "page": "https://ncs.io/PLAYASNEVERDIE",
+  "credit": "Song: ANGELPLAYA - PLAYAS NEVER DIE [NCS Release]\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/PLAYASNEVERDIE\nWatch: http://NCS.lnk.to/PLAYASNEVERDIEAT/youtube",
+  "note": "NCS PLAYAS NEVER DIE (155 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "images": {
   "hero": {

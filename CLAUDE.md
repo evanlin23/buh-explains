@@ -8,7 +8,7 @@ Automation for **@BuhExplains**: 20–35 s meme-lore explainer Shorts (a TTS nar
 
 ## Layout
 - `buhexplains/episodes/<slug>/`: `episode.json` (lines, beats, pictures with `points`, name bites, music, sources), `script.md`, `package.json` (title, description, first comment), `manifest.json` (written by the render: every picture/sound source).
-- `buhexplains/pipeline/`: `fetch_assets.py` (rebuild `.cache/` from logged URLs), `voice.py` (Gemini Achird or Kokoro; the narrator says the names, `voice.bites: false`), `render.py` (picture + sound + mix), `phonk.py` (each episode's original music bed), `voicecheck.py` (clipped cuts + intelligibility in the final mix), `shake_measure.py`, `bite.py`, `upload.py`, `comment.py`, `audit.py` (virality QA on the finished file).
+- `buhexplains/pipeline/`: `fetch_assets.py` (rebuild `.cache/` from logged URLs), `voice.py` (Gemini Achird or Kokoro; the narrator says the names, `voice.bites: false`), `render.py` (picture + sound + mix), `phonk.py` (the old in-house phonk bed, unused since the owner chose NCS), `voicecheck.py` (clipped cuts + intelligibility in the final mix), `shake_measure.py`, `bite.py`, `upload.py`, `comment.py`, `audit.py` (virality QA on the finished file).
 - `buhexplains/assets/sfx/`: the owner's own sound kit (committed). `buhexplains/assets/sfx_sources.txt`: the myinstants kit's URLs.
 
 ## Skills (`.claude/skills/`)
@@ -27,7 +27,7 @@ buhexplains/make.sh <slug> --preview   # half-size render, no voicecheck
 `GEMINI_API_KEY` is a repo secret that only Actions can read. Pushing a change to an episode script or `voice.py` runs `.github/workflows/voice.yml`: one Gemini request per changed script (free tier is about 10 a day; keep the script final before pushing), cached by text. Its artifact `voice` carries each episode's `voice.wav`, `words.json` and **Gemini's raw take** (`.cache/tts/*.wav`). Put the raw takes in `.cache/tts/` and `voice.py` runs locally with no API call, so splices and cleanup can be tuned for free.
 
 ## Media policy
-`.cache/` (models, stock clips, myinstants sounds, music beds, bites, pictures, raw TTS) is never committed: the repo is public and most of these are other people's files. Every one has its URL logged (`episode.json`, `sfx_sources.txt`, `render.STOCK`), and `fetch_assets.py <slug>` rebuilds it. Music is original: each episode's phonk bed is synthesized from its slug by `pipeline/phonk.py` (`music.synth: "phonk"`), so no commercial song goes in a video. Renders (`out/`) aren't committed either.
+`.cache/` (models, stock clips, myinstants sounds, music beds, bites, pictures, raw TTS) is never committed: the repo is public and most of these are other people's files. Every one has its URL logged (`episode.json`, `sfx_sources.txt`, `render.STOCK`), and `fetch_assets.py <slug>` rebuilds it. Music is NoCopyrightSounds phonk (owner, 2026-11-07: "just use ncs phonk"): one track per episode from `buhexplains/assets/ncs_tracks.txt`, downloaded from its logged ncs.io link, with NCS's credit block in the description. Renders (`out/`) aren't committed either.
 
 ## Operations
 `docs/operations.md`: the daily schedule (2 uploads and 2 productions a day), the producer session and its scheduled tasks, the cron-job.org jobs, secrets and variables, how to pause or reorder, and the known failure modes. Read it before changing any of them.

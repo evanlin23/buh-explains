@@ -25,16 +25,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep02-last-dance-phonk.wav",
-  "start": 0,
+  "file": "ncs-takethesky.mp3",
+  "start": 20.249,
   "loop": [
-   3.609,
-   41.5038
+   20.249,
+   40.818
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep02-last-dance)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/c2f727f2-50a4-4de6-a21a-a7a7f71ab83a",
+  "page": "https://ncs.io/takethesky",
+  "credit": "Song: Crysstales - Take The Sky\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/takethesky\nWatch: http://ncs.lnk.to/taketheskyAT/youtube",
+  "note": "NCS Take The Sky (140 BPM): starts on the drop, loops 12 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "images": {
   "duo": {

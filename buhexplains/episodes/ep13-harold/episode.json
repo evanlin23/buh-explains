@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep13-harold-phonk.wav",
-  "start": 0,
+  "file": "ncs-bandidofunk.mp3",
+  "start": 73.435,
   "loop": [
-   3.609,
-   41.5038
+   73.435,
+   87.971
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep13-harold)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/65578506-0c4e-43d0-984b-455411206002",
+  "page": "https://ncs.io/BANDIDOFUNK",
+  "credit": "Song: Emin Nilsen & Kamran747 - BANDIDO FUNK [NCS Release]\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/BANDIDOFUNK\nWatch: http://ncs.lnk.to/BANDIDOFUNKAT/youtube",
+  "note": "NCS BANDIDO FUNK (132.11 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "sources": {
   "meme": "Know Your Meme, 'Hide the Pain Harold': stock photos of a Hungarian man on Dreamstime; the meme began on the Facepunch forums in 2011, where users named him Harold.",

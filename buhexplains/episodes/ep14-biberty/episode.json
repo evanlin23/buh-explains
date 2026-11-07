@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep14-biberty-phonk.wav",
-  "start": 0,
+  "file": "ncs-favela.mp3",
+  "start": 39.959,
   "loop": [
-   3.5821,
-   41.194
+   39.959,
+   54.73
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep14-biberty)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/dd8b733e-d94a-4a9e-8349-f2674acb21ed",
+  "page": "https://ncs.io/FAVELA",
+  "credit": "Song: MXZI, Deno - FAVELA\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/FAVELA\nWatch: http://ncs.lnk.to/FAVELAAT/youtube",
+  "note": "NCS FAVELA (130 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "sources": {
   "launch": "Liberty Mutual press release, 'Liberty Mutual Turns \"Liberty Biberty\" From Famous Ad Flub Into Its Newest Brand Character' (July 20, 2026; libertymutualgroup.com): created with Bandits & Friends; the puppet crafted by Jim Henson's Creature Shop. Primary video: Liberty Mutual's 'Tell Everyone | Liberty Biberty' (youtube.com/watch?v=c5X7YYZmhS4).",

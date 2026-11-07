@@ -1,0 +1,201 @@
+# NCS (NoCopyrightSounds) phonk tracks for @BuhExplains music beds (owner, 2026-11-07: "just use ncs phonk"; PLAYBOOK §6).
+# Terms: https://ncs.io/usage-policy (free for independent creators on YouTube incl. monetised videos; credit in the description;
+# edits only for timing, https://ncs.io/usage-policy/terms). Never commit the audio: fetch_assets.py downloads `source` into .cache/music/<file>.
+# start/loop are seconds in the file: start = the drop's downbeat, loop = that drop plus N bars (checked for a clean seam).
+# Pick one the last few episodes and the neighbouring queue slots didn't use; copy file/source/page/credit/start/loop into episode.json -> music
+# and append the credit to package.json -> description.
+
+track:  FAVELA
+artist: MXZI, Deno
+page:   https://ncs.io/FAVELA
+source: https://ncs.io/track/download/dd8b733e-d94a-4a9e-8349-f2674acb21ed
+file:   ncs-favela.mp3
+start:  39.959   loop: 39.959, 54.73   (130 BPM, 8 bars)
+used:   ep14-biberty
+credit:
+  Song: MXZI, Deno - FAVELA
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/FAVELA
+  Watch: http://ncs.lnk.to/FAVELAAT/youtube
+
+track:  EXECUTIONER
+artist: DJ FKU
+page:   https://ncs.io/EXECUTIONER
+source: https://ncs.io/track/download/6cd2e920-4901-448e-9630-dddaa78fc7cf
+file:   ncs-executioner.mp3
+start:  15.053   loop: 15.053, 31.052   (120 BPM, 8 bars)
+used:   ep03-november
+credit:
+  Song: DJ FKU - EXECUTIONER [NCS Release]
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/EXECUTIONER
+  Watch: http://ncs.lnk.to/EXECUTIONERAT/youtube
+
+track:  X2
+artist: MUPP
+page:   https://ncs.io/MUPPX2
+source: https://ncs.io/track/download/b9bbfafc-837d-47b1-8e3f-73f10ec686f3
+file:   ncs-muppx2.mp3
+start:  18.007   loop: 18.007, 32.77   (130 BPM, 8 bars)
+used:   ep15-skullcap
+credit:
+  Song: mupp - X2
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/MUPPX2
+  Watch: http://ncs.lnk.to/MUPPX2AT/youtube
+
+track:  DANÇA DO VERÃO
+artist: Scythermane, SH3RWIN, NXGHT!
+page:   https://ncs.io/DDV
+source: https://ncs.io/track/download/36b043a8-1f04-4826-ae48-361abdd10999
+file:   ncs-ddv.mp3
+start:  45.999   loop: 45.999, 60.221   (135 BPM, 8 bars)
+used:   ep01-verity
+credit:
+  Song: NXGHT!, SH3RWIN, Scythermane - DANÇA DO VERÃO
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/DDV
+  Watch: http://ncs.lnk.to/DDVAT/youtube
+
+track:  Fearless Funk
+artist: DR MØB, Chris Linton
+page:   https://ncs.io/FearlessFunk
+source: https://ncs.io/track/download/8783cd5f-c6c7-434c-b1a9-a064f1db6baa
+file:   ncs-fearlessfunk.mp3
+start:  33.015   loop: 33.015, 47.784   (130 BPM, 8 bars)
+used:   ep04-deceive
+credit:
+  Song: DR MØB - Fearless Funk
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/FearlessFunk
+  Watch: http://ncs.lnk.to/FearlessFunkAT/youtube
+
+track:  PLAYAS NEVER DIE
+artist: ANGELPLAYA
+page:   https://ncs.io/PLAYASNEVERDIE
+source: https://ncs.io/track/download/94e06ebf-9500-4451-8cbb-4b9ccbe1a9d1
+file:   ncs-playasneverdie.mp3
+start:  30.365   loop: 30.365, 42.752   (155 BPM, 8 bars)
+used:   ep05-its-time
+credit:
+  Song: ANGELPLAYA - PLAYAS NEVER DIE [NCS Release]
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/PLAYASNEVERDIE
+  Watch: http://NCS.lnk.to/PLAYASNEVERDIEAT/youtube
+
+track:  VEM LENTA!
+artist: KPHK, Eluvo, Sayfalse
+page:   https://ncs.io/VEMLENTA
+source: https://ncs.io/track/download/db31a9bd-cb3c-4b8b-ae59-378f6aaff95d
+file:   ncs-vemlenta.mp3
+start:  43.889   loop: 43.889, 58.657   (130 BPM, 8 bars)
+used:   ep09-rumpel
+credit:
+  Song: Sayfalse, Eluvo, KPHK - Vem Lenta
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/VEMLENTA
+  Watch: http://ncs.lnk.to/VEMLENTAAT/youtube
+
+track:  MONTAGEM INDIA
+artist: GxL
+page:   https://ncs.io/montagemindia
+source: https://ncs.io/track/download/345ceb62-1d76-4b2a-b403-a5c65063b75c
+file:   ncs-montagemindia.mp3
+start:  73.633   loop: 73.633, 88.402   (130 BPM, 8 bars)
+used:   ep08-biddy
+credit:
+  Song: GxL - MONTAGEM INDIA
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/montagemindia
+  Watch: http://ncs.lnk.to/montagemindiaAT/youtube
+
+track:  Montagem Toma
+artist: X972, sk3tch01, MXZI
+page:   https://ncs.io/MontagemToma
+source: https://ncs.io/track/download/e7884c05-656b-4911-9a36-34e060706645
+file:   ncs-montagemtoma.mp3
+start:  44.319   loop: 44.319, 73.859   (130 BPM, 16 bars)
+used:   ep07-tralala
+credit:
+  Song: MXZI, sk3tch01, X972 - Montagem Toma
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/MontagemToma
+  Watch: http://ncs.lnk.to/MontagemTomaAT/youtube
+
+track:  Take The Sky
+artist: crysstales, DJ YHR, HRXSTAL
+page:   https://ncs.io/takethesky
+source: https://ncs.io/track/download/c2f727f2-50a4-4de6-a21a-a7a7f71ab83a
+file:   ncs-takethesky.mp3
+start:  20.249   loop: 20.249, 40.818   (140 BPM, 12 bars)
+used:   ep02-last-dance
+credit:
+  Song: Crysstales - Take The Sky
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/takethesky
+  Watch: http://ncs.lnk.to/taketheskyAT/youtube
+
+track:  BANE
+artist: Emin Nilsen
+page:   https://ncs.io/BANE
+source: https://ncs.io/track/download/bb070aaa-1e96-410f-a59f-4510005e9af6
+file:   ncs-bane.mp3
+start:  70.887   loop: 70.887, 98.311   (140 BPM, 16 bars)
+used:   ep10-randy
+credit:
+  Song: Emin Nilsen - BANE [NCS Release]
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/BANE
+  Watch: http://ncs.lnk.to/BANEAT/youtube
+
+track:  MONTAGEM FAVELA
+artist: CHASHKAKEFIRA
+page:   https://ncs.io/MONTAGEMFAVELA
+source: https://ncs.io/track/download/ce219d28-5aa8-42fe-a537-95583564f44e
+file:   ncs-montagemfavela.mp3
+start:  10.185   loop: 10.185, 25.301   (127.2 BPM, 8 bars)
+used:   ep12-duckroll
+credit:
+  Song: CHASHKAKEFIRA - MONTAGEM FAVELA
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/MONTAGEMFAVELA
+  Watch: http://ncs.lnk.to/MONTAGEMFAVELAAT/youtube
+
+track:  BANDIDO FUNK
+artist: Kamran747, Emin Nilsen
+page:   https://ncs.io/BANDIDOFUNK
+source: https://ncs.io/track/download/65578506-0c4e-43d0-984b-455411206002
+file:   ncs-bandidofunk.mp3
+start:  73.435   loop: 73.435, 87.971   (132.11 BPM, 8 bars)
+used:   ep13-harold
+credit:
+  Song: Emin Nilsen & Kamran747 - BANDIDO FUNK [NCS Release]
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/BANDIDOFUNK
+  Watch: http://ncs.lnk.to/BANDIDOFUNKAT/youtube
+
+track:  PSYCHOPATHIC
+artist: ANGELPLAYA
+page:   https://ncs.io/PSYCHOPATHIC
+source: https://ncs.io/track/download/812821f1-d97c-4047-b634-beac2bc5860c
+file:   ncs-psychopathic.mp3
+start:  46.645   loop: 46.645, 59.886   (145 BPM, 8 bars)
+used:   (spare)
+credit:
+  Song: ANGELPLAYA - PSYCHOPATHIC [NCS Release]
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/PSYCHOPATHIC
+  Watch: http://youtu.be/   <- NCS's own block has an empty Watch link; link NCS's YouTube upload of the track instead before using
+
+track:  Blade Fury
+artist: ATSMXN, VØJ
+page:   https://ncs.io/bladefury
+source: https://ncs.io/track/download/d2190a56-7365-4c31-a93d-d9109f70b6c4
+file:   ncs-bladefury.mp3
+start:  15.545   loop: 15.545, 31.547   (120 BPM, 8 bars)
+used:   (spare)
+credit:
+  Song: VØJ & ATSMXN - Blade Fury [NCS Release]
+  Music provided by NoCopyrightSounds
+  Free Download/Stream: http://ncs.io/bladefury
+  Watch: http://youtu.be/   <- empty Watch link on NCS's page; link NCS's YouTube upload instead before using

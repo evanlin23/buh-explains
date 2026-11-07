@@ -8,16 +8,17 @@
   "bites": false
  },
  "music": {
-  "synth": "phonk",
-  "file": "ep15-skullcap-phonk.wav",
-  "start": 0,
+  "file": "ncs-muppx2.mp3",
+  "start": 18.007,
   "loop": [
-   3.609,
-   41.5038
+   18.007,
+   32.77
   ],
   "under_voice_db": -8,
-  "source": "synthesized in-house (pipeline/phonk.py, seed ep15-skullcap)",
-  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
+  "source": "https://ncs.io/track/download/b9bbfafc-837d-47b1-8e3f-73f10ec686f3",
+  "page": "https://ncs.io/MUPPX2",
+  "credit": "Song: mupp - X2\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/MUPPX2\nWatch: http://ncs.lnk.to/MUPPX2AT/youtube",
+  "note": "NCS X2 (130 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
  },
  "sources": {
   "trend": "Know Your Meme, 'Skull Cap Trend' (added Oct 27, 2026): TikTok skits, awkward to confident after putting on a skull cap, 'timed to the beat drop in Bryson Tiller's verse from DJ Khaled's song \"Wild Thoughts\" featuring Rihanna'; popular 'around mid-October 2026'; examples with 7.4M to 12.8M views (e.g. @antoniopieterss, Oct 18, 2026: over 12.8 million views).",
