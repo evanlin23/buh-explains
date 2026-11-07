@@ -8,15 +8,16 @@
   "bites": false
  },
  "music": {
-  "file": "montagem-alquimia.mp3",
-  "start": 0.07,
+  "synth": "phonk",
+  "file": "ep13-harold-phonk.wav",
+  "start": 0,
   "loop": [
-   2.18,
-   13.37
+   3.609,
+   41.5038
   ],
   "under_voice_db": -8,
-  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
-  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+  "source": "synthesized in-house (pipeline/phonk.py, seed ep13-harold)",
+  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
  },
  "sources": {
   "meme": "Know Your Meme, 'Hide the Pain Harold': stock photos of a Hungarian man on Dreamstime; the meme began on the Facepunch forums in 2011, where users named him Harold.",

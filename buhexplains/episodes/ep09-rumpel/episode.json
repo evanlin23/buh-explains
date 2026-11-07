@@ -8,15 +8,16 @@
   "bites": false
  },
  "music": {
-  "file": "montagem-alquimia.mp3",
-  "start": 0.07,
+  "synth": "phonk",
+  "file": "ep09-rumpel-phonk.wav",
+  "start": 0,
   "loop": [
-   2.18,
-   13.37
+   3.871,
+   40.6452
   ],
   "under_voice_db": -8,
-  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
-  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+  "source": "synthesized in-house (pipeline/phonk.py, seed ep09-rumpel)",
+  "note": "owner note 2026-11-07 (PLAYBOOK §6): an original bed per episode; no commercial song, no samples."
  },
  "sources": {
   "origin": "Know Your Meme, 'AI Rumpelstiltskin / Tip Toein' In My Jordans': AI video co-posted on Instagram by Stroinaya (Tatyana Tereshchenko, AI artist), Neuroferma and Anna Glinskaya on Aug 27, 2026; TikTok @6aimbot9 paired it with Riff Raff on Sept 29, 2026. Many viewers tied it to the 1987 film. EarlyGame: 'a movie that never existed'. NBC (syndicated): AI-generated Rumpelstiltskin meme.",
