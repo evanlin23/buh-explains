@@ -78,6 +78,7 @@ def youtube():
 
 
 QUEUE = ROOT / "buhexplains" / "queue.txt"
+PAUSED = ROOT / "buhexplains" / "PAUSED"
 
 
 def central_today() -> str:
@@ -101,6 +102,9 @@ def main() -> None:
     ok, missing = enabled()
     if not ok:
         print(f"uploads are off (missing: {missing}). Nothing done.")
+        return
+    if PAUSED.exists():   # owner, 2026-11-07: "Pause for now" (0 views, possible suppression). Delete the file to resume.
+        print(f"uploads are paused ({PAUSED.relative_to(ROOT)}): {PAUSED.read_text().strip()} Nothing done.")
         return
     if not a.slug:  # the daily clock (cron-job.org): one video a day, the next one in the queue
         done0 = uploads()

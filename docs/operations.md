@@ -32,6 +32,7 @@ Set up 2026-11-06. Times are US Central (America/Chicago).
   Setup steps: `docs/youtube-setup.md`, `docs/browser-setup-prompt.md`.
 
 ## Controls
+- **Pause uploads (current state, 2026-11-07):** while `buhexplains/PAUSED` exists on `main`, every upload run prints "uploads are paused" and does nothing. Delete the file to resume; the queue picks up where it left off (2 a day). Production and renders keep running.
 - **Stop all uploads:** delete the repo variable `YT_ENABLED` (or set it to anything but `true`). The cron runs keep firing and do nothing.
 - **Change what goes up next:** edit `buhexplains/queue.txt` on `main`. Time-critical topics go at the top; uploaded slugs are skipped automatically.
 - **Upload one by hand:** run `upload` with a slug (Actions → upload → Run workflow → `main`). Hand uploads count toward the 2 per day.
