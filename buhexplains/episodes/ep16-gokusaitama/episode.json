@@ -1,0 +1,479 @@
+{
+ "slug": "ep16-gokusaitama",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "ncs-psychopathic.mp3",
+  "start": 46.645,
+  "loop": [
+   46.645,
+   59.886
+  ],
+  "under_voice_db": -8,
+  "source": "https://ncs.io/track/download/812821f1-d97c-4047-b634-beac2bc5860c",
+  "page": "https://ncs.io/PSYCHOPATHIC",
+  "credit": "Song: ANGELPLAYA - PSYCHOPATHIC [NCS Release]\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/PSYCHOPATHIC\nWatch: https://youtu.be/R9LrSuGqQRo",
+  "note": "NCS PSYCHOPATHIC (145 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
+ },
+ "sources": {
+  "episode": "Primary: DEATH BATTLE!, 'Goku VS Saitama (Dragon Ball VS One Punch Man) | DEATH BATTLE!' (youtube.com/watch?v=VhKtn3G5eM4), posted October 18, 2026 (Know Your Meme, 'Saitama vs. Goku': 'The episode was released on October 18th, 2026'; 'Goku is ultimately awarded the victory over Saitama').",
+  "verdict": "CBR, 'It's Official: The Goku vs. Saitama Debate Is Finally Over' (Oct 19, 2026): 'swiftly surpassing 5 million views in less than a day'; 'Each time Goku seems to surpass Saitama with a new transformation, Saitama swiftly rises to the occasion to match him'; forms 'From Super Saiyan to DAIMA's Super Saiyan 4 and even Super Saiyan Blue'; 'Goku is forced to combine Kaioken with his Ultra Instinct form ... giving him a boost of power too insurmountable for Saitama to quickly overcome'; the debate has run 'since 2009'.",
+  "reaction": "Know Your Meme, Weekly Meme Roundup (Oct 23, 2026): 'Goku wins against Saitama, which shocked a lot of viewers'."
+ },
+ "images": {
+  "db": {
+   "url": "https://i.ytimg.com/vi/VhKtn3G5eM4/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/VhKtn3G5eM4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=VhKtn3G5eM4",
+   "points": {
+    "goku": [
+     0.2,
+     0.41,
+     0.11
+    ],
+    "saitama": [
+     0.8,
+     0.35,
+     0.1
+    ],
+    "logo": [
+     0.5,
+     0.5,
+     0.13
+    ]
+   }
+  },
+  "punch": {
+   "url": "https://i.ytimg.com/vi/mblUfeZc_MA/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/mblUfeZc_MA/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=mblUfeZc_MA",
+   "points": {
+    "face": [
+     0.36,
+     0.2,
+     0.06
+    ],
+    "fist": [
+     0.27,
+     0.8,
+     0.08
+    ]
+   },
+   "focus": [
+    0.35,
+    0.5
+   ]
+  },
+  "fandoms": {
+   "url": "https://i.ytimg.com/vi/mG4GFGtg3AI/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/mG4GFGtg3AI/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=mG4GFGtg3AI",
+   "points": {
+    "title": [
+     0.5,
+     0.87,
+     0.15
+    ]
+   }
+  },
+  "base": {
+   "url": "https://i.ytimg.com/vi/DtPD-nBChnw/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/DtPD-nBChnw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=DtPD-nBChnw",
+   "points": {
+    "face": [
+     0.41,
+     0.33,
+     0.07
+    ],
+    "fist": [
+     0.65,
+     0.3,
+     0.1
+    ]
+   },
+   "focus": [
+    0.45,
+    0.35
+   ]
+  },
+  "ss": {
+   "url": "https://i.ytimg.com/vi/emKzNDXIz_k/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/emKzNDXIz_k/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=emKzNDXIz_k",
+   "crop": [
+    0.0,
+    0.0,
+    0.65,
+    1.0
+   ],
+   "points": {
+    "goku": [
+     0.6,
+     0.52,
+     0.1
+    ]
+   },
+   "focus": [
+    0.6,
+    0.5
+   ]
+  },
+  "ui": {
+   "url": "https://i.ytimg.com/vi/r1fK0jG275I/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/r1fK0jG275I/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=r1fK0jG275I",
+   "points": {
+    "goku": [
+     0.54,
+     0.32,
+     0.09
+    ],
+    "saitama": [
+     0.25,
+     0.22,
+     0.09
+    ]
+   },
+   "focus": [
+    0.45,
+    0.35
+   ]
+  },
+  "lost": {
+   "url": "https://i.ytimg.com/vi/czikh-Fa1r4/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/czikh-Fa1r4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=czikh-Fa1r4",
+   "points": {
+    "face": [
+     0.3,
+     0.4,
+     0.15
+    ]
+   },
+   "focus": [
+    0.3,
+    0.45
+   ]
+  },
+  "winner": {
+   "url": "https://i.ytimg.com/vi/1FvWQugMPgg/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/1FvWQugMPgg/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=1FvWQugMPgg",
+   "crop": [
+    0.62,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "points": {
+    "face": [
+     0.5,
+     0.42,
+     0.22
+    ]
+   }
+  }
+ },
+ "lines": [
+  {
+   "text": "Who actually wins, {Goku} or {Saitama}?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "db",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "Goku",
+     "sticker": "ellipse",
+     "target": "goku",
+     "dur": 0.6
+    },
+    {
+     "on": "Saitama?",
+     "sticker": "ellipse",
+     "target": "saitama",
+     "dur": 0.6
+    },
+    {
+     "on": "wins,",
+     "sticker": "interrobang",
+     "at": [
+      540,
+      560
+     ],
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Saitama} we all know and love ends every fight with one punch.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "punch",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "one",
+     "label": "ONE PUNCH",
+     "dur": 0.9
+    },
+    {
+     "on": "punch.",
+     "sticker": "arrow",
+     "target": "fist",
+     "from": -140,
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "Fans have argued about this since two thousand nine.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "fandoms",
+     "fit": "blurfill",
+     "enter": "spin"
+    },
+    {
+     "on": "argued",
+     "sticker": "ellipse",
+     "target": "title",
+     "dur": 0.7
+    },
+    {
+     "on": "nine.",
+     "label": "SINCE 2009",
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "On October eighteenth, Death Battle finally settled it.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "db",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "eighteenth,",
+     "label": "OCT 18, 2026",
+     "dur": 1.0
+    },
+    {
+     "on": "Battle",
+     "sticker": "ellipse",
+     "target": "logo",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Five million views in under a day.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "db",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "million",
+     "label": "5,000,000 VIEWS",
+     "dur": 1.1
+    },
+    {
+     "on": "day.",
+     "lightning": true
+    }
+   ]
+  },
+  {
+   "text": "But one punch didn't end it.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "punch",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "didn't",
+     "sticker": "x",
+     "target": "fist",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Every time Goku transformed, Saitama matched him.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "base",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "transformed,",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.5
+    },
+    {
+     "on": "Saitama",
+     "img": "ui",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "matched",
+     "sticker": "arrow",
+     "target": "saitama",
+     "from": -30,
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "Super Saiyan. Super Saiyan Blue. Even Super Saiyan four.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "ss",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": 0,
+     "label": "SUPER SAIYAN",
+     "dur": 0.8
+    },
+    {
+     "on": "Blue.",
+     "punch": true
+    },
+    {
+     "on": "Blue.",
+     "label": "SUPER SAIYAN BLUE",
+     "dur": 0.8
+    },
+    {
+     "on": "Even",
+     "img": "base",
+     "fit": "cover",
+     "enter": "cut"
+    },
+    {
+     "on": "four.",
+     "label": "SUPER SAIYAN 4",
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "text": "So what broke the tie?",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "db",
+     "fit": "cover",
+     "enter": "zoomblur",
+     "grade": "dark"
+    },
+    {
+     "on": "tie?",
+     "sticker": "interrobang",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Goku stacked Kaioken on top of Ultra Instinct, and Saitama couldn't catch up.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "ui",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "Kaioken",
+     "label": "KAIOKEN + ULTRA INSTINCT",
+     "dur": 1.4
+    },
+    {
+     "on": "Ultra",
+     "sticker": "ellipse",
+     "target": "goku",
+     "dur": 0.5
+    },
+    {
+     "on": "Saitama",
+     "img": "lost",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "catch",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "This makes {Goku} the winner.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "winner",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "winner.",
+     "lightning": true
+    },
+    {
+     "on": "winner.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.4
+    }
+   ]
+  }
+ ]
+}
