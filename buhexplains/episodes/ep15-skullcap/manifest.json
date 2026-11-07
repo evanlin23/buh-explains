@@ -1,0 +1,48 @@
+{
+ "slug": "ep15-skullcap",
+ "images": {
+  "kym": {
+   "used": "https://i.ytimg.com/vi/NmumrAb5RGQ/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=NmumrAb5RGQ",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "tiller": {
+   "used": "https://upload.wikimedia.org/wikipedia/commons/7/70/Bryson_Tiller_August_2018.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bryson_Tiller_August_2018.jpg",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "wt": {
+   "used": "https://i.ytimg.com/vi/J2aEdINke5M/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=J2aEdINke5M",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "khaled": {
+   "used": "https://i.ytimg.com/vi/fyaI4-5849w/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=fyaI4-5849w",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "mv": {
+   "used": "https://i.ytimg.com/vi/nPLV7lGbmT4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=nPLV7lGbmT4",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "live": {
+   "used": "https://i.ytimg.com/vi/lBveD6Ddwps/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=lBveD6Ddwps",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "acoustic": {
+   "used": "https://i.ytimg.com/vi/jMmGUTqJ8dQ/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=jMmGUTqJ8dQ",
+   "rights": "third-party; shown under narration as commentary"
+  }
+ },
+ "stock": {
+  "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
+  "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
+ },
+ "sfx": "synthesized",
+ "name_bites": {}
+}

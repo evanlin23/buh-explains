@@ -95,7 +95,7 @@
     ]
    },
    "focus": [
-    0.55,
+    0.37,
     0.45
    ]
   },
@@ -261,6 +261,14 @@
      "target": "title",
      "from": -140,
      "dur": 0.4
+    },
+    {
+     "on": "passed",
+     "punch": true
+    },
+    {
+     "on": "clips",
+     "punch": true
     }
    ]
   },
@@ -330,6 +338,13 @@
      "on": "seventeen.",
      "label": "2017",
      "dur": 1.0
+    },
+    {
+     "on": "came",
+     "sticker": "arrow",
+     "target": "khaled",
+     "from": -30,
+     "dur": 0.5
     }
    ]
   },
@@ -360,7 +375,7 @@
     {
      "on": 0,
      "img": "wt",
-     "fit": "cover",
+     "fit": "blurfill",
      "enter": "zoomblur"
     },
     {
@@ -382,6 +397,16 @@
      "fit": "cover",
      "enter": "cut",
      "grade": "dark"
+    },
+    {
+     "on": "under",
+     "punch": true
+    },
+    {
+     "on": "Listen",
+     "sticker": "ellipse",
+     "target": "title",
+     "dur": 0.5
     }
    ]
   },
@@ -418,7 +443,8 @@
      "from": -140,
      "dur": 0.6
     }
-   ]
+   ],
+   "split_reach": 0.5
   },
   {
    "text": "Ten weeks at number one. A Grammy.",
