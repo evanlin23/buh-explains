@@ -7,8 +7,7 @@ The voice is Bryson Tiller.
 His verse from Wild Thoughts, a DJ Khaled song with Rihanna.
 That came out in twenty seventeen.
 But that's not the oldest part.
-Listen to the guitar under it.
-It's borrowed.
+Listen to the guitar under it. It's borrowed.
 From Santana's Maria Maria, in nineteen ninety nine.
 Ten weeks at number one. A Grammy.
 This makes the skull cap guitar twenty seven years old.

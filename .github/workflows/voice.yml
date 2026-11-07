@@ -77,6 +77,7 @@ jobs:
           done
           echo "SLUGS=$(echo $slugs | tr ' ' ',')" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v4
+        if: always()   # keep Gemini's raw take even when a line check fails (a lost take costs another request)
         with:
           name: voice
           path: |

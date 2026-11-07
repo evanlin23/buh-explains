@@ -355,7 +355,7 @@
    ]
   },
   {
-   "text": "Listen to the guitar under it.",
+   "text": "Listen to the guitar under it. It's borrowed.",
    "beats": [
     {
      "on": 0,
@@ -371,18 +371,13 @@
       760
      ],
      "dur": 0.6
-    }
-   ]
-  },
-  {
-   "text": "It's borrowed.",
-   "beats": [
+    },
     {
-     "on": 0,
+     "on": "It's",
      "riser": true
     },
     {
-     "on": 0,
+     "on": "It's",
      "img": "khaled",
      "fit": "cover",
      "enter": "cut",
