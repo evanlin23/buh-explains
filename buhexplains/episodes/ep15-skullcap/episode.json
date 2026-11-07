@@ -1,0 +1,477 @@
+{
+ "slug": "ep15-skullcap",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "montagem-alquimia.mp3",
+  "start": 0.07,
+  "loop": [
+   2.18,
+   13.37
+  ],
+  "under_voice_db": -8,
+  "source": "https://www.myinstants.com/media/sounds/montagem-alquimia.mp3 (viral phonk, 2026 lists; 15 s clip looped on bar lines)",
+  "note": "owner, 2026-11-06: use the latest viral phonk. Copyrighted song baked in: expect a Content ID claim."
+ },
+ "sources": {
+  "trend": "Know Your Meme, 'Skull Cap Trend' (added Oct 27, 2026): TikTok skits, awkward to confident after putting on a skull cap, 'timed to the beat drop in Bryson Tiller's verse from DJ Khaled's song \"Wild Thoughts\" featuring Rihanna'; popular 'around mid-October 2026'; examples with 7.4M to 12.8M views (e.g. @antoniopieterss, Oct 18, 2026: over 12.8 million views).",
+  "song": "Wikipedia, 'Wild Thoughts': DJ Khaled featuring Rihanna and Bryson Tiller, released June 16, 2017; 'heavily samples the guitar riff from Santana's \"Maria Maria\" (1999)'. Primary: DJ Khaled - Wild Thoughts (Official Video), youtube.com/watch?v=fyaI4-5849w.",
+  "original": "Wikipedia, 'Maria Maria': 1999 single by Santana (featuring The Product G&B) from Supernatural; 'stayed at the top of the Billboard Hot 100 chart for 10 weeks'; won Best Pop Performance by a Duo or Group with Vocals at the 2000 Grammy Awards. Primary: Santana - Maria Maria (Official Video) ft. The Product G&B, youtube.com/watch?v=nPLV7lGbmT4."
+ },
+ "images": {
+  "kym": {
+   "url": "https://i.ytimg.com/vi/NmumrAb5RGQ/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/NmumrAb5RGQ/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=NmumrAb5RGQ",
+   "points": {
+    "face": [
+     0.16,
+     0.14,
+     0.08
+    ],
+    "title": [
+     0.68,
+     0.6,
+     0.2
+    ]
+   },
+   "focus": [
+    0.25,
+    0.35
+   ]
+  },
+  "tiller": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Bryson_Tiller_August_2018.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bryson_Tiller_August_2018.jpg",
+   "points": {
+    "face": [
+     0.42,
+     0.13,
+     0.07
+    ]
+   },
+   "focus": [
+    0.42,
+    0.3
+   ]
+  },
+  "wt": {
+   "url": "https://i.ytimg.com/vi/J2aEdINke5M/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/J2aEdINke5M/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=J2aEdINke5M",
+   "points": {
+    "title": [
+     0.5,
+     0.45,
+     0.25
+    ]
+   }
+  },
+  "khaled": {
+   "url": "https://i.ytimg.com/vi/fyaI4-5849w/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/fyaI4-5849w/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=fyaI4-5849w",
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.85
+   ],
+   "points": {
+    "khaled": [
+     0.37,
+     0.45,
+     0.07
+    ],
+    "rihanna": [
+     0.73,
+     0.35,
+     0.07
+    ]
+   },
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "mv": {
+   "url": "https://i.ytimg.com/vi/nPLV7lGbmT4/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/nPLV7lGbmT4/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=nPLV7lGbmT4",
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.86
+   ],
+   "points": {
+    "face": [
+     0.34,
+     0.2,
+     0.06
+    ],
+    "guitar": [
+     0.45,
+     0.8,
+     0.12
+    ]
+   },
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "live": {
+   "url": "https://i.ytimg.com/vi/lBveD6Ddwps/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/lBveD6Ddwps/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=lBveD6Ddwps",
+   "crop": [
+    0.2,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "points": {
+    "face": [
+     0.35,
+     0.3,
+     0.07
+    ],
+    "guitar": [
+     0.53,
+     0.82,
+     0.12
+    ]
+   },
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "acoustic": {
+   "url": "https://i.ytimg.com/vi/jMmGUTqJ8dQ/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/jMmGUTqJ8dQ/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=jMmGUTqJ8dQ",
+   "points": {
+    "face": [
+     0.39,
+     0.15,
+     0.06
+    ],
+    "guitar": [
+     0.3,
+     0.7,
+     0.15
+    ]
+   },
+   "focus": [
+    0.35,
+    0.45
+   ]
+  }
+ },
+ "lines": [
+  {
+   "text": "How old is the {skull cap} song?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "kym",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "song?",
+     "sticker": "arrow",
+     "target": "title",
+     "from": -140,
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "You see, the {skull cap} trend we all know and love is one beat drop: awkward, cap on, instantly confident.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "kym",
+     "fit": "cover",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "drop:",
+     "label": "BEAT DROP",
+     "dur": 0.9
+    },
+    {
+     "on": "awkward,",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ],
+     "dur": 0.5
+    },
+    {
+     "on": "confident.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Since mid October, some of those clips passed ten million views.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "kym",
+     "fit": "blurfill",
+     "enter": "spin"
+    },
+    {
+     "on": "October,",
+     "label": "OCT 2026",
+     "dur": 0.9
+    },
+    {
+     "on": "million",
+     "label": "10,000,000+ VIEWS",
+     "dur": 1.1
+    },
+    {
+     "on": "views.",
+     "sticker": "arrow",
+     "target": "title",
+     "from": -140,
+     "dur": 0.4
+    }
+   ]
+  },
+  {
+   "text": "The voice is Bryson Tiller.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "tiller",
+     "fit": "cover",
+     "enter": "whip"
+    },
+    {
+     "on": "Tiller.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.7
+    }
+   ]
+  },
+  {
+   "text": "His verse from Wild Thoughts, a DJ Khaled song with Rihanna.",
+   "beats": [
+    {
+     "on": "Wild",
+     "img": "wt",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "Thoughts,",
+     "sticker": "ellipse",
+     "target": "title",
+     "dur": 0.5
+    },
+    {
+     "on": "DJ",
+     "img": "khaled",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "Khaled",
+     "sticker": "arrow",
+     "target": "khaled",
+     "from": -30,
+     "dur": 0.5
+    },
+    {
+     "on": "Rihanna.",
+     "sticker": "ellipse",
+     "target": "rihanna",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "That came out in twenty seventeen.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "khaled",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "seventeen.",
+     "label": "2017",
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "text": "But that's not the oldest part.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "tiller",
+     "fit": "blurfill",
+     "enter": "whip",
+     "grade": "dark"
+    },
+    {
+     "on": "oldest",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Listen to the guitar under it.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "wt",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "guitar",
+     "sticker": "interrobang",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "It's borrowed.",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "khaled",
+     "fit": "cover",
+     "enter": "cut",
+     "grade": "dark"
+    }
+   ]
+  },
+  {
+   "text": "From Santana's Maria Maria, in nineteen ninety nine.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "mv",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "Maria",
+     "label": "SANTANA: MARIA MARIA",
+     "dur": 1.3
+    },
+    {
+     "on": "nineteen",
+     "label": "1999",
+     "dur": 1.0
+    },
+    {
+     "on": "ninety",
+     "sticker": "arrow",
+     "target": "guitar",
+     "from": -140,
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Ten weeks at number one. A Grammy.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "live",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "weeks",
+     "label": "#1 FOR 10 WEEKS",
+     "dur": 1.0
+    },
+    {
+     "on": "Grammy.",
+     "lightning": true
+    },
+    {
+     "on": "Grammy.",
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "This makes the {skull cap} guitar twenty seven years old.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "acoustic",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "guitar",
+     "sticker": "ellipse",
+     "target": "guitar",
+     "dur": 0.6
+    },
+    {
+     "on": "seven",
+     "label": "27 YEARS OLD",
+     "dur": 1.0
+    }
+   ]
+  }
+ ]
+}
