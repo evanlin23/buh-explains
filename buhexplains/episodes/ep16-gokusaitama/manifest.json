@@ -1,0 +1,53 @@
+{
+ "slug": "ep16-gokusaitama",
+ "images": {
+  "db": {
+   "used": "https://i.ytimg.com/vi/VhKtn3G5eM4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=VhKtn3G5eM4",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "punch": {
+   "used": "https://i.ytimg.com/vi/mblUfeZc_MA/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=mblUfeZc_MA",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "fandoms": {
+   "used": "https://i.ytimg.com/vi/mG4GFGtg3AI/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=mG4GFGtg3AI",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "base": {
+   "used": "https://i.ytimg.com/vi/DtPD-nBChnw/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=DtPD-nBChnw",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "ss": {
+   "used": "https://i.ytimg.com/vi/emKzNDXIz_k/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=emKzNDXIz_k",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "ui": {
+   "used": "https://i.ytimg.com/vi/r1fK0jG275I/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=r1fK0jG275I",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "lost": {
+   "used": "https://i.ytimg.com/vi/czikh-Fa1r4/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=czikh-Fa1r4",
+   "rights": "third-party; shown under narration as commentary"
+  },
+  "winner": {
+   "used": "https://i.ytimg.com/vi/1FvWQugMPgg/maxresdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=1FvWQugMPgg",
+   "rights": "third-party; shown under narration as commentary"
+  }
+ },
+ "stock": {
+  "boom": "https://mixkit.co (Mixkit free licence) 38818-720.mp4",
+  "flamewall": "https://mixkit.co (Mixkit free licence) 3765-1080.mp4",
+  "tongue": "https://mixkit.co (Mixkit free licence) 22834-720.mp4",
+  "embers": "https://mixkit.co (Mixkit free licence) 3465-1080.mp4"
+ },
+ "sfx": "synthesized",
+ "name_bites": {}
+}

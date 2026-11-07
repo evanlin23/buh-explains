@@ -180,12 +180,12 @@ page:   https://ncs.io/PSYCHOPATHIC
 source: https://ncs.io/track/download/812821f1-d97c-4047-b634-beac2bc5860c
 file:   ncs-psychopathic.mp3
 start:  46.645   loop: 46.645, 59.886   (145 BPM, 8 bars)
-used:   (spare)
+used:   ep16-gokusaitama
 credit:
   Song: ANGELPLAYA - PSYCHOPATHIC [NCS Release]
   Music provided by NoCopyrightSounds
   Free Download/Stream: http://ncs.io/PSYCHOPATHIC
-  Watch: http://youtu.be/   <- NCS's own block has an empty Watch link; link NCS's YouTube upload of the track instead before using
+  Watch: https://youtu.be/R9LrSuGqQRo   (NCS's own block had an empty Watch link; this is NCS's YouTube upload)
 
 track:  Blade Fury
 artist: ATSMXN, VØJ
