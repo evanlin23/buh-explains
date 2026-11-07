@@ -33,7 +33,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p .cache/tts out
-          for run in $(gh run list --repo "$GITHUB_REPOSITORY" --workflow voice.yml --status success --json databaseId --limit 15 -q '.[].databaseId'); do
+          for run in $(gh run list --repo "$GITHUB_REPOSITORY" --workflow voice.yml --status completed --json databaseId --limit 15 -q '.[].databaseId'); do
             rm -rf _voice && gh run download "$run" --repo "$GITHUB_REPOSITORY" -n voice -D _voice 2>/dev/null || continue
             cp -n _voice/.cache/tts/*.wav .cache/tts/ 2>/dev/null || true
           done

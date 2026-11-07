@@ -13,6 +13,7 @@ import soundfile as sf
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.path.dirname(ROOT)
 MODELS = os.path.join(REPO, ".cache", "models")
+_BIG = None   # small.en, loaded only when base.en fails a line
 SR = 48000  # whole voice track at 48 kHz: a 24 kHz track cut the bites' top end (owner: "muffled")
 
 
@@ -337,6 +338,11 @@ def main(slug):
         cp = os.path.join(od, f"seg{seg_n:02d}.wav"); seg_n += 1; sf.write(cp, speak, SR)
         times, heard = word_times(cp, tokens, model)
         matched = sum(1 for x in times if x); total = len(tokens); heard_all = heard
+        if total and matched / total < 0.6:   # base.en mishears names ("Gohoo" for Goku); ask small.en before failing the line
+            global _BIG
+            if _BIG is None: _BIG = WhisperModel("small.en", device="cpu", compute_type="int8", download_root=os.path.join(MODELS, "whisper"))
+            t2, h2 = word_times(cp, tokens, _BIG); m2 = sum(1 for x in t2 if x)
+            if m2 > matched: times, heard, matched, heard_all = t2, h2, m2, h2
         dur = len(speak) / SR; times = fill(times, tokens, dur)
         groups = [idx for kind, idx in segs if kind == "bite"]
         name_groups = groups
