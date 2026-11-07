@@ -21,5 +21,14 @@ for v in r.get("items", []):
     print(f"  processing={v.get('processingDetails', {}).get('processingStatus')} views={st.get('viewCount')} likes={st.get('likeCount')} comments={st.get('commentCount')}")
 for i in set(ids) - seen:
     print(f"== {ids[i]} {i}: NOT RETURNED (deleted, or not visible to this channel)")
+pl = yt.channels().list(part="contentDetails", mine=True).execute()["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+items = yt.playlistItems().list(part="snippet,status", playlistId=pl, maxResults=50).execute().get("items", [])
+extra = [i for i in items if i["snippet"]["resourceId"]["videoId"] not in ids]
+if extra:
+    st = {v["id"]: v for v in yt.videos().list(part="status,statistics", id=",".join(i["snippet"]["resourceId"]["videoId"] for i in extra)).execute().get("items", [])}
+    print("other videos on the channel (not in uploads.json):")
+    for i in extra:
+        vid = i["snippet"]["resourceId"]["videoId"]; v = st.get(vid, {})
+        print(f"  {vid}  {i['snippet']['publishedAt']}  {v.get('status', {}).get('privacyStatus')}  views={v.get('statistics', {}).get('viewCount')}  {i['snippet']['title']!r}")
 ch = yt.channels().list(part="status,statistics", mine=True).execute()["items"][0]
 print("channel:", json.dumps({**ch["status"], **ch["statistics"]}))
