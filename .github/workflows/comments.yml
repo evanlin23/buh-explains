@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - if: ${{ vars.YT_ENABLED == 'true' }}
-        run: pip install -q google-api-python-client google-auth
+        run: pip install -q google-api-python-client google-auth requests
       - name: comment
         if: ${{ vars.YT_ENABLED == 'true' }}
         env:

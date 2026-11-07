@@ -40,6 +40,8 @@ Set up 2026-11-06. Times are US Central (America/Chicago).
 - **Re-render an episode:** run `render` with its slug on `main`. The uploader always uses the newest successful `film-<slug>`.
 
 ## Limits and known failure modes
+- **Token expiry:** an OAuth app left in "Testing" issues refresh tokens that die after 7 days. Upload and comment runs then stop with "YT_REFRESH_TOKEN no longer works". Fix: `docs/browser-oauth-publish-prompt.md`. Run `status` (Actions) any time to test the token.
+- **Cadence (2026-11-07):** 1 upload a day by default, published at a random time between 11:00 AM and 7:30 PM Central. Set the repo variable `YT_PER_DAY=2` to go back to two (noon and 6 PM). Every upload gets `#Shorts` in its description.
 - **Gemini free tier:** about 10 TTS requests a day. The producer uses 1 per episode (2 a day). Raw takes are reused from earlier voice artifacts on any branch, so unchanged scripts cost nothing. On a quota error the producer commits the script and stops; it gets voiced on the next run.
 - **Claude usage limit:** scheduled tasks stop when the weekly limit is reached and can start late (blocky-stories saw up to about an hour). Uploads don't depend on Claude: the cron keeps posting from the queue.
 - **YouTube API quota:** 10,000 units a day; an upload costs about 1,600, so 2 a day is about 3,200.

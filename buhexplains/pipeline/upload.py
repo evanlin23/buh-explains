@@ -17,7 +17,10 @@ EP = ROOT / "buhexplains" / "episodes"
 UPLOADS = ROOT / "buhexplains" / "uploads.json"
 REPO = os.environ.get("GITHUB_REPOSITORY", "evanlin23/buh-explains")
 SLOTS_CENTRAL = [(12, 0), (18, 0)]   # two posts a day (owner, 2026-11-06): about noon and about 6 PM Central
-PER_DAY = 2
+# After the 0-view scare (2026-11-07 research): restart at 1 a day, published at a varied time, then go back to 2
+# by setting the repo variable YT_PER_DAY=2. Fixed-time robotic posting is one of the "mass-produced" signals.
+PER_DAY = int(os.environ.get("YT_PER_DAY", "1") or 1)
+WINDOW_CENTRAL = ((11, 0), (19, 30))  # with 1 a day, publish at a random time in this window
 
 
 def enabled() -> tuple[bool, str]:
@@ -52,8 +55,14 @@ def publish_at(slot: int = 0) -> str | None:
     import random
     from zoneinfo import ZoneInfo
     tz = ZoneInfo("America/Chicago"); now = dt.datetime.now(dt.timezone.utc).astimezone(tz)
-    h, m = SLOTS_CENTRAL[min(slot, len(SLOTS_CENTRAL) - 1)]
-    at = now.replace(hour=h, minute=m, second=0, microsecond=0) + dt.timedelta(minutes=random.randint(0, 12))
+    if PER_DAY == 1:
+        (h0, m0), (h1, m1) = WINDOW_CENTRAL
+        lo, hi = h0 * 60 + m0, h1 * 60 + m1
+        mins = random.randint(lo, hi)
+        at = now.replace(hour=mins // 60, minute=mins % 60, second=0, microsecond=0)
+    else:
+        h, m = SLOTS_CENTRAL[min(slot, len(SLOTS_CENTRAL) - 1)]
+        at = now.replace(hour=h, minute=m, second=0, microsecond=0) + dt.timedelta(minutes=random.randint(0, 12))
     if at < now + dt.timedelta(minutes=30):
         at = now + dt.timedelta(hours=1)
     return at.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -72,8 +81,16 @@ def film(slug: str, d: Path) -> Path:
 def youtube():
     from google.oauth2.credentials import Credentials
     from googleapiclient.discovery import build
+    from google.auth.transport.requests import Request
+    from google.auth.exceptions import RefreshError
     creds = Credentials(None, refresh_token=os.environ["YT_REFRESH_TOKEN"], client_id=os.environ["YT_CLIENT_ID"],
                         client_secret=os.environ["YT_CLIENT_SECRET"], token_uri="https://oauth2.googleapis.com/token")
+    try:
+        creds.refresh(Request())
+    except RefreshError as e:
+        sys.exit(f"YT_REFRESH_TOKEN no longer works ({e}). If the Google Cloud OAuth consent screen is still in 'Testing', "
+                 "its tokens expire after 7 days: publish the app ('In production') and re-authorize once "
+                 "(docs/youtube-setup.md), then replace the YT_REFRESH_TOKEN secret.")
     return build("youtube", "v3", credentials=creds, cache_discovery=False)
 
 
@@ -132,7 +149,8 @@ def main() -> None:
         today = dt.datetime.now(dt.timezone.utc).date().isoformat()
         slot = sum(1 for e in done.values() if e.get("uploaded_central") == central_today())
         when = publish_at(slot)
-        body = {"snippet": {"title": pkg["title"], "description": pkg["description"], "categoryId": "24"},
+        desc = pkg["description"] if "#shorts" in pkg["description"].lower() else pkg["description"].rstrip() + "\n\n#Shorts"
+        body = {"snippet": {"title": pkg["title"], "description": desc, "categoryId": "24"},
                 "status": {"privacyStatus": "private", "selfDeclaredMadeForKids": False, "containsSyntheticMedia": False}}
         if when: body["status"]["publishAt"] = when
         print(f"{a.slug}: {pkg['title']!r}, {mp4.stat().st_size / 1e6:.0f} MB, publish at {when or 'never (private)'}")
