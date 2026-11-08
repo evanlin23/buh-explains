@@ -18,6 +18,9 @@ def main() -> int:
     ok, missing = enabled()
     if not ok:
         print(f"uploads are off (missing: {missing}), so no comments either. Nothing done."); return 0
+    from upload import PAUSED
+    if PAUSED.exists():
+        print("BuhExplains is paused (buhexplains/PAUSED), so no comments either. Nothing done."); return 0
     done = uploads()
     ids = [e["video_id"] for e in done.values() if e.get("video_id") and not e.get("commented")]
     if not ids:
