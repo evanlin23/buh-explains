@@ -22,3 +22,4 @@ All cuts have the viral pass (zoom-in hook, jump-cut build-up, payoff hit) and p
 | ep14 Who built the mascot the internet wants dead? | `ep14-biberty.mp4` | **ASAP** (Boston protest was Oct 25) |
 | ep15 How old is the skull cap song? | `ep15-skullcap.mp4` | soon (trend peaked late October) |
 | ep16 Who actually wins, Goku or Saitama? | `ep16-gokusaitama.mp4` | soon (Death Battle, Oct 18) |
+| ep17 Who's the French guy shadowboxing on your feed? | `ep17-jeanphil.mp4` | soon (Jean Phil, Sept-Nov) |
