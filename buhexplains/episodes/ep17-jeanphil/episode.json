@@ -188,7 +188,7 @@
  },
  "lines": [
   {
-   "text": "Who is the French guy shadowboxing all over your feed?",
+   "text": "Who's the French guy shadowboxing on your feed?",
    "beats": [
     {
      "on": 0,
@@ -341,6 +341,16 @@
       760
      ],
      "dur": 0.6
+    },
+    {
+     "on": "trace",
+     "punch": true
+    },
+    {
+     "on": "before",
+     "img": "cards",
+     "fit": "cover",
+     "enter": "cut"
     }
    ]
   },
@@ -435,7 +445,8 @@
      "target": "jean",
      "dur": 0.6
     }
-   ]
+   ],
+   "split_reach": 0.5
   },
   {
    "text": "This makes Jean Phil a French influencer with no Frenchman.",

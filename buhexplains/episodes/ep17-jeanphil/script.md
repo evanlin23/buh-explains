@@ -1,6 +1,6 @@
 # ep17-jeanphil
 
-Who is the French guy shadowboxing all over your feed?
+Who's the French guy shadowboxing on your feed?
 You see, the Jean Phil we all know and love is a moustache, a blonde bob and a houndstooth suit, punching at nothing.
 His first post went up on September seventeenth.
 Three days later, nearly a hundred and fifty thousand followers.
