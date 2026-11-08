@@ -1,0 +1,462 @@
+{
+ "slug": "ep17-jeanphil",
+ "names": {},
+ "voice": {
+  "engine": "gemini",
+  "voice": "Achird",
+  "gap": 0.0,
+  "bites": false
+ },
+ "music": {
+  "file": "ncs-bladefury.mp3",
+  "start": 15.545,
+  "loop": [
+   15.545,
+   31.547
+  ],
+  "under_voice_db": -8,
+  "source": "https://ncs.io/track/download/d2190a56-7365-4c31-a93d-d9109f70b6c4",
+  "page": "https://ncs.io/bladefury",
+  "credit": "Song: VØJ & ATSMXN - Blade Fury [NCS Release]\nMusic provided by NoCopyrightSounds\nFree Download/Stream: http://ncs.io/bladefury\nWatch: https://youtu.be/3ebuV2IYelI",
+  "note": "NCS Blade Fury (120 BPM): starts on the drop, loops 8 bars. Owner, 2026-11-07: \"just use ncs phonk\" (PLAYBOOK §6)."
+ },
+ "sources": {
+  "persona": "Know Your Meme, 'Jean Philanthrope / Jean Phil' (status Confirmed, type AI-generated): 'an AI-generated French internet persona and character who emerged in mid-to-late September 2026'; earliest post on Instagram @jean_philanthrope on September 17, 2026; 'over 145,000 followers in three days'. Primary: the @jean_philanthrope Instagram and TikTok accounts.",
+  "coin": "Know Your Meme: on Sept 20, 2026 the X account @JeanPhilMadame posted 'This is the only official JEANPHIL token' (Solana, pump.fun). Reddit r/isthisAI (Sept 21): 'No online presence before a few days ago.'",
+  "press": "LADbible (Sept 30, 2026): 'The AI generated \"influencer\" Jean Philanthrope has gone viral'; one Instagram video 'viewed 35.9 million times'; rival 'Archibald Brown' with a meme coin 'associated with Archibald Brown as well'. Know Your Meme explainer (via Yahoo, Sept 24, 2026): 'no definitive confirmation from the character himself'; Archibald Brown 'created as an English counterpart and rival'."
+ },
+ "images": {
+  "intro": {
+   "url": "https://i.ytimg.com/vi/8ax9WbNvHCY/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/8ax9WbNvHCY/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=8ax9WbNvHCY",
+   "crop": [
+    0.0,
+    0.12,
+    1.0,
+    1.0
+   ],
+   "points": {
+    "face": [
+     0.5,
+     0.42,
+     0.07
+    ],
+    "moustache": [
+     0.42,
+     0.52,
+     0.035
+    ],
+    "left": [
+     0.1,
+     0.25,
+     0.05
+    ],
+    "right": [
+     0.9,
+     0.3,
+     0.06
+    ]
+   },
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "portrait": {
+   "url": "https://i.ytimg.com/vi/U_YSwf2ztpw/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/U_YSwf2ztpw/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=U_YSwf2ztpw",
+   "points": {
+    "face": [
+     0.25,
+     0.3,
+     0.07
+    ],
+    "moustache": [
+     0.25,
+     0.37,
+     0.04
+    ],
+    "suit": [
+     0.25,
+     0.78,
+     0.09
+    ]
+   },
+   "focus": [
+    0.25,
+    0.45
+   ]
+  },
+  "cards": {
+   "url": "https://i.ytimg.com/vi/T3ArAHcPEJI/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/T3ArAHcPEJI/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=T3ArAHcPEJI",
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.88
+   ],
+   "points": {
+    "street": [
+     0.29,
+     0.27,
+     0.05
+    ],
+    "cafe": [
+     0.8,
+     0.48,
+     0.06
+    ]
+   },
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "nothing": {
+   "url": "https://i.ytimg.com/vi/88SGHQfNCnY/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/88SGHQfNCnY/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=88SGHQfNCnY",
+   "points": {
+    "date": [
+     0.2,
+     0.1,
+     0.09
+    ],
+    "face": [
+     0.7,
+     0.55,
+     0.14
+    ]
+   },
+   "focus": [
+    0.6,
+    0.5
+   ]
+  },
+  "fake": {
+   "url": "https://i.ytimg.com/vi/0-Tp5Oo--jQ/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/0-Tp5Oo--jQ/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=0-Tp5Oo--jQ",
+   "points": {
+    "fake": [
+     0.5,
+     0.15,
+     0.1
+    ],
+    "jean": [
+     0.37,
+     0.5,
+     0.1
+    ]
+   },
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "faux": {
+   "url": "https://i.ytimg.com/vi/2RjYfkFeWAM/maxresdefault.jpg",
+   "fallback": "https://i.ytimg.com/vi/2RjYfkFeWAM/hqdefault.jpg",
+   "page": "https://www.youtube.com/watch?v=2RjYfkFeWAM",
+   "crop": [
+    0.5,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "points": {
+    "face": [
+     0.5,
+     0.33,
+     0.08
+    ],
+    "faux": [
+     0.2,
+     0.8,
+     0.12
+    ]
+   },
+   "focus": [
+    0.5,
+    0.45
+   ]
+  }
+ },
+ "lines": [
+  {
+   "text": "Who is the French guy shadowboxing all over your feed?",
+   "beats": [
+    {
+     "on": 0,
+     "img": "intro",
+     "fit": "blurfill",
+     "enter": "zoomblur"
+    },
+    {
+     "on": 0,
+     "sticker": "ellipse",
+     "target": "face",
+     "dur": 0.9
+    },
+    {
+     "on": "shadowboxing",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -140,
+     "dur": 0.6
+    },
+    {
+     "on": "feed?",
+     "sticker": "interrobang",
+     "at": [
+      800,
+      560
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "You see, the {Jean Phil} we all know and love is a moustache, a blonde bob and a houndstooth suit, punching at nothing.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "portrait",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "love",
+     "sticker": "heart",
+     "dur": 0.7
+    },
+    {
+     "on": "moustache,",
+     "sticker": "ellipse",
+     "target": "moustache",
+     "dur": 0.5
+    },
+    {
+     "on": "houndstooth",
+     "sticker": "arrow",
+     "target": "suit",
+     "from": -140,
+     "dur": 0.6
+    },
+    {
+     "on": "punching",
+     "img": "cards",
+     "fit": "blurfill",
+     "enter": "cut"
+    },
+    {
+     "on": "nothing.",
+     "sticker": "ellipse",
+     "target": "street",
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "His first post went up on September seventeenth.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "intro",
+     "fit": "cover",
+     "enter": "zoomblur"
+    },
+    {
+     "on": "seventeenth.",
+     "label": "SEPT 17, 2026",
+     "dur": 1.1
+    }
+   ]
+  },
+  {
+   "text": "Three days later, nearly a hundred and fifty thousand followers.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "portrait",
+     "fit": "cover",
+     "enter": "whip"
+    },
+    {
+     "on": "thousand",
+     "label": "~150,000 FOLLOWERS",
+     "dur": 1.2
+    },
+    {
+     "on": "followers.",
+     "punch": true
+    }
+   ]
+  },
+  {
+   "text": "One video passed thirty five million views.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "cards",
+     "fit": "blurfill",
+     "enter": "spin"
+    },
+    {
+     "on": "million",
+     "label": "35,000,000+ VIEWS",
+     "dur": 1.1
+    },
+    {
+     "on": "views.",
+     "lightning": true
+    }
+   ]
+  },
+  {
+   "text": "But nobody could find a trace of him before that week.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "nothing",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "grade": "dark"
+    },
+    {
+     "on": "trace",
+     "sticker": "ellipse",
+     "target": "date",
+     "dur": 0.7
+    },
+    {
+     "on": "week.",
+     "sticker": "warning",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "Then his account announced a crypto coin with his name on it.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "portrait",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "coin",
+     "label": "$JEANPHIL",
+     "dur": 1.0
+    },
+    {
+     "on": "name",
+     "sticker": "arrow",
+     "target": "face",
+     "from": -30,
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "And an English rival showed up with a coin of his own.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "intro",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "rival",
+     "label": "ARCHIBALD BROWN",
+     "dur": 1.1
+    },
+    {
+     "on": "coin",
+     "sticker": "interrobang",
+     "at": [
+      540,
+      760
+     ],
+     "dur": 0.5
+    }
+   ]
+  },
+  {
+   "text": "So who is he, really?",
+   "beats": [
+    {
+     "on": 0,
+     "riser": true
+    },
+    {
+     "on": 0,
+     "img": "intro",
+     "fit": "cover",
+     "enter": "zoomblur",
+     "grade": "dark"
+    }
+   ]
+  },
+  {
+   "text": "Nobody. Know Your Meme lists him as AI generated.",
+   "beats": [
+    {
+     "on": 0,
+     "flash": true
+    },
+    {
+     "on": 0,
+     "img": "fake",
+     "fit": "blurfill",
+     "enter": "zoomblur",
+     "sfx": [
+      "reveal"
+     ]
+    },
+    {
+     "on": "lists",
+     "label": "AI-GENERATED",
+     "dur": 1.3
+    },
+    {
+     "on": "generated.",
+     "sticker": "ellipse",
+     "target": "jean",
+     "dur": 0.6
+    }
+   ]
+  },
+  {
+   "text": "This makes Jean Phil a French influencer with no Frenchman.",
+   "beats": [
+    {
+     "on": 0,
+     "img": "faux",
+     "fit": "blurfill",
+     "enter": "whip"
+    },
+    {
+     "on": "influencer",
+     "sticker": "x",
+     "target": "face",
+     "dur": 0.6
+    },
+    {
+     "on": "Frenchman.",
+     "lightning": true
+    }
+   ]
+  }
+ ]
+}
