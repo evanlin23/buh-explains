@@ -870,10 +870,10 @@ def main(slug, preview=False):
     outp = os.path.join(od, f"{slug}{'-preview' if preview else ''}.mp4")
     size = (540, 960) if preview else (W, H)
     af = ("acompressor=threshold=-24dB:ratio=8:attack=2:release=50:makeup=15,"   # audit: about -10 LUFS, true peak about -1 dBFS
-          "aresample=192000,alimiter=limit=0.84:attack=4:release=40:level=false,aresample=48000")  # 4x oversampled: catches inter-sample peaks  # about -10 LUFS; true peak kept under -1 dBFS after AAC (audit)
+          "aresample=192000,alimiter=limit=0.84:attack=4:release=40:level=false,aresample=48000")  # 4x oversampled: catches inter-sample peaks  # about -10 LUFS; true peak kept under -1 dBFS after AAC (audit). AAC at 256k: at 192k it overshot to -0.1 dBFS on ep17
     cmd = ["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{size[0]}x{size[1]}", "-r", str(FPS),
            "-i", "-", "-i", audio, "-c:v", "libx264", "-preset", "slow", "-crf", "15", "-tune", "film", "-pix_fmt", "yuv420p",
-           "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]
+           "-af", af, "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-shortest", "-movflags", "+faststart", outp]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     nf = int(dur * FPS)
     for i in range(nf):

@@ -193,9 +193,9 @@ page:   https://ncs.io/bladefury
 source: https://ncs.io/track/download/d2190a56-7365-4c31-a93d-d9109f70b6c4
 file:   ncs-bladefury.mp3
 start:  15.545   loop: 15.545, 31.547   (120 BPM, 8 bars)
-used:   (spare)
+used:   ep17-jeanphil
 credit:
   Song: VØJ & ATSMXN - Blade Fury [NCS Release]
   Music provided by NoCopyrightSounds
   Free Download/Stream: http://ncs.io/bladefury
-  Watch: http://youtu.be/   <- empty Watch link on NCS's page; link NCS's YouTube upload instead before using
+  Watch: https://youtu.be/3ebuV2IYelI   (NCS's page had an empty Watch link; this is NCS's YouTube upload)

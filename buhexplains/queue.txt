@@ -6,6 +6,7 @@ ep14-biberty      # time-critical: Boston protest was Oct 25, still in KYM's Nov
 ep16-gokusaitama  # time-critical: Death Battle episode Oct 18, fans still arguing
 ep03-november      # before late November
 ep15-skullcap     # live: skull cap trend peaked late October
+ep17-jeanphil     # live: Jean Phil since Sept 17, copycats still posting
 ep01-verity
 ep04-deceive       # while the Holmes doc is in theatres
 ep05-its-time      # November to December
